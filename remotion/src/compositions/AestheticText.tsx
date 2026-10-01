@@ -67,6 +67,7 @@ export const AestheticText: React.FC<MotionProps> = (p) => {
             fontFamily: p.titleFont || '"Liberation Serif", Georgia, serif',
             fontSize: (vertical ? 44 : 40) * u,
             lineHeight: 1.25,
+            whiteSpace: 'pre-line',
             textShadow: shadow,
           }}
         >
