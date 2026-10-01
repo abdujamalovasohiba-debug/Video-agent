@@ -216,3 +216,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Video agent
+node_modules/
+remotion/out/
+output/
+.*_work/
+*.mp4
+*.mov
+*.wav
+*.mp3

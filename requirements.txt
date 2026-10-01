@@ -1,0 +1,6 @@
+# Whisper (bittasi yetarli; faster-whisper tezroq va kam xotira talab qiladi)
+faster-whisper>=1.0
+# openai-whisper>=20231117
+
+# Testlar uchun
+pytest>=7
