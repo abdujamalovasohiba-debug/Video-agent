@@ -10,6 +10,10 @@ GRADES = {
     "cinematic": ("curves=master='0/0.04 0.25/0.21 0.5/0.5 0.75/0.79 1/0.96',"
                   "colorbalance=rs=-0.03:gs=0.0:bs=0.05:rm=0.03:gm=0.0:bm=-0.03:rh=0.06:gh=0.02:bh=-0.06,"
                   "eq=saturation=0.88:contrast=1.04"),
+    # Xira, iliq, qorong'iroq "cozy" kayfiyat (estetik Instagram).
+    "moody": ("curves=master='0/0.05 0.3/0.24 0.6/0.55 1/0.92',"
+              "colorbalance=rs=0.02:bs=0.02:rm=0.05:bm=-0.04:rh=0.04:bh=-0.04,"
+              "eq=saturation=0.82"),
     "warm": "colorbalance=rm=0.06:bm=-0.05:rh=0.05:bh=-0.04,eq=saturation=1.05",
     "vivid": "eq=saturation=1.3:contrast=1.08,unsharp=5:5:0.4",
     "pastel": "curves=master='0/0.08 1/0.95',eq=saturation=0.75:brightness=0.03",

@@ -38,6 +38,7 @@ class MotionText:
     subtitle: str = ""
     name: str = ""
     role: str = ""
+    handle: str = ""
 
 
 def _props(cfg: MotionConfig, text: MotionText, w: int, h: int, fps: int, dur: float) -> dict:
@@ -45,6 +46,8 @@ def _props(cfg: MotionConfig, text: MotionText, w: int, h: int, fps: int, dur: f
         "width": w, "height": h, "fps": fps, "durationInFrames": max(1, round(dur * fps)),
         "primary": cfg.primary, "accent": cfg.accent, "textColor": cfg.text_color,
         "fontFamily": 'Montserrat, "DejaVu Sans", Arial, sans-serif', "titleFont": cfg.title_font,
+        "handle": text.handle,
+        **({"textY": cfg.text_y} if cfg.text_y is not None else {}),
         "title": text.title, "subtitle": text.subtitle, "name": text.name, "role": text.role, "cta": cfg.cta,
     }
 
@@ -158,7 +161,7 @@ class FFmpegRenderer:
         w, h = size
         u = min(w, h) / 1080
         vertical = h > w
-        main = (text.title if comp == "Intro" else cfg.cta) or " "
+        main = (text.title if comp == "Intro" else text.handle if comp == "EndCard" else cfg.cta) or " "
         tf = self._textfile(f"{out.stem}_main", main.upper(), 14 if vertical else 22)
         fs = round((100 if comp == "Intro" else 90) * u)
         alpha = f"min(1\\,t/0.4)*min(1\\,({dur:.2f}-t)/0.4)"
@@ -171,7 +174,7 @@ class FFmpegRenderer:
             f"drawbox=x=(iw-{round(360 * u)})/2:y=ih/2+{round(150 * u)}:w={round(360 * u)}:h={round(12 * u)}:"
             f"color={acc}:t=fill:enable='gt(t\\,0.4)'",
         ]
-        sub = text.subtitle if comp == "Intro" else text.name
+        sub = text.subtitle if comp == "Intro" else "" if comp == "EndCard" else text.name
         if sub:
             sf = self._textfile(f"{out.stem}_sub", sub, 40)
             vf.append(f"drawtext=fontfile='{_fesc(self.font)}':textfile='{_fesc(sf)}':fontsize={round(46 * u)}:"
@@ -191,6 +194,18 @@ class FFmpegRenderer:
         en = f"between(t\\,{start:.2f}\\,{end:.2f})"
         alpha = f"min(1\\,(t-{start:.2f})/0.3)*min(1\\,({end:.2f}-t)/0.3)"
         acc = ff.hex_to_ffmpeg(cfg.accent)
+        if comp == "AestheticText":
+            serif = font_file("Liberation Serif", bold=False)
+            tf = self._textfile(f"{out.stem}_t", text.title, 34 if vertical else 60)
+            f = (f"drawtext=fontfile='{_fesc(serif)}':textfile='{_fesc(tf)}':fontsize={round(44 * u)}:"
+                 f"fontcolor=0xF7F3EC:x=(w-text_w)/2:y=h*{cfg.text_y if cfg.text_y is not None else (0.36 if vertical else 0.3)}:shadowcolor=black@0.5:"
+                 f"shadowx=0:shadowy=1:alpha='{alpha}':enable='{en}'")
+            if text.handle:
+                hf = self._textfile(f"{out.stem}_h", text.handle.upper(), 40)
+                f += (f",drawtext=fontfile='{_fesc(self.font)}':textfile='{_fesc(hf)}':fontsize={round(25 * u)}:"
+                      f"fontcolor=white:x=w-text_w-{round(44 * u)}:y=h*{0.29 if vertical else 0.16}:"
+                      f"alpha='{alpha}':enable='{en}'")
+            return Overlay(start, dur, filter=f)
         if comp == "CinematicTitle":
             serif = font_file("Liberation Serif", bold=False)
             tf = self._textfile(f"{out.stem}_t", " ".join(text.title.upper()), 30 if vertical else 60)

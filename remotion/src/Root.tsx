@@ -4,6 +4,8 @@ import {Outro} from './compositions/Outro';
 import {TitleOverlay} from './compositions/TitleOverlay';
 import {LowerThird} from './compositions/LowerThird';
 import {CinematicTitle} from './compositions/CinematicTitle';
+import {AestheticText} from './compositions/AestheticText';
+import {EndCard} from './compositions/EndCard';
 import {defaultProps, motionSchema, MotionProps} from './theme';
 
 // O'lcham va davomiylik props'dan olinadi, shuning uchun bitta kompozitsiya
@@ -21,6 +23,8 @@ const comps = [
   {id: 'TitleOverlay', component: TitleOverlay},
   {id: 'LowerThird', component: LowerThird},
   {id: 'CinematicTitle', component: CinematicTitle},
+  {id: 'AestheticText', component: AestheticText},
+  {id: 'EndCard', component: EndCard},
 ] as const;
 
 export const RemotionRoot: React.FC = () => (

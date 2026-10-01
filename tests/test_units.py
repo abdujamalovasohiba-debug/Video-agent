@@ -136,3 +136,13 @@ def test_cinematic_style_and_look_filters():
     assert atempo_chain(0.25) == "atempo=0.5,atempo=0.5000"
     with pytest.raises(ValueError):
         look_filters(type(s.look)(grade="nope"), 5)
+
+
+def test_aesthetic_style():
+    from video_agent.look import look_filters
+
+    s = load_style("aesthetic", {"motion": {"text_y": 0.12}})
+    assert s.motion.title_style == "aesthetic" and s.motion.outro_style == "endcard"
+    assert s.transition.edge_type == "fadeblack" and s.look.push > 0
+    assert look_filters(s.look, 9.0)[0].startswith("curves=")
+    assert s.motion.text_y == 0.12

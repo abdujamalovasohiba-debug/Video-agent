@@ -38,6 +38,8 @@ def parse_args(argv=None) -> argparse.Namespace:
     g.add_argument("--subtitle", default="", help="intro ostidagi kichik matn (kanal nomi)")
     g.add_argument("--name", default="", help="pastki yozuv: ism")
     g.add_argument("--role", default="", help="pastki yozuv: lavozim")
+    g.add_argument("--handle", default="", help="Instagram @username (belgi va yakuniy karta uchun)")
+    g.add_argument("--text-y", type=float, help="estetik matn balandligi 0..1 (masalan 0.15 - yuqorida)")
     g.add_argument("--cta", help="outro chaqiruvi (standart: \"Obuna bo'ling!\")")
     g.add_argument("--keywords", default="", help="zoom bilan ajratiladigan so'zlar, vergul bilan")
     g.add_argument("--accent", help="asosiy urg'u rangi, masalan #FACC15")
@@ -55,7 +57,7 @@ def parse_args(argv=None) -> argparse.Namespace:
     g.add_argument("--silence-db", type=float, help="jimlik chegarasi, dB (masalan -35)")
     g.add_argument("--min-silence", type=float, help="kesiladigan eng qisqa pauza, s")
     g.add_argument("--transition", help="o'tish turi (fade, smoothleft, circleopen, ...)")
-    g.add_argument("--grade", choices=["none", "cinematic", "warm", "vivid", "pastel", "bw"],
+    g.add_argument("--grade", choices=["none", "cinematic", "moody", "warm", "vivid", "pastel", "bw"],
                    help="rang uslubi (color grading)")
     g.add_argument("--speed", type=float, help="tezlik: 0.85 = sekinroq (kinematik), 1 = asl")
     g.add_argument("--reframe", choices=["blur", "crop"], help="16:9 -> 9:16 usuli")
@@ -103,6 +105,7 @@ def build_overrides(a: argparse.Namespace) -> dict:
     put("captions.font", a.font)
     put("motion.renderer", a.renderer)
     put("motion.cta", a.cta)
+    put("motion.text_y", a.text_y)
     put("audio.music_volume_db", a.music_volume)
     put("audio.target_lufs", a.lufs)
     if a.accent:
@@ -137,7 +140,7 @@ def main(argv=None) -> int:
         log.info("🎬 Video agent | uslub: %s | formatlar: %s", style.name, ", ".join(style.formats))
         result = run(Options(
             input=a.video, style=style, output_dir=a.output, music=a.music, title=a.title,
-            subtitle=a.subtitle, name=a.name, role=a.role,
+            subtitle=a.subtitle, name=a.name, role=a.role, handle=a.handle,
             keywords=[k.strip() for k in a.keywords.split(",") if k.strip()],
             transcript=a.transcript, whisper_model=a.model,
             language=None if a.language == "auto" else a.language, device=a.device,

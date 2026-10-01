@@ -26,6 +26,7 @@ class TransitionConfig:
     type: str = "fade"            # ffmpeg xfade turi: fade, smoothleft, circleopen...
     duration: float = 0.12        # kesimlar orasidagi o'tish (s)
     edge_duration: float = 0.5    # intro/outro o'tishi (s)
+    edge_type: str = "fade"       # intro/outro o'tish turi (fade, fadeblack, ...)
 
 
 @dataclass
@@ -72,7 +73,9 @@ class MotionConfig:
     accent: str = "#FACC15"
     text_color: str = "#FFFFFF"
     cta: str = "Obuna bo'ling!"
-    title_style: str = "box"      # box - sariq blok | cinematic - ingichka nafis matn
+    title_style: str = "box"      # box - sariq blok | cinematic - nafis matn | aesthetic - Instagram estetik
+    text_y: float | None = None   # estetik matn balandligi (0=yuqori, 1=past); yuzni yopsa o'zgartiring
+    outro_style: str = "cta"      # cta - "Obuna bo'ling" | endcard - Instagram belgisi + @username
     title_font: str = 'Montserrat, "DejaVu Sans", Arial, sans-serif'
 
 
@@ -84,6 +87,7 @@ class LookConfig:
     speed: float = 1.0            # 0.8 = 20% sekinroq (kinematik), 1.0 = asl tezlik
     fade_in: float = 0.0          # qora ekrandan chiqish (s)
     fade_out: float = 0.0         # qora ekranga kirish (s)
+    push: float = 0.0             # kameraning sekin yaqinlashishi: 0.06 = video oxirigacha 6% zoom
 
 
 @dataclass
@@ -195,7 +199,24 @@ def _cinematic() -> StyleConfig:
     return s
 
 
-STYLES = {"reels": _reels, "youtube": _youtube, "minimal": _minimal, "cinematic": _cinematic}
+def _aesthetic() -> StyleConfig:
+    """Estetik Instagram uslubi: kichik nafis matn + emoji, @username, moody rang, yakuniy karta."""
+    s = _cinematic()
+    s.name = "aesthetic"
+    s.transition.edge_type = "fadeblack"
+    s.transition.edge_duration = 0.8
+    s.motion.title_style = "aesthetic"
+    s.motion.outro = True
+    s.motion.outro_style = "endcard"
+    s.motion.outro_duration = 3.5
+    s.motion.title_start = 0.0
+    s.motion.title_font = '"Liberation Serif", Georgia, serif'
+    s.look = LookConfig(grade="moody", vignette=0.35, grain=4, speed=1.0, fade_in=0.0, fade_out=0.0, push=0.06)
+    s.highlight.enabled = False
+    return s
+
+
+STYLES = {"reels": _reels, "youtube": _youtube, "minimal": _minimal, "cinematic": _cinematic, "aesthetic": _aesthetic}
 
 
 def _merge(obj, data: dict):

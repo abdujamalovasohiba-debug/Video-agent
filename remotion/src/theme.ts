@@ -20,6 +20,8 @@ export const motionSchema = baseSchema.extend({
   role: z.string(),
   cta: z.string(),
   titleFont: z.string().optional(),
+  handle: z.string().optional(),
+  textY: z.number().optional(),
 });
 
 export type MotionProps = z.infer<typeof motionSchema>;

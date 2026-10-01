@@ -29,6 +29,7 @@ class Options:
     subtitle: str = ""
     name: str = ""
     role: str = ""
+    handle: str = ""
     keywords: list[str] = field(default_factory=list)
     transcript: Path | None = None
     whisper_model: str = "medium"
@@ -152,6 +153,9 @@ def run(opt: Options) -> Result:
             log.info("    urg'u: %s", ", ".join(h.word for h in hls) or "-")
         zoom = highlights.zoom_expression(hls, st.highlight.zoom, st.highlight.ramp, st.highlight.hold) \
             if st.highlight.enabled else "1"
+        if st.look.push > 0:
+            # Kamera sekin yaqinlashadi (Ken Burns), urg'u zoomi ustiga ko'paytiriladi.
+            zoom = f"({zoom})*(1+{st.look.push:.4f}*t/{max(cut_info.duration, 0.1):.3f})"
         srt = None
         if out_words:
             srt = subtitles.write_srt(out_words, opt.output_dir / f"{stem}.srt")
@@ -161,6 +165,7 @@ def run(opt: Options) -> Result:
         text = MotionText(
             title=opt.title if opt.title is not None else auto_title(out_words, stem.replace("_", " ")),
             subtitle=opt.subtitle, name=opt.name, role=opt.role,
+            handle=("@" + opt.handle.lstrip("@")) if opt.handle else "",
         )
         jobs: list[MotionJob] = []
         main_d = cut_info.duration
@@ -170,8 +175,11 @@ def run(opt: Options) -> Result:
                 if mc.intro and text.title:
                     jobs.append(MotionJob(fmt, "Intro", size, st.fps, mc.intro_duration, work / f"intro_{tag}"))
                 if mc.outro:
-                    jobs.append(MotionJob(fmt, "Outro", size, st.fps, mc.outro_duration, work / f"outro_{tag}"))
-                if text.title and not mc.intro:
+                    jobs.append(MotionJob(fmt, "EndCard" if mc.outro_style == "endcard" else "Outro", size, st.fps, mc.outro_duration, work / f"outro_{tag}"))
+                if text.title and mc.title_style == "aesthetic":
+                    jobs.append(MotionJob(fmt, "AestheticText", size, st.fps, main_d, work / f"title_{tag}",
+                                          0.0, alpha=True))
+                elif text.title and not mc.intro:
                     d = min(mc.title_duration, main_d - mc.title_start)
                     if d > 1:
                         comp = "CinematicTitle" if mc.title_style == "cinematic" else "TitleOverlay"
@@ -189,7 +197,7 @@ def run(opt: Options) -> Result:
             if j.alpha:
                 a["overlays"].append(rendered[i])
             else:
-                a[j.comp.lower()] = rendered[i]
+                a["intro" if j.comp == "Intro" else "outro"] = rendered[i]
 
     with Step(6, total_steps, "Ovoz: tozalash, balans, fon musiqasi (ducking)"):
         voice = audio.clean_voice(cut, work / "voice.wav", st.audio)
@@ -218,7 +226,7 @@ def run(opt: Options) -> Result:
                 zoom_expr=zoom, ass=ass, overlays=a["overlays"],
                 intro=a.get("intro"), intro_duration=mc.intro_duration,
                 outro=a.get("outro"), outro_duration=mc.outro_duration,
-                edge=st.transition.edge_duration, crf=st.crf, preset=st.preset, workdir=work,
+                edge=st.transition.edge_duration, edge_type=st.transition.edge_type, crf=st.crf, preset=st.preset, workdir=work,
                 look=look_filters(st.look, cut_info.duration),
             )
             outputs[fmt] = compose(job)
