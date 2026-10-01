@@ -40,7 +40,7 @@ class Options:
     focus_x: float = 0.5
     keep_temp: bool = False
     hide_face: str | None = None   # blur | emoji
-    face_emoji: str = "🍂"
+    face_emoji: str = "🌸"
 
 
 @dataclass

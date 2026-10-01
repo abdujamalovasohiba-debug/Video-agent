@@ -155,3 +155,10 @@ def test_face_track_fill_and_smooth():
     out = fill_and_smooth(boxes, window=1)
     assert out[1][0] == pytest.approx(5.0) and out[3][0] == pytest.approx(10.0)
     assert fill_and_smooth([None, None]) == [None, None]
+
+
+def test_split_emojis():
+    from video_agent.faceblur import split_emojis
+
+    assert split_emojis("🌼🍁") == ["🌼", "🍁"]
+    assert split_emojis("☕️,🌸") == ["☕", "🌸"]
