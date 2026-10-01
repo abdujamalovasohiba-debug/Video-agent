@@ -2,5 +2,10 @@
 faster-whisper>=1.0
 # openai-whisper>=20231117
 
+# Yuzni yashirish (--hide-face) uchun
+opencv-python-headless>=4.8,<5
+pillow>=10
+numpy
+
 # Testlar uchun
 pytest>=7

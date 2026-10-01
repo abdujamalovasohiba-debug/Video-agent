@@ -39,6 +39,8 @@ class Options:
     remove_fillers: bool = True
     focus_x: float = 0.5
     keep_temp: bool = False
+    hide_face: str | None = None   # blur | emoji
+    face_emoji: str = "🍂"
 
 
 @dataclass
@@ -101,6 +103,10 @@ def run(opt: Options) -> Result:
         info = ff.probe(opt.input)
         if not info.has_video:
             raise ValueError("Faylda video oqimi yo'q")
+        src = opt.input
+        if opt.hide_face:
+            from .faceblur import hide_faces
+            src = hide_faces(opt.input, work / "faceless", opt.hide_face, opt.face_emoji)
         log.info("    %dx%d, %.1f fps, %.1fs, ovoz: %s", info.width, info.height, info.fps, info.duration,
                  "bor" if info.has_audio else "yo'q")
 
@@ -130,7 +136,7 @@ def run(opt: Options) -> Result:
             segments = [Segment(0.0, info.duration)]
         t = editing.effective_transition(segments, st.transition.duration)
         tl = Timeline(segments, t)
-        cut = editing.cut_and_join(opt.input, segments, work, editing.working_size(info.width, info.height),
+        cut = editing.cut_and_join(src, segments, work, editing.working_size(info.width, info.height),
                                    st.fps, info.has_audio, st.transition.type, t)
         if abs(st.look.speed - 1.0) > 1e-3:
             cut = editing.change_speed(cut, work / "cut_speed", st.look.speed, st.fps)

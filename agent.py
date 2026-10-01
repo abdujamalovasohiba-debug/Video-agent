@@ -40,6 +40,8 @@ def parse_args(argv=None) -> argparse.Namespace:
     g.add_argument("--role", default="", help="pastki yozuv: lavozim")
     g.add_argument("--handle", default="", help="Instagram @username (belgi va yakuniy karta uchun)")
     g.add_argument("--text-y", type=float, help="estetik matn balandligi 0..1 (masalan 0.15 - yuqorida)")
+    g.add_argument("--hide-face", choices=["blur", "emoji"], help="yuzni yashirish: yumshoq xiralik yoki emoji")
+    g.add_argument("--face-emoji", default="🍂", help="--hide-face emoji uchun belgi")
     g.add_argument("--cta", help="outro chaqiruvi (standart: \"Obuna bo'ling!\")")
     g.add_argument("--keywords", default="", help="zoom bilan ajratiladigan so'zlar, vergul bilan")
     g.add_argument("--accent", help="asosiy urg'u rangi, masalan #FACC15")
@@ -145,6 +147,7 @@ def main(argv=None) -> int:
             transcript=a.transcript, whisper_model=a.model,
             language=None if a.language == "auto" else a.language, device=a.device,
             cut=not a.no_cut, remove_fillers=not a.keep_fillers, focus_x=a.focus_x, keep_temp=a.keep_temp,
+            hide_face=a.hide_face, face_emoji=a.face_emoji,
         ))
     except KeyboardInterrupt:
         log.error("To'xtatildi.")

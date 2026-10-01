@@ -146,3 +146,12 @@ def test_aesthetic_style():
     assert s.transition.edge_type == "fadeblack" and s.look.push > 0
     assert look_filters(s.look, 9.0)[0].startswith("curves=")
     assert s.motion.text_y == 0.12
+
+
+def test_face_track_fill_and_smooth():
+    from video_agent.faceblur import fill_and_smooth
+
+    boxes = [[0, 0, 10, 10], None, [10, 0, 10, 10], None]
+    out = fill_and_smooth(boxes, window=1)
+    assert out[1][0] == pytest.approx(5.0) and out[3][0] == pytest.approx(10.0)
+    assert fill_and_smooth([None, None]) == [None, None]

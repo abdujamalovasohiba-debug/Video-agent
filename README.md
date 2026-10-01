@@ -93,6 +93,7 @@ python agent.py video.mp4 --transcript output/video.transcript.json
 | `--keywords a,b,c` | zoom bilan ajratiladigan so'zlar (qolganlari avtomatik tanlanadi) |
 | `--accent #HEX`, `--font NAME` | rang va shrift |
 | `--handle username`, `--text-y 0.15` | Instagram nomi (belgi va yakuniy karta) va estetik matn balandligi |
+| `--hide-face blur/emoji`, `--face-emoji 🍂` | yuzni kuzatib, yumshoq xiralik yoki emoji bilan yashirish |
 | `--grade cinematic/warm/vivid/pastel/bw`, `--speed 0.85` | rang uslubi va tezlik |
 | `--reframe crop/blur`, `--focus-x 0..1` | 9:16 ga o'tkazish usuli va qirqish markazi |
 | `--silence-db`, `--min-silence`, `--transition` | montaj sozlamalari |
