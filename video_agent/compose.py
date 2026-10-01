@@ -33,6 +33,7 @@ class ComposeJob:
     crf: int = 20
     preset: str = "medium"
     workdir: Path | None = None
+    look: list[str] = field(default_factory=list)   # rang/vinyetka filtrlari (overlay'lardan oldin)
 
 
 def total_duration(job: ComposeJob) -> float:
@@ -66,6 +67,9 @@ def build_graph(job: ComposeJob, overlay_inputs: dict[int, int], intro_idx: int 
     if job.zoom_expr != "1":
         g.append(zoom_filter(job.zoom_expr, w, h, cur, "[zm]"))
         cur = "[zm]"
+    if job.look:
+        g.append(f"{cur}{','.join(job.look)}[lk]")
+        cur = "[lk]"
     for i, ov in enumerate(job.overlays):
         nxt = f"[ov{i}]"
         if ov.file is not None:

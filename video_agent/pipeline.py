@@ -9,6 +9,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from . import audio, editing, ffmpeg_utils as ff, highlights, silence, subtitles, transcribe
+from .look import look_filters
 from .compose import ComposeJob, compose, main_offset, total_duration
 from .config import FORMATS, StyleConfig
 from .motion import MotionJob, MotionText, render_motion
@@ -130,12 +131,18 @@ def run(opt: Options) -> Result:
         tl = Timeline(segments, t)
         cut = editing.cut_and_join(opt.input, segments, work, editing.working_size(info.width, info.height),
                                    st.fps, info.has_audio, st.transition.type, t)
+        if abs(st.look.speed - 1.0) > 1e-3:
+            cut = editing.change_speed(cut, work / "cut_speed", st.look.speed, st.fps)
+            log.info("    tezlik: x%.2f", st.look.speed)
         cut_info = ff.probe(cut)
         log.info("    %d bo'lak, %.1fs -> %.1fs (%.0f%% qisqardi)", len(segments), info.duration,
                  cut_info.duration, 100 * (1 - cut_info.duration / max(info.duration, 0.01)))
 
     with Step(4, total_steps, "Subtitr va muhim so'zlar"):
         out_words = remap_words(words, tl)
+        if abs(st.look.speed - 1.0) > 1e-3:
+            out_words = [Word(w.text, round(w.start / st.look.speed, 3), round(w.end / st.look.speed, 3),
+                              w.probability) for w in out_words]
         if opt.remove_fillers:
             out_words = [w for w in out_words if highlights.normalize(w.text) not in highlights.FILLERS]
         hls = []
@@ -167,7 +174,8 @@ def run(opt: Options) -> Result:
                 if text.title and not mc.intro:
                     d = min(mc.title_duration, main_d - mc.title_start)
                     if d > 1:
-                        jobs.append(MotionJob(fmt, "TitleOverlay", size, st.fps, d, work / f"title_{tag}",
+                        comp = "CinematicTitle" if mc.title_style == "cinematic" else "TitleOverlay"
+                        jobs.append(MotionJob(fmt, comp, size, st.fps, d, work / f"title_{tag}",
                                               mc.title_start, alpha=True))
                 if text.name:
                     d = min(mc.lower_third_duration, main_d - mc.lower_third_start)
@@ -211,6 +219,7 @@ def run(opt: Options) -> Result:
                 intro=a.get("intro"), intro_duration=mc.intro_duration,
                 outro=a.get("outro"), outro_duration=mc.outro_duration,
                 edge=st.transition.edge_duration, crf=st.crf, preset=st.preset, workdir=work,
+                look=look_filters(st.look, cut_info.duration),
             )
             outputs[fmt] = compose(job)
             log.info("    ✓ %s -> %s", fmt, outputs[fmt])

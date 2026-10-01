@@ -76,6 +76,7 @@ python agent.py video.mp4 --transcript output/video.transcript.json
 | `reels` | agressiv (0.35s+ pauzalar) | katta, KATTA HARF, 3 so'z | kuchli | ha |
 | `youtube` | yumshoq (0.6s+) | o'rtacha, 6 so'z, pastda | yengil | ha |
 | `minimal` | faqat uzun pauzalar | oddiy, oq | yo'q | yo'q |
+| `cinematic` | yumshoq, sekin (x0.85) | nafis serif | juda yengil | yo'q (iliq rang, vinyetka, plyonka donasi, fade) |
 
 ### Asosiy parametrlar
 
@@ -86,6 +87,7 @@ python agent.py video.mp4 --transcript output/video.transcript.json
 | `--title`, `--subtitle`, `--name`, `--role`, `--cta` | motion grafika matnlari (sarlavha berilmasa nutqdan olinadi) |
 | `--keywords a,b,c` | zoom bilan ajratiladigan so'zlar (qolganlari avtomatik tanlanadi) |
 | `--accent #HEX`, `--font NAME` | rang va shrift |
+| `--grade cinematic/warm/vivid/pastel/bw`, `--speed 0.85` | rang uslubi va tezlik |
 | `--reframe crop/blur`, `--focus-x 0..1` | 9:16 ga o'tkazish usuli va qirqish markazi |
 | `--silence-db`, `--min-silence`, `--transition` | montaj sozlamalari |
 | `--model small/medium/large-v3`, `--language uz`, `--device cuda` | Whisper |

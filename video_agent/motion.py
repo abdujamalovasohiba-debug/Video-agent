@@ -44,7 +44,7 @@ def _props(cfg: MotionConfig, text: MotionText, w: int, h: int, fps: int, dur: f
     return {
         "width": w, "height": h, "fps": fps, "durationInFrames": max(1, round(dur * fps)),
         "primary": cfg.primary, "accent": cfg.accent, "textColor": cfg.text_color,
-        "fontFamily": 'Montserrat, "DejaVu Sans", Arial, sans-serif',
+        "fontFamily": 'Montserrat, "DejaVu Sans", Arial, sans-serif', "titleFont": cfg.title_font,
         "title": text.title, "subtitle": text.subtitle, "name": text.name, "role": text.role, "cta": cfg.cta,
     }
 
@@ -191,6 +191,16 @@ class FFmpegRenderer:
         en = f"between(t\\,{start:.2f}\\,{end:.2f})"
         alpha = f"min(1\\,(t-{start:.2f})/0.3)*min(1\\,({end:.2f}-t)/0.3)"
         acc = ff.hex_to_ffmpeg(cfg.accent)
+        if comp == "CinematicTitle":
+            serif = font_file("Liberation Serif", bold=False)
+            tf = self._textfile(f"{out.stem}_t", " ".join(text.title.upper()), 30 if vertical else 60)
+            fade = f"min(1\\,max(0\\,(t-{start:.2f})/0.9))*min(1\\,max(0\\,({end:.2f}-t)/0.9))"
+            f = (f"drawtext=fontfile='{_fesc(serif)}':textfile='{_fesc(tf)}':fontsize={round(80 * u)}:"
+                 f"fontcolor=0xF5EEDF:line_spacing={round(14 * u)}:x=(w-text_w)/2:y=h*{0.7 if vertical else 0.74}:"
+                 f"shadowcolor=black@0.4:shadowx=0:shadowy=2:alpha='{fade}':enable='{en}',"
+                 f"drawbox=x=(iw-{round(160 * u)})/2:y=ih*{0.7 if vertical else 0.74}+{round(120 * u)}:w={round(160 * u)}:h=2:"
+                 f"color={acc}@0.8:t=fill:enable='between(t\\,{start + 0.6:.2f}\\,{end - 0.4:.2f})'")
+            return Overlay(start, dur, filter=f)
         if comp == "TitleOverlay":
             tf = self._textfile(f"{out.stem}_t", text.title.upper(), 18 if vertical else 32)
             fs = round(64 * u)

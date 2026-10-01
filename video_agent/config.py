@@ -72,6 +72,18 @@ class MotionConfig:
     accent: str = "#FACC15"
     text_color: str = "#FFFFFF"
     cta: str = "Obuna bo'ling!"
+    title_style: str = "box"      # box - sariq blok | cinematic - ingichka nafis matn
+    title_font: str = 'Montserrat, "DejaVu Sans", Arial, sans-serif'
+
+
+@dataclass
+class LookConfig:
+    grade: str = "none"           # rang uslubi: none | cinematic | warm | vivid | pastel | bw
+    vignette: float = 0.0         # 0 - yo'q, 0.3-0.6 - yumshoq qorong'i chetlar
+    grain: int = 0                # plyonka donadorligi (0-15)
+    speed: float = 1.0            # 0.8 = 20% sekinroq (kinematik), 1.0 = asl tezlik
+    fade_in: float = 0.0          # qora ekrandan chiqish (s)
+    fade_out: float = 0.0         # qora ekranga kirish (s)
 
 
 @dataclass
@@ -98,6 +110,7 @@ class StyleConfig:
     captions: CaptionConfig = field(default_factory=CaptionConfig)
     highlight: HighlightConfig = field(default_factory=HighlightConfig)
     motion: MotionConfig = field(default_factory=MotionConfig)
+    look: LookConfig = field(default_factory=LookConfig)
     audio: AudioConfig = field(default_factory=AudioConfig)
 
     def to_dict(self) -> dict:
@@ -149,7 +162,40 @@ def _minimal() -> StyleConfig:
     return s
 
 
-STYLES = {"reels": _reels, "youtube": _youtube, "minimal": _minimal}
+def _cinematic() -> StyleConfig:
+    s = StyleConfig(name="cinematic", reframe="blur")
+    s.cut.min_silence = 0.7
+    s.cut.padding = 0.2
+    s.transition.duration = 0.35
+    s.transition.edge_duration = 0.8
+    s.captions.size = 58
+    s.captions.uppercase = False
+    s.captions.max_words = 6
+    s.captions.max_chars = 40
+    s.captions.highlight = "#F5E6C8"
+    s.captions.keyword_color = "#F5E6C8"
+    s.captions.outline = 2
+    s.captions.shadow = 4
+    s.captions.pop = 1.0
+    s.captions.position = 0.78
+    s.captions.position_wide = 0.88
+    s.captions.font = "DejaVu Serif"
+    s.highlight.zoom = 1.04
+    s.highlight.per_minute = 2.0
+    s.highlight.ramp = 0.6
+    s.motion.intro = False
+    s.motion.outro = False
+    s.motion.title_style = "cinematic"
+    s.motion.title_start = 0.8
+    s.motion.title_duration = 4.0
+    s.motion.accent = "#E8D5B0"
+    s.motion.title_font = '"Playfair Display", "Cormorant Garamond", "Liberation Serif", Georgia, serif'
+    s.look = LookConfig(grade="cinematic", vignette=0.45, grain=5, speed=0.85, fade_in=0.8, fade_out=1.0)
+    s.audio.music_volume_db = -6.0
+    return s
+
+
+STYLES = {"reels": _reels, "youtube": _youtube, "minimal": _minimal, "cinematic": _cinematic}
 
 
 def _merge(obj, data: dict):

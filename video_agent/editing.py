@@ -96,3 +96,25 @@ def cut_and_join(src: Path, segments: list[Segment], workdir: Path, size: tuple[
         clips.append(extract_segment(src, seg, segdir / f"seg_{i:04d}", size, fps, has_audio))
         log.debug("bo'lak %d/%d: %.2f-%.2f", i + 1, len(segments), seg.start, seg.end)
     return join_clips(clips, [s.duration for s in segments], workdir / "cut", transition, t)
+
+
+def atempo_chain(speed: float) -> str:
+    """atempo 0.5..2.0 oralig'ida ishlaydi, kerak bo'lsa zanjir qilinadi."""
+    parts, r = [], speed
+    while r < 0.5:
+        parts.append("atempo=0.5")
+        r /= 0.5
+    while r > 2.0:
+        parts.append("atempo=2.0")
+        r /= 2.0
+    parts.append(f"atempo={r:.4f}")
+    return ",".join(parts)
+
+
+def change_speed(src: Path, out: Path, speed: float, fps: int) -> Path:
+    """Video va ovozni sekinlashtiradi/tezlashtiradi (kinematik slow-motion)."""
+    out = out.with_suffix(".mov")
+    ff.run(["-i", src, "-filter_complex",
+            f"[0:v]setpts=PTS/{speed:.4f},fps={fps}[v];[0:a]{atempo_chain(speed)}[a]",
+            "-map", "[v]", "-map", "[a]", *_encode_args(), out])
+    return out

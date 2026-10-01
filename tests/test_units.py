@@ -121,3 +121,18 @@ def test_style_overrides_and_validation():
 def test_auto_title():
     assert auto_title([W("Salom", 0, 1), W("do'stlar!", 1, 2), W("Bugun", 2, 3)], "x") == "Salom do'stlar"
     assert auto_title([], "fallback") == "fallback"
+
+
+def test_cinematic_style_and_look_filters():
+    from video_agent.editing import atempo_chain
+    from video_agent.look import look_filters
+
+    s = load_style("cinematic")
+    assert s.motion.title_style == "cinematic" and not s.motion.outro and s.look.speed < 1
+    f = look_filters(s.look, 10.0)
+    assert f[0].startswith("curves=") and any(x.startswith("vignette") for x in f)
+    assert f[-1] == "fade=t=out:st=9.000:d=1.00"
+    assert look_filters(load_style("reels").look, 10.0) == []
+    assert atempo_chain(0.25) == "atempo=0.5,atempo=0.5000"
+    with pytest.raises(ValueError):
+        look_filters(type(s.look)(grade="nope"), 5)

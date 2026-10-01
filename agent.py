@@ -5,6 +5,7 @@ Misollar:
     python agent.py video.mp4 --style reels
     python agent.py video.mp4 --style youtube --music fon.mp3 --title "Yangi dars" --name "Ali Valiyev" --role "Dasturchi"
     python agent.py video.mp4 --formats 9:16 --keywords pul,biznes,2024
+    python agent.py video.mp4 --style cinematic --music fon.mp3 --title "Toshkent kuzi"
 """
 
 from __future__ import annotations
@@ -54,6 +55,9 @@ def parse_args(argv=None) -> argparse.Namespace:
     g.add_argument("--silence-db", type=float, help="jimlik chegarasi, dB (masalan -35)")
     g.add_argument("--min-silence", type=float, help="kesiladigan eng qisqa pauza, s")
     g.add_argument("--transition", help="o'tish turi (fade, smoothleft, circleopen, ...)")
+    g.add_argument("--grade", choices=["none", "cinematic", "warm", "vivid", "pastel", "bw"],
+                   help="rang uslubi (color grading)")
+    g.add_argument("--speed", type=float, help="tezlik: 0.85 = sekinroq (kinematik), 1 = asl")
     g.add_argument("--reframe", choices=["blur", "crop"], help="16:9 -> 9:16 usuli")
     g.add_argument("--focus-x", type=float, default=0.5, help="crop markazi 0..1 (standart 0.5)")
 
@@ -91,6 +95,8 @@ def build_overrides(a: argparse.Namespace) -> dict:
     if a.formats:
         put("formats", list(FORMATS) if a.formats == "both" else [f.strip() for f in a.formats.split(",")])
     put("reframe", a.reframe)
+    put("look.grade", a.grade)
+    put("look.speed", a.speed)
     put("cut.noise_db", a.silence_db)
     put("cut.min_silence", a.min_silence)
     put("transition.type", a.transition)
