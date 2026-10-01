@@ -103,6 +103,8 @@ def test_reframe_modes():
     assert "crop=1080:1920" in reframe_filter(1920, 1080, 1080, 1920, "crop")
     assert "gblur" in reframe_filter(1920, 1080, 1080, 1920, "blur")
     assert "split" not in reframe_filter(1920, 1080, 1920, 1080, "blur")
+    # tik -> gorizontal: crop so'ralsa ham xira fon ishlatiladi
+    assert "gblur" in reframe_filter(1080, 1920, 1920, 1080, "crop")
 
 
 def test_style_overrides_and_validation():

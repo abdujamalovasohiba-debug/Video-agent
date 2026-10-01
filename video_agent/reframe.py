@@ -15,6 +15,9 @@ def reframe_filter(src_w: int, src_h: int, dst_w: int, dst_h: int, mode: str = "
     cover = f"scale={dst_w}:{dst_h}:force_original_aspect_ratio=increase:flags=lanczos"
     fx = min(max(focus_x, 0.0), 1.0)
     crop = f"crop={dst_w}:{dst_h}:(iw-{dst_w})*{fx:.3f}:(ih-{dst_h})/2"
+    # Tik videodan gorizontal kadr qirqilsa bosh/oyoq kesilib ketadi -> doim xira fon.
+    if mode == "crop" and src_h > src_w and dst_w > dst_h:
+        mode = "blur"
     if mode == "crop":
         return f"{inp}{cover},{crop},setsar=1{out}"
     # Xira fon: kichraytirib xiralash (tez), keyin kattalashtirish.
