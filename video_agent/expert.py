@@ -145,7 +145,9 @@ def build_plan(words: list[Word], duration: float, title: str = "", points: list
         if sub_ws:
             lines.append({"style": "small", "words": [_w(w) for w in sub_ws]})
         prev_end = phs[pi - 1][-1].end if pi > 0 else t0
-        start = max(t0, prev_end, ws[0].start - 0.5)
+        # Plashka sarlavha so'zidan ko'pi bilan 0.6 s oldin chiqadi (bo'sh turib qolmasin)
+        first_t = title_words[0]["t"] if title_words else ws[0].start
+        start = max(t0, prev_end, first_t - 0.6)
         items.append({"type": "number", "start": round(start, 3), "end": round(ws[-1].end + 0.4, 3),
                       "n": n, "total": max(total, n), "lines": lines})
         used.update(group)
@@ -185,7 +187,7 @@ def build_plan(words: list[Word], duration: float, title: str = "", points: list
         if not gap:
             break
         mid = (gap[0] + gap[1]) / 2
-        in_card = any(it["start"] - 0.5 < mid < it["end"] + 0.5 for it in items if it["type"] in ("card", "hook"))
+        in_card = any(it["start"] - 0.5 < mid < it["end"] + 0.5 for it in items if it["type"] in ("card", "hook", "number"))
         if not in_card:
             items.append({"type": "flash", "start": round(max(0.0, mid - 0.15), 3), "dur": 0.35})
         t = mid + 15.0
