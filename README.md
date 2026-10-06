@@ -94,7 +94,7 @@ python agent.py video.mp4 --transcript output/video.transcript.json
 | Parametr | Tavsif |
 |----------|--------|
 | `--formats 16:9,9:16` / `both` | chiqish formatlari |
-| `--music FILE`, `--music-volume dB` | fon musiqasi va uning nutqqa nisbatan darajasi |
+| `--music FILE`, `--music-from referens.mp4`, `--music-volume dB` | fon musiqasi (yoki referens videodan ovozsiz ajratilgan musiqa) va uning nutqqa nisbatan darajasi |
 | `--title`, `--subtitle`, `--name`, `--role`, `--cta` | motion grafika matnlari (sarlavha berilmasa nutqdan olinadi) |
 | `--keywords a,b,c` | zoom bilan ajratiladigan so'zlar (qolganlari avtomatik tanlanadi) |
 | `--accent #HEX`, `--font NAME` | rang va shrift |

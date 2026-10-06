@@ -232,7 +232,9 @@ def _expert() -> StyleConfig:
     s.motion.outro = False
     s.motion.title_style = "expert"
     s.look = LookConfig(grade="warm", vignette=0.0, grain=0, speed=1.0, punch=0.12)
-    s.audio.music_volume_db = -14.0
+    # Referensdagidek: musiqa butun video davomida eshitiladi, nutqdan ~15 dB past (o'lchangan)
+    s.audio.music_volume_db = -7.0
+    s.audio.duck_ratio = 2.0
     return s
 
 

@@ -39,6 +39,7 @@ class Options:
     remove_fillers: bool = True
     focus_x: float = 0.5
     keep_temp: bool = False
+    music_from: Path | None = None  # musiqani shu videodan ajratib olish
     plan: Path | None = None       # expert uslubi: tayyor reja (plan.json)
     points: list[str] = field(default_factory=list)  # expert: ro'yxat punktlari
     script: Path | None = None     # Whisper bo'lmasa: nutq matni (.txt)
@@ -264,13 +265,19 @@ def run(opt: Options) -> Result:
 
     with Step(6, total_steps, "Ovoz: tozalash, balans, fon musiqasi (ducking)"):
         voice = audio.clean_voice(cut, work / "voice.wav", st.audio)
+        music = opt.music
+        if opt.music_from:
+            from .music import extract_instrumental, loop_to
+            log.info("    musiqa referensdan ajratilmoqda: %s", opt.music_from.name)
+            music = loop_to(extract_instrumental(opt.music_from, work / "music"), work / "music_bed.wav",
+                            cut_info.duration + 10)
         probe_job = ComposeJob(cut, voice, work / "x.mp4", (cut_info.width, cut_info.height), (0, 0), st.fps,
                                cut_info.duration, intro=next((a.get("intro") for a in motion_assets.values()), None),
                                intro_duration=mc.intro_duration,
                                outro=next((a.get("outro") for a in motion_assets.values()), None),
                                outro_duration=mc.outro_duration, edge=st.transition.edge_duration)
         mixed = audio.mix(voice, work / "mix.wav", st.audio, total_duration(probe_job), main_offset(probe_job),
-                          opt.music)
+                          music)
 
     outputs: dict[str, Path] = {}
     with Step(7, total_steps, f"Render: {', '.join(st.formats)}"):

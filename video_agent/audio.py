@@ -27,7 +27,15 @@ def voice_chain(cfg: AudioConfig) -> str:
 
 
 def clean_voice(src: Path, out: Path, cfg: AudioConfig) -> Path:
-    ff.run(["-i", src, "-vn", "-af", voice_chain(cfg), "-ar", "48000", "-ac", "2", "-c:a", "pcm_s16le", out])
+    """Nutqni tozalaydi va standart balandlikka keltiradi.
+
+    Past yozilgan ovozda bu muhim: aks holda musiqa nutqdan baland chiqib qoladi,
+    chunki musiqa darajasi target_lufs ga nisbatan hisoblanadi.
+    """
+    raw = out.with_name(out.stem + "_raw.wav")
+    ff.run(["-i", src, "-vn", "-af", voice_chain(cfg), "-ar", "48000", "-ac", "2", "-c:a", "pcm_s16le", raw])
+    norm = loudnorm_filter(raw, cfg.target_lufs)
+    ff.run(["-i", raw, "-af", f"{norm},aresample=48000", "-ar", "48000", "-c:a", "pcm_s16le", out])
     return out
 
 

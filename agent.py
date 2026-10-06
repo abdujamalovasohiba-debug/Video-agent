@@ -71,6 +71,7 @@ def parse_args(argv=None) -> argparse.Namespace:
 
     g = p.add_argument_group("ovoz")
     g.add_argument("--music", type=Path, help="fon musiqasi fayli")
+    g.add_argument("--music-from", type=Path, help="fon musiqasini shu (referens) videodan ajratib olish")
     g.add_argument("--music-volume", type=float, help="musiqa darajasi, dB (masalan -18)")
     g.add_argument("--no-denoise", action="store_true", help="shovqin tozalashni o'chirish")
     g.add_argument("--lufs", type=float, help="yakuniy balandlik (standart -14 LUFS)")
@@ -151,7 +152,7 @@ def main(argv=None) -> int:
             transcript=a.transcript, whisper_model=a.model,
             language=None if a.language == "auto" else a.language, device=a.device,
             cut=not a.no_cut, remove_fillers=not a.keep_fillers, focus_x=a.focus_x, keep_temp=a.keep_temp,
-            hide_face=a.hide_face, face_emoji=a.face_emoji, plan=a.plan, script=a.script,
+            hide_face=a.hide_face, face_emoji=a.face_emoji, plan=a.plan, script=a.script, music_from=a.music_from,
             points=[x.strip() for x in a.points.split("|") if x.strip()],
         ))
     except KeyboardInterrupt:
