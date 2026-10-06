@@ -39,7 +39,8 @@ def phrases(words: list[Word], max_words: int = 5, max_gap: float = 0.45) -> lis
         cur.append(w)
     if cur:
         out.append(cur)
-    # Gap oxiridagi 1-2 so'zlik qoldiqni oldingi iboraga qo'shamiz ("HAM ishlaydi" emas)
+    # 1-2 so'zlik bo'laklar o'qib bo'lmaydigan darajada qisqa chiqadi:
+    # gap oxiridagi qoldiq oldingi iboraga, gap boshidagisi keyingi iboraga qo'shiladi.
     merged: list[list[Word]] = []
     for ph in out:
         prev_open = merged and merged[-1][-1].text.rstrip()[-1:] not in ".!?,;:"
@@ -47,7 +48,21 @@ def phrases(words: list[Word], max_words: int = 5, max_gap: float = 0.45) -> lis
             merged[-1] = merged[-1] + ph
         else:
             merged.append(ph)
-    return merged
+    result: list[list[Word]] = []
+    carry: list[Word] = []
+    for ph in merged:
+        ph = carry + ph
+        carry = []
+        if len(ph) <= 2 and ph[-1].text.rstrip()[-1:] not in ".!?":
+            carry = ph
+            continue
+        result.append(ph)
+    if carry:
+        if result:
+            result[-1] = result[-1] + carry
+        else:
+            result.append(carry)
+    return result
 
 
 def split_title(title: str) -> tuple[str, str]:
@@ -116,8 +131,17 @@ def build_plan(words: list[Word], duration: float, title: str = "", points: list
         ws = [w for g in group for w in phs[g]]
         body = [w for w in ws if normalize(w.text) not in ords]
         title_ws = [w for w in body if normalize(w.text) not in GENERIC and normalize(w.text) not in STOPWORDS][:1]
-        sub_ws = [w for w in body if w.start > (title_ws[0].start if title_ws else 0)][:4]
-        lines = [{"style": "sans", "words": [_w(w) for w in title_ws]}]
+        title_words = [_w(w) for w in title_ws]
+        if points and n <= len(points):
+            # Foydalanuvchi bergan punkt nomi, nutqda shu so'z aytilgan paytda chiqadi
+            key = normalize(points[n - 1].split()[0])
+            hit = next((w for w in ws if normalize(w.text).startswith(key[:max(4, len(key) - 2)])), ws[0])
+            title_ws = [hit]
+            title_words = [{"w": t, "t": round(hit.start + i * 0.12, 3)} for i, t in enumerate(points[n - 1].split())]
+        title_keys = {normalize(t["w"])[:5] for t in title_words}
+        sub_ws = [w for w in body if w.start > (title_ws[0].start if title_ws else 0)
+                  and normalize(w.text)[:5] not in title_keys][:4]
+        lines = [{"style": "sans", "words": title_words}]
         if sub_ws:
             lines.append({"style": "small", "words": [_w(w) for w in sub_ws]})
         prev_end = phs[pi - 1][-1].end if pi > 0 else t0
@@ -141,7 +165,8 @@ def build_plan(words: list[Word], duration: float, title: str = "", points: list
         if not free(a, b):
             continue
         content = [w for w in ph if normalize(w.text) not in STOPWORDS]
-        if a - last_card >= card_every and len(ph) >= 3 and content:
+        complete = ph[-1].text.rstrip()[-1:] in ".!?"  # karta faqat tugal fikr bilan
+        if a - last_card >= card_every and len(ph) >= 3 and content and complete:
             head = ph[:1] if len(ph[0].text) >= 3 else ph[:2]
             items.append({"type": "card", "start": round(a - 0.05, 3), "end": end, "lines": [
                 {"style": "caps", "words": [{"w": w.text.upper(), "t": round(w.start, 3)} for w in head]},
