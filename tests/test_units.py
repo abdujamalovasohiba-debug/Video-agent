@@ -162,3 +162,27 @@ def test_split_emojis():
 
     assert split_emojis("🌼🍁") == ["🌼", "🍁"]
     assert split_emojis("☕️,🌸") == ["☕", "🌸"]
+
+
+def test_expert_plan_structure():
+    from video_agent.expert import align_script, build_plan, split_title
+
+    text = ("Reklamaga pul ketyapti. Bunga uchta sabab bor. Birinchi sabab auditoriya noto'g'ri. "
+            "Ikkinchi sabab kreativ zaif. Uchinchi sabab byudjet kam. Aksincha sabr qilgan biznes yutadi. "
+            "To'g'ri reklama doim ishlaydi va mijoz olib keladi. Izohga audit deb yozing.")
+    words = align_script(text, [(0.0, 30.0)])
+    assert len(words) == len(text.split()) and words[0].start == 0.0
+    plan = build_plan(words, 30.0, "Reklamaga pul|mijoz yo'qmi?", card_every=8.0)
+    kinds = [it["type"] for it in plan]
+    assert kinds[0] == "hook" and kinds.count("number") == 3 and "card" in kinds
+    nums = [it for it in plan if it["type"] == "number"]
+    assert [n["n"] for n in nums] == [1, 2, 3] and all(n["total"] == 3 for n in nums)
+    assert [n["lines"][0]["words"][0]["w"] for n in nums] == ["auditoriya", "kreativ", "byudjet"]
+    blocks = [it for it in plan if "end" in it]
+    assert all(a["end"] <= b["start"] + 1e-6 for a, b in zip(blocks, blocks[1:])), "matnlar ustma-ust tushmasin"
+    assert split_title("bir ikki uch to'rt besh") == ("bir ikki uch", "to'rt besh")
+
+
+def test_expert_style_preset():
+    s = load_style("expert")
+    assert s.motion.title_style == "expert" and not s.captions.enabled and s.transition.duration == 0

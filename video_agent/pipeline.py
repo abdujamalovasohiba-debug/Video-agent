@@ -39,6 +39,9 @@ class Options:
     remove_fillers: bool = True
     focus_x: float = 0.5
     keep_temp: bool = False
+    plan: Path | None = None       # expert uslubi: tayyor reja (plan.json)
+    points: list[str] = field(default_factory=list)  # expert: ro'yxat punktlari
+    script: Path | None = None     # Whisper bo'lmasa: nutq matni (.txt)
     hide_face: str | None = None   # blur | emoji
     face_emoji: str = "🌸"
 
@@ -147,6 +150,13 @@ def run(opt: Options) -> Result:
 
     with Step(4, total_steps, "Subtitr va muhim so'zlar"):
         out_words = remap_words(words, tl)
+        if not out_words and opt.script:
+            from .expert import align_script
+            from .timeline import invert
+            sil = silence.detect_silences(cut, -35, 0.25, cut_info.duration)
+            speech = [(sg.start, sg.end) for sg in invert(sil, cut_info.duration)]
+            out_words = align_script(opt.script.read_text(encoding="utf-8"), speech)
+            log.info("    matn nutqqa moslandi: %d so'z (taxminiy vaqtlar)", len(out_words))
         if abs(st.look.speed - 1.0) > 1e-3:
             out_words = [Word(w.text, round(w.start / st.look.speed, 3), round(w.end / st.look.speed, 3),
                               w.probability) for w in out_words]
@@ -174,6 +184,7 @@ def run(opt: Options) -> Result:
             handle=("@" + opt.handle.lstrip("@")) if opt.handle else "",
         )
         jobs: list[MotionJob] = []
+        motion_cache: dict = {}
         main_d = cut_info.duration
         if mc.enabled:
             for fmt in st.formats:
@@ -182,7 +193,27 @@ def run(opt: Options) -> Result:
                     jobs.append(MotionJob(fmt, "Intro", size, st.fps, mc.intro_duration, work / f"intro_{tag}"))
                 if mc.outro:
                     jobs.append(MotionJob(fmt, "EndCard" if mc.outro_style == "endcard" else "Outro", size, st.fps, mc.outro_duration, work / f"outro_{tag}"))
-                if text.title and mc.title_style == "aesthetic":
+                if mc.title_style == "expert":
+                    from .expert import build_plan, load_plan, save_plan
+                    if "plan" not in motion_cache:
+                        plan = load_plan(opt.plan) if opt.plan else build_plan(
+                            out_words, main_d, opt.title or "", opt.points)
+                        motion_cache["plan"] = plan
+                        save_plan(plan, opt.output_dir / f"{stem}.plan.json")
+                        log.info("    reja: %d element -> %s", len(plan), opt.output_dir / f"{stem}.plan.json")
+                    from .expert import caption_top
+                    from .reframe import reframe_filter
+                    # Yuz o'rni aynan shu formatdagi kadrda aniqlanadi
+                    probe_v = work / f"layout_{tag}.mp4"
+                    ff.run(["-i", cut, "-t", "20", "-filter_complex",
+                            reframe_filter(cut_info.width, cut_info.height, *size, st.reframe, opt.focus_x,
+                                           "[0:v]", "[o]"), "-map", "[o]", "-an", "-c:v", "libx264",
+                            "-preset", "ultrafast", "-crf", "28", probe_v])
+                    top = caption_top(probe_v, *size)
+                    log.info("    matn balandligi (%s): %.0f%%", fmt, top * 100)
+                    jobs.append(MotionJob(fmt, "ExpertOverlay", size, st.fps, main_d, work / f"expert_{tag}",
+                                          0.0, alpha=True, props={"items": motion_cache["plan"], "captionTop": top}))
+                elif text.title and mc.title_style == "aesthetic":
                     jobs.append(MotionJob(fmt, "AestheticText", size, st.fps, main_d, work / f"title_{tag}",
                                           0.0, alpha=True))
                 elif text.title and not mc.intro:

@@ -75,6 +75,7 @@ class MotionJob:
     out: Path                     # kengaytmasiz yo'l
     start: float = 0.0            # overlay boshlanish vaqti
     alpha: bool = False           # True -> shaffof overlay
+    props: dict | None = None     # maxsus props (masalan ExpertOverlay rejasi)
 
 
 class RemotionRenderer:
@@ -93,7 +94,11 @@ class RemotionRenderer:
         spec = []
         for j in jobs:
             out = j.out.with_suffix(".mov" if j.alpha else ".mp4")
-            spec.append({"composition": j.comp, "props": _props(cfg, text, *j.size, j.fps, j.duration),
+            props = _props(cfg, text, *j.size, j.fps, j.duration)
+            if j.props:
+                props = {"width": j.size[0], "height": j.size[1], "fps": j.fps,
+                         "durationInFrames": max(1, round(j.duration * j.fps)), **j.props}
+            spec.append({"composition": j.comp, "props": props,
                          "output": str(out.resolve()), "alpha": j.alpha})
         jobs_file = jobs[0].out.parent / "remotion_jobs.json"
         jobs_file.write_text(json.dumps(spec, ensure_ascii=False), encoding="utf-8")
@@ -144,6 +149,8 @@ class FFmpegRenderer:
         return True
 
     def render_all(self, jobs: list[MotionJob], cfg: MotionConfig, text: MotionText) -> dict[int, Overlay | Path]:
+        if any(j.comp == "ExpertOverlay" for j in jobs):
+            raise RuntimeError("'expert' uslubi uchun Remotion kerak: cd remotion && npm install")
         out: dict[int, Overlay | Path] = {}
         for i, j in enumerate(jobs):
             if j.alpha:

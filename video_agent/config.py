@@ -216,7 +216,25 @@ def _aesthetic() -> StyleConfig:
     return s
 
 
-STYLES = {"reels": _reels, "youtube": _youtube, "minimal": _minimal, "cinematic": _cinematic, "aesthetic": _aesthetic}
+def _expert() -> StyleConfig:
+    """Gapiradigan odam (ekspert) videolari: referensdagi kabi hook plashka, jigarrang kartalar,
+    raqamli punktlar, so'zma-so'z kinetik matn, light leak va flash o'tishlar."""
+    s = StyleConfig(name="expert", reframe="crop")
+    s.formats = ["9:16"]
+    s.cut.min_silence = 0.4
+    s.cut.padding = 0.1
+    s.transition.duration = 0.0      # referensdagi kabi keskin kesish
+    s.captions.enabled = False       # matnlarni Remotion overlay chizadi
+    s.highlight.enabled = False
+    s.motion.intro = False
+    s.motion.outro = False
+    s.motion.title_style = "expert"
+    s.look = LookConfig(grade="warm", vignette=0.0, grain=0, speed=1.0)
+    s.audio.music_volume_db = -14.0
+    return s
+
+
+STYLES = {"reels": _reels, "youtube": _youtube, "minimal": _minimal, "cinematic": _cinematic, "aesthetic": _aesthetic, "expert": _expert}
 
 
 def _merge(obj, data: dict):

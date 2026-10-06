@@ -50,6 +50,11 @@ python agent.py video.mp4 --formats 9:16 --keywords pul,biznes,2025
 python agent.py video.mp4 --style aesthetic --title "javob bermaganim uchun uzr, band edim" \
     --subtitle "💻📈☕️" --handle username
 
+# Ekspert uslubi (hook + kartalar + 1/3 punktlar + so'zma-so'z matn)
+python agent.py video.mp4 --style expert --title "Reklamaga pul tashlayapsiz|lekin mijoz yo'qmi?" \
+    --points "Auditoriya|Kreativ|Byudjet" --music fon.mp3
+# reja output/video.plan.json ga yoziladi: tahrirlab, --plan bilan qayta render qiling
+
 # Tez qoralama (sinab ko'rish uchun)
 python agent.py video.mp4 --draft
 ```
@@ -80,6 +85,7 @@ python agent.py video.mp4 --transcript output/video.transcript.json
 | `reels` | agressiv (0.35s+ pauzalar) | katta, KATTA HARF, 3 so'z | kuchli | ha |
 | `youtube` | yumshoq (0.6s+) | o'rtacha, 6 so'z, pastda | yengil | ha |
 | `minimal` | faqat uzun pauzalar | oddiy, oq | yo'q | yo'q |
+| `expert` | keskin kesish | so'zma-so'z kinetik matn (Montserrat) | yo'q | gapiradigan odam videolari: krem hook plashka, jigarrang matn kartalari, "1/4" raqamli punktlar, light leak va flash o'tishlar; matn yuzdan pastga avtomatik joylanadi |
 | `aesthetic` | yumshoq | — | yo'q | Instagram estetik: kichik nafis matn + emoji, @username, moody rang, kamera sekin yaqinlashadi, oxirida Instagram logoli karta |
 | `cinematic` | yumshoq, sekin (x0.85) | nafis serif | juda yengil | yo'q (iliq rang, vinyetka, plyonka donasi, fade) |
 
@@ -93,6 +99,7 @@ python agent.py video.mp4 --transcript output/video.transcript.json
 | `--keywords a,b,c` | zoom bilan ajratiladigan so'zlar (qolganlari avtomatik tanlanadi) |
 | `--accent #HEX`, `--font NAME` | rang va shrift |
 | `--handle username`, `--text-y 0.15` | Instagram nomi (belgi va yakuniy karta) va estetik matn balandligi |
+| `--plan`, `--points "A\|B\|C"`, `--script matn.txt` | expert uslubi: tahrirlangan reja, ro'yxat punktlari, Whisper bo'lmasa nutq matni |
 | `--hide-face flowers/blur/emoji`, `--face-emoji 🌸` | yuzni kuzatib yashirish: tebranib turuvchi gul buketi (masalan `🌼🍁`), xiralik yoki emoji |
 | `--grade cinematic/warm/vivid/pastel/bw`, `--speed 0.85` | rang uslubi va tezlik |
 | `--reframe crop/blur`, `--focus-x 0..1` | 9:16 ga o'tkazish usuli va qirqish markazi |
