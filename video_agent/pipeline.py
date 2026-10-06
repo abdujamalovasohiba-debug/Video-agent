@@ -82,6 +82,19 @@ def auto_title(words: list[Word], fallback: str, max_words: int = 6) -> str:
     return " ".join(out) if out else fallback
 
 
+def punch_terms(tl: Timeline, min_block: float = 4.0) -> str:
+    """Kesim joylarida har >= min_block soniyada kadr yaqinlashadi/uzoqlashadi (jump-cut uslubi)."""
+    blocks, last, state = [], 0.0, 0
+    for cut in tl.out_starts[1:]:
+        if cut - last >= min_block:
+            if state:
+                blocks.append((last, cut))
+            last, state = cut, 1 - state
+    if state:
+        blocks.append((last, tl.duration + 1))
+    return "+".join(f"between(t,{a:.3f},{b - 0.001:.3f})" for a, b in blocks) or "0"
+
+
 def remap_words(words: list[Word], tl: Timeline) -> list[Word]:
     out = []
     for w in words:
@@ -121,8 +134,12 @@ def run(opt: Options) -> Result:
             log.info("    tayyor transkript yuklandi: %s (%d so'z)", opt.transcript, len(words))
         elif info.has_audio and (st.captions.enabled or opt.remove_fillers or opt.title is None):
             wav = transcribe.extract_audio(opt.input, work / "speech16k.wav")
-            words = transcribe.transcribe(wav, opt.whisper_model, opt.language, opt.device)
-            log.info("    %d so'z aniqlandi", len(words))
+            try:
+                words = transcribe.transcribe(wav, opt.whisper_model, opt.language, opt.device)
+                log.info("    %d so'z aniqlandi", len(words))
+            except Exception as e:  # model yuklanmasa ham montaj davom etadi
+                log.warning("    Whisper ishlamadi, matnsiz davom etiladi: %s", str(e).strip().splitlines()[-1][:200])
+                log.warning("    Yechim: --transcript, --script yoki internetda huggingface.co ga ruxsat")
         if words:
             transcript_path = opt.output_dir / f"{stem}.transcript.json"
             if not opt.transcript or opt.transcript.resolve() != transcript_path.resolve():
@@ -130,7 +147,11 @@ def run(opt: Options) -> Result:
 
     with Step(3, total_steps, "Montaj: jimlik va pauzalarni kesish, o'tishlar"):
         if opt.cut and info.has_audio:
-            sil = silence.detect_silences(opt.input, st.cut.noise_db, st.cut.min_silence, info.duration)
+            noise_db = st.cut.noise_db
+            if st.cut.auto_threshold:
+                noise_db = silence.auto_threshold(opt.input)
+                log.info("    jimlik chegarasi: %.1f dB (avtomatik)", noise_db)
+            sil = silence.detect_silences(opt.input, noise_db, st.cut.min_silence, info.duration)
             remove = highlights.filler_spans(words) if opt.remove_fillers else []
             segments = build_keep_segments(sil, info.duration, st.cut.padding,
                                            max(st.cut.min_segment, 2 * st.transition.duration + 0.05),
@@ -169,6 +190,8 @@ def run(opt: Options) -> Result:
             log.info("    urg'u: %s", ", ".join(h.word for h in hls) or "-")
         zoom = highlights.zoom_expression(hls, st.highlight.zoom, st.highlight.ramp, st.highlight.hold) \
             if st.highlight.enabled else "1"
+        if st.look.punch > 0 and len(tl.segments) > 1:
+            zoom = f"({zoom})*(1+{st.look.punch:.3f}*({punch_terms(tl)}))"
         if st.look.push > 0:
             # Kamera sekin yaqinlashadi (Ken Burns), urg'u zoomi ustiga ko'paytiriladi.
             zoom = f"({zoom})*(1+{st.look.push:.4f}*t/{max(cut_info.duration, 0.1):.3f})"
@@ -203,6 +226,8 @@ def run(opt: Options) -> Result:
                         log.info("    reja: %d element -> %s", len(plan), opt.output_dir / f"{stem}.plan.json")
                     from .expert import caption_top
                     from .reframe import reframe_filter
+                    if not motion_cache["plan"]:
+                        continue
                     # Yuz o'rni aynan shu formatdagi kadrda aniqlanadi
                     probe_v = work / f"layout_{tag}.mp4"
                     ff.run(["-i", cut, "-t", "20", "-filter_complex",
@@ -211,8 +236,9 @@ def run(opt: Options) -> Result:
                             "-preset", "ultrafast", "-crf", "28", probe_v])
                     top = caption_top(probe_v, *size)
                     log.info("    matn balandligi (%s): %.0f%%", fmt, top * 100)
-                    jobs.append(MotionJob(fmt, "ExpertOverlay", size, st.fps, main_d, work / f"expert_{tag}",
-                                          0.0, alpha=True, props={"items": motion_cache["plan"], "captionTop": top}))
+                    if motion_cache["plan"]:  # bo'sh reja uchun overlay render qilinmaydi
+                        jobs.append(MotionJob(fmt, "ExpertOverlay", size, st.fps, main_d, work / f"expert_{tag}",
+                                              0.0, alpha=True, props={"items": motion_cache["plan"], "captionTop": top}))
                 elif text.title and mc.title_style == "aesthetic":
                     jobs.append(MotionJob(fmt, "AestheticText", size, st.fps, main_d, work / f"title_{tag}",
                                           0.0, alpha=True))

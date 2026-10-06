@@ -16,6 +16,7 @@ FORMATS = {
 @dataclass
 class CutConfig:
     noise_db: float = -35.0       # shundan past ovoz "jimlik" hisoblanadi
+    auto_threshold: bool = True   # chegarani ovoz darajasiga qarab avtomatik tanlash
     min_silence: float = 0.45     # shundan qisqa pauzalar qoldiriladi
     padding: float = 0.12         # nutq atrofida qoldiriladigan zaxira (s)
     min_segment: float = 0.25     # juda qisqa bo'laklar tashlab yuboriladi
@@ -88,6 +89,7 @@ class LookConfig:
     fade_in: float = 0.0          # qora ekrandan chiqish (s)
     fade_out: float = 0.0         # qora ekranga kirish (s)
     push: float = 0.0             # kameraning sekin yaqinlashishi: 0.06 = video oxirigacha 6% zoom
+    punch: float = 0.0            # kesimlarda navbatma-navbat yaqinlashish (0.12 = 12%)
 
 
 @dataclass
@@ -221,7 +223,7 @@ def _expert() -> StyleConfig:
     raqamli punktlar, so'zma-so'z kinetik matn, light leak va flash o'tishlar."""
     s = StyleConfig(name="expert", reframe="crop")
     s.formats = ["9:16"]
-    s.cut.min_silence = 0.4
+    s.cut.min_silence = 0.3
     s.cut.padding = 0.1
     s.transition.duration = 0.0      # referensdagi kabi keskin kesish
     s.captions.enabled = False       # matnlarni Remotion overlay chizadi
@@ -229,7 +231,7 @@ def _expert() -> StyleConfig:
     s.motion.intro = False
     s.motion.outro = False
     s.motion.title_style = "expert"
-    s.look = LookConfig(grade="warm", vignette=0.0, grain=0, speed=1.0)
+    s.look = LookConfig(grade="warm", vignette=0.0, grain=0, speed=1.0, punch=0.12)
     s.audio.music_volume_db = -14.0
     return s
 

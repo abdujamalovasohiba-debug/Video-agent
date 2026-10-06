@@ -64,6 +64,10 @@ def build_graph(job: ComposeJob, overlay_inputs: dict[int, int], intro_idx: int 
     norm = f"fps={job.fps},format=yuv420p,setsar=1,settb=AVTB"
     g = [reframe_filter(*job.src_size, w, h, job.reframe, job.focus_x, "[0:v]", "[rf]")]
     cur = "[rf]"
+    if job.src_size[1] < h * 0.8 and job.src_size[0] < w * 0.8:
+        # Kichik manba kattalashtirilganda yumshoqlikni kompensatsiya qilamiz
+        g.append(f"{cur}unsharp=5:5:0.7:5:5:0.0[sh]")
+        cur = "[sh]"
     if job.zoom_expr != "1":
         g.append(zoom_filter(job.zoom_expr, w, h, cur, "[zm]"))
         cur = "[zm]"

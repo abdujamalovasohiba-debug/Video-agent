@@ -29,3 +29,24 @@ def detect_silences(media: str | Path, noise_db: float, min_silence: float, dura
         "-i", media, "-vn", "-af", f"silencedetect=noise={noise_db}dB:d={min_silence}", "-f", "null", "-",
     ])
     return parse_silencedetect(log, duration)
+
+
+def auto_threshold(media: str | Path) -> float:
+    """Ovoz darajasiga qarab jimlik chegarasini tanlaydi (past yozilgan videolar uchun muhim).
+
+    50 ms bo'laklar RMS'i: 15-persentil ~ fon shovqini, 75-persentil ~ nutq.
+    Chegara ularning orasida, shovqinga yaqinroq bo'ladi.
+    """
+    import subprocess
+
+    proc = subprocess.run(
+        ["ffmpeg", "-v", "error", "-i", str(media), "-vn", "-af",
+         "aresample=48000,asetnsamples=2400,astats=metadata=1:reset=1,"
+         "ametadata=mode=print:key=lavfi.astats.Overall.RMS_level:file=-", "-f", "null", "-"],
+        capture_output=True, text=True,
+    )
+    vals = sorted(float(v) for v in re.findall(r"RMS_level=(-?[\d.]+)", proc.stdout))
+    if len(vals) < 20:
+        return -35.0
+    noise, speech = vals[int(len(vals) * 0.15)], vals[int(len(vals) * 0.75)]
+    return round(max(-70.0, min(-25.0, noise + (speech - noise) * 0.6)), 1)
