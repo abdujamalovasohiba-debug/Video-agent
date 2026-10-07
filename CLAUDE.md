@@ -14,6 +14,16 @@ Yangi uslub referens bilan kelsa: tahlil qiling, foydalanuvchi bergan nom bilan 
 | **Ekspert montaj jigarrang** | `ekspert-jigarrang` | quyida batafsil |
 | **Ekspert montaj yashil** | `ekspert-yashil` | aynan shu, faqat jigarrang o'rniga to'q yashil (#1F4A38) |
 
+## Rang va tovush (barcha uslublar)
+- Rangni referensga `signalstats` (YAVG, SATAVG, UAVG, VAVG) bilan moslang; foydalanuvchi "rang berilmagan"
+  deb e'tiroz bildirgan. Telefon videolari uchun boshlang'ich: `eq=saturation=1.32:contrast=1.07:brightness=-0.02,
+  colorbalance=bm=0.07:bh=0.05:rh=-0.02,unsharp=5:5:0.5` (faqat odam kadrlariga, stok B-rollga emas) va `--grade none`.
+- **Tovush effektlari** qo'shing (`assets/sfx/README.md`): whoosh - kadr almashuvi, pop - hook/oltin yozuv, ding - kuchli so'z.
+
+## "Doktor" referensi elementlari (Remotion: bubble, duo, gold, stat)
+Chat-pufak hook (`bubble`), oq KATTA + oltin qo'lyozma (`duo`), oltin kalit ibora (`gold`), tepada katta qo'lyozma (`stat`),
+mavzuga mos B-roll, oxirida telefon raqami (`duo` caps) + "Muolajaga yozilishingiz mumkin". Nomi hali berilmagan.
+
 ## "Ekspert montaj jigarrang": `--style ekspert-jigarrang`
 
 `expert` referensi asosida (talking-head): krem hook plashka, jigarrang matn kartalari,
