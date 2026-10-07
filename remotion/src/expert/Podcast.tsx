@@ -94,12 +94,12 @@ export const Plain: React.FC<P<Extract<Item, {type: 'plain'}>>> = ({item, u, w, 
         {item.caps.length ? (
           <div style={{fontFamily: glow ? 'Montserrat' : 'Oswald', fontWeight: glow ? 600 : 700, fontSize: (glow ? 62 : 84) * u,
                        textTransform: 'uppercase', lineHeight: 1.05, letterSpacing: glow ? 1 * u : 0}}>
-            <Words words={item.caps} color="#FFFFFF" />
+            <Words words={item.caps} color={item.color ?? "#FFFFFF"} />
           </div>
         ) : null}
         {item.script.length ? (
           <div style={{fontFamily: 'Montserrat', fontStyle: 'italic', fontWeight: 600, fontSize: 52 * u, lineHeight: 1.15, marginTop: 2 * u}}>
-            <Words words={item.script} color="#FFFFFF" />
+            <Words words={item.script} color={item.color ?? "#FFFFFF"} />
           </div>
         ) : null}
       </div>
@@ -116,7 +116,7 @@ export const Point: React.FC<P<Extract<Item, {type: 'point'}>>> = ({item, u, w, 
     <AbsoluteFill style={{alignItems: 'center', paddingTop: h * (item.top ?? 0.57), opacity: fadeOut(now, item.end)}}>
       {item.label ? (
         <div style={{position: 'absolute', top: h * (item.top ?? 0.57) - 104 * u, fontFamily: 'Oswald', fontWeight: 700, fontSize: 80 * u,
-                     color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: 2 * u, textShadow: shadow(u, false),
+                     color: item.color ?? "#FFFFFF", textTransform: 'uppercase', letterSpacing: 2 * u, textShadow: shadow(u, false),
                      transform: `translateX(${(1 - lab) * -60 * u}px) scale(${0.7 + 0.3 * lab})`, opacity: Math.min(1, lab * 1.5)}}>
           {item.label}
         </div>
