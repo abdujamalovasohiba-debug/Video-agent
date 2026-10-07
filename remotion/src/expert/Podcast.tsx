@@ -31,7 +31,7 @@ const Words: React.FC<{words: Word[]; color: string}> = ({words, color}) => (
 export const Headline: React.FC<P<Extract<Item, {type: 'headline'}>>> = ({item, u, w, h}) => {
   const {now, fps} = useNow();
   const s = spring({frame: (now - item.start) * fps, fps, config: {damping: 12, mass: 0.6}});
-  const s2 = spring({frame: (now - item.start - 0.25) * fps, fps, config: {damping: 10, mass: 0.6}});
+  const s2 = spring({frame: (now - (item.bigAt ?? item.start + 0.25)) * fps, fps, config: {damping: 10, mass: 0.6}});
   const stroke = {WebkitTextStroke: `${3 * u}px #151515`, paintOrder: 'stroke fill', textShadow: `0 ${4 * u}px ${10 * u}px rgba(0,0,0,0.5)`} as const;
   return (
     <AbsoluteFill style={{alignItems: 'center', paddingTop: h * (item.top ?? 0.5), opacity: fadeOut(now, item.end)}}>
@@ -42,7 +42,7 @@ export const Headline: React.FC<P<Extract<Item, {type: 'headline'}>>> = ({item, 
             {ln}
           </div>
         ))}
-        <div style={{fontSize: 190 * u, lineHeight: 1, marginTop: 6 * u, transform: `scale(${0.4 + 0.6 * s2})`,
+        <div style={{fontSize: 140 * u, whiteSpace: 'nowrap', lineHeight: 1, marginTop: 6 * u, transform: `scale(${0.4 + 0.6 * s2})`,
                      opacity: Math.min(1, s2 * 1.5), ...stroke}}>
           {item.big}
         </div>
@@ -53,11 +53,13 @@ export const Headline: React.FC<P<Extract<Item, {type: 'headline'}>>> = ({item, 
 
 // Oq siqiq KATTA so'z + ostida oq kursiv izoh; B-roll ustida "glow" bilan.
 export const Plain: React.FC<P<Extract<Item, {type: 'plain'}>>> = ({item, u, w, h, top}) => {
-  const {now} = useNow();
+  const {now, fps} = useNow();
   const glow = !!item.glow;
+  const first = item.caps[0]?.t ?? item.script[0]?.t ?? item.start;
+  const pop = spring({frame: (now - first + 0.05) * fps, fps, config: {damping: 11, mass: 0.5}});
   return (
     <AbsoluteFill style={{alignItems: 'center', paddingTop: h * (item.top ?? top ?? 0.5), opacity: fadeOut(now, item.end)}}>
-      <div style={{maxWidth: w * 0.88, textAlign: 'center', textShadow: shadow(u, glow)}}>
+      <div style={{maxWidth: w * 0.88, textAlign: 'center', textShadow: shadow(u, glow), transform: `scale(${0.82 + 0.18 * pop}) translateY(${(1 - pop) * 30 * u}px)`}}>
         {item.caps.length ? (
           <div style={{fontFamily: glow ? 'Montserrat' : 'Oswald', fontWeight: glow ? 600 : 700, fontSize: (glow ? 62 : 84) * u,
                        textTransform: 'uppercase', lineHeight: 1.05, letterSpacing: glow ? 1 * u : 0}}>
@@ -76,10 +78,18 @@ export const Plain: React.FC<P<Extract<Item, {type: 'plain'}>>> = ({item, u, w, 
 
 // Krem plashka: avval bo'sh plashka ochiladi, so'ng matn so'zma-so'z; o'ng pastda "n/jami".
 export const Point: React.FC<P<Extract<Item, {type: 'point'}>>> = ({item, u, w, h}) => {
-  const {now} = useNow();
+  const {now, fps} = useNow();
+  const lab = spring({frame: (now - item.start) * fps, fps, config: {damping: 12, mass: 0.5}});
   const open = interpolate(now, [item.start, item.start + 0.3], [0, 1], {...clamp, easing: Easing.bezier(0.2, 0.8, 0.2, 1)});
   return (
     <AbsoluteFill style={{alignItems: 'center', paddingTop: h * (item.top ?? 0.57), opacity: fadeOut(now, item.end)}}>
+      {item.label ? (
+        <div style={{position: 'absolute', top: h * (item.top ?? 0.57) - 104 * u, fontFamily: 'Oswald', fontWeight: 700, fontSize: 80 * u,
+                     color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: 2 * u, textShadow: shadow(u, false),
+                     transform: `translateX(${(1 - lab) * -60 * u}px) scale(${0.7 + 0.3 * lab})`, opacity: Math.min(1, lab * 1.5)}}>
+          {item.label}
+        </div>
+      ) : null}
       <div
         style={{
           position: 'relative',
