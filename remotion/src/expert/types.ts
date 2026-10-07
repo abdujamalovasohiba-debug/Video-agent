@@ -9,6 +9,10 @@ export type Item =
   | {type: 'number'; start: number; end: number; n: number; total: number; lines: Line[]; top?: number}
   | {type: 'leak'; start: number; dur: number}
   | {type: 'flash'; start: number; dur: number}
+  | {type: 'bubble'; start: number; end: number; text: string; top?: number}
+  | {type: 'duo'; start: number; end: number; top?: number; caps: Word[]; script: Word[]}
+  | {type: 'gold'; start: number; end: number; top?: number; words: Word[]}
+  | {type: 'stat'; start: number; end: number; top?: number; words: Word[]}
   | {type: 'follow'; start: number; end: number; image: string; label?: string; done?: string};
 
 export type Palette = {brown: string; cream: string; hookBg: string; keyword: string; text: string};
@@ -20,3 +24,5 @@ export const PALETTE: Palette = {
   keyword: '#F3E7A6',
   text: '#F8F6ED',
 };
+
+export const GOLD = '#F2C443';
