@@ -87,7 +87,7 @@ export const NumberBox: React.FC<P<Extract<Item, {type: 'number'}>>> = ({item, u
   const small = 165 * u;
   const full = w * 0.82;
   return (
-    <AbsoluteFill style={{justifyContent: 'flex-start', alignItems: 'flex-start', paddingTop: h * 0.555, paddingLeft: w * 0.09}}>
+    <AbsoluteFill style={{justifyContent: 'flex-start', alignItems: 'flex-start', paddingTop: h * (item.top ?? 0.555), paddingLeft: w * 0.09}}>
       <div
         style={{
           width: small + (full - small) * grow,

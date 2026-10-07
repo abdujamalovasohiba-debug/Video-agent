@@ -6,7 +6,7 @@ export type Item =
   | {type: 'hook'; start: number; end: number; small: string; big: string; top?: number}
   | {type: 'card'; start: number; end: number; lines: Line[]}
   | {type: 'caption'; start: number; end: number; lines: Line[]}
-  | {type: 'number'; start: number; end: number; n: number; total: number; lines: Line[]}
+  | {type: 'number'; start: number; end: number; n: number; total: number; lines: Line[]; top?: number}
   | {type: 'leak'; start: number; dur: number}
   | {type: 'flash'; start: number; dur: number}
   | {type: 'follow'; start: number; end: number; image: string; label?: string; done?: string};
