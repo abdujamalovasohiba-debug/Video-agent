@@ -13,7 +13,9 @@ Foydalanuvchi talablari (o'zgartirmang, agar o'zi so'ramasa):
 - **Rangli o'tishlar yo'q** (light leak / to'q sariq flash olib tashlangan) — `mening` buni o'zi qiladi.
 - **Fon musiqasi asl balandligining 5%** ida, ducking'siz — `mening` buni o'zi qiladi.
   Musiqa faylini foydalanuvchi yuboradi (oxirgisi: Kanye West — Runaway). Musiqa yuborilmasa, so'rang.
-- Username / Instagram belgisi kerak emas.
+- Username / Instagram belgisi kerak emas. "Obuna bo'ling" joyida **profil rasmi kartasi** bo'lsin:
+  `--avatar rasm.png` (oxirgisi: Instagram profil skrinshotidan qirqilgan doira rasm).
+- Musiqa vaqt bo'yicha tekislanadi (qo'shiq o'rtasida balandlashmasin) — `mening` buni o'zi qiladi.
 - Yuborilgan video **30 MB dan kichik** bo'lsin (ilova chegarasi): `-crf 25 -preset slow` bilan siqing.
 
 ## Har bir video uchun qadamlar
@@ -46,6 +48,8 @@ Foydalanuvchi yuzini ko'rsatmaslikni so'rasa: xiralik/emoji EMAS — ovoz + mavz
    `[[boshlanish, "klip.mp4", focus_x], ...]` va yig'ing:
    `python tools/build_broll.py spec.json klipler/ <davomiylik> broll.mp4`
 3. B-roll + kesilgan ovozni birlashtirib, `--no-cut --plan reja.json --text-y 0.40` bilan render qiling.
+   Foydalanuvchi **realistik** kadrlarni afzal ko'radi: animatsion HUD/grafik va kod ekranlaridan qoching,
+   haqiqiy qo'llar, noutbuk, telefon, kafe, haqiqiy analitika ekranlarini tanlang. Eng yaxshisi — uning o'z kadrlari.
 
 ## Foydali buyruqlar
 - Testlar: `python -m pytest -q tests`
