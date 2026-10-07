@@ -33,6 +33,35 @@ export const Headline: React.FC<P<Extract<Item, {type: 'headline'}>>> = ({item, 
   const s = spring({frame: (now - item.start) * fps, fps, config: {damping: 12, mass: 0.6}});
   const s2 = spring({frame: (now - (item.bigAt ?? item.start + 0.25)) * fps, fps, config: {damping: 10, mass: 0.6}});
   const stroke = {WebkitTextStroke: `${3 * u}px #151515`, paintOrder: 'stroke fill', textShadow: `0 ${4 * u}px ${10 * u}px rgba(0,0,0,0.5)`} as const;
+  if (item.framed) {
+    // Referensdagidek: to'q shaffof ramka ichida krem harflar, ostida katta raqam + krem plashkadagi so'z, chetlarda emoji.
+    const [num, ...rest] = item.big.split(' ');
+    const cream = '#F4F0CF';
+    const emo = item.emojis ?? [];
+    const wob = (k: number) => Math.sin((now - item.start) * 3 + k) * 6;
+    return (
+      <AbsoluteFill style={{alignItems: 'center', paddingTop: h * (item.top ?? 0.5), opacity: fadeOut(now, item.end)}}>
+        <div style={{position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center',
+                     transform: `scale(${0.6 + 0.4 * s})`, opacity: Math.min(1, s * 1.5)}}>
+          <div style={{background: 'rgba(38,38,38,0.86)', borderRadius: 18 * u, padding: `${16 * u}px ${30 * u}px`,
+                       maxWidth: w * 0.86, textAlign: 'center', fontFamily: 'Oswald', fontWeight: 700, color: cream,
+                       textTransform: 'uppercase', lineHeight: 1.12, fontSize: 64 * u, letterSpacing: 1 * u,
+                       boxShadow: `0 ${8 * u}px ${26 * u}px rgba(0,0,0,0.35)`}}>
+            {item.lines.map((ln, i) => <div key={i}>{ln}</div>)}
+          </div>
+          <div style={{display: 'flex', alignItems: 'center', marginTop: -14 * u, transform: `scale(${0.4 + 0.6 * s2})`,
+                       opacity: Math.min(1, s2 * 1.5), fontFamily: 'Oswald', fontWeight: 700, textTransform: 'uppercase'}}>
+            <span style={{fontSize: 170 * u, lineHeight: 1, color: cream, WebkitTextStroke: `${4 * u}px #262626`,
+                          paintOrder: 'stroke fill', marginRight: -6 * u, zIndex: 1}}>{num}</span>
+            <span style={{fontSize: 84 * u, lineHeight: 1.05, color: '#262626', background: cream, borderRadius: 14 * u,
+                          padding: `${2 * u}px ${22 * u}px`}}>{rest.join(' ')}</span>
+          </div>
+          {emo[0] ? <div style={{position: 'absolute', left: -50 * u, top: -60 * u, fontSize: 110 * u, transform: `rotate(${-12 + wob(0)}deg)`}}>{emo[0]}</div> : null}
+          {emo[1] ? <div style={{position: 'absolute', right: -46 * u, top: '52%', fontSize: 96 * u, transform: `rotate(${10 + wob(2)}deg)`}}>{emo[1]}</div> : null}
+        </div>
+      </AbsoluteFill>
+    );
+  }
   return (
     <AbsoluteFill style={{alignItems: 'center', paddingTop: h * (item.top ?? 0.5), opacity: fadeOut(now, item.end)}}>
       <div style={{maxWidth: w * 0.9, textAlign: 'center', fontFamily: 'Oswald', fontWeight: 700, color: '#FFF',
