@@ -23,7 +23,7 @@ Yangi uslub referens bilan kelsa: tahlil qiling, foydalanuvchi bergan nom bilan 
   0.35 s alfa fade bilan kirib-chiqsin (overlay boshlanishi 0.175 s oldin).
 - **O'tishlar ko'p bo'lmasin** (30 s videoga ~7 ta). Jump-cut'larni iloji boricha B-roll ostiga yashiring
   (B-roll kesimdan ≥0.35 s oldin boshlansin, ostida oddiy kesim); ketma-ket B-roll'larni bittaga birlashtiring.
-- **Tovush effektlari** qo'shing (`assets/sfx/README.md`): whoosh - kadr almashuvi, pop - hook/oltin yozuv, ding - kuchli so'z.
+- **Tovush effektlari** qo'shing (`assets/sfx/README.md`): whoosh FAQAT B-roll kirishida (30 s ga ~3 ta, ko'p bo'lmasin), pop - hook/oltin yozuv, ding - kuchli so'z.
 
 ## "Doktor" referensi elementlari (Remotion: bubble, duo, gold, stat)
 Chat-pufak hook (`bubble`), oq KATTA + oltin qo'lyozma (`duo`), oltin kalit ibora (`gold`), tepada katta qo'lyozma (`stat`),
