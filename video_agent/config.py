@@ -76,6 +76,7 @@ class MotionConfig:
     cta: str = "Obuna bo'ling!"
     title_style: str = "box"      # box - sariq blok | cinematic - nafis matn | aesthetic - Instagram estetik
     expert_fx: bool = True        # expert: light leak va flash o'tishlari
+    palette: dict | None = None   # expert: ranglar {brown, cream, hookBg, keyword, text}
     text_y: float | None = None   # estetik matn balandligi (0=yuqori, 1=past); yuzni yopsa o'zgartiring
     outro_style: str = "cta"      # cta - "Obuna bo'ling" | endcard - Instagram belgisi + @username
     title_font: str = 'Montserrat, "DejaVu Sans", Arial, sans-serif'
@@ -252,8 +253,17 @@ def _ekspert_jigarrang() -> StyleConfig:
     return s
 
 
+def _ekspert_yashil() -> StyleConfig:
+    """"Ekspert montaj yashil": ekspert-jigarrang bilan bir xil, faqat asosiy rang - to'q yashil."""
+    s = _ekspert_jigarrang()
+    s.name = "ekspert-yashil"
+    s.motion.palette = {"brown": "#1F4A38", "cream": "#EEF2D8", "hookBg": "#F1F5DF",
+                        "keyword": "#CFE6A3", "text": "#F8F8F2"}
+    return s
+
+
 STYLES = {"reels": _reels, "youtube": _youtube, "minimal": _minimal, "cinematic": _cinematic, "aesthetic": _aesthetic, "expert": _expert,
-          "ekspert-jigarrang": _ekspert_jigarrang}
+          "ekspert-jigarrang": _ekspert_jigarrang, "ekspert-yashil": _ekspert_yashil}
 
 # Foydalanuvchi uslubni turli yozishi mumkin - hammasi bitta presetga olib boradi
 ALIASES = {
@@ -262,6 +272,9 @@ ALIASES = {
     "ekspert_jigarrang": "ekspert-jigarrang",
     "ekspert-montaj-jigarrang": "ekspert-jigarrang",
     "estetik": "aesthetic",
+    "yashil": "ekspert-yashil",
+    "ekspert_yashil": "ekspert-yashil",
+    "ekspert-montaj-yashil": "ekspert-yashil",
 }
 
 

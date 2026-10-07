@@ -12,6 +12,7 @@ Yangi uslub referens bilan kelsa: tahlil qiling, foydalanuvchi bergan nom bilan 
 | Foydalanuvchi aytadigan nom | `--style` | Qisqacha |
 |---|---|---|
 | **Ekspert montaj jigarrang** | `ekspert-jigarrang` | quyida batafsil |
+| **Ekspert montaj yashil** | `ekspert-yashil` | aynan shu, faqat jigarrang o'rniga to'q yashil (#1F4A38) |
 
 ## "Ekspert montaj jigarrang": `--style ekspert-jigarrang`
 

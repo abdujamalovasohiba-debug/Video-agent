@@ -208,3 +208,9 @@ def test_follow_item_at_obuna():
     fol = [it for it in plan if it["type"] == "follow"]
     obuna = next(w for w in words if w.text.startswith("obuna"))
     assert len(fol) == 1 and abs(fol[0]["start"] - (obuna.start - 0.3)) < 1e-3 and fol[0]["end"] == 10.0
+
+
+def test_ekspert_yashil_palette():
+    s = load_style("yashil")
+    assert s.name == "ekspert-yashil" and s.motion.palette["brown"] == "#1F4A38"
+    assert s.audio.music_percent == 5.0 and not s.motion.expert_fx

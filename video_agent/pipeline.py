@@ -251,7 +251,8 @@ def run(opt: Options) -> Result:
                     log.info("    matn balandligi (%s): %.0f%%", fmt, top * 100)
                     if motion_cache["plan"]:  # bo'sh reja uchun overlay render qilinmaydi
                         jobs.append(MotionJob(fmt, "ExpertOverlay", size, st.fps, main_d, work / f"expert_{tag}",
-                                              0.0, alpha=True, props={"items": motion_cache["plan"], "captionTop": top}))
+                                              0.0, alpha=True, props={"items": motion_cache["plan"], "captionTop": top,
+                                                     **({"palette": mc.palette} if mc.palette else {})}))
                 elif text.title and mc.title_style == "aesthetic":
                     jobs.append(MotionJob(fmt, "AestheticText", size, st.fps, main_d, work / f"title_{tag}",
                                           0.0, alpha=True))
