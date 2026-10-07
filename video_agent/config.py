@@ -262,8 +262,19 @@ def _ekspert_yashil() -> StyleConfig:
     return s
 
 
+def _doktor_oltin() -> StyleConfig:
+    """"Doktor oltin": shifokor referensi - chat-pufak hook, oq KATTA + oltin qo'lyozma, mavzuli B-roll,
+    silliq o'tishlar, rang tuzatish (tayyor bazaga), tovush effektlari. Overlay rejasi qo'lda (bubble/duo/gold/stat)."""
+    s = _ekspert_jigarrang()
+    s.name = "doktor-oltin"
+    s.look.grade = "none"
+    s.look.punch = 0.0
+    return s
+
+
 STYLES = {"reels": _reels, "youtube": _youtube, "minimal": _minimal, "cinematic": _cinematic, "aesthetic": _aesthetic, "expert": _expert,
-          "ekspert-jigarrang": _ekspert_jigarrang, "ekspert-yashil": _ekspert_yashil}
+          "ekspert-jigarrang": _ekspert_jigarrang, "ekspert-yashil": _ekspert_yashil,
+          "doktor-oltin": _doktor_oltin}
 
 # Foydalanuvchi uslubni turli yozishi mumkin - hammasi bitta presetga olib boradi
 ALIASES = {
@@ -273,6 +284,8 @@ ALIASES = {
     "ekspert-montaj-jigarrang": "ekspert-jigarrang",
     "estetik": "aesthetic",
     "yashil": "ekspert-yashil",
+    "doktor": "doktor-oltin",
+    "doktor_oltin": "doktor-oltin",
     "ekspert_yashil": "ekspert-yashil",
     "ekspert-montaj-yashil": "ekspert-yashil",
 }

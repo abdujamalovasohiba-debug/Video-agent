@@ -13,6 +13,7 @@ Yangi uslub referens bilan kelsa: tahlil qiling, foydalanuvchi bergan nom bilan 
 |---|---|---|
 | **Ekspert montaj jigarrang** | `ekspert-jigarrang` | quyida batafsil |
 | **Ekspert montaj yashil** | `ekspert-yashil` | aynan shu, faqat jigarrang o'rniga to'q yashil (#1F4A38) |
+| **Doktor oltin** | `doktor-oltin` | shifokor referensi: chat-pufak hook, oq KATTA + oltin qo'lyozma, B-roll, telefon raqami |
 
 ## Rang va tovush (barcha uslublar)
 - Rangni referensga `signalstats` (YAVG, SATAVG, UAVG, VAVG) bilan moslang; foydalanuvchi "rang berilmagan"
@@ -25,9 +26,11 @@ Yangi uslub referens bilan kelsa: tahlil qiling, foydalanuvchi bergan nom bilan 
   (B-roll kesimdan ≥0.35 s oldin boshlansin, ostida oddiy kesim); ketma-ket B-roll'larni bittaga birlashtiring.
 - **Tovush effektlari** qo'shing (`assets/sfx/README.md`): whoosh FAQAT B-roll kirishida (30 s ga ~3 ta, ko'p bo'lmasin), pop - hook/oltin yozuv, ding - kuchli so'z.
 
-## "Doktor" referensi elementlari (Remotion: bubble, duo, gold, stat)
+## "Doktor oltin": `--style doktor-oltin` (Remotion: bubble, duo, gold, stat)
 Chat-pufak hook (`bubble`), oq KATTA + oltin qo'lyozma (`duo`), oltin kalit ibora (`gold`), tepada katta qo'lyozma (`stat`),
-mavzuga mos B-roll, oxirida telefon raqami (`duo` caps) + "Muolajaga yozilishingiz mumkin". Nomi hali berilmagan.
+mavzuga mos B-roll, oxirida telefon raqami (`duo` caps, raqam aytila boshlaganda chiqsin) + "Muolajaga yozilishingiz mumkin".
+Klinika raqami: +998 99 845 50 70 (foydalanuvchi tasdiqlagan). Reja qo'lda yoziladi (`--plan`, `--no-cut`, `--text-y 0.52`),
+baza oldindan yig'iladi: rang tuzatish, silliq o'tishlar, B-roll alfa fade bilan. Musiqa: Runaway 5%.
 
 ## "Ekspert montaj jigarrang": `--style ekspert-jigarrang`
 
