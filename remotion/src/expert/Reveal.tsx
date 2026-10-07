@@ -51,7 +51,8 @@ export const RevealLine: React.FC<{line: Line; u: number; color: string; font?: 
       ...font,
       lineHeight: 1.08,
       textAlign: line.align ?? 'center',
-      textShadow: `0 ${2 * u}px ${10 * u}px rgba(0,0,0,0.35)`,
+      // Och fonda ham o'qilishi uchun yumshoq qorong'i halo + aniq soya
+      textShadow: `0 0 ${16 * u}px rgba(0,0,0,0.55), 0 ${2 * u}px ${6 * u}px rgba(0,0,0,0.5)`,
     }}
   >
     {line.words.map((wd, i) => (
