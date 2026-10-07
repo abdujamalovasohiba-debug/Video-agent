@@ -27,6 +27,9 @@ Foydalanuvchi talablari (o'zgartirmang, agar o'zi so'ramasa):
   `--avatar rasm.png` (oxirgisi: Instagram profil skrinshotidan qirqilgan doira rasm).
 - **Xiralashgan (blur) yuz kadrlari ishlatilmasin** — ayniqsa hook'da. Manbada yuz xira bo'lsa,
   o'rniga realistik B-roll qo'ying (masalan Mixkit 206: kafeda noutbukda yozayotgan qo'llar).
+- **Hook kadri har videoda yangi bo'lsin** (avvalgi videodagi B-roll takrorlanmasin). Ro'yxatli videolarda
+  kuchli usul — "teaser": hook davomida ro'yxatdagi barcha ekranlar ~0.45 s dan tez almashadi.
+- Hook matni bitta kuchli gap (`--title "|KATTA GAP"`); "Marketologlar, saqlab qo'ying" kabi qo'shimcha qator kerak emas.
 - Musiqa vaqt bo'yicha tekislanadi (qo'shiq o'rtasida balandlashmasin) — `ekspert-jigarrang` buni o'zi qiladi.
 - Yuborilgan video **30 MB dan kichik** bo'lsin (ilova chegarasi): `-crf 25 -preset slow` bilan siqing.
 
