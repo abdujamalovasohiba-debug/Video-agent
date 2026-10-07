@@ -227,3 +227,5 @@ output/
 *.wav
 *.mp3
 remotion/public/user/
+models/UVR-*.onnx
+models/*.json

@@ -17,7 +17,7 @@ export const Hook: React.FC<P<Extract<Item, {type: 'hook'}>>> = ({item, u, pal, 
   const s = spring({frame: (now - item.start) * fps, fps, config: {damping: 13, mass: 0.6}});
   const out = interpolate(now, [item.end - 0.2, item.end], [1, 0], clamp);
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-start', paddingTop: h * 0.515}}>
+    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-start', paddingTop: h * (item.top ?? 0.515)}}>
       <div
         style={{
           background: pal.hookBg,

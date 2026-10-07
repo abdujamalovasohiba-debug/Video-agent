@@ -3,7 +3,7 @@ export type Word = {w: string; t: number}; // t - so'z paydo bo'ladigan vaqt (s)
 export type Line = {style: 'caps' | 'sans' | 'small'; align?: 'left' | 'center' | 'right'; words: Word[]};
 
 export type Item =
-  | {type: 'hook'; start: number; end: number; small: string; big: string}
+  | {type: 'hook'; start: number; end: number; small: string; big: string; top?: number}
   | {type: 'card'; start: number; end: number; lines: Line[]}
   | {type: 'caption'; start: number; end: number; lines: Line[]}
   | {type: 'number'; start: number; end: number; n: number; total: number; lines: Line[]}
