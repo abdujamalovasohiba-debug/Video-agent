@@ -21,6 +21,8 @@ Yangi uslub referens bilan kelsa: tahlil qiling, foydalanuvchi bergan nom bilan 
 - **O'tishlar silliq bo'lsin** — foydalanuvchi keskin kesishni yoqtirmaydi. Jump-cut'larda 0.3 s dissolve
   (`xfade=fade`, kesimning ikki tomonidan 0.15 s "handle" olib, ovoz vaqti o'zgarmasin), B-roll esa
   0.35 s alfa fade bilan kirib-chiqsin (overlay boshlanishi 0.175 s oldin).
+- **O'tishlar ko'p bo'lmasin** (30 s videoga ~7 ta). Jump-cut'larni iloji boricha B-roll ostiga yashiring
+  (B-roll kesimdan ≥0.35 s oldin boshlansin, ostida oddiy kesim); ketma-ket B-roll'larni bittaga birlashtiring.
 - **Tovush effektlari** qo'shing (`assets/sfx/README.md`): whoosh - kadr almashuvi, pop - hook/oltin yozuv, ding - kuchli so'z.
 
 ## "Doktor" referensi elementlari (Remotion: bubble, duo, gold, stat)
