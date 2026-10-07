@@ -37,6 +37,16 @@ Foydalanuvchi talablari (o'zgartirmang, agar o'zi so'ramasa):
 6. Tekshiring: kontakt-varaq (matn yuzni yopmasin, plashka bo'sh turmasin), `ebur128` (≈ −14 LUFS).
 7. 30 MB dan kichik qilib siqing va `SendUserFile` bilan yuboring. Nima qilinganini qisqa yozing.
 
+## Yuzsiz (B-roll) montaj
+Foydalanuvchi yuzini ko'rsatmaslikni so'rasa: xiralik/emoji EMAS — ovoz + mavzuga mos B-roll + matnlar.
+1. Kadrlar: foydalanuvchining o'z kadrlari yoki Mixkit (mixkit.co, assets.mixkit.co ruxsat etilgan;
+   `https://mixkit.co/free-stock-video/<mavzu>/` sahifasidan id topiladi,
+   `https://assets.mixkit.co/videos/<id>/<id>-1080.mp4` yoki `-720.mp4`).
+2. Avval odatdagidek render qilib rejani oling (`output/<video>.plan.json`), har bir iboraga mos kadr tanlang:
+   `[[boshlanish, "klip.mp4", focus_x], ...]` va yig'ing:
+   `python tools/build_broll.py spec.json klipler/ <davomiylik> broll.mp4`
+3. B-roll + kesilgan ovozni birlashtirib, `--no-cut --plan reja.json --text-y 0.40` bilan render qiling.
+
 ## Foydali buyruqlar
 - Testlar: `python -m pytest -q tests`
 - Referensdan musiqa ajratish: `--music-from referens.mp4` (`pip install 'audio-separator[cpu]'`)

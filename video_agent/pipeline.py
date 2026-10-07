@@ -229,13 +229,16 @@ def run(opt: Options) -> Result:
                     from .reframe import reframe_filter
                     if not motion_cache["plan"]:
                         continue
-                    # Yuz o'rni aynan shu formatdagi kadrda aniqlanadi
-                    probe_v = work / f"layout_{tag}.mp4"
-                    ff.run(["-i", cut, "-t", "20", "-filter_complex",
-                            reframe_filter(cut_info.width, cut_info.height, *size, st.reframe, opt.focus_x,
-                                           "[0:v]", "[o]"), "-map", "[o]", "-an", "-c:v", "libx264",
-                            "-preset", "ultrafast", "-crf", "28", probe_v])
-                    top = caption_top(probe_v, *size)
+                    if mc.text_y is not None:  # qo'lda berilgan (masalan B-roll montajida)
+                        top = mc.text_y
+                    else:
+                        # Yuz o'rni aynan shu formatdagi kadrda aniqlanadi
+                        probe_v = work / f"layout_{tag}.mp4"
+                        ff.run(["-i", cut, "-t", "20", "-filter_complex",
+                                reframe_filter(cut_info.width, cut_info.height, *size, st.reframe, opt.focus_x,
+                                               "[0:v]", "[o]"), "-map", "[o]", "-an", "-c:v", "libx264",
+                                "-preset", "ultrafast", "-crf", "28", probe_v])
+                        top = caption_top(probe_v, *size)
                     log.info("    matn balandligi (%s): %.0f%%", fmt, top * 100)
                     if motion_cache["plan"]:  # bo'sh reja uchun overlay render qilinmaydi
                         jobs.append(MotionJob(fmt, "ExpertOverlay", size, st.fps, main_d, work / f"expert_{tag}",
