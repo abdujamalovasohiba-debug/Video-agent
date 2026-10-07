@@ -62,6 +62,8 @@ def _faster_whisper(audio: Path, model: str, language: str | None, device: str) 
     m = WhisperModel(model, device=device, compute_type=compute)
     segments, info = m.transcribe(
         str(audio), language=language, word_timestamps=True, vad_filter=True, beam_size=5,
+        # Oldingi matnga tayanmaslik uzun o'zbekcha nutqda takroriy "xayoliy" gaplarning oldini oladi
+        condition_on_previous_text=False,
         initial_prompt=UZ_PROMPT if language == "uz" else None,
     )
     words = []
@@ -82,7 +84,7 @@ def _openai_whisper(audio: Path, model: str, language: str | None, device: str) 
             for seg in result["segments"] for w in seg.get("words", [])]
 
 
-def transcribe(audio: Path, model: str = "medium", language: str | None = "uz",
+def transcribe(audio: Path, model: str = "large-v3", language: str | None = "uz",
                device: str = "auto", latin: bool = True) -> list[Word]:
     """faster-whisper (tezroq) yoki openai-whisper orqali transkripsiya."""
     errors = []

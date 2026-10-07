@@ -77,7 +77,17 @@ def mix(voice: Path, out: Path, cfg: AudioConfig, total: float, voice_offset: fl
     delay_ms = int(round(voice_offset * 1000))
     pre = out.with_name(out.stem + "_pre.wav")
     voice_f = f"[0:a]adelay={delay_ms}|{delay_ms},apad,atrim=0:{total:.3f}"
-    if music:
+    if music and cfg.music_percent is not None:
+        # Musiqa asl balandligining aniq foizida, butun video davomida bir xil (ducking'siz)
+        fade_out = max(0.0, total - cfg.music_fade)
+        graph = (
+            f"{voice_f}[v];"
+            f"[1:a]aresample=48000,aformat=channel_layouts=stereo,atrim=0:{total:.3f},"
+            f"volume={cfg.music_percent / 100:.4f},afade=t=in:d={cfg.music_fade}:curve=tri,"
+            f"afade=t=out:st={fade_out:.3f}:d={cfg.music_fade}[m];"
+            f"[v][m]amix=inputs=2:duration=first:normalize=0[out]"
+        )
+    elif music:
         gain = music_gain_db(music, cfg)
         log.debug("musiqa kuchaytirish: %.1f dB", gain)
         fade_out = max(0.0, total - cfg.music_fade)
@@ -90,6 +100,7 @@ def mix(voice: Path, out: Path, cfg: AudioConfig, total: float, voice_offset: fl
             f":attack=30:release=400:makeup=1[duck];"
             f"[v][duck]amix=inputs=2:duration=first:normalize=0[out]"
         )
+    if music:
         ff.run(["-i", voice, "-stream_loop", "-1", "-i", music, "-filter_complex", graph, "-map", "[out]",
                 "-t", f"{total:.3f}", "-ar", "48000", "-c:a", "pcm_s16le", pre])
     else:

@@ -108,7 +108,7 @@ def _find_points(phs: list[list[Word]], points: list[str]) -> list[int]:
 
 
 def build_plan(words: list[Word], duration: float, title: str = "", points: list[str] | None = None,
-               card_every: float = 11.0, hook_max: float = 4.5) -> list[dict]:
+               card_every: float = 11.0, hook_max: float = 4.5, fx: bool = True) -> list[dict]:
     items: list[dict] = []
     t0 = 0.0
     if title:
@@ -191,6 +191,8 @@ def build_plan(words: list[Word], duration: float, title: str = "", points: list
         if not in_card:
             items.append({"type": "flash", "start": round(max(0.0, mid - 0.15), 3), "dur": 0.35})
         t = mid + 15.0
+    if not fx:  # rangli o'tishlarsiz (light leak / flash yo'q)
+        items = [it for it in items if it["type"] not in ("leak", "flash")]
     return _clip_overlaps(sorted(items, key=lambda it: it["start"]))
 
 

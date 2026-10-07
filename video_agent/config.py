@@ -75,6 +75,7 @@ class MotionConfig:
     text_color: str = "#FFFFFF"
     cta: str = "Obuna bo'ling!"
     title_style: str = "box"      # box - sariq blok | cinematic - nafis matn | aesthetic - Instagram estetik
+    expert_fx: bool = True        # expert: light leak va flash o'tishlari
     text_y: float | None = None   # estetik matn balandligi (0=yuqori, 1=past); yuzni yopsa o'zgartiring
     outro_style: str = "cta"      # cta - "Obuna bo'ling" | endcard - Instagram belgisi + @username
     title_font: str = 'Montserrat, "DejaVu Sans", Arial, sans-serif'
@@ -101,6 +102,7 @@ class AudioConfig:
     duck_ratio: float = 8.0         # nutq paytida musiqani qanchalik bosish
     duck_threshold: float = 0.03
     music_fade: float = 1.5
+    music_percent: float | None = None  # berilsa: musiqa asl balandligining shu foizida (masalan 5)
 
 
 @dataclass
@@ -238,7 +240,17 @@ def _expert() -> StyleConfig:
     return s
 
 
-STYLES = {"reels": _reels, "youtube": _youtube, "minimal": _minimal, "cinematic": _cinematic, "aesthetic": _aesthetic, "expert": _expert}
+def _mening() -> StyleConfig:
+    """Foydalanuvchining tasdiqlangan uslubi: expert referensi, rangli o'tishlarsiz,
+    musiqa asl balandligining 5% ida (ducking'siz)."""
+    s = _expert()
+    s.name = "mening"
+    s.motion.expert_fx = False
+    s.audio.music_percent = 5.0
+    return s
+
+
+STYLES = {"reels": _reels, "youtube": _youtube, "minimal": _minimal, "cinematic": _cinematic, "aesthetic": _aesthetic, "expert": _expert, "mening": _mening}
 
 
 def _merge(obj, data: dict):

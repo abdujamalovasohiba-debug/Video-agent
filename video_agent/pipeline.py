@@ -32,7 +32,7 @@ class Options:
     handle: str = ""
     keywords: list[str] = field(default_factory=list)
     transcript: Path | None = None
-    whisper_model: str = "medium"
+    whisper_model: str = "large-v3"
     language: str | None = "uz"
     device: str = "auto"
     cut: bool = True
@@ -221,7 +221,7 @@ def run(opt: Options) -> Result:
                     from .expert import build_plan, load_plan, save_plan
                     if "plan" not in motion_cache:
                         plan = load_plan(opt.plan) if opt.plan else build_plan(
-                            out_words, main_d, opt.title or "", opt.points)
+                            out_words, main_d, opt.title or "", opt.points, fx=mc.expert_fx)
                         motion_cache["plan"] = plan
                         save_plan(plan, opt.output_dir / f"{stem}.plan.json")
                         log.info("    reja: %d element -> %s", len(plan), opt.output_dir / f"{stem}.plan.json")

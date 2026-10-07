@@ -72,12 +72,13 @@ def parse_args(argv=None) -> argparse.Namespace:
     g = p.add_argument_group("ovoz")
     g.add_argument("--music", type=Path, help="fon musiqasi fayli")
     g.add_argument("--music-from", type=Path, help="fon musiqasini shu (referens) videodan ajratib olish")
+    g.add_argument("--music-percent", type=float, help="musiqa asl balandligining foizi, masalan 5 (ducking'siz)")
     g.add_argument("--music-volume", type=float, help="musiqa darajasi, dB (masalan -18)")
     g.add_argument("--no-denoise", action="store_true", help="shovqin tozalashni o'chirish")
     g.add_argument("--lufs", type=float, help="yakuniy balandlik (standart -14 LUFS)")
 
     g = p.add_argument_group("whisper")
-    g.add_argument("--model", default="medium", help="Whisper modeli: tiny/base/small/medium/large-v3")
+    g.add_argument("--model", default="large-v3", help="Whisper modeli: small/medium/large-v3 (o'zbekcha uchun large-v3)")
     g.add_argument("--language", default="uz", help="nutq tili (standart: uz; 'auto' - avtomatik)")
     g.add_argument("--device", default="auto", help="cpu / cuda / auto")
     g.add_argument("--transcript", type=Path, help="tayyor transkript JSON (qayta ishlatish/tahrirlash uchun)")
@@ -114,6 +115,7 @@ def build_overrides(a: argparse.Namespace) -> dict:
     put("motion.cta", a.cta)
     put("motion.text_y", a.text_y)
     put("audio.music_volume_db", a.music_volume)
+    put("audio.music_percent", a.music_percent)
     put("audio.target_lufs", a.lufs)
     if a.accent:
         put("motion.accent", a.accent)

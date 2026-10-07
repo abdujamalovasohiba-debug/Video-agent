@@ -85,6 +85,7 @@ python agent.py video.mp4 --transcript output/video.transcript.json
 | `reels` | agressiv (0.35s+ pauzalar) | katta, KATTA HARF, 3 so'z | kuchli | ha |
 | `youtube` | yumshoq (0.6s+) | o'rtacha, 6 so'z, pastda | yengil | ha |
 | `minimal` | faqat uzun pauzalar | oddiy, oq | yo'q | yo'q |
+| `mening` | keskin kesish | expert kabi | yo'q | tasdiqlangan uslub: expert, rangli o'tishlarsiz, musiqa 5% |
 | `expert` | keskin kesish | so'zma-so'z kinetik matn (Montserrat) | yo'q | gapiradigan odam videolari: krem hook plashka, jigarrang matn kartalari, "1/4" raqamli punktlar, light leak va flash o'tishlar; matn yuzdan pastga avtomatik joylanadi |
 | `aesthetic` | yumshoq | — | yo'q | Instagram estetik: kichik nafis matn + emoji, @username, moody rang, kamera sekin yaqinlashadi, oxirida Instagram logoli karta |
 | `cinematic` | yumshoq, sekin (x0.85) | nafis serif | juda yengil | yo'q (iliq rang, vinyetka, plyonka donasi, fade) |
