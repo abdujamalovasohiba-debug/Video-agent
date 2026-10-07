@@ -188,10 +188,12 @@ def test_expert_style_preset():
     assert s.motion.title_style == "expert" and not s.captions.enabled and s.transition.duration == 0
 
 
-def test_mening_style_no_fx_and_music_percent():
+def test_ekspert_jigarrang_style_and_aliases():
     from video_agent.expert import build_plan, align_script
 
-    s = load_style("mening")
+    s = load_style("ekspert-jigarrang")
+    assert s.name == "ekspert-jigarrang"
+    assert load_style("mening").name == load_style("Ekspert").name == "ekspert-jigarrang"
     assert not s.motion.expert_fx and s.audio.music_percent == 5.0 and s.motion.title_style == "expert"
     words = align_script("Bir ikki uch. To'rt besh olti yetti. Sakkiz to'qqiz o'n bir. Yana gap bor.", [(0.0, 40.0)])
     plan = build_plan(words, 40.0, "a b|c d", card_every=5.0, fx=False)

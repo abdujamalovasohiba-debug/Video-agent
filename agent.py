@@ -15,7 +15,7 @@ import logging
 import sys
 from pathlib import Path
 
-from video_agent.config import FORMATS, STYLES, load_style
+from video_agent.config import ALIASES, FORMATS, STYLES, load_style
 from video_agent.pipeline import Options, run
 
 
@@ -27,7 +27,8 @@ def parse_args(argv=None) -> argparse.Namespace:
         epilog=__doc__.split("Misollar:")[1] if __doc__ else None,
     )
     p.add_argument("video", type=Path, help="kirish video fayli")
-    p.add_argument("--style", choices=list(STYLES), default="reels", help="uslub (standart: reels)")
+    p.add_argument("--style", choices=list(STYLES) + list(ALIASES), default="reels",
+                   help="uslub (standart: reels). 'Ekspert montaj jigarrang' = ekspert-jigarrang")
     p.add_argument("--formats", default=None,
                    help=f"chiqish formatlari, vergul bilan: {','.join(FORMATS)} yoki 'both' (standart: both)")
     p.add_argument("-o", "--output", type=Path, default=Path("output"), help="natijalar papkasi")

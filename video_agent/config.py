@@ -241,18 +241,28 @@ def _expert() -> StyleConfig:
     return s
 
 
-def _mening() -> StyleConfig:
-    """Foydalanuvchining tasdiqlangan uslubi: expert referensi, rangli o'tishlarsiz,
-    musiqa asl balandligining 5% ida (ducking'siz)."""
+def _ekspert_jigarrang() -> StyleConfig:
+    """"Ekspert montaj jigarrang": foydalanuvchining tasdiqlangan uslubi - expert referensi,
+    rangli o'tishlarsiz, musiqa asl balandligining 5% ida (ducking'siz), tekislangan."""
     s = _expert()
-    s.name = "mening"
+    s.name = "ekspert-jigarrang"
     s.motion.expert_fx = False
     s.audio.music_percent = 5.0
     s.audio.music_even = True     # Runaway kabi qo'shiqlar o'rtasida 14 dB balandlashadi
     return s
 
 
-STYLES = {"reels": _reels, "youtube": _youtube, "minimal": _minimal, "cinematic": _cinematic, "aesthetic": _aesthetic, "expert": _expert, "mening": _mening}
+STYLES = {"reels": _reels, "youtube": _youtube, "minimal": _minimal, "cinematic": _cinematic, "aesthetic": _aesthetic, "expert": _expert,
+          "ekspert-jigarrang": _ekspert_jigarrang}
+
+# Foydalanuvchi uslubni turli yozishi mumkin - hammasi bitta presetga olib boradi
+ALIASES = {
+    "mening": "ekspert-jigarrang",
+    "ekspert": "ekspert-jigarrang",
+    "ekspert_jigarrang": "ekspert-jigarrang",
+    "ekspert-montaj-jigarrang": "ekspert-jigarrang",
+    "estetik": "aesthetic",
+}
 
 
 def _merge(obj, data: dict):
@@ -270,6 +280,7 @@ def _merge(obj, data: dict):
 
 
 def load_style(name: str, overrides: dict | None = None, config_path: str | Path | None = None) -> StyleConfig:
+    name = ALIASES.get(name.strip().lower(), name.strip().lower())
     if name not in STYLES:
         raise ValueError(f"Noma'lum uslub '{name}'. Mavjud: {', '.join(STYLES)}")
     style = STYLES[name]()

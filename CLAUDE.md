@@ -3,19 +3,29 @@
 Foydalanuvchi (targetolog, o'zbek tilida yozadi) video yuklaydi va uni **o'zi tasdiqlagan uslubda**
 montaj qilishni kutadi. Javoblar o'zbek tilida, qisqa va aniq bo'lsin.
 
-## Tasdiqlangan uslub: `--style mening`
+## Uslublar katalogi
+
+Foydalanuvchi har safar uslub **nomini** yozadi. Nom yozilmasa — taxmin qilmang, qaysi uslub ekanini so'rang.
+Yangi uslub referens bilan kelsa: tahlil qiling, foydalanuvchi bergan nom bilan preset qiling
+(`video_agent/config.py` STYLES + ALIASES), shu katalogga qo'shing va sinov videosini ko'rsating.
+
+| Foydalanuvchi aytadigan nom | `--style` | Qisqacha |
+|---|---|---|
+| **Ekspert montaj jigarrang** | `ekspert-jigarrang` | quyida batafsil |
+
+## "Ekspert montaj jigarrang": `--style ekspert-jigarrang`
 
 `expert` referensi asosida (talking-head): krem hook plashka, jigarrang matn kartalari,
 "1/3" raqamli punktlar, so'zma-so'z chiqadigan matn (yuzdan pastda), keskin kesish,
 kesimlarda navbatma-navbat 12% yaqinlashish, iliq rang.
 
 Foydalanuvchi talablari (o'zgartirmang, agar o'zi so'ramasa):
-- **Rangli o'tishlar yo'q** (light leak / to'q sariq flash olib tashlangan) — `mening` buni o'zi qiladi.
-- **Fon musiqasi asl balandligining 5%** ida, ducking'siz — `mening` buni o'zi qiladi.
+- **Rangli o'tishlar yo'q** (light leak / to'q sariq flash olib tashlangan) — `ekspert-jigarrang` buni o'zi qiladi.
+- **Fon musiqasi asl balandligining 5%** ida, ducking'siz — `ekspert-jigarrang` buni o'zi qiladi.
   Musiqa faylini foydalanuvchi yuboradi (oxirgisi: Kanye West — Runaway). Musiqa yuborilmasa, so'rang.
 - Username / Instagram belgisi kerak emas. "Obuna bo'ling" joyida **profil rasmi kartasi** bo'lsin:
   `--avatar rasm.png` (oxirgisi: Instagram profil skrinshotidan qirqilgan doira rasm).
-- Musiqa vaqt bo'yicha tekislanadi (qo'shiq o'rtasida balandlashmasin) — `mening` buni o'zi qiladi.
+- Musiqa vaqt bo'yicha tekislanadi (qo'shiq o'rtasida balandlashmasin) — `ekspert-jigarrang` buni o'zi qiladi.
 - Yuborilgan video **30 MB dan kichik** bo'lsin (ilova chegarasi): `-crf 25 -preset slow` bilan siqing.
 
 ## Har bir video uchun qadamlar
@@ -32,7 +42,7 @@ Foydalanuvchi talablari (o'zgartirmang, agar o'zi so'ramasa):
 4. **Hook** (2 qator, `kichik|KATTA`) va **punktlar** (3–4 ta) ni mazmundan tanlang.
 5. Render:
    ```bash
-   python agent.py video.mp4 --style mening --transcript tuzatilgan.transcript.json \
+   python agent.py video.mp4 --style ekspert-jigarrang --transcript tuzatilgan.transcript.json \
        --title "kichik qator|katta qator" --points "A|B|C" --music musiqa.mp3 -o output
    ```
    Reja `output/<video>.plan.json` ga yoziladi — kerak bo'lsa tahrirlab `--plan` bilan qayta render qiling.
