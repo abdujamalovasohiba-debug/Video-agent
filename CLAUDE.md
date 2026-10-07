@@ -25,6 +25,8 @@ Foydalanuvchi talablari (o'zgartirmang, agar o'zi so'ramasa):
   Musiqa faylini foydalanuvchi yuboradi (oxirgisi: Kanye West — Runaway). Musiqa yuborilmasa, so'rang.
 - Username / Instagram belgisi kerak emas. "Obuna bo'ling" joyida **profil rasmi kartasi** bo'lsin:
   `--avatar rasm.png` (oxirgisi: Instagram profil skrinshotidan qirqilgan doira rasm).
+- **Xiralashgan (blur) yuz kadrlari ishlatilmasin** — ayniqsa hook'da. Manbada yuz xira bo'lsa,
+  o'rniga realistik B-roll qo'ying (masalan Mixkit 206: kafeda noutbukda yozayotgan qo'llar).
 - Musiqa vaqt bo'yicha tekislanadi (qo'shiq o'rtasida balandlashmasin) — `ekspert-jigarrang` buni o'zi qiladi.
 - Yuborilgan video **30 MB dan kichik** bo'lsin (ilova chegarasi): `-crf 25 -preset slow` bilan siqing.
 
