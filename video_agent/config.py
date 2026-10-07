@@ -103,6 +103,7 @@ class AudioConfig:
     duck_threshold: float = 0.03
     music_fade: float = 1.5
     music_percent: float | None = None  # berilsa: musiqa asl balandligining shu foizida (masalan 5)
+    music_even: bool = False      # musiqani vaqt bo'yicha tekislash (qo'shiq o'rtasida balandlashmasin)
 
 
 @dataclass
@@ -247,6 +248,7 @@ def _mening() -> StyleConfig:
     s.name = "mening"
     s.motion.expert_fx = False
     s.audio.music_percent = 5.0
+    s.audio.music_even = True     # Runaway kabi qo'shiqlar o'rtasida 14 dB balandlashadi
     return s
 
 

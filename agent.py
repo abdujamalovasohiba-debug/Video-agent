@@ -43,6 +43,7 @@ def parse_args(argv=None) -> argparse.Namespace:
     g.add_argument("--plan", type=Path, help="expert uslubi: tahrirlangan reja (output/<video>.plan.json)")
     g.add_argument("--points", default="", help="expert: ro'yxat punktlari, | bilan: \"Auditoriya|Kreativ|Byudjet\"")
     g.add_argument("--script", type=Path, help="Whisper bo'lmasa: nutq matni (.txt) - so'zlar taxminan moslanadi")
+    g.add_argument("--avatar", type=Path, help="expert: profil rasmi - 'obuna bo'ling' joyida karta chiqadi")
     g.add_argument("--hide-face", choices=["flowers", "blur", "emoji"],
                    help="yuzni yashirish: flowers - gul buketi, blur - xiralik, emoji - bitta emoji")
     g.add_argument("--face-emoji", default="🌸", help="buket/emoji belgilari, masalan 🌸 yoki 🌼🍁")
@@ -154,7 +155,7 @@ def main(argv=None) -> int:
             transcript=a.transcript, whisper_model=a.model,
             language=None if a.language == "auto" else a.language, device=a.device,
             cut=not a.no_cut, remove_fillers=not a.keep_fillers, focus_x=a.focus_x, keep_temp=a.keep_temp,
-            hide_face=a.hide_face, face_emoji=a.face_emoji, plan=a.plan, script=a.script, music_from=a.music_from,
+            hide_face=a.hide_face, face_emoji=a.face_emoji, plan=a.plan, script=a.script, music_from=a.music_from, avatar=a.avatar,
             points=[x.strip() for x in a.points.split("|") if x.strip()],
         ))
     except KeyboardInterrupt:

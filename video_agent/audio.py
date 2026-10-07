@@ -83,6 +83,7 @@ def mix(voice: Path, out: Path, cfg: AudioConfig, total: float, voice_offset: fl
         graph = (
             f"{voice_f}[v];"
             f"[1:a]aresample=48000,aformat=channel_layouts=stereo,atrim=0:{total:.3f},"
+            + ("loudnorm=I=-21:LRA=3:TP=-2,aresample=48000," if cfg.music_even else "") +
             f"volume={cfg.music_percent / 100:.4f},afade=t=in:d={cfg.music_fade}:curve=tri,"
             f"afade=t=out:st={fade_out:.3f}:d={cfg.music_fade}[m];"
             f"[v][m]amix=inputs=2:duration=first:normalize=0[out]"

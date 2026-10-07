@@ -196,3 +196,13 @@ def test_mening_style_no_fx_and_music_percent():
     words = align_script("Bir ikki uch. To'rt besh olti yetti. Sakkiz to'qqiz o'n bir. Yana gap bor.", [(0.0, 40.0)])
     plan = build_plan(words, 40.0, "a b|c d", card_every=5.0, fx=False)
     assert not any(it["type"] in ("leak", "flash") for it in plan)
+
+
+def test_follow_item_at_obuna():
+    from video_agent.expert import align_script, build_plan
+
+    words = align_script("Foydali gaplar uchun blogimga obuna bo'ling va izoh yozing.", [(0.0, 10.0)])
+    plan = build_plan(words, 10.0, "", avatar="user/avatar.jpg")
+    fol = [it for it in plan if it["type"] == "follow"]
+    obuna = next(w for w in words if w.text.startswith("obuna"))
+    assert len(fol) == 1 and abs(fol[0]["start"] - (obuna.start - 0.3)) < 1e-3 and fol[0]["end"] == 10.0

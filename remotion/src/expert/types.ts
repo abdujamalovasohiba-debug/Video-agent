@@ -8,7 +8,8 @@ export type Item =
   | {type: 'caption'; start: number; end: number; lines: Line[]}
   | {type: 'number'; start: number; end: number; n: number; total: number; lines: Line[]}
   | {type: 'leak'; start: number; dur: number}
-  | {type: 'flash'; start: number; dur: number};
+  | {type: 'flash'; start: number; dur: number}
+  | {type: 'follow'; start: number; end: number; image: string; label?: string; done?: string};
 
 export type Palette = {brown: string; cream: string; hookBg: string; keyword: string; text: string};
 

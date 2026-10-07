@@ -40,6 +40,7 @@ class Options:
     focus_x: float = 0.5
     keep_temp: bool = False
     music_from: Path | None = None  # musiqani shu videodan ajratib olish
+    avatar: Path | None = None     # expert: "obuna bo'ling" joyida profil rasmi
     plan: Path | None = None       # expert uslubi: tayyor reja (plan.json)
     points: list[str] = field(default_factory=list)  # expert: ro'yxat punktlari
     script: Path | None = None     # Whisper bo'lmasa: nutq matni (.txt)
@@ -220,8 +221,16 @@ def run(opt: Options) -> Result:
                 if mc.title_style == "expert":
                     from .expert import build_plan, load_plan, save_plan
                     if "plan" not in motion_cache:
+                        avatar_rel = None
+                        if opt.avatar:
+                            import shutil as _sh
+                            from .motion import REMOTION_DIR
+                            dst = REMOTION_DIR / "public" / "user" / f"avatar{opt.avatar.suffix.lower()}"
+                            dst.parent.mkdir(parents=True, exist_ok=True)
+                            _sh.copyfile(opt.avatar, dst)
+                            avatar_rel = f"user/{dst.name}"
                         plan = load_plan(opt.plan) if opt.plan else build_plan(
-                            out_words, main_d, opt.title or "", opt.points, fx=mc.expert_fx)
+                            out_words, main_d, opt.title or "", opt.points, fx=mc.expert_fx, avatar=avatar_rel)
                         motion_cache["plan"] = plan
                         save_plan(plan, opt.output_dir / f"{stem}.plan.json")
                         log.info("    reja: %d element -> %s", len(plan), opt.output_dir / f"{stem}.plan.json")

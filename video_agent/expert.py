@@ -108,7 +108,8 @@ def _find_points(phs: list[list[Word]], points: list[str]) -> list[int]:
 
 
 def build_plan(words: list[Word], duration: float, title: str = "", points: list[str] | None = None,
-               card_every: float = 11.0, hook_max: float = 4.5, fx: bool = True) -> list[dict]:
+               card_every: float = 11.0, hook_max: float = 4.5, fx: bool = True,
+               avatar: str | None = None) -> list[dict]:
     items: list[dict] = []
     t0 = 0.0
     if title:
@@ -191,14 +192,23 @@ def build_plan(words: list[Word], duration: float, title: str = "", points: list
         if not in_card:
             items.append({"type": "flash", "start": round(max(0.0, mid - 0.15), 3), "dur": 0.35})
         t = mid + 15.0
+    if avatar:
+        add_follow(items, words, duration, avatar)
     if not fx:  # rangli o'tishlarsiz (light leak / flash yo'q)
         items = [it for it in items if it["type"] not in ("leak", "flash")]
     return _clip_overlaps(sorted(items, key=lambda it: it["start"]))
 
 
+def add_follow(items: list[dict], words: list[Word], duration: float, avatar: str) -> None:
+    """"Obuna" so'zi aytilganda profil rasmi va "Obuna bo'ling" tugmasi chiqadi (oxirigacha)."""
+    hit = next((w for w in reversed(words) if normalize(w.text).startswith("obuna")), None)
+    start = hit.start - 0.3 if hit else max(0.0, duration - 4.0)
+    items.append({"type": "follow", "start": round(max(0.0, start), 3), "end": round(duration, 3), "image": avatar})
+
+
 def _clip_overlaps(items: list[dict]) -> list[dict]:
     """Matnli elementlar bir-birini yopmasligi uchun har birini keyingisining boshigacha qisqartiradi."""
-    blocks = [it for it in items if "end" in it]
+    blocks = [it for it in items if "end" in it and it["type"] != "follow"]
     for cur, nxt in zip(blocks, blocks[1:]):
         if cur["end"] > nxt["start"]:
             cur["end"] = round(max(cur["start"] + 0.3, nxt["start"]), 3)

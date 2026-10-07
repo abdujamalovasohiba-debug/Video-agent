@@ -1,4 +1,4 @@
-import {AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig, Easing} from 'remotion';
+import {AbsoluteFill, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig, Easing} from 'remotion';
 import {Item, Line, Palette} from './types';
 import {RevealLine, RevealWord, lineFont} from './Reveal';
 
@@ -150,6 +150,58 @@ export const Flash: React.FC<P<Extract<Item, {type: 'flash'}>>> = ({item}) => {
       <AbsoluteFill style={{background: '#FFFDF8', opacity: p < 0.5 ? white : 1 - orange}} />
       <AbsoluteFill style={{background: '#D9620B', opacity: orange}} />
     </>
+  );
+};
+
+// 7) Obuna kartasi: profil rasmi sakrab chiqadi, "Obuna bo'ling" tugmasi bosiladi -> "Obunadasiz".
+export const Follow: React.FC<P<Extract<Item, {type: 'follow'}>>> = ({item, u, pal, h}) => {
+  const {now, fps} = useTime();
+  const t = now - item.start;
+  const dur = item.end - item.start;
+  const pop = spring({frame: t * fps, fps, config: {damping: 12, mass: 0.6}});
+  const btn = spring({frame: (t - 0.35) * fps, fps, config: {damping: 14}});
+  const tapAt = Math.min(1.6, dur * 0.45);
+  const press = interpolate(t, [tapAt - 0.12, tapAt, tapAt + 0.15], [1, 0.9, 1], clamp);
+  const done = t >= tapAt;
+  const out = interpolate(now, [item.end - 0.25, item.end], [1, 0], clamp);
+  const ring = 340 * u;
+  return (
+    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-start', paddingTop: h * 0.56, opacity: out}}>
+      <div
+        style={{
+          width: ring,
+          height: ring,
+          borderRadius: '50%',
+          padding: 8 * u,
+          background: `conic-gradient(${pal.cream}, ${pal.brown}, ${pal.cream})`,
+          transform: `scale(${pop})`,
+          boxShadow: `0 ${10 * u}px ${40 * u}px rgba(0,0,0,0.45)`,
+        }}
+      >
+        <Img
+          src={staticFile(item.image)}
+          style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', border: `${6 * u}px solid ${pal.brown}`}}
+        />
+      </div>
+      <div
+        style={{
+          marginTop: 34 * u,
+          transform: `scale(${btn * press})`,
+          opacity: btn,
+          background: done ? pal.cream : pal.brown,
+          color: done ? pal.brown : pal.cream,
+          fontFamily: 'Montserrat',
+          fontWeight: 700,
+          fontSize: 46 * u,
+          padding: `${18 * u}px ${54 * u}px`,
+          borderRadius: 999,
+          boxShadow: `0 ${8 * u}px ${28 * u}px rgba(0,0,0,0.4)`,
+          border: `${3 * u}px solid ${pal.cream}`,
+        }}
+      >
+        {done ? item.done ?? '✓ Obunadasiz' : item.label ?? "Obuna bo'ling"}
+      </div>
+    </AbsoluteFill>
   );
 };
 
