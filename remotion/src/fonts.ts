@@ -5,6 +5,7 @@ const FONTS = [
   {family: 'Oswald', file: 'fonts/Oswald.ttf'},
   {family: 'Montserrat', file: 'fonts/Montserrat.ttf'},
   {family: 'Courgette', file: 'fonts/Courgette.ttf'},
+  {family: 'Anton', file: 'fonts/Anton.ttf'},
 ];
 
 let loaded = false;
@@ -15,7 +16,7 @@ export const loadFonts = () => {
   const handle = delayRender('Shriftlar yuklanmoqda');
   Promise.all(
     FONTS.map(async ({family, file}) => {
-      const face = new FontFace(family, `url(${staticFile(file)})`, family === 'Courgette' ? {} : {weight: '100 900'});
+      const face = new FontFace(family, `url(${staticFile(file)})`, family === 'Courgette' || family === 'Anton' ? {} : {weight: '100 900'});
       await face.load();
       document.fonts.add(face);
     }),

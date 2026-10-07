@@ -13,6 +13,9 @@ export type Item =
   | {type: 'duo'; start: number; end: number; top?: number; caps: Word[]; script: Word[]}
   | {type: 'gold'; start: number; end: number; top?: number; words: Word[]}
   | {type: 'stat'; start: number; end: number; top?: number; words: Word[]}
+  | {type: 'headline'; start: number; end: number; top?: number; lines: string[]; big: string}
+  | {type: 'plain'; start: number; end: number; top?: number; glow?: boolean; caps: Word[]; script: Word[]}
+  | {type: 'point'; start: number; end: number; top?: number; n: number; total: number; caps: Word[]; script: Word[]}
   | {type: 'follow'; start: number; end: number; image: string; label?: string; done?: string};
 
 export type Palette = {brown: string; cream: string; hookBg: string; keyword: string; text: string};
