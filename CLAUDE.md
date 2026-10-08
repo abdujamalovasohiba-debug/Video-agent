@@ -32,6 +32,15 @@ mavzuga mos B-roll, oxirida telefon raqami (`duo` caps, raqam aytila boshlaganda
 Klinika raqami: +998 99 845 50 70 (foydalanuvchi tasdiqlagan). Reja qo'lda yoziladi (`--plan`, `--no-cut`, `--text-y 0.52`),
 baza oldindan yig'iladi: rang tuzatish, silliq o'tishlar, B-roll alfa fade bilan. Musiqa: Runaway 5%.
 
+## Podkast-referens uslubi (nomi hali berilmagan; doktor videosida tasdiqlangan)
+Remotion: `headline` (framed, `bg` yashil `rgba(31,74,56,0.9)`, ko'krak balandligida `top≈0.56`, emoji 🩺/🤔, katta qator YO'Q),
+`point` (krem plashka, tepasida "N-BOSQICH" yorlig'i, burchakda N/jami), `plain` (Oswald KATTA + kursiv izoh).
+- Matn rangi **sariq** (`color: "#FFD43B"`) — oq xalat ustida oq matn o'qilmaydi.
+- Hook — foydalanuvchining savoli (masalan "SHAXNOZAPA, ENUREZNI QANDAY USULDA DAVOLAYSIZ?"), "5 ta bosqich" kabi qo'shimcha qator kerak emas.
+- Hook kirish ovozi: `2354` (xabar). `2356` pop hook uchun YOQMADI.
+- "mm/eee" va uzun pauzalarni kesing, lekin yuzdagi kesim ko'rinadigan joyda (B-roll yo'q) qisqa pauzani qoldiring — dissolve ham sezilmasin.
+- B-roll har bosqich mazmuniga mos, birinchi kadrdanoq to'liq (oq/bo'sh boshlanmasin).
+
 ## "Ekspert montaj jigarrang": `--style ekspert-jigarrang`
 
 `expert` referensi asosida (talking-head): krem hook plashka, jigarrang matn kartalari,
