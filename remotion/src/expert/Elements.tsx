@@ -64,7 +64,8 @@ export const Caption: React.FC<P<Extract<Item, {type: 'caption'}>>> = ({item, u,
   const {now} = useTime();
   const out = interpolate(now, [item.end - 0.15, item.end], [1, 0], clamp);
   return (
-    <AbsoluteFill style={{justifyContent: 'flex-start', padding: `${h * (top ?? 0.355)}px ${70 * u}px 0`, opacity: out}}>
+    <AbsoluteFill style={{justifyContent: 'flex-start', padding: `${h * (item.top ?? top ?? 0.355)}px ${70 * u}px 0`, opacity: out,
+                          textShadow: `0 ${2 * u}px ${6 * u}px rgba(0,0,0,0.65), 0 0 ${14 * u}px rgba(0,0,0,0.35)`}}>
       <div style={{display: 'flex', flexDirection: 'column', gap: 2 * u}}>
         {item.lines.map((ln, i) => (
           <RevealLine key={i} line={ln} u={u} color={ln.style === 'caps' ? pal.keyword : pal.text} />

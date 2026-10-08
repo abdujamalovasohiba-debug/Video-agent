@@ -5,7 +5,7 @@ export type Line = {style: 'caps' | 'sans' | 'small'; align?: 'left' | 'center' 
 export type Item =
   | {type: 'hook'; start: number; end: number; small: string; big: string; top?: number}
   | {type: 'card'; start: number; end: number; lines: Line[]}
-  | {type: 'caption'; start: number; end: number; lines: Line[]}
+  | {type: 'caption'; start: number; end: number; top?: number; lines: Line[]}
   | {type: 'number'; start: number; end: number; n: number; total: number; lines: Line[]; top?: number}
   | {type: 'leak'; start: number; dur: number}
   | {type: 'flash'; start: number; dur: number}

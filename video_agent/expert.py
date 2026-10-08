@@ -201,7 +201,10 @@ def build_plan(words: list[Word], duration: float, title: str = "", points: list
 
 def add_follow(items: list[dict], words: list[Word], duration: float, avatar: str) -> None:
     """"Obuna" so'zi aytilganda profil rasmi va "Obuna bo'ling" tugmasi chiqadi (oxirigacha)."""
-    hit = next((w for w in reversed(words) if normalize(w.text).startswith("obuna")), None)
+    def is_follow(t: str) -> bool:  # "obuna bo'ling", lekin "obunachilarim" emas
+        n = normalize(t)
+        return n.startswith("obuna") and not n.startswith("obunachi")
+    hit = next((w for w in reversed(words) if is_follow(w.text)), None)
     start = hit.start - 0.3 if hit else max(0.0, duration - 4.0)
     items.append({"type": "follow", "start": round(max(0.0, start), 3), "end": round(duration, 3), "image": avatar})
 
@@ -256,3 +259,9 @@ def save_plan(items: list[dict], path: Path) -> Path:
 def load_plan(path: Path) -> list[dict]:
     data = json.loads(Path(path).read_text(encoding="utf-8"))
     return data["items"] if isinstance(data, dict) else data
+
+
+def load_plan_palette(path: Path) -> dict | None:
+    """Reja faylida ixtiyoriy "palette" (masalan oq kiyim ustida sariq matn uchun)."""
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    return data.get("palette") if isinstance(data, dict) else None

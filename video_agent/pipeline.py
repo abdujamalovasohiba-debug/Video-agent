@@ -227,15 +227,17 @@ def run(opt: Options) -> Result:
                             from .motion import REMOTION_DIR
                             dst = REMOTION_DIR / "public" / "user" / f"avatar{opt.avatar.suffix.lower()}"
                             dst.parent.mkdir(parents=True, exist_ok=True)
-                            _sh.copyfile(opt.avatar, dst)
+                            if opt.avatar.resolve() != dst.resolve():
+                                _sh.copyfile(opt.avatar, dst)
                             avatar_rel = f"user/{dst.name}"
                         plan = load_plan(opt.plan) if opt.plan else build_plan(
                             out_words, main_d, opt.title or "", opt.points, fx=mc.expert_fx, avatar=avatar_rel)
                         motion_cache["plan"] = plan
                         save_plan(plan, opt.output_dir / f"{stem}.plan.json")
                         log.info("    reja: %d element -> %s", len(plan), opt.output_dir / f"{stem}.plan.json")
-                    from .expert import caption_top
+                    from .expert import caption_top, load_plan_palette
                     from .reframe import reframe_filter
+                    palette = {**(mc.palette or {}), **((opt.plan and load_plan_palette(opt.plan)) or {})}
                     if not motion_cache["plan"]:
                         continue
                     if mc.text_y is not None:  # qo'lda berilgan (masalan B-roll montajida)
@@ -252,7 +254,7 @@ def run(opt: Options) -> Result:
                     if motion_cache["plan"]:  # bo'sh reja uchun overlay render qilinmaydi
                         jobs.append(MotionJob(fmt, "ExpertOverlay", size, st.fps, main_d, work / f"expert_{tag}",
                                               0.0, alpha=True, props={"items": motion_cache["plan"], "captionTop": top,
-                                                     **({"palette": mc.palette} if mc.palette else {})}))
+                                                     **({"palette": palette} if palette else {})}))
                 elif text.title and mc.title_style == "aesthetic":
                     jobs.append(MotionJob(fmt, "AestheticText", size, st.fps, main_d, work / f"title_{tag}",
                                           0.0, alpha=True))
