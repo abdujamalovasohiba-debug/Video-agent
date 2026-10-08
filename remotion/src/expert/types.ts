@@ -16,6 +16,12 @@ export type Item =
   | {type: 'headline'; start: number; end: number; top?: number; lines: string[]; big: string; bigAt?: number; framed?: boolean; emojis?: string[]; bg?: string}
   | {type: 'plain'; start: number; end: number; top?: number; glow?: boolean; color?: string; caps: Word[]; script: Word[]}
   | {type: 'point'; start: number; end: number; top?: number; label?: string; color?: string; n: number; total: number; caps: Word[]; script: Word[]}
+  | {type: 'tri'; start: number; end: number; top?: number; size?: number; pre?: Word[]; pill?: string; big: Word[]; post?: Word[]; wave?: boolean; tag?: string}
+  | {type: 'keys'; start: number; end: number; top?: number; pre?: Word[]; keys: {c: string; t: number}[]; post?: Word[]; tag?: string}
+  | {type: 'stamps'; start: number; end: number; top?: number; pre?: Word[]; cards: {icon: string; label: string; t: number}[]; tag?: string}
+  | {type: 'white'; start: number; end: number; pre?: string; quote?: string; size?: number; post?: string;
+     app?: {icon?: string; image?: string; label: string; pill?: string; total?: number}}
+  | {type: 'glow'; start: number; dur: number}
   | {type: 'follow'; start: number; end: number; image: string; label?: string; done?: string};
 
 export type Palette = {brown: string; cream: string; hookBg: string; keyword: string; text: string};

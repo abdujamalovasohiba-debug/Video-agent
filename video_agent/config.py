@@ -262,6 +262,11 @@ def _ekspert_yashil() -> StyleConfig:
     return s
 
 
+def _ai_explainer_oltin() -> StyleConfig:
+    """"AI explainer oltin": rejadagi tri/keys/stamps/white/glow elementlari bilan (plan qo'lda yoziladi)."""
+    s = _doktor_oltin(); s.name = "ai-explainer-oltin"; return s
+
+
 def _doktor_oltin() -> StyleConfig:
     """"Doktor oltin": shifokor referensi - chat-pufak hook, oq KATTA + oltin qo'lyozma, mavzuli B-roll,
     silliq o'tishlar, rang tuzatish (tayyor bazaga), tovush effektlari. Overlay rejasi qo'lda (bubble/duo/gold/stat)."""
@@ -274,7 +279,7 @@ def _doktor_oltin() -> StyleConfig:
 
 STYLES = {"reels": _reels, "youtube": _youtube, "minimal": _minimal, "cinematic": _cinematic, "aesthetic": _aesthetic, "expert": _expert,
           "ekspert-jigarrang": _ekspert_jigarrang, "ekspert-yashil": _ekspert_yashil,
-          "doktor-oltin": _doktor_oltin}
+          "doktor-oltin": _doktor_oltin, "ai-explainer-oltin": _ai_explainer_oltin}
 
 # Foydalanuvchi uslubni turli yozishi mumkin - hammasi bitta presetga olib boradi
 ALIASES = {
@@ -286,6 +291,8 @@ ALIASES = {
     "yashil": "ekspert-yashil",
     "doktor": "doktor-oltin",
     "doktor_oltin": "doktor-oltin",
+    "ai-explainer": "ai-explainer-oltin",
+    "ai_explainer_oltin": "ai-explainer-oltin",
     "ekspert_yashil": "ekspert-yashil",
     "ekspert-montaj-yashil": "ekspert-yashil",
 }

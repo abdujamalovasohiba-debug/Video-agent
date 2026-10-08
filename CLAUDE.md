@@ -13,6 +13,7 @@ Yangi uslub referens bilan kelsa: tahlil qiling, foydalanuvchi bergan nom bilan 
 |---|---|---|
 | **Ekspert montaj jigarrang** | `ekspert-jigarrang` | quyida batafsil |
 | **Ekspert montaj yashil** | `ekspert-yashil` | aynan shu, faqat jigarrang o'rniga to'q yashil (#1F4A38) |
+| **AI explainer oltin** | `ai-explainer-oltin` | oltin gradient KATTA so'z + kichik kursiv, klaviatura tugmalari, markalar, oq ekranlar (suyuq parda), oltin nur |
 | **Doktor oltin** | `doktor-oltin` | shifokor referensi: chat-pufak hook, oq KATTA + oltin qo'lyozma, B-roll, telefon raqami |
 
 ## Rang va tovush (barcha uslublar)
@@ -41,7 +42,9 @@ Remotion: `headline` (framed, `bg` yashil `rgba(31,74,56,0.9)`, ko'krak balandli
 - "mm/eee" va uzun pauzalarni kesing, lekin yuzdagi kesim ko'rinadigan joyda (B-roll yo'q) qisqa pauzani qoldiring — dissolve ham sezilmasin.
 - B-roll har bosqich mazmuniga mos, birinchi kadrdanoq to'liq (oq/bo'sh boshlanmasin).
 
-## "AI-agent" referensi (tahlil qilingan, nomi va preset hali yo'q)
+## "AI explainer oltin": `--style ai-explainer-oltin` (Remotion: tri, keys, stamps, white, glow — `Explainer.tsx`)
+Reja qo'lda (`--plan`, `--no-cut`, `--grade none`); namunasi: Sohiba haqidagi mijoz fikri. Oq kiyim ustida matnga qorong'i halo shart.
+Brend teg: "Sohiba • target". Referens tahlili:
 Referens: 25 s, 720x1280, yigit ko'chada (shisha binolar), qo'lda kamera, tez gap. Uslub — "motion-heavy explainer":
 - **Matn tizimi:** har 1–2 s da yangi blok, yuzdan pastda (ko'krak, y≈0.52–0.62). 3 qatlam:
   kichik oq kursiv yuqori qator ("Qanaqa qilib", "o'zingizning") → KATTA qalin to'q-sariq/oltin gradient so'z
