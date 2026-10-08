@@ -44,7 +44,7 @@ Remotion: `headline` (framed, `bg` yashil `rgba(31,74,56,0.9)`, ko'krak balandli
 
 ## "AI explainer oltin": `--style ai-explainer-oltin` (Remotion: tri, keys, stamps, white, glow — `Explainer.tsx`)
 Reja qo'lda (`--plan`, `--no-cut`, `--grade none`); namunasi: Sohiba haqidagi mijoz fikri. Oq kiyim ustida matnga qorong'i halo shart.
-Brend teg: "Sohiba • target". Referens tahlili:
+Brend teg: "Sohiba • target". Oltin nur (glow) o'tishi YOQMADI — ishlatmang. Referens tahlili:
 Referens: 25 s, 720x1280, yigit ko'chada (shisha binolar), qo'lda kamera, tez gap. Uslub — "motion-heavy explainer":
 - **Matn tizimi:** har 1–2 s da yangi blok, yuzdan pastda (ko'krak, y≈0.52–0.62). 3 qatlam:
   kichik oq kursiv yuqori qator ("Qanaqa qilib", "o'zingizning") → KATTA qalin to'q-sariq/oltin gradient so'z
