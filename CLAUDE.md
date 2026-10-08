@@ -59,7 +59,10 @@ Foydalanuvchi talablari (o'zgartirmang, agar o'zi so'ramasa):
   kuchli usul — "teaser": hook davomida ro'yxatdagi barcha ekranlar ~0.45 s dan tez almashadi.
 - Hook matni bitta kuchli gap (`--title "|KATTA GAP"`); "Marketologlar, saqlab qo'ying" kabi qo'shimcha qator kerak emas.
 - Musiqa vaqt bo'yicha tekislanadi (qo'shiq o'rtasida balandlashmasin) — `ekspert-jigarrang` buni o'zi qiladi.
-- Yuborilgan video **30 MB dan kichik** bo'lsin (ilova chegarasi): `-crf 25 -preset slow` bilan siqing.
+- Yuborilgan video **30 MB dan kichik** bo'lsin (ilova chegarasi). Sifat pasaymasin: SFX qo'shganda videoni qayta kodlamang
+  (`-c:v copy`, render crf 20 ≈ 18 MB / 37 s); faqat 30 MB dan oshsa `-crf 23 -preset slow`.
+- "Syomka" deb yozing (S'yomka emas). Oq kiyimli kadrlarda subtitr sariq (`plan.json` da `"palette"`).
+- Alohida rangli fon kartasi (card) shart emas bo'lsa ishlatmang — foydalanuvchiga yoqmadi.
 
 ## Har bir video uchun qadamlar
 
