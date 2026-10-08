@@ -41,6 +41,25 @@ Remotion: `headline` (framed, `bg` yashil `rgba(31,74,56,0.9)`, ko'krak balandli
 - "mm/eee" va uzun pauzalarni kesing, lekin yuzdagi kesim ko'rinadigan joyda (B-roll yo'q) qisqa pauzani qoldiring — dissolve ham sezilmasin.
 - B-roll har bosqich mazmuniga mos, birinchi kadrdanoq to'liq (oq/bo'sh boshlanmasin).
 
+## "AI-agent" referensi (tahlil qilingan, nomi va preset hali yo'q)
+Referens: 25 s, 720x1280, yigit ko'chada (shisha binolar), qo'lda kamera, tez gap. Uslub — "motion-heavy explainer":
+- **Matn tizimi:** har 1–2 s da yangi blok, yuzdan pastda (ko'krak, y≈0.52–0.62). 3 qatlam:
+  kichik oq kursiv yuqori qator ("Qanaqa qilib", "o'zingizning") → KATTA qalin to'q-sariq/oltin gradient so'z
+  (Montserrat/Inter ExtraBold italic, #FFB800→#F59E0B, oq ichki yorug'lik) → kichik oq/kursiv pastki qator ("qo'yaman").
+  Ba'zan kichik sariq "Hozir" yorlig'i (pill) KATTA so'z tepasida. So'zlar alohida sakrab chiqadi (scale 0.6→1.05→1, ~0.2 s).
+- **Animatsion ob'ektlar** (gapdagi narsaga mos, ~1.5 s):
+  - klaviatura tugmalari (keycaps): oltin 3D kvadratlar, ichidagi belgi slot-mashinadek aylanadi (7·1·$ → A·I·⚡), atrofida tanlov ramkasi (Figma selection);
+  - "pochta markasi" kartalari (tishli qirrali oltin kvadrat + ikonka + yozuv: Sotadi, CRM), aylanib/qiyshayib kirib, ketma-ket ustma-ust;
+  - ikonli pill (Instagram/Telegram logotipi so'z yonida), to'lqinli oltin chiziq (ekranni kesib o'tadi), sichqoncha kursori + "isroil.ai" yorlig'i (brend teg, doim harakatda).
+- **Oq "motion" ekranlar** (2–3 s, fon #F5F5F5): markazda katta qora "24/7" qo'shtirnoqda + kichik izoh; Instagram post kartasi
+  (spikerning o'z kadri bilan) 3D aylanib chiqadi; qora rounded ilova-ikonka (14 kun → BEPUL yashil pill → havola ikonkasi) va ostida
+  1-2-3-4 progress chiziq (oltin nuqtalar to'ladi). Oq ekranga **suyuq (liquid/blob) wipe** bilan kiriladi va chiqiladi (~0.5 s).
+- **O'tishlar:** liquid wipe (oq), yorug' nur/light-leak (oltin, ~0.5 s, CTA oldidan), qolgani oddiy kesim; kesimlarda kadr 5–10% yaqinlashadi.
+- **Rang:** tabiiy, past to'yinganlik (SATAVG≈14, YAVG≈118, biroz sovuq U≈132), urg'u faqat oltin-sariq. Oq+qora+oltin palitra.
+- **Tovush:** ovoz −14 LUFS, fon musiqasi deyarli eshitilmaydi; har matn/ob'ekt chiqishiga mayda "tick/pop", wipe'larda yumshoq whoosh.
+- **Tuzilma:** hook (0–2 s: "Qanaqa qilib 5 MINUT") → muammo/yechim punktlari ob'ektlar bilan → oq ekranli tushuntirish →
+  qiymat (14 kun BEPUL) → CTA: "izohga AGENT deb yozing" (oltin, "deb yozing" sariq pill) → "Direct'ga yuboraman".
+
 ## "Ekspert montaj jigarrang": `--style ekspert-jigarrang`
 
 `expert` referensi asosida (talking-head): krem hook plashka, jigarrang matn kartalari,
