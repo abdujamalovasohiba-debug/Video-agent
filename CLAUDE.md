@@ -119,6 +119,10 @@ Foydalanuvchi yuzini ko'rsatmaslikni so'rasa: xiralik/emoji EMAS — ovoz + mavz
    Foydalanuvchi **realistik** kadrlarni afzal ko'radi: animatsion HUD/grafik va kod ekranlaridan qoching,
    haqiqiy qo'llar, noutbuk, telefon, kafe, haqiqiy analitika ekranlarini tanlang. Eng yaxshisi — uning o'z kadrlari.
 
+## Foydalanuvchining o'zi (Sohiba) kadrda bo'lsa
+- **Uning yuzi hech qachon ko'rinmasin** (selfi bo'laklarida ham): ovozini qoldirib, tasvirni natija skrinshotlari / oq ekran / B-roll
+  bilan TO'LIQ yoping (fade paytida ham yuz ko'rinmasin - rasmlar orasida bo'shliq qoldirmang). Mijozlar (doktor va b.) yuzi ko'rinishi mumkin.
+
 ## Foydali buyruqlar
 - Testlar: `python -m pytest -q tests`
 - Referensdan musiqa ajratish: `--music-from referens.mp4` (`pip install 'audio-separator[cpu]'`)
