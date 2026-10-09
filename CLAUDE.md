@@ -65,8 +65,7 @@ Referens: 25 s, 720x1280, yigit ko'chada (shisha binolar), qo'lda kamera, tez ga
 
 ## "Split" referensi (nomi hali berilmagan) — Remotion: `panel`, `karaoke` (`Explainer.tsx`)
 Referens: tepada kontent (oq karta / skrinshot), pastda gapiruvchi, chegarada 2 qatorli subtitr (aytilgan so'z oq, keyingisi kulrang).
-Sohibaning o'z videosida yuz ko'rinmaydi: tepada oq panel (qora ikonka + KATTA so'z + qizil ✗ / yashil ✓ pill), pastda realistik
-stok B-roll (y=860..1920), subtitr `top≈0.40`. "Muammo → Demak, ..." formatida har savol-javobga bitta panel; namunasi: v14.
+Pastda gapiruvchining o'z videosi (sinxron, `crop=1080:1060:0:430`, kesimlarda navbatma-navbat 6% zoom; foydalanuvchi shuni tanladi): tepada oq panel (qora ikonka + KATTA so'z + qizil ✗ / yashil ✓ pill), pastki qism y=860..1920, subtitr `top≈0.40`. "Muammo → Demak, ..." formatida har savol-javobga bitta panel; namunasi: v14.
 
 ## "Ekspert montaj jigarrang": `--style ekspert-jigarrang`
 
@@ -125,7 +124,7 @@ Foydalanuvchi yuzini ko'rsatmaslikni so'rasa: xiralik/emoji EMAS — ovoz + mavz
    haqiqiy qo'llar, noutbuk, telefon, kafe, haqiqiy analitika ekranlarini tanlang. Eng yaxshisi — uning o'z kadrlari.
 
 ## Foydalanuvchining o'zi (Sohiba) kadrda bo'lsa
-- **Uning yuzi hech qachon ko'rinmasin** (selfi bo'laklarida ham): ovozini qoldirib, tasvirni natija skrinshotlari / oq ekran / B-roll
+- Odatda **uning yuzi ko'rinmasin** (selfi bo'laklarida ham), LEKIN o'zi so'rasa (masalan split uslubida "pastga o'zimni gapirgan videoyimni qo'y") ko'rsating: ovozini qoldirib, tasvirni natija skrinshotlari / oq ekran / B-roll
   bilan TO'LIQ yoping (fade paytida ham yuz ko'rinmasin - rasmlar orasida bo'shliq qoldirmang). Mijozlar (doktor va b.) yuzi ko'rinishi mumkin.
 
 ## Shovqin
