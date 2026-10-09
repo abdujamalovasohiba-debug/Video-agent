@@ -123,6 +123,10 @@ Foydalanuvchi yuzini ko'rsatmaslikni so'rasa: xiralik/emoji EMAS — ovoz + mavz
 - **Uning yuzi hech qachon ko'rinmasin** (selfi bo'laklarida ham): ovozini qoldirib, tasvirni natija skrinshotlari / oq ekran / B-roll
   bilan TO'LIQ yoping (fade paytida ham yuz ko'rinmasin - rasmlar orasida bo'shliq qoldirmang). Mijozlar (doktor va b.) yuzi ko'rinishi mumkin.
 
+## Shovqin
+- Fon shovqini (konditsioner g'uvillashi) qolsa foydalanuvchi e'tiroz bildiradi. `afftdn` yetmaydi: pauzadan shovqin namunasini olib
+  `noisereduce` (stationary, prop_decrease=0.95) bilan tozalang (≈ −20 dB), so'ng bazani shu ovoz bilan yig'ing.
+
 ## Foydali buyruqlar
 - Testlar: `python -m pytest -q tests`
 - Referensdan musiqa ajratish: `--music-from referens.mp4` (`pip install 'audio-separator[cpu]'`)
