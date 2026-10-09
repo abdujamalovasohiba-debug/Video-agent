@@ -63,6 +63,11 @@ Referens: 25 s, 720x1280, yigit ko'chada (shisha binolar), qo'lda kamera, tez ga
 - **Tuzilma:** hook (0–2 s: "Qanaqa qilib 5 MINUT") → muammo/yechim punktlari ob'ektlar bilan → oq ekranli tushuntirish →
   qiymat (14 kun BEPUL) → CTA: "izohga AGENT deb yozing" (oltin, "deb yozing" sariq pill) → "Direct'ga yuboraman".
 
+## "Split" referensi (nomi hali berilmagan) — Remotion: `panel`, `karaoke` (`Explainer.tsx`)
+Referens: tepada kontent (oq karta / skrinshot), pastda gapiruvchi, chegarada 2 qatorli subtitr (aytilgan so'z oq, keyingisi kulrang).
+Sohibaning o'z videosida yuz ko'rinmaydi: tepada oq panel (qora ikonka + KATTA so'z + qizil ✗ / yashil ✓ pill), pastda realistik
+stok B-roll (y=860..1920), subtitr `top≈0.40`. "Muammo → Demak, ..." formatida har savol-javobga bitta panel; namunasi: v14.
+
 ## "Ekspert montaj jigarrang": `--style ekspert-jigarrang`
 
 `expert` referensi asosida (talking-head): krem hook plashka, jigarrang matn kartalari,

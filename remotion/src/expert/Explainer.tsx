@@ -258,3 +258,59 @@ export const Glow: React.FC<P<Extract<Item, {type: 'glow'}>>> = ({item}) => {
       background: `linear-gradient(${100 + 30 * p}deg, rgba(0,0,0,0) ${10 + 40 * p}%, rgba(255,200,80,0.95) ${30 + 40 * p}%, rgba(255,250,220,0.9) ${38 + 40 * p}%, rgba(255,170,40,0.7) ${48 + 40 * p}%, rgba(0,0,0,0) ${70 + 30 * p}%)`}} />
   );
 };
+
+// 6) "Split" referensi: tepadagi oq panelda katta qora so'z + ikonka/pill (savol - qizil ✗, javob - yashil ✓).
+export const Panel: React.FC<P<Extract<Item, {type: 'panel'}>>> = ({item, u, w, h}) => {
+  const {now, fps} = useNow();
+  const s = pop(now, item.start, fps);
+  const s2 = pop(now, item.start + 0.25, fps);
+  const H = h * (item.height ?? 0.448);
+  const good = item.tone === 'good';
+  const out = interpolate(now, [item.end - 0.12, item.end], [1, 0], clamp);
+  return (
+    <AbsoluteFill>
+      <div style={{position: 'absolute', left: 0, top: 0, width: w, height: H, display: 'flex', flexDirection: 'column',
+                   alignItems: 'center', justifyContent: 'center', opacity: out, padding: `${60 * u}px ${50 * u}px 0`, textAlign: 'center'}}>
+        {item.label ? <div style={{fontFamily: 'Montserrat', fontWeight: 600, fontSize: 54 * u, color: '#8A8A8A', marginBottom: 26 * u,
+                                   opacity: Math.min(1, s * 2)}}>{item.label}</div> : null}
+        <div style={{display: 'flex', alignItems: 'center', gap: 26 * u, transform: `scale(${0.6 + 0.4 * s})`, opacity: Math.min(1, s * 2)}}>
+          {item.icon ? <div style={{width: 210 * u, height: 210 * u, borderRadius: 50 * u, background: '#141414', display: 'flex',
+                                    alignItems: 'center', justifyContent: 'center', fontSize: 120 * u,
+                                    boxShadow: `0 ${14 * u}px ${30 * u}px rgba(0,0,0,0.22)`}}>{item.icon}</div> : null}
+          <div style={{fontFamily: 'Montserrat', fontWeight: 900, fontSize: (item.size ?? 150) * u, color: '#111', lineHeight: 1,
+                       letterSpacing: -2 * u, textTransform: 'uppercase', textAlign: 'left', maxWidth: w * 0.7, whiteSpace: 'pre-line'}}>{item.word}</div>
+        </div>
+        {item.pill ? (
+          <div style={{marginTop: 40 * u, transform: `scale(${s2})`, background: good ? '#22C55E' : '#EF4444', color: '#FFF',
+                       fontFamily: 'Montserrat', fontWeight: 800, fontSize: 56 * u, padding: `${10 * u}px ${38 * u}px`, borderRadius: 999,
+                       boxShadow: `0 ${8 * u}px ${18 * u}px rgba(0,0,0,0.18)`}}>{good ? '✓ ' : '✗ '}{item.pill}</div>
+        ) : null}
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+// 7) Ikki qatorli subtitr (referensdagidek): aytilgan so'zlar oq qalin, keyingilari kulrang.
+export const Karaoke: React.FC<P<Extract<Item, {type: 'karaoke'}>>> = ({item, u, w, h}) => {
+  const {now} = useNow();
+  const out = interpolate(now, [item.end - 0.1, item.end], [1, 0], clamp);
+  const half = Math.ceil(item.words.length / 2);
+  const lines = item.words.length > 3 ? [item.words.slice(0, half), item.words.slice(half)] : [item.words];
+  return (
+    <AbsoluteFill style={{opacity: out}}>
+      <div style={{position: 'absolute', top: h * (item.top ?? 0.455), left: 0, width: w, textAlign: 'center', padding: `0 ${40 * u}px`}}>
+        {lines.map((ln, i) => (
+          <div key={i} style={{fontFamily: 'Montserrat', fontWeight: 800, fontSize: 74 * u, lineHeight: 1.15}}>
+            {ln.map((wd, j) => {
+              const on = now >= wd.t;
+              return (
+                <span key={j} style={{color: on ? '#FFFFFF' : 'rgba(255,255,255,0.55)',
+                  textShadow: `0 0 ${4 * u}px rgba(0,0,0,0.9), 0 ${2 * u}px ${10 * u}px rgba(0,0,0,0.7)`}}>{wd.w} </span>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+    </AbsoluteFill>
+  );
+};

@@ -22,6 +22,8 @@ export type Item =
   | {type: 'white'; start: number; end: number; pre?: string; quote?: string; size?: number; post?: string;
      app?: {icon?: string; image?: string; label: string; pill?: string; total?: number}}
   | {type: 'glow'; start: number; dur: number}
+  | {type: 'panel'; start: number; end: number; height?: number; label?: string; icon?: string; word: string; size?: number; pill?: string; tone?: 'good' | 'bad'}
+  | {type: 'karaoke'; start: number; end: number; top?: number; words: Word[]}
   | {type: 'follow'; start: number; end: number; image: string; label?: string; done?: string};
 
 export type Palette = {brown: string; cream: string; hookBg: string; keyword: string; text: string};
