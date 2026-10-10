@@ -1,0 +1,14 @@
+# Whisper (bittasi yetarli; faster-whisper tezroq va kam xotira talab qiladi)
+faster-whisper>=1.0
+# openai-whisper>=20231117
+
+# Yuzni yashirish (--hide-face) uchun
+opencv-python-headless>=4.8,<5
+pillow>=10
+numpy
+
+# Referensdan musiqa ajratish (--music-from) uchun
+audio-separator[cpu]
+
+# Testlar uchun
+pytest>=7
