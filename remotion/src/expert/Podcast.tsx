@@ -47,7 +47,7 @@ export const Headline: React.FC<P<Extract<Item, {type: 'headline'}>>> = ({item, 
                      transform: `scale(${0.6 + 0.4 * s})`, opacity: Math.min(1, s * 1.5)}}>
           <div style={{background: item.bg ?? 'rgba(38,38,38,0.86)', borderRadius: 18 * u, padding: `${16 * u}px ${30 * u}px`,
                        maxWidth: w * 0.86, textAlign: 'center', fontFamily: 'Oswald', fontWeight: 700, color: cream,
-                       textTransform: 'uppercase', lineHeight: 1.12, fontSize: 64 * u, letterSpacing: 1 * u,
+                       textTransform: 'uppercase', lineHeight: 1.12, fontSize: (item.size ?? 64) * u, letterSpacing: 1 * u,
                        boxShadow: `0 ${8 * u}px ${26 * u}px rgba(0,0,0,0.35)`}}>
             {item.lines.map((ln, i) => <div key={i}>{ln}</div>)}
           </div>

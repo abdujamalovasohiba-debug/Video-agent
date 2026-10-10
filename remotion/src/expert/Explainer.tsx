@@ -314,3 +314,41 @@ export const Karaoke: React.FC<P<Extract<Item, {type: 'karaoke'}>>> = ({item, u,
     </AbsoluteFill>
   );
 };
+
+// 8) Markazdagi "diagnoz" kartasi (yuzsiz to'liq ekran): oq karta, ikonka + KATTA so'z + ✗/✓ pill, burchakda n/jami.
+export const Diag: React.FC<P<Extract<Item, {type: 'diag'}>>> = ({item, u, w, h}) => {
+  const {now, fps} = useNow();
+  const s = pop(now, item.start, fps);
+  const s2 = pop(now, item.start + 0.2, fps);
+  const out = interpolate(now, [item.end - 0.1, item.end], [1, 0], clamp);
+  const good = item.tone === 'good';
+  return (
+    <AbsoluteFill style={{opacity: out}}>
+      {item.n ? (
+        <div style={{position: 'absolute', top: h * 0.07, right: 50 * u, background: 'rgba(20,20,20,0.82)', color: '#FFF', borderRadius: 999,
+                     fontFamily: 'Montserrat', fontWeight: 900, fontSize: 52 * u, padding: `${8 * u}px ${28 * u}px`}}>
+          <span style={{color: '#FFD43B'}}>{item.n}</span>/{item.total}
+        </div>
+      ) : null}
+      <div style={{position: 'absolute', top: h * (item.top ?? 0.3), left: 60 * u, right: 60 * u, display: 'flex', justifyContent: 'center'}}>
+        <div style={{background: 'rgba(255,255,255,0.96)', borderRadius: 44 * u, padding: `${36 * u}px ${44 * u}px ${40 * u}px`,
+                     boxShadow: `0 ${24 * u}px ${60 * u}px rgba(0,0,0,0.35)`, display: 'flex', flexDirection: 'column', alignItems: 'center',
+                     transform: `scale(${0.7 + 0.3 * s}) rotate(${(1 - s) * (good ? 4 : -4)}deg)`, opacity: Math.min(1, s * 2)}}>
+          {item.label ? <div style={{fontFamily: 'Montserrat', fontWeight: 600, fontSize: 44 * u, color: '#888', marginBottom: 16 * u, textAlign: 'center'}}>{item.label}</div> : null}
+          <div style={{display: 'flex', alignItems: 'center', gap: 24 * u}}>
+            {item.icon ? <div style={{width: 150 * u, height: 150 * u, borderRadius: 38 * u, background: '#141414', display: 'flex',
+                                      alignItems: 'center', justifyContent: 'center', fontSize: 92 * u}}>{item.icon}</div> : null}
+            <div style={{fontFamily: 'Montserrat', fontWeight: 900, fontSize: (item.size ?? 110) * u, color: '#111', lineHeight: 1,
+                         letterSpacing: -2 * u, textTransform: 'uppercase', whiteSpace: 'pre-line'}}>{item.word}</div>
+          </div>
+          {item.pill ? (
+            <div style={{marginTop: 30 * u, transform: `scale(${s2})`, background: good ? '#22C55E' : '#EF4444', color: '#FFF',
+                         fontFamily: 'Montserrat', fontWeight: 800, fontSize: 50 * u, padding: `${10 * u}px ${34 * u}px`, borderRadius: 999}}>
+              {good ? '✓ ' : '✗ '}{item.pill}
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
+};
