@@ -67,6 +67,11 @@ Referens: 25 s, 720x1280, yigit ko'chada (shisha binolar), qo'lda kamera, tez ga
 Referens: tepada kontent (oq karta / skrinshot), pastda gapiruvchi, chegarada 2 qatorli subtitr (aytilgan so'z oq, keyingisi kulrang).
 Pastda gapiruvchining o'z videosi (sinxron, `crop=1080:1060:0:430`, kesimlarda navbatma-navbat 6% zoom; foydalanuvchi shuni tanladi): tepada oq panel (qora ikonka + KATTA so'z + qizil ✗ / yashil ✓ pill), pastki qism y=860..1920, subtitr `top≈0.40`. "Muammo → Demak, ..." formatida har savol-javobga bitta panel; namunasi: v14.
 
+## Yuzsiz viral "N ta sabab" (namunasi v16) — Remotion: `diag`, `karaoke`, `headline` (framed, `size`)
+To'liq ekran realistik B-roll (har juftga bitta klip, `eq=brightness=-0.06`), markazda oq "diagnoz" kartasi (ikonka + KATTA so'z +
+qizil ✗ muammo / yashil ✓ "Demak"), o'ng tepada n/jami, pastda (`top≈0.70`) karaoke subtitr. Hook: "…YO'QMI? N TA SABAB 👇" + 3D stikerlar.
+Ovoz `atempo=1.12`, oraliq 0.06 s (≈30–35 s). Oxirida CTA "QAYSI BIRI SIZDA? IZOHGA RAQAMINI YOZING" + profil kartasi. Musiqa 25%.
+
 ## "Ekspert montaj jigarrang": `--style ekspert-jigarrang`
 
 `expert` referensi asosida (talking-head): krem hook plashka, jigarrang matn kartalari,
