@@ -1,4 +1,4 @@
-import {AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig, Easing} from 'remotion';
+import {AbsoluteFill, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig, Easing} from 'remotion';
 import {Item, Word} from './types';
 import {RevealWord} from './Reveal';
 
@@ -39,6 +39,8 @@ export const Headline: React.FC<P<Extract<Item, {type: 'headline'}>>> = ({item, 
     const cream = '#F4F0CF';
     const emo = item.emojis ?? [];
     const wob = (k: number) => Math.sin((now - item.start) * 3 + k) * 6;
+    const pop0 = spring({frame: (now - item.start - 0.25) * fps, fps, config: {damping: 9, mass: 0.5}});
+    const pop1 = spring({frame: (now - item.start - 0.45) * fps, fps, config: {damping: 9, mass: 0.5}});
     return (
       <AbsoluteFill style={{alignItems: 'center', paddingTop: h * (item.top ?? 0.5), opacity: fadeOut(now, item.end)}}>
         <div style={{position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center',
@@ -58,8 +60,8 @@ export const Headline: React.FC<P<Extract<Item, {type: 'headline'}>>> = ({item, 
                           padding: `${2 * u}px ${22 * u}px`}}>{rest.join(' ')}</span>
           </div>
           ) : null}
-          {emo[0] ? <div style={{position: 'absolute', left: -50 * u, top: -60 * u, fontSize: 110 * u, transform: `rotate(${-12 + wob(0)}deg)`}}>{emo[0]}</div> : null}
-          {emo[1] ? <div style={{position: 'absolute', right: -46 * u, top: '52%', fontSize: 96 * u, transform: `rotate(${10 + wob(2)}deg)`}}>{emo[1]}</div> : null}
+          {emo[0] ? <Sticker e={emo[0]} size={150 * u} style={{left: -70 * u, top: -90 * u}} rot={-12 + wob(0)} pop={pop0} u={u} /> : null}
+          {emo[1] ? <Sticker e={emo[1]} size={135 * u} style={{right: -66 * u, top: '40%'}} rot={10 + wob(2)} pop={pop1} u={u} /> : null}
         </div>
       </AbsoluteFill>
     );
@@ -166,5 +168,16 @@ export const Point: React.FC<P<Extract<Item, {type: 'point'}>>> = ({item, u, w, 
         </div>
       </div>
     </AbsoluteFill>
+  );
+};
+
+// 3D stiker (Apple/Fluent uslubi): PNG bo'lsa rasm, aks holda emoji; sakrab chiqadi, yumshoq soya bilan.
+const Sticker: React.FC<{e: string; size: number; style: React.CSSProperties; rot: number; pop: number; u: number}> = ({e, size, style, rot, pop, u}) => {
+  const isImg = /\.(png|webp)$/i.test(e);
+  return (
+    <div style={{position: 'absolute', ...style, width: size, height: size, transform: `rotate(${rot}deg) scale(${pop})`,
+                 filter: `drop-shadow(0 ${10 * u}px ${14 * u}px rgba(0,0,0,0.35))`}}>
+      {isImg ? <Img src={staticFile(e)} style={{width: '100%', height: '100%'}} /> : <div style={{fontSize: size * 0.8, lineHeight: 1}}>{e}</div>}
+    </div>
   );
 };
