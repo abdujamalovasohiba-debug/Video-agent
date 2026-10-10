@@ -34,7 +34,7 @@ Klinika raqami: +998 99 845 50 70 (foydalanuvchi tasdiqlagan). Reja qo'lda yozil
 baza oldindan yig'iladi: rang tuzatish, silliq o'tishlar, B-roll alfa fade bilan. Musiqa: Runaway 5%.
 
 ## Podkast-referens uslubi (nomi hali berilmagan; doktor videosida tasdiqlangan)
-Remotion: `headline` (framed, `bg` yashil `rgba(31,74,56,0.9)`, ko'krak balandligida `top≈0.56`, emoji 🩺/🤔, katta qator YO'Q),
+Remotion: `headline` (framed, `bg` yashil `rgba(31,74,56,0.9)`, ko'krak balandligida `top≈0.56`, 3D stikerlar `emojis: ["emoji3d/....png"]` — Fluent Emoji 3D PNG (MIT, raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/<Nom>/3D/<nom>_3d.png → remotion/public/emoji3d), oddiy emoji EMAS; katta qator YO'Q),
 `point` (krem plashka, tepasida "N-BOSQICH" yorlig'i, burchakda N/jami), `plain` (Oswald KATTA + kursiv izoh).
 - Matn rangi **sariq** (`color: "#FFD43B"`) — oq xalat ustida oq matn o'qilmaydi.
 - Hook — foydalanuvchining savoli (masalan "SHAXNOZAPA, ENUREZNI QANDAY USULDA DAVOLAYSIZ?"), "5 ta bosqich" kabi qo'shimcha qator kerak emas.
