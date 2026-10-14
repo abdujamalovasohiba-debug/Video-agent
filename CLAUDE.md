@@ -132,7 +132,14 @@ Foydalanuvchi yuzini ko'rsatmaslikni so'rasa: xiralik/emoji EMAS — ovoz + mavz
 - Odatda **uning yuzi ko'rinmasin** (selfi bo'laklarida ham), LEKIN o'zi so'rasa (masalan split uslubida "pastga o'zimni gapirgan videoyimni qo'y") ko'rsating: ovozini qoldirib, tasvirni natija skrinshotlari / oq ekran / B-roll
   bilan TO'LIQ yoping (fade paytida ham yuz ko'rinmasin - rasmlar orasida bo'shliq qoldirmang). Mijozlar (doktor va b.) yuzi ko'rinishi mumkin.
 
+## Kesish
+- **Mazmunni o'zingcha kesmang** — foydalanuvchi aytilgan gaplarni, gap tartibini va oxirini to'liq saqlashni so'raydi.
+  Faqat "mm/eee" va uzun pauzalarni olib tashlash mumkin; gapni olib tashlash, joyini almashtirish (hook uchun ham) yoki tezlashtirish uchun avval so'rang.
+
 ## Shovqin
+- Pipeline ovozni −14 LUFS gacha kuchaytiradi (+20 dB atrofida), shu bilan pauzadagi qoldiq shovqin ham ko'tariladi. Shuning uchun ovozni o'zingiz tayyorlang:
+  pauzalardan olingan shovqin profili bilan `noisereduce` (prop_decrease=1.0), kompressor, gain → −14 LUFS, so'ng `agate` (pauza ≲ −45 dB).
+  Videoni pipeline'da render qiling, keyin ovozni shu toza ovoz + musiqa + SFX bilan almashtiring (`-c:v copy`).
 - Fon shovqini (konditsioner g'uvillashi) qolsa foydalanuvchi e'tiroz bildiradi. `afftdn` yetmaydi: pauzadan shovqin namunasini olib
   `noisereduce` (stationary, prop_decrease=0.95) bilan tozalang (≈ −20 dB), so'ng bazani shu ovoz bilan yig'ing.
 
