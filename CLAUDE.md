@@ -134,7 +134,8 @@ Foydalanuvchi yuzini ko'rsatmaslikni so'rasa: xiralik/emoji EMAS — ovoz + mavz
 
 ## Kesish
 - **Mazmunni o'zingcha kesmang** — foydalanuvchi aytilgan gaplarni, gap tartibini va oxirini to'liq saqlashni so'raydi.
-  Faqat "mm/eee" va uzun pauzalarni olib tashlash mumkin; gapni olib tashlash, joyini almashtirish (hook uchun ham) yoki tezlashtirish uchun avval so'rang.
+  Faqat "mm/eee" va uzun pauzalarni olib tashlash mumkin; gapni olib tashlash uchun avval so'rang. Teaser hook (kuchli gapni boshga
+  NUSXA qilish) va `atempo=1.08` ga ruxsat bor (tasdiqlangan), lekin gap asl joyida ham qolsin; oxirgi so'z tugaguncha kesmang.
 
 ## Shovqin
 - Pipeline ovozni −14 LUFS gacha kuchaytiradi (+20 dB atrofida), shu bilan pauzadagi qoldiq shovqin ham ko'tariladi. Shuning uchun ovozni o'zingiz tayyorlang:
