@@ -72,6 +72,24 @@ To'liq ekran realistik B-roll (har juftga bitta klip, `eq=brightness=-0.06`), ma
 qizil ✗ muammo / yashil ✓ "Demak"), o'ng tepada n/jami, pastda (`top≈0.70`) karaoke subtitr. Hook: "…YO'QMI? N TA SABAB 👇" + 3D stikerlar.
 Ovoz `atempo=1.12`, oraliq 0.06 s (≈30–35 s). Oxirida CTA "QAYSI BIRI SIZDA? IZOHGA RAQAMINI YOZING" + profil kartasi. Musiqa 25%.
 
+## "Kuzgi storismaker" referensi (nomi hali berilmagan; v19 tahlili, 7b8d8b77…mp4)
+Referens: 47.7 s, 720x1280, ovoz −14.3 LUFS, pauzasiz zich gap (jimlik yo'q), fon musiqasi deyarli sezilmaydi. Mavzu: progrev storismaker xizmati.
+- **Kadrlar:** ochiq havoda (kuzgi o'rmon, sariq barglar) ikki rakurs navbatma-navbat: (1) keng plan — yog'ochda o'tirgan, YUZI XIRALASHTIRILGAN;
+  (2) yelka ortidan yaqin plan (yuz ko'rinmaydi, qo'lda planshet + mikrofon). Kesimlar oddiy, har 3–8 s da rakurs almashadi.
+- **Rang:** tabiiy-iliq, past yorug'lik (YAVG≈86, SATAVG≈14–19, V≈135 — iliq/sariq), qorong'i vinyetka.
+- **Matn tizimi** (bir joyda, ekranning chap-o'rtasida, y≈0.30–0.50, yuzdan chetda): kichik oq ingichka qator → KATTA qalin so'z →
+  kichik oq qator; so'zlar aytilishi bilan chiqadi. KATTA so'z rangi almashadi: sariq (#F2E600, "STORIS YURGAZSAM", "auditoriya", "storismaker"),
+  oq ("storisda ulashib", "ishonchi"), oq so'z QIZIL plashkada ("Reelsga"), qizil plashkali kichik yorliqlar ("Produsyer / Sotuv bo'limi bilan").
+  Hook: sariq siqiq KATTA (Oswald/Bebas) + kichik kursiv savol ("qanaqa effekt beradi?").
+- **Natija kartalari:** chap tepada qiyshiq 3D shisha-karta (rounded, oq hoshiya, ichida natija videosi/rasm) + ustida "150+ / sotuv", "5TA ODAM / har kuni",
+  "50TA ODAM / kursga yozilgan" — har gapga yangi karta, gorizontal surilib almashadi (swipe), karta ichidagi rasm almashib turadi.
+- **To'liq ekranli motion kadrlar:** (a) oq/kulrang fon, qizil hoshiyali ko'p fotokartalar (kollaj) + markazda jigarrang lenta-plashka
+  "PROGREV / STORISMAKERNING / ASOSIY VAZIFASI"; (b) oq fon, siluet odamlar yuradi + jigarrang "❝Storis orqali" iqtibos, ostida 2 qator;
+  (c) stok B-roll (telefon штатив, ring-light, blog yozayotgan ayol) qorong'ilashtirilgan, ustida kursiv yozuv + so'z sariq "highlighter" ramkada
+  ("ko'rsata olasiz!" — Figma-selection uslubida) va pastda "——— Storismaker" imzo.
+- **Tuzilma:** hook-savol (0–3 s) → keyslar raqamlar bilan (3–16 s) → "albatta… produsyer bilan" (16–21) → ta'rif motion-ekranlarda (21–29)
+  → sabab + B-roll (29–38) → natija (38–42) → CTA "Agar sizga ham tajribali progrev storismaker kerak bo'lsa — Direktdan murojaat qiling".
+
 ## "Ekspert montaj jigarrang": `--style ekspert-jigarrang`
 
 `expert` referensi asosida (talking-head): krem hook plashka, jigarrang matn kartalari,
