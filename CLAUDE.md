@@ -87,6 +87,10 @@ Referens: 47.7 s, 720x1280, ovoz −14.3 LUFS, pauzasiz zich gap (jimlik yo'q), 
   "PROGREV / STORISMAKERNING / ASOSIY VAZIFASI"; (b) oq fon, siluet odamlar yuradi + jigarrang "❝Storis orqali" iqtibos, ostida 2 qator;
   (c) stok B-roll (telefon штатив, ring-light, blog yozayotgan ayol) qorong'ilashtirilgan, ustida kursiv yozuv + so'z sariq "highlighter" ramkada
   ("ko'rsata olasiz!" — Figma-selection uslubida) va pastda "——— Storismaker" imzo.
+- **Remotion (`Story.tsx`):** `story` (pre/big/post, `tone` yellow|white|red, `hook` — Oswald, `top≈0.74`, `left 0.07`), `labels` (qizil + qora
+  plashkali yorliqlar), `quote` (oq radial fon, jigarrang ❝ iqtibos, doira bo'lib ochiladi), `ask` (o'zbekcha Instagram savol stikeri, `rect`).
+  Namunasi v20: Adam Mosseri inglizcha videosi o'zbekchaga — ingliz subtitri `boxblur` + qorong'ilashtirilgan maska bandi bilan yashirilgan,
+  savol stikeri `ask` bilan almashtirilgan, musiqa 10%.
 - **Tuzilma:** hook-savol (0–3 s) → keyslar raqamlar bilan (3–16 s) → "albatta… produsyer bilan" (16–21) → ta'rif motion-ekranlarda (21–29)
   → sabab + B-roll (29–38) → natija (38–42) → CTA "Agar sizga ham tajribali progrev storismaker kerak bo'lsa — Direktdan murojaat qiling".
 

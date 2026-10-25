@@ -25,6 +25,11 @@ export type Item =
   | {type: 'panel'; start: number; end: number; height?: number; label?: string; icon?: string; word: string; size?: number; pill?: string; tone?: 'good' | 'bad'}
   | {type: 'diag'; start: number; end: number; top?: number; n?: number; total?: number; label?: string; icon?: string; word: string; size?: number; pill?: string; tone?: 'good' | 'bad'}
   | {type: 'karaoke'; start: number; end: number; top?: number; words: Word[]}
+  | {type: 'story'; start: number; end: number; top?: number; left?: number; align?: 'left' | 'center'; hook?: boolean; size?: number;
+     tone?: 'yellow' | 'white' | 'red'; pre?: Word[]; big: Word[]; post?: Word[]}
+  | {type: 'labels'; start: number; end: number; top?: number; left?: number; lines: Word[]}
+  | {type: 'quote'; start: number; end: number; top?: number; size?: number; big: Word[]; post?: Word[]}
+  | {type: 'ask'; start: number; end: number; rect?: [number, number, number, number]; title: string; question: string; size?: number}
   | {type: 'follow'; start: number; end: number; image: string; label?: string; done?: string};
 
 export type Palette = {brown: string; cream: string; hookBg: string; keyword: string; text: string};
