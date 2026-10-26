@@ -1,0 +1,161 @@
+// Referens uslublaridagi karusellarni 1080x1350 PNG qilib chiqaradi: node generate2.js
+const fs = require("fs");
+const path = require("path");
+const { chromium } = require("playwright");
+const { handle, cards, splits } = require("./content2");
+
+const W = 1080, H = 1350;
+const YELLOW = "#F9B417", HL = "#FCEFB0";
+
+const photo = (name) => {
+  const file = path.join(__dirname, "photos", name);
+  return `data:image/jpeg;base64,${fs.readFileSync(file).toString("base64")}`;
+};
+
+const svg = (d, extra = "") =>
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ${extra}>${d}</svg>`;
+const ICON = {
+  back: '<path d="M15 5l-7 7 7 7"/>',
+  reply: '<path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/>',
+  share: '<path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/>',
+  save: '<path d="M18 21l-6-4.5L6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1z"/>',
+};
+const longArrow = `<svg width="84" height="24" viewBox="0 0 84 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M2 12h78M70 3l10 9-10 9"/></svg>`;
+
+const base = `
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: ${W}px; height: ${H}px; }
+  body { font-family: "Inter Display", Inter, sans-serif; position: relative; overflow: hidden;
+         -webkit-font-smoothing: antialiased; }`;
+
+function coverHtml(c) {
+  const { cover } = c;
+  return `<!doctype html><html><head><meta charset="utf-8"><style>${base}
+  body { background: #111 url(${photo(cover.photo)}) center/cover; color: #fff; }
+  .shade { position: absolute; inset: 0;
+           background: linear-gradient(180deg, rgba(0,0,0,0) 38%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.88) 100%); }
+  .text { position: absolute; left: 70px; right: 70px; bottom: 210px; text-align: center; }
+  h1 { font-size: 92px; line-height: 1.04; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; white-space: nowrap; }
+  h1 .y { color: ${YELLOW}; position: relative; display: inline-block; }
+  h1 .y::after { content: ""; position: absolute; left: 0; width: 58%; bottom: -14px; height: 6px;
+                 border-radius: 3px; background: ${YELLOW}; }
+  .sub { margin-top: 44px; font-size: 38px; line-height: 1.3; color: rgba(255,255,255,.82); }
+  footer { position: absolute; left: 100px; right: 100px; bottom: 76px; display: flex;
+           justify-content: space-between; align-items: center; font-size: 30px; font-weight: 500; }
+  </style></head><body>
+  <div class="shade"></div>
+  <div class="text"><h1>${cover.line1}<br><span class="y">${cover.line2}</span></h1><p class="sub">${cover.sub}</p></div>
+  <footer><span>${handle}</span>${longArrow.replace('width="84"', 'width="60"')}</footer>
+  </body></html>`;
+}
+
+function cardHtml(s, i, n) {
+  const counter = `${String(i).padStart(2, "0")} / ${String(n).padStart(2, "0")}`;
+  return `<!doctype html><html><head><meta charset="utf-8"><style>${base}
+  body { background: #E6E3DD; color: #0E0E0E; }
+  .paper { position: absolute; inset: 0; filter: url(#paper); opacity: .55; }
+  .card { position: absolute; left: 84px; right: 78px; top: 50%; transform: translateY(-50%); min-height: 845px;
+          background: rgba(250,250,249,.86); border-radius: 50px; padding: 36px 46px 64px 72px;
+          box-shadow: 0 30px 70px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.05), inset 0 0 0 2px rgba(255,255,255,.8); }
+  .bar { display: flex; align-items: center; justify-content: space-between; margin: 0 0 30px -28px; }
+  .btn { width: 88px; height: 88px; border-radius: 50%; background: #fff; display: flex; align-items: center;
+         justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.06); }
+  .btn svg { width: 40px; height: 40px; }
+  .right { display: flex; align-items: center; gap: 36px; }
+  .pill { display: flex; gap: 40px; padding: 22px 46px; background: #fff; border-radius: 50px;
+          box-shadow: 0 4px 14px rgba(0,0,0,.06); }
+  .pill svg { width: 40px; height: 40px; }
+  .dots { display: flex; gap: 8px; align-items: center; }
+  .dots i { width: 9px; height: 9px; border-radius: 50%; background: #111; }
+  .count { font-size: 28px; letter-spacing: 1px; }
+  .label { display: flex; align-items: center; gap: 26px; font-size: 32px; font-style: italic;
+           text-transform: uppercase; margin-bottom: 26px; }
+  .label::before { content: ""; width: 7px; height: 62px; border-radius: 4px; background: #F7D54A; margin-left: -12px; }
+  h2 { font-size: 80px; line-height: 1.12; font-weight: 800; letter-spacing: -2.5px; margin-bottom: 40px; }
+  h2.final { font-size: 96px; text-transform: uppercase; letter-spacing: -2px; }
+  mark { background: linear-gradient(transparent 14%, ${HL} 14%, ${HL} 94%, transparent 94%); color: inherit; padding: 0 10px; margin: 0 -6px; border-radius: 12px;
+         -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .body { font-size: 44px; line-height: 1.36; letter-spacing: -.5px; margin-bottom: 34px; }
+  .note { font-size: 36px; line-height: 1.38; letter-spacing: -.3px; max-width: 760px; }
+  .note b { font-weight: 800; }
+  footer { position: absolute; left: 82px; right: 72px; bottom: 30px; display: flex; justify-content: space-between;
+           align-items: center; font-size: 28px; color: #222; }
+  footer .save { display: flex; align-items: center; gap: 14px; }
+  footer .save svg { width: 34px; height: 34px; }
+  </style></head><body>
+  <svg width="0" height="0" style="position:absolute"><filter id="paper">
+    <feTurbulence type="fractalNoise" baseFrequency=".008 .02" numOctaves="4" seed="7"/>
+    <feDiffuseLighting lighting-color="#fff" surfaceScale="2.2"><feDistantLight azimuth="45" elevation="55"/></feDiffuseLighting>
+  </filter></svg>
+  <div class="paper"></div>
+  <div class="card">
+    <div class="bar">
+      <div class="btn">${svg(ICON.back)}</div>
+      <div class="right">
+        <div class="pill">${svg(ICON.reply)}${svg(ICON.share)}<div class="dots"><i></i><i></i><i></i></div></div>
+        <span class="count">${counter}</span>
+      </div>
+    </div>
+    <div class="label">${s.label}</div>
+    <h2 class="${s.final ? "final" : ""}">${s.title}</h2>
+    <p class="body">${s.body}</p>
+    <p class="note">${s.note}</p>
+  </div>
+  <footer><span>${handle}</span>${s.final ? `<span class="save">Saqlab qoʻying ${svg(ICON.save)}</span>` : longArrow}</footer>
+  </body></html>`;
+}
+
+function splitHtml(s) {
+  const img = photo(s.photo);
+  const half = (bw, text) => `
+    <div class="half"><div class="img${bw ? " bw" : ""}" style="background-image:url(${img})"></div>
+      <div class="t" style="left:${s.x}%;top:${s.y}%">${text}</div></div>`;
+  return `<!doctype html><html><head><meta charset="utf-8"><style>${base}
+  body { background: #000; }
+  .half { position: relative; width: ${W}px; height: ${H / 2}px; overflow: hidden; }
+  .img { position: absolute; inset: 0; background-size: cover; background-position: center; }
+  .bw { filter: grayscale(1) contrast(1.08) brightness(.95); }
+  .img:not(.bw) { filter: saturate(1.15); }
+  .t { position: absolute; color: #fff; font-size: 66px; font-weight: 700; letter-spacing: -.5px; white-space: nowrap;
+       text-shadow: 0 2px 18px rgba(0,0,0,.35); }
+  </style></head><body>${half(true, s.top)}${half(false, s.bottom)}</body></html>`;
+}
+
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage({ viewport: { width: W, height: H } });
+  const has = (name) => fs.existsSync(path.join(__dirname, "photos", name));
+  const shot = async (html, file) => {
+    await page.setContent(html);
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      await Promise.all([...document.images].map((i) => i.decode().catch(() => {})));
+      // Sig'magan sarlavhalarni kichraytiradi
+      for (const el of document.querySelectorAll("h1, h2, .t")) {
+        const box = el.closest(".text, .card, .half");
+        let size = parseFloat(getComputedStyle(el).fontSize);
+        const over = () => el.getBoundingClientRect().right > box.getBoundingClientRect().right - 40 || el.scrollWidth > el.clientWidth;
+        while (over() && size > 36) el.style.fontSize = `${(size -= 3)}px`;
+      }
+    });
+    await page.waitForTimeout(150);
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    await page.screenshot({ path: file });
+    console.log(file);
+  };
+  const out = (id, k) => path.join(__dirname, "output-v2", id, `${String(k).padStart(2, "0")}.png`);
+
+  for (const c of cards) {
+    const n = c.slides.length + 1;
+    if (has(c.cover.photo)) await shot(coverHtml(c), out(c.id, 1));
+    else console.log(`rasm yo'q, muqova o'tkazib yuborildi: photos/${c.cover.photo}`);
+    for (const [i, s] of c.slides.entries()) await shot(cardHtml(s, i + 2, n), out(c.id, i + 2));
+  }
+  for (const c of splits) {
+    for (const [i, s] of c.slides.entries()) {
+      if (has(s.photo)) await shot(splitHtml(s), out(c.id, i + 1));
+      else console.log(`rasm yo'q, slayd o'tkazib yuborildi: photos/${s.photo}`);
+    }
+  }
+  await browser.close();
+})();
