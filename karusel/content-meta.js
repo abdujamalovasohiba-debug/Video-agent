@@ -20,8 +20,8 @@ module.exports = {
     },
     {
       id: "M9-target-organik",
-      theme: bg("s1-oqish.jpg"),
-      cover: { photo: "s1-oqish.jpg", pos: "50% 20%", line1: "«Target yoqsang, profil oʻrganib qoladi»", line2: "Aslida ham shundaymi?", sub: "Instagram rahbari Adam Mosseri<br>bu haqda oʻzi javob berdi." },
+      theme: bg("t05-ish.jpg"),
+      cover: { photo: "t05-ish.jpg", pos: "50% 30%", line1: "«Target yoqsang, profil oʻrganib qoladi»", line2: "Aslida ham shundaymi?", sub: "Instagram rahbari Adam Mosseri<br>bu haqda oʻzi javob berdi." },
       slides: [
         { label: "Afsona", title: "«Profil reklamaga <mark>oʻrganib qoladi.</mark>»", body: "Bu gapni mijozlardan deyarli har hafta eshitaman: «Target yoqsak, keyin oddiy postlar uchmay qoladi».", note: "Instagram rahbari Adam Mosseri esa bunday emas deydi." },
         { label: "Haqiqat", title: "Reklama oxvatni <mark>tushirmaydi ham, oshirmaydi ham.</mark>", body: "Mosseri ochiq aytgan: reklama berdingizmi-yoʻqmi, oddiy postlaringiz oxvatiga taʼsir qilmaydi.", note: "Instagram'ga oxvatingizni kesish foyda emas. Unga odamlar koʻradigan yaxshi kontent kerak." },
