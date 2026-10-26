@@ -36,7 +36,7 @@ module.exports = {
     {
       id: "M10-metrikalar",
       theme: bg("t05-ish.jpg"),
-      cover: { photo: "t05-ish.jpg", pos: "50% 30%", line1: "Reklama hisobotidagi raqamlar", line2: "oddiy tilda", sub: "Oxvat, CPM, CTR, CPC...<br>endi chalkashmaysiz." },
+      cover: { photo: "t05-ish.jpg", pos: "50% 30%", line1: "Reklama hisobotidagi raqamlar", line2: "oddiy tilda", sub: "Oxvat, CPM, CTR, CPA, ROAS...<br>endi chalkashmaysiz." },
       slides: [
         { label: "Misol", title: "Tasavvur qiling: <mark>doʻkon vitrinasi.</mark>", body: "Reklama — koʻchadagi vitrina. Odamlar oʻtadi, qaraydi, baʼzilari ichkariga kiradi, baʼzilari sotib oladi.", note: "Har bir raqam shu yoʻlning bir qismini oʻlchaydi." },
         { label: "Oxvat", title: "Oxvat — <mark>nechta odam koʻrdi.</mark>", body: "Vitrina oldidan oʻtib, unga qaragan odamlar soni.", note: "Bitta odam 3 marta koʻrsa ham — oxvat 1." },
@@ -46,8 +46,11 @@ module.exports = {
         { label: "CTR", title: "CTR — <mark>necha foizi bosdi.</mark>", body: "Koʻrganlardan nechtasi qiziqib, ichkariga kirdi.", note: "100 kishi koʻrib, 2 tasi bossa — CTR 2%. Past boʻlsa, kreativ odamni toʻxtatmayapti." },
         { label: "CPC", title: "CPC — <mark>bitta bosish narxi.</mark>", body: "Bir odam reklamani bosishi sizga qanchaga tushdi.", note: "Arzon bosish — hali mijoz degani emas." },
         { label: "Lid narxi", title: "Lid narxi — <mark>bitta zayavka narxi.</mark>", body: "Raqam qoldirgan yoki direktga yozgan bitta odam qanchaga tushdi.", note: "Tadbirkor uchun eng muhim raqamlardan biri." },
-        { label: "Eng asosiysi", title: "Bitta <mark>mijoz narxi.</mark>", body: "Reklamaga ketgan pul ÷ sotib olganlar soni.", note: "Bu raqam bitta mijozdan topadigan foydangizdan kam boʻlsa — reklama oʻzini oqlayapti." },
-        { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>Layk va oxvat — chiroyli raqam. Pul topyapsizmi-yoʻqmi — mijoz narxi aytadi.", note: "<b>Qaysi raqam sizni koʻproq chalkashtiradi? Izohda yozing.</b>" },
+        { label: "CPA", title: "CPA — <mark>bitta xarid narxi.</mark>", body: "Reklamaga ketgan pul ÷ sotib olganlar soni.", note: "300$ reklamadan 10 ta mijoz kelsa — CPA 30$." },
+        { label: "CAC", title: "CAC — mijozning <mark>haqiqiy narxi.</mark>", body: "Reklama + targetolog + sotuv menejeri + boshqa xarajatlar ÷ yangi mijozlar soni.", note: "Yuqoridagi misolga yana 500$ xizmat haqi qoʻshilsa: 800$ ÷ 10 = <b>CAC 80$.</b> Tadbirkor uchun asosiy raqam shu." },
+        { label: "ROAS", title: "ROAS — <mark>har 1$ qancha qaytardi.</mark>", body: "Reklamadan tushgan pul ÷ reklamaga ketgan pul.", note: "300$ reklamadan 1200$ savdo boʻlsa — ROAS 4. Har 1$ ga 4$ tushdi." },
+        { label: "Eng asosiysi", title: "Reklama <mark>oʻzini oqlayaptimi?</mark>", body: "CAC bitta mijozdan topadigan foydangizdan kam boʻlsa — ha.", note: "ROAS katta, lekin foyda yoʻqmi? Demak, narx yoki xarajatlarni qayta hisoblash kerak." },
+        { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>Layk va oxvat — chiroyli raqam. Pul topyapsizmi-yoʻqmi — CAC va ROAS aytadi.", note: "<b>Qaysi raqam sizni koʻproq chalkashtiradi? Izohda yozing.</b>" },
       ],
     },
   ],
