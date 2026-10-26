@@ -216,3 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Shaxsiy rasmlar va ular ishlatilgan slaydlar (repo ochiq)
+karusel/photos/
+karusel/output-target/
+karusel/output-split/

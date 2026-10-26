@@ -1,7 +1,7 @@
 // Yangi uslubdagi karusellar matni. O'zgartirgach: node generate2.js
 // Rasmlar photos/ papkasida — o'zingiznikiga almashtirsangiz bo'ladi (nomini saqlang).
 module.exports = {
-  handle: "@sizning_blog",
+  handle: "@sohiba_abdujamolova",
 
   // A uslub: rasmli muqova + oq kartochkali slaydlar
   cards: [

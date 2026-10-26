@@ -34,14 +34,18 @@ const base = `
 function coverHtml(c) {
   const { cover } = c;
   return `<!doctype html><html><head><meta charset="utf-8"><style>${base}
-  body { color: #fff; background: ${has(cover.photo) ? `#111 url(${photo(cover.photo)}) center/cover`
+  body { color: #fff; background: ${has(cover.photo) ? `#111 url(${photo(cover.photo)}) ${cover.pos || "center"}/cover`
     : `radial-gradient(120% 80% at 85% 0%, #3a3a3a 0%, #161616 55%, #0d0d0d 100%)`}; }
   .kicker { display: inline-block; margin-bottom: 44px; padding: 14px 30px; border-radius: 40px;
             border: 2px solid ${YELLOW}; color: ${YELLOW}; font-size: 28px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
   .big { position: absolute; right: -40px; top: 60px; font-size: 520px; font-weight: 800; line-height: 1;
          color: rgba(255,255,255,.05); letter-spacing: -20px; }
   .shade { position: absolute; inset: 0;
-           background: linear-gradient(180deg, rgba(0,0,0,0) 38%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.88) 100%); }
+           background: linear-gradient(180deg, rgba(0,0,0,0) 42%, rgba(0,0,0,.62) 62%, rgba(0,0,0,.92) 100%); }
+  body.ph .text { bottom: 150px; }
+  body.ph h1 { font-size: 78px; }
+  body.ph .kicker { margin-bottom: 30px; font-size: 24px; padding: 10px 24px; background: rgba(0,0,0,.35); }
+  body.ph .sub { font-size: 34px; margin-top: 36px; }
   .text { position: absolute; left: 70px; right: 70px; bottom: 210px; text-align: center; }
   h1 { font-size: 92px; line-height: 1.04; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; text-wrap: balance; }
   h1 .y { color: ${YELLOW}; position: relative; display: inline-block; }
@@ -50,7 +54,7 @@ function coverHtml(c) {
   .sub { margin-top: 44px; font-size: 38px; line-height: 1.3; color: rgba(255,255,255,.82); }
   footer { position: absolute; left: 100px; right: 100px; bottom: 76px; display: flex;
            justify-content: space-between; align-items: center; font-size: 30px; font-weight: 500; }
-  </style></head><body>
+  </style></head><body class="${has(cover.photo) ? "ph" : ""}">
   ${has(cover.photo) ? `<div class="shade"></div>` : cover.big ? `<div class="big">${cover.big}</div>` : ""}
   <div class="text">${cover.kicker ? `<div class="kicker">${cover.kicker}</div>` : ""}<h1>${cover.line1}<br><span class="y">${cover.line2}</span></h1><p class="sub">${cover.sub}</p></div>
   <footer><span>${handle}</span>${longArrow.replace('width="84"', 'width="60"')}</footer>
@@ -116,7 +120,7 @@ function cardHtml(s, i, n) {
 function splitHtml(s) {
   const img = photo(s.photo);
   const half = (bw, text) => `
-    <div class="half"><div class="img${bw ? " bw" : ""}" style="background-image:url(${img})"></div>
+    <div class="half"><div class="img${bw ? " bw" : ""}" style="background-image:url(${img});background-position:${s.pos || "center"}"></div>
       <div class="t" style="left:${s.x}%;top:${s.y}%">${text}</div></div>`;
   return `<!doctype html><html><head><meta charset="utf-8"><style>${base}
   body { background: #000; }
@@ -125,7 +129,9 @@ function splitHtml(s) {
   .bw { filter: grayscale(1) contrast(1.08) brightness(.95); }
   .img:not(.bw) { filter: saturate(1.15); }
   .t { position: absolute; color: #fff; font-size: 66px; font-weight: 700; letter-spacing: -.5px; white-space: nowrap;
-       text-shadow: 0 2px 18px rgba(0,0,0,.35); }
+       text-shadow: 0 2px 6px rgba(0,0,0,.45), 0 4px 30px rgba(0,0,0,.6); }
+  .half::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.16); }
+  .t { z-index: 1; }
   </style></head><body>${half(true, s.top)}${half(false, s.bottom)}</body></html>`;
 }
 

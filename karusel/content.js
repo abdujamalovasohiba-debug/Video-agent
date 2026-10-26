@@ -1,7 +1,7 @@
 // Karusel matnlari. Matnni shu yerda o'zgartiring, keyin: node generate.js
 module.exports = {
   // Instagram nikingizni shu yerga yozing
-  handle: "@sizning_blog",
+  handle: "@sohiba_abdujamolova",
 
   carousels: [
     {
