@@ -6,7 +6,7 @@ module.exports = {
   cards: [
     {
       id: "01-reklama-natija-bermayapti",
-      cover: { kicker: "Tadbirkorlar uchun", photo: "t01-oylash.jpg", big: "01", line1: "Reklamaga pul ketyapti,", line2: "natija yoʻq?", sub: "Pulingiz qayerga «oqib» ketayotganini<br>koʻrsatadigan 7 ta sabab." },
+      cover: { kicker: "Tadbirkorlar uchun", photo: "t01-zina.jpg", big: "01", line1: "Reklamaga pul ketyapti,", line2: "natija yoʻq?", sub: "Pulingiz qayerga «oqib» ketayotganini<br>koʻrsatadigan 7 ta sabab." },
       slides: [
         { label: "Taklif", title: "<mark>Taklifingiz</mark> kuchsiz.", body: "Reklama yomon taklifni yaxshi qilmaydi — faqat uni koʻproq odamga koʻrsatadi.", note: "Avval «nega aynan sizdan olish kerak?» savoliga javob toping." },
         { label: "Profil", title: "Profil <mark>tayyor emas.</mark>", body: "Odam reklamadan kirdi: bio tushunarsiz, narx yoʻq, sharhlar yoʻq.", note: "Natija — u chiqib ketadi, pul esa sarflangan boʻladi." },
@@ -33,7 +33,7 @@ module.exports = {
     },
     {
       id: "03-reklama-byudjeti",
-      cover: { kicker: "Eng koʻp beriladigan savol", photo: "t03-latte.jpg", pos: "50% 90%", big: "03", line1: "Reklamaga qancha", line2: "pul kerak?", sub: "Byudjetni «taxminan» emas,<br>hisob-kitob bilan rejalashtiring." },
+      cover: { kicker: "Eng koʻp beriladigan savol", photo: "t03-mojito.jpg", pos: "50% 75%", big: "03", line1: "Reklamaga qancha", line2: "pul kerak?", sub: "Byudjetni «taxminan» emas,<br>hisob-kitob bilan rejalashtiring." },
       slides: [
         { label: "Teskari hisob", title: "Byudjet <mark>maqsaddan</mark> boshlanadi.", body: "Avval savol: oyiga nechta mijoz kerak?", note: "Keyin orqaga qarab hisoblaymiz." },
         { label: "Konversiya", title: "Necha liddan <mark>bitta sotuv?</mark>", body: "Masalan, 10 ta murojaatdan 2 tasi sotib oladi — konversiya 20%.", note: "Bu raqamni sotuv boʻlimingizdan oling." },
@@ -46,7 +46,7 @@ module.exports = {
     },
     {
       id: "04-sotadigan-kreativ",
-      cover: { kicker: "Kreativ sirlari", photo: "t04-profil.jpg", big: "04", line1: "Sotadigan reklama", line2: "qanday boʻladi?", sub: "Lentada toʻxtatadigan va bosishga<br>undaydigan kreativning 6 qoidasi." },
+      cover: { kicker: "Kreativ sirlari", photo: "t04-telefon.jpg", big: "04", line1: "Sotadigan reklama", line2: "qanday boʻladi?", sub: "Lentada toʻxtatadigan va bosishga<br>undaydigan kreativning 6 qoidasi." },
       slides: [
         { label: "Ilgak", title: "Birinchi <mark>2 soniya</mark> hal qiladi.", body: "Video boshida — eng kuchli kadr yoki savol. Rasmda — katta, oʻqiladigan sarlavha.", note: "Toʻxtatmagan reklama koʻrilmagan reklamadir." },
         { label: "Og'riq", title: "Mahsulotdan emas, <mark>muammodan</mark> boshlang.", body: "Odam mahsulotingizni emas, oʻz muammosining yechimini qidiradi.", note: "«Bizda 20% chegirma» emas — «Ertalab vaqtingiz yetmayaptimi?»" },
@@ -60,7 +60,7 @@ module.exports = {
     },
     {
       id: "05-lid-bor-sotuv-yoq",
-      cover: { kicker: "Tadbirkorlar uchun", photo: "t05-javon.jpg", big: "05", line1: "Lidlar bor,", line2: "sotuv yoʻq?", sub: "Muammo har doim ham reklamada emas.<br>Mana 6 ta asosiy sabab." },
+      cover: { kicker: "Tadbirkorlar uchun", photo: "t05-ish.jpg", big: "05", line1: "Lidlar bor,", line2: "sotuv yoʻq?", sub: "Muammo har doim ham reklamada emas.<br>Mana 6 ta asosiy sabab." },
       slides: [
         { label: "Tezlik", title: "<mark>Kech javob</mark> berish.", body: "Birinchi 5–15 daqiqa — eng «issiq» payt. Keyin qiziqish soʻnadi.", note: "Javob vaqtini oʻlchang va qisqartiring." },
         { label: "Skript", title: "Narxni aytib, <mark>jim qolish.</mark>", body: "«Narxi 500 ming» — va suhbat tugadi.", note: "Avval ehtiyojni bilib oling, keyin qiymatni tushuntiring, soʻng narxni ayting." },
@@ -73,7 +73,7 @@ module.exports = {
     },
     {
       id: "06-prodvigat-tugmasi",
-      cover: { kicker: "Koʻpchilik shu xatoni qiladi", photo: "t06-qahva.jpg", pos: "50% 20%", big: "06", line1: "«Продвигать» tugmasini", line2: "bosmang", sub: "Ads Manager orqali sozlangan reklama<br>nega yaxshiroq ishlaydi?" },
+      cover: { kicker: "Koʻpchilik shu xatoni qiladi", photo: "t06-latte.jpg", pos: "50% 30%", big: "06", line1: "«Продвигать» tugmasini", line2: "bosmang", sub: "Ads Manager orqali sozlangan reklama<br>nega yaxshiroq ishlaydi?" },
       slides: [
         { label: "Maqsad", title: "Tugma <mark>maqsadni</mark> cheklaydi.", body: "Koʻpincha natija — layk va koʻrishlar. Sizga esa mijoz kerak.", note: "Ads Managerʼda maqsadni aniq tanlaysiz: lid, xabar, sotuv." },
         { label: "Auditoriya", title: "Sozlamalar <mark>juda oddiy.</mark>", body: "Retargeting, oʻxshash auditoriya, istisnolar — bularning koʻpi yoʻq.", note: "Natijada reklama keraksiz odamlarga ham ketadi." },
@@ -123,7 +123,7 @@ module.exports = {
     },
     {
       id: "10-retargeting",
-      cover: { kicker: "Yashirin daromad", photo: "t10-kitob.jpg", big: "10", line1: "Sizni koʻrdi, lekin", line2: "sotib olmadi", sub: "Retargeting orqali «yoʻqotilgan»<br>mijozlarni qaytarish." },
+      cover: { kicker: "Yashirin daromad", photo: "t10-tanlash.jpg", pos: "50% 20%", big: "10", line1: "Sizni koʻrdi, lekin", line2: "sotib olmadi", sub: "Retargeting orqali «yoʻqotilgan»<br>mijozlarni qaytarish." },
       slides: [
         { label: "Muammo", title: "Koʻpchilik <mark>birinchi marta</mark> sotib olmaydi.", body: "Oʻylaydi, solishtiradi, keyinga qoldiradi — va unutadi.", note: "Retargeting — ularga eslatish usuli." },
         { label: "Kimlar", title: "Kimlarga <mark>qayta</mark> koʻrsatamiz?", body: "Profilga kirganlar, videoni koʻrganlar, direktga yozganlar, saytga kirganlar.", note: "Bu — sizni allaqachon taniydigan «issiq» auditoriya." },
@@ -143,6 +143,7 @@ module.exports = {
         { photo: "s1-oqish.jpg", pos: "50% 35%", top: "Reklama ishlamadimi?", bottom: "Kreativni almashtiring.", x: 6, y: 12 },
         { photo: "s2-kruassan.jpg", pos: "50% 40%", top: "Yomon tongmi?", bottom: "Tushlikda qaytadan boshlang.", x: 6, y: 10 },
         { photo: "s3-kitob.jpg", pos: "50% 30%", top: "Lid qimmatlashdimi?", bottom: "Testni qaytadan boshlang.", x: 6, y: 74 },
+        { photo: "s5-mojito.jpg", pos: "50% 45%", top: "Yomon kunmi?", bottom: "Ertaga qaytadan boshlang.", x: 6, y: 10 },
         { photo: "s4-qahva.jpg", pos: "50% 45%", top: "Yomon haftami?", bottom: "Dushanbadan qaytadan boshlang.", x: 6, y: 10 },
       ],
     },
