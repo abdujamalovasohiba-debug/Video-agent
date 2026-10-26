@@ -6,6 +6,8 @@ module.exports = {
   cards: [
     {
       id: "01-reklama-natija-bermayapti",
+      // Kartochka orqasida muqova rasmi xiralashtirilgan holda
+      theme: { bgPhoto: "t01-zina.jpg", paper: 0, muted: "#fff" },
       cover: { photo: "t01-zina.jpg", big: "01", line1: "Reklamaga pul ketyapti,", line2: "natija yoʻq?", sub: "Pulingiz qayerga «oqib» ketayotganini<br>koʻrsatadigan 7 ta sabab." },
       slides: [
         { label: "Taklif", title: "<mark>Taklifingiz</mark> kuchsiz.", body: "Reklama yomon taklifni yaxshi qilmaydi — faqat uni koʻproq odamga koʻrsatadi.", note: "Avval «nega aynan sizdan olish kerak?» savoliga javob toping." },
