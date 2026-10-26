@@ -2,11 +2,14 @@
 const fs = require("fs");
 const path = require("path");
 const { chromium } = require("playwright");
-const { handle, cards, splits } = require("./content2");
+// Boshqa matn fayli bilan: node generate2.js content-target.js output-target
+const { handle, cards = [], splits = [] } = require(path.resolve(__dirname, process.argv[2] || "content2.js"));
+const OUT = process.argv[3] || "output-v2";
 
 const W = 1080, H = 1350;
 const YELLOW = "#F9B417", HL = "#FCEFB0";
 
+const has = (name) => !!name && fs.existsSync(path.join(__dirname, "photos", name));
 const photo = (name) => {
   const file = path.join(__dirname, "photos", name);
   return `data:image/jpeg;base64,${fs.readFileSync(file).toString("base64")}`;
@@ -31,11 +34,16 @@ const base = `
 function coverHtml(c) {
   const { cover } = c;
   return `<!doctype html><html><head><meta charset="utf-8"><style>${base}
-  body { background: #111 url(${photo(cover.photo)}) center/cover; color: #fff; }
+  body { color: #fff; background: ${has(cover.photo) ? `#111 url(${photo(cover.photo)}) center/cover`
+    : `radial-gradient(120% 80% at 85% 0%, #3a3a3a 0%, #161616 55%, #0d0d0d 100%)`}; }
+  .kicker { display: inline-block; margin-bottom: 44px; padding: 14px 30px; border-radius: 40px;
+            border: 2px solid ${YELLOW}; color: ${YELLOW}; font-size: 28px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+  .big { position: absolute; right: -40px; top: 60px; font-size: 520px; font-weight: 800; line-height: 1;
+         color: rgba(255,255,255,.05); letter-spacing: -20px; }
   .shade { position: absolute; inset: 0;
            background: linear-gradient(180deg, rgba(0,0,0,0) 38%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.88) 100%); }
   .text { position: absolute; left: 70px; right: 70px; bottom: 210px; text-align: center; }
-  h1 { font-size: 92px; line-height: 1.04; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; white-space: nowrap; }
+  h1 { font-size: 92px; line-height: 1.04; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; text-wrap: balance; }
   h1 .y { color: ${YELLOW}; position: relative; display: inline-block; }
   h1 .y::after { content: ""; position: absolute; left: 0; width: 58%; bottom: -14px; height: 6px;
                  border-radius: 3px; background: ${YELLOW}; }
@@ -43,8 +51,8 @@ function coverHtml(c) {
   footer { position: absolute; left: 100px; right: 100px; bottom: 76px; display: flex;
            justify-content: space-between; align-items: center; font-size: 30px; font-weight: 500; }
   </style></head><body>
-  <div class="shade"></div>
-  <div class="text"><h1>${cover.line1}<br><span class="y">${cover.line2}</span></h1><p class="sub">${cover.sub}</p></div>
+  ${has(cover.photo) ? `<div class="shade"></div>` : cover.big ? `<div class="big">${cover.big}</div>` : ""}
+  <div class="text">${cover.kicker ? `<div class="kicker">${cover.kicker}</div>` : ""}<h1>${cover.line1}<br><span class="y">${cover.line2}</span></h1><p class="sub">${cover.sub}</p></div>
   <footer><span>${handle}</span>${longArrow.replace('width="84"', 'width="60"')}</footer>
   </body></html>`;
 }
@@ -124,7 +132,6 @@ function splitHtml(s) {
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: W, height: H } });
-  const has = (name) => fs.existsSync(path.join(__dirname, "photos", name));
   const shot = async (html, file) => {
     await page.setContent(html);
     await page.evaluate(async () => {
@@ -134,7 +141,8 @@ function splitHtml(s) {
       for (const el of document.querySelectorAll("h1, h2, .t")) {
         const box = el.closest(".text, .card, .half");
         let size = parseFloat(getComputedStyle(el).fontSize);
-        const over = () => el.getBoundingClientRect().right > box.getBoundingClientRect().right - 40 || el.scrollWidth > el.clientWidth;
+        const over = () => el.scrollWidth > el.clientWidth ||
+          (el.matches(".t") && el.getBoundingClientRect().right > box.getBoundingClientRect().right - 40);
         while (over() && size > 36) el.style.fontSize = `${(size -= 3)}px`;
       }
     });
@@ -143,12 +151,11 @@ function splitHtml(s) {
     await page.screenshot({ path: file });
     console.log(file);
   };
-  const out = (id, k) => path.join(__dirname, "output-v2", id, `${String(k).padStart(2, "0")}.png`);
+  const out = (id, k) => path.join(__dirname, OUT, id, `${String(k).padStart(2, "0")}.png`);
 
   for (const c of cards) {
     const n = c.slides.length + 1;
-    if (has(c.cover.photo)) await shot(coverHtml(c), out(c.id, 1));
-    else console.log(`rasm yo'q, muqova o'tkazib yuborildi: photos/${c.cover.photo}`);
+    await shot(coverHtml(c), out(c.id, 1));
     for (const [i, s] of c.slides.entries()) await shot(cardHtml(s, i + 2, n), out(c.id, i + 2));
   }
   for (const c of splits) {
