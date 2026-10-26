@@ -33,5 +33,22 @@ module.exports = {
         { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>Profil reklamaga oʻrganib qolmaydi. Oxvatni zaif kontent va notoʻgʻri auditoriya tushiradi.", note: "<b>Siz ham shunga ishonganmisiz? Izohda yozing.</b>" },
       ],
     },
+    {
+      id: "M10-metrikalar",
+      theme: bg("t05-ish.jpg"),
+      cover: { photo: "t05-ish.jpg", pos: "50% 30%", line1: "Reklama hisobotidagi raqamlar", line2: "oddiy tilda", sub: "Oxvat, CPM, CTR, CPC...<br>endi chalkashmaysiz." },
+      slides: [
+        { label: "Misol", title: "Tasavvur qiling: <mark>doʻkon vitrinasi.</mark>", body: "Reklama — koʻchadagi vitrina. Odamlar oʻtadi, qaraydi, baʼzilari ichkariga kiradi, baʼzilari sotib oladi.", note: "Har bir raqam shu yoʻlning bir qismini oʻlchaydi." },
+        { label: "Oxvat", title: "Oxvat — <mark>nechta odam koʻrdi.</mark>", body: "Vitrina oldidan oʻtib, unga qaragan odamlar soni.", note: "Bitta odam 3 marta koʻrsa ham — oxvat 1." },
+        { label: "Pokaz", title: "Pokaz — <mark>necha marta koʻrsatildi.</mark>", body: "Oʻsha odamlar reklamani jami necha marta koʻrgani.", note: "Bitta odam 3 marta koʻrsa — 3 ta pokaz." },
+        { label: "Chastota", title: "Chastota — <mark>bir odam necha marta koʻrdi.</mark>", body: "Pokaz ÷ oxvat.", note: "Haddan oshib ketsa, odamlar reklamadan zerikadi. Shunda kreativni almashtiring." },
+        { label: "CPM", title: "CPM — <mark>1000 marta koʻrsatish narxi.</mark>", body: "Vitrina oldidan 1000 kishi oʻtishi uchun toʻlaydigan «ijara».", note: "Bayram va aksiyalarda oshadi — chunki hamma reklama beradi." },
+        { label: "CTR", title: "CTR — <mark>necha foizi bosdi.</mark>", body: "Koʻrganlardan nechtasi qiziqib, ichkariga kirdi.", note: "100 kishi koʻrib, 2 tasi bossa — CTR 2%. Past boʻlsa, kreativ odamni toʻxtatmayapti." },
+        { label: "CPC", title: "CPC — <mark>bitta bosish narxi.</mark>", body: "Bir odam reklamani bosishi sizga qanchaga tushdi.", note: "Arzon bosish — hali mijoz degani emas." },
+        { label: "Lid narxi", title: "Lid narxi — <mark>bitta zayavka narxi.</mark>", body: "Raqam qoldirgan yoki direktga yozgan bitta odam qanchaga tushdi.", note: "Tadbirkor uchun eng muhim raqamlardan biri." },
+        { label: "Eng asosiysi", title: "Bitta <mark>mijoz narxi.</mark>", body: "Reklamaga ketgan pul ÷ sotib olganlar soni.", note: "Bu raqam bitta mijozdan topadigan foydangizdan kam boʻlsa — reklama oʻzini oqlayapti." },
+        { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>Layk va oxvat — chiroyli raqam. Pul topyapsizmi-yoʻqmi — mijoz narxi aytadi.", note: "<b>Qaysi raqam sizni koʻproq chalkashtiradi? Izohda yozing.</b>" },
+      ],
+    },
   ],
 };
