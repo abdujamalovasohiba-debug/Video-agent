@@ -6,10 +6,10 @@ module.exports = {
   cards: [
     {
       id: "01-reklama-natija-bermayapti",
-      cover: { kicker: "Tadbirkorlar uchun", photo: "t01-zina.jpg", big: "01", line1: "Reklamaga pul ketyapti,", line2: "natija yoʻq?", sub: "Pulingiz qayerga «oqib» ketayotganini<br>koʻrsatadigan 7 ta sabab." },
+      cover: { photo: "t01-zina.jpg", big: "01", line1: "Reklamaga pul ketyapti,", line2: "natija yoʻq?", sub: "Pulingiz qayerga «oqib» ketayotganini<br>koʻrsatadigan 7 ta sabab." },
       slides: [
         { label: "Taklif", title: "<mark>Taklifingiz</mark> kuchsiz.", body: "Reklama yomon taklifni yaxshi qilmaydi — faqat uni koʻproq odamga koʻrsatadi.", note: "Avval «nega aynan sizdan olish kerak?» savoliga javob toping." },
-        { label: "Profil", title: "Profil <mark>tayyor emas.</mark>", body: "Odam reklamadan kirdi: bio tushunarsiz, narx yoʻq, sharhlar yoʻq.", note: "Natija — u chiqib ketadi, pul esa sarflangan boʻladi." },
+        { label: "Profil", title: "Profil <mark>tayyor emas.</mark>", body: "Odam reklamadan kirdi: bio tushunarsiz, narx yoʻq, otzivlar yoʻq.", note: "Natija — u chiqib ketadi, pul esa sarflangan boʻladi." },
         { label: "Kreativ", title: "Kreativ <mark>toʻxtatmaydi.</mark>", body: "Lentada odam postga 1–2 soniya qaraydi. Rasm yoki birinchi kadr ushlamasa — tamom.", note: "Natijaning katta qismi auditoriyadan emas, kreativdan keladi." },
         { label: "Tugma", title: "«Продвигать» <mark>tugmasi.</mark>", body: "Postni shunchaki «reklama qilish» — eng qimmat va eng nazoratsiz yoʻl.", note: "Professional reklama Ads Managerʼda sozlanadi." },
         { label: "Sabr", title: "Reklamani <mark>2 kunda</mark> oʻchirish.", body: "Algoritm avval oʻrganadi, keyin optimallashtiradi.", note: "Har kuni oʻzgartirish — har kuni noldan boshlash degani." },
@@ -51,7 +51,7 @@ module.exports = {
         { label: "Ilgak", title: "Birinchi <mark>2 soniya</mark> hal qiladi.", body: "Video boshida — eng kuchli kadr yoki savol. Rasmda — katta, oʻqiladigan sarlavha.", note: "Toʻxtatmagan reklama koʻrilmagan reklamadir." },
         { label: "Og'riq", title: "Mahsulotdan emas, <mark>muammodan</mark> boshlang.", body: "Odam mahsulotingizni emas, oʻz muammosining yechimini qidiradi.", note: "«Bizda 20% chegirma» emas — «Ertalab vaqtingiz yetmayaptimi?»" },
         { label: "Aniqlik", title: "Bitta reklama — <mark>bitta fikr.</mark>", body: "Hamma afzalliklarni bitta kreativga tiqishtirmang.", note: "Bitta muammo, bitta yechim, bitta harakat." },
-        { label: "Isbot", title: "<mark>Isbot</mark> koʻrsating.", body: "Mijoz sharhlari, «oldin/keyin», raqamlar, jarayon videosi.", note: "Ishonch boʻlmasa, bosish ham boʻlmaydi." },
+        { label: "Isbot", title: "<mark>Isbot</mark> koʻrsating.", body: "Mijoz otzivlari, «oldin/keyin», raqamlar, jarayon videosi.", note: "Ishonch boʻlmasa, bosish ham boʻlmaydi." },
         { label: "Format", title: "Reklamaga <mark>oʻxshamasin.</mark>", body: "Telefonda oddiy olingan, «jonli» video koʻpincha studiya rolikidan yaxshi ishlaydi.", note: "Lentadagi oddiy postdek koʻrinsin." },
         { label: "Harakat", title: "Nima qilishni <mark>aniq ayting.</mark>", body: "Direktga «narx» deb yozing, «Havolani bosing» — aniq va oson.", note: "Odam oʻylab oʻtirmasligi kerak." },
         { label: "Test", title: "Bitta emas — <mark>3–5 ta kreativ.</mark>", body: "Qaysi biri ishlashini oldindan hech kim bilmaydi.", note: "Test qiling, gʻolibini kuchaytiring." },
@@ -60,7 +60,7 @@ module.exports = {
     },
     {
       id: "05-lid-bor-sotuv-yoq",
-      cover: { kicker: "Tadbirkorlar uchun", photo: "t05-ish.jpg", big: "05", line1: "Lidlar bor,", line2: "sotuv yoʻq?", sub: "Muammo har doim ham reklamada emas.<br>Mana 6 ta asosiy sabab." },
+      cover: { photo: "t05-ish.jpg", big: "05", line1: "Lidlar bor,", line2: "sotuv yoʻq?", sub: "Muammo har doim ham reklamada emas.<br>Mana 6 ta asosiy sabab." },
       slides: [
         { label: "Tezlik", title: "<mark>Kech javob</mark> berish.", body: "Birinchi 5–15 daqiqa — eng «issiq» payt. Keyin qiziqish soʻnadi.", note: "Javob vaqtini oʻlchang va qisqartiring." },
         { label: "Skript", title: "Narxni aytib, <mark>jim qolish.</mark>", body: "«Narxi 500 ming» — va suhbat tugadi.", note: "Avval ehtiyojni bilib oling, keyin qiymatni tushuntiring, soʻng narxni ayting." },
@@ -113,8 +113,8 @@ module.exports = {
       cover: { kicker: "Checklist", photo: "t09-chiroq.jpg", big: "09", line1: "Reklamani yoqishdan", line2: "oldin tekshiring", sub: "Bu 6 ta narsa tayyor boʻlmasa,<br>byudjetingiz behuda ketadi." },
       slides: [
         { label: "Bio", title: "Bio <mark>3 soniyada</mark> tushunarlimi?", body: "Kimsiz, nima taklif qilasiz va qanday bogʻlanish mumkin.", note: "Murakkab bio — yoʻqotilgan mijoz." },
-        { label: "Lenta", title: "Lentada <mark>ishonch</mark> bormi?", body: "Ish namunalari, mijoz sharhlari, jarayon, jamoa.", note: "Yangi odam birinchi 9 ta postga qaraydi." },
-        { label: "Highlights", title: "<mark>Aktual</mark> storislar tayyormi?", body: "Narxlar, sharhlar, yetkazib berish, manzil, savol-javob.", note: "Odam savol bermasdan javob topsin." },
+        { label: "Lenta", title: "Lentada <mark>ishonch</mark> bormi?", body: "Ish namunalari, mijoz otzivlari, jarayon, jamoa.", note: "Yangi odam birinchi 9 ta postga qaraydi." },
+        { label: "Highlights", title: "<mark>Aktual</mark> storislar tayyormi?", body: "Narxlar, otzivlar, yetkazib berish, manzil, savol-javob.", note: "Odam savol bermasdan javob topsin." },
         { label: "Narx", title: "<mark>Narx</mark> tushunarlimi?", body: "«Narxi direktda» — koʻp odamni yozmasdan chiqib ketishga majbur qiladi.", note: "Hech boʻlmasa «...dan boshlab» deb yozing." },
         { label: "Aloqa", title: "Javob berishga <mark>kim</mark> masʼul?", body: "Reklama yoqilgan kuni kelgan xabarlarga kim, qancha vaqtda javob beradi?", note: "Buni oldindan hal qiling." },
         { label: "Taklif", title: "Reklama uchun <mark>aniq taklif</mark> bormi?", body: "Bonus, bepul konsultatsiya, sinov darsi — harakatga undaydigan sabab.", note: "«Bizga obuna boʻling» — taklif emas." },
@@ -128,7 +128,7 @@ module.exports = {
         { label: "Muammo", title: "Koʻpchilik <mark>birinchi marta</mark> sotib olmaydi.", body: "Oʻylaydi, solishtiradi, keyinga qoldiradi — va unutadi.", note: "Retargeting — ularga eslatish usuli." },
         { label: "Kimlar", title: "Kimlarga <mark>qayta</mark> koʻrsatamiz?", body: "Profilga kirganlar, videoni koʻrganlar, direktga yozganlar, saytga kirganlar.", note: "Bu — sizni allaqachon taniydigan «issiq» auditoriya." },
         { label: "Nega", title: "Nega bu <mark>samarali?</mark>", body: "Issiq auditoriya sovuq auditoriyaga qaraganda odatda yaxshiroq sotib oladi.", note: "Ular sizni biladi — ishonch qisman bor." },
-        { label: "Kreativ", title: "Ularga <mark>boshqa</mark> narsa ayting.", body: "Bir xil reklamani qayta koʻrsatmang. Sharhlar, natijalar, savollarga javob koʻrsating.", note: "Ikkilanish sababini yoʻq qiling." },
+        { label: "Kreativ", title: "Ularga <mark>boshqa</mark> narsa ayting.", body: "Bir xil reklamani qayta koʻrsatmang. Otzivlar, natijalar, savollarga javob koʻrsating.", note: "Ikkilanish sababini yoʻq qiling." },
         { label: "Taklif", title: "<mark>Shoshilish</mark> sababini bering.", body: "Cheklangan muddatli bonus yoki joylar soni cheklangan taklif.", note: "Faqat haqiqiy boʻlsin — soxta «oxirgi kun» ishonchni yoʻqotadi." },
         { label: "Texnika", title: "Saytingiz boʻlsa — <mark>Pixel</mark> oʻrnating.", body: "Pixel saytga kim kirgani va nima qilganini eslab qoladi.", note: "Usiz retargeting imkoniyatlari cheklanadi." },
         { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Eng arzon mijoz — sizni allaqachon biladigan mijoz.", note: "Retargetingdan foydalanasizmi? <b>Izohda «ha» yoki «yoʻq» deb yozing.</b>" },
