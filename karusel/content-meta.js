@@ -36,7 +36,7 @@ module.exports = {
     {
       id: "M10-metrikalar",
       theme: bg("t05-ish.jpg"),
-      cover: { photo: "t05-ish.jpg", pos: "50% 30%", line1: "Reklama hisobotidagi raqamlar", line2: "oddiy tilda", sub: "Oxvat, CPM, CTR, CPA, ROAS...<br>endi chalkashmaysiz." },
+      cover: { photo: "t05-ish.jpg", pos: "50% 30%", line1: "Targetdagi raqamlar", line2: "nimani anglatadi?", sub: "CTR, CPM, ROAS... tushunmasangiz,<br>pulingiz qayerga ketyapti — bilmaysiz." },
       slides: [
         { label: "Misol", title: "Tasavvur qiling: <mark>doʻkon vitrinasi.</mark>", body: "Reklama — koʻchadagi vitrina. Odamlar oʻtadi, qaraydi, baʼzilari ichkariga kiradi, baʼzilari sotib oladi.", note: "Har bir raqam shu yoʻlning bir qismini oʻlchaydi." },
         { label: "Oxvat", title: "Oxvat — <mark>nechta odam koʻrdi.</mark>", body: "Vitrina oldidan oʻtib, unga qaragan odamlar soni.", note: "Bitta odam 3 marta koʻrsa ham — oxvat 1." },
