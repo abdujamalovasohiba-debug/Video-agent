@@ -8,6 +8,9 @@ const OUT = process.argv[3] || "output-v2";
 
 const W = 1080, H = 1350;
 const YELLOW = "#F9B417", HL = "#FCEFB0";
+// Karusel bo'yicha ranglar: content faylida c.theme bilan almashtirsa bo'ladi
+const DEFAULT_THEME = { accent: YELLOW, bg: "#E6E3DD", card: "rgba(250,250,249,.86)", ink: "#0E0E0E",
+  muted: "#222", hl: HL, bar: "#F7D54A", btn: "#fff" };
 
 const has = (name) => !!name && fs.existsSync(path.join(__dirname, "photos", name));
 const photo = (name) => {
@@ -32,12 +35,12 @@ const base = `
          -webkit-font-smoothing: antialiased; }`;
 
 function coverHtml(c) {
-  const { cover } = c;
+  const { cover } = c, t = { ...DEFAULT_THEME, ...c.theme };
   return `<!doctype html><html><head><meta charset="utf-8"><style>${base}
   body { color: #fff; background: ${has(cover.photo) ? `#111 url(${photo(cover.photo)}) ${cover.pos || "center"}/cover`
     : `radial-gradient(120% 80% at 85% 0%, #3a3a3a 0%, #161616 55%, #0d0d0d 100%)`}; }
   .kicker { display: inline-block; margin-bottom: 44px; padding: 14px 30px; border-radius: 40px;
-            border: 2px solid ${YELLOW}; color: ${YELLOW}; font-size: 28px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+            border: 2px solid ${t.accent}; color: ${t.accent}; font-size: 28px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
   .big { position: absolute; right: -40px; top: 60px; font-size: 520px; font-weight: 800; line-height: 1;
          color: rgba(255,255,255,.05); letter-spacing: -20px; }
   .shade { position: absolute; inset: 0;
@@ -48,9 +51,9 @@ function coverHtml(c) {
   body.ph .sub { font-size: 34px; margin-top: 36px; }
   .text { position: absolute; left: 70px; right: 70px; bottom: 210px; text-align: center; }
   h1 { font-size: 92px; line-height: 1.04; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; text-wrap: balance; }
-  h1 .y { color: ${YELLOW}; position: relative; display: inline-block; }
+  h1 .y { color: ${t.accent}; position: relative; display: inline-block; }
   h1 .y::after { content: ""; position: absolute; left: 0; width: 58%; bottom: -14px; height: 6px;
-                 border-radius: 3px; background: ${YELLOW}; }
+                 border-radius: 3px; background: ${t.accent}; }
   .sub { margin-top: 44px; font-size: 38px; line-height: 1.3; color: rgba(255,255,255,.82); }
   footer { position: absolute; left: 100px; right: 100px; bottom: 76px; display: flex;
            justify-content: space-between; align-items: center; font-size: 30px; font-weight: 500; }
@@ -61,37 +64,37 @@ function coverHtml(c) {
   </body></html>`;
 }
 
-function cardHtml(s, i, n) {
+function cardHtml(s, i, n, t) {
   const counter = `${String(i).padStart(2, "0")} / ${String(n).padStart(2, "0")}`;
   return `<!doctype html><html><head><meta charset="utf-8"><style>${base}
-  body { background: #E6E3DD; color: #0E0E0E; }
+  body { background: ${t.bg}; color: ${t.ink}; }
   .paper { position: absolute; inset: 0; filter: url(#paper); opacity: .55; }
   .card { position: absolute; left: 84px; right: 78px; top: 50%; transform: translateY(-50%); min-height: 845px;
-          background: rgba(250,250,249,.86); border-radius: 50px; padding: 36px 46px 64px 72px;
+          background: ${t.card}; border-radius: 50px; padding: 36px 46px 64px 72px;
           box-shadow: 0 30px 70px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.05), inset 0 0 0 2px rgba(255,255,255,.8); }
   .bar { display: flex; align-items: center; justify-content: space-between; margin: 0 0 30px -28px; }
-  .btn { width: 88px; height: 88px; border-radius: 50%; background: #fff; display: flex; align-items: center;
+  .btn { width: 88px; height: 88px; border-radius: 50%; background: ${t.btn}; display: flex; align-items: center;
          justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.06); }
   .btn svg { width: 40px; height: 40px; }
   .right { display: flex; align-items: center; gap: 36px; }
-  .pill { display: flex; gap: 40px; padding: 22px 46px; background: #fff; border-radius: 50px;
+  .pill { display: flex; gap: 40px; padding: 22px 46px; background: ${t.btn}; border-radius: 50px;
           box-shadow: 0 4px 14px rgba(0,0,0,.06); }
   .pill svg { width: 40px; height: 40px; }
   .dots { display: flex; gap: 8px; align-items: center; }
-  .dots i { width: 9px; height: 9px; border-radius: 50%; background: #111; }
+  .dots i { width: 9px; height: 9px; border-radius: 50%; background: ${t.ink}; }
   .count { font-size: 28px; letter-spacing: 1px; }
   .label { display: flex; align-items: center; gap: 26px; font-size: 32px; font-style: italic;
            text-transform: uppercase; margin-bottom: 26px; }
-  .label::before { content: ""; width: 7px; height: 62px; border-radius: 4px; background: #F7D54A; margin-left: -12px; }
+  .label::before { content: ""; width: 7px; height: 62px; border-radius: 4px; background: ${t.bar}; margin-left: -12px; }
   h2 { font-size: 80px; line-height: 1.12; font-weight: 800; letter-spacing: -2.5px; margin-bottom: 40px; }
   h2.final { font-size: 96px; text-transform: uppercase; letter-spacing: -2px; }
-  mark { background: linear-gradient(transparent 14%, ${HL} 14%, ${HL} 94%, transparent 94%); color: inherit; padding: 0 10px; margin: 0 -6px; border-radius: 12px;
+  mark { background: linear-gradient(transparent 14%, ${t.hl} 14%, ${t.hl} 94%, transparent 94%); color: inherit; padding: 0 10px; margin: 0 -6px; border-radius: 12px;
          -webkit-box-decoration-break: clone; box-decoration-break: clone; }
   .body { font-size: 44px; line-height: 1.36; letter-spacing: -.5px; margin-bottom: 34px; }
   .note { font-size: 36px; line-height: 1.38; letter-spacing: -.3px; max-width: 760px; }
   .note b { font-weight: 800; }
   footer { position: absolute; left: 82px; right: 72px; bottom: 30px; display: flex; justify-content: space-between;
-           align-items: center; font-size: 28px; color: #222; }
+           align-items: center; font-size: 28px; color: ${t.muted}; }
   footer .save { display: flex; align-items: center; gap: 14px; }
   footer .save svg { width: 34px; height: 34px; }
   </style></head><body>
@@ -162,7 +165,7 @@ function splitHtml(s) {
   for (const c of cards) {
     const n = c.slides.length + 1;
     await shot(coverHtml(c), out(c.id, 1));
-    for (const [i, s] of c.slides.entries()) await shot(cardHtml(s, i + 2, n), out(c.id, i + 2));
+    for (const [i, s] of c.slides.entries()) await shot(cardHtml(s, i + 2, n, { ...DEFAULT_THEME, ...c.theme }), out(c.id, i + 2));
   }
   for (const c of splits) {
     for (const [i, s] of c.slides.entries()) {
