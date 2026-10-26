@@ -6,9 +6,6 @@ module.exports = {
   cards: [
     {
       id: "01-reklama-natija-bermayapti",
-      // Muqovadagi zina rasmiga mos iliq qum-bej uslub
-      theme: { accent: "#E0B07A", bg: "#D2B793", card: "rgba(251,247,240,.92)", ink: "#2E2117", muted: "#5A4636",
-               hl: "#EED9B8", bar: "#B9874E", btn: "#F6EEE2" },
       cover: { photo: "t01-zina.jpg", big: "01", line1: "Reklamaga pul ketyapti,", line2: "natija yoʻq?", sub: "Pulingiz qayerga «oqib» ketayotganini<br>koʻrsatadigan 7 ta sabab." },
       slides: [
         { label: "Taklif", title: "<mark>Taklifingiz</mark> kuchsiz.", body: "Reklama yomon taklifni yaxshi qilmaydi — faqat uni koʻproq odamga koʻrsatadi.", note: "Avval «nega aynan sizdan olish kerak?» savoliga javob toping." },

@@ -10,7 +10,7 @@ const W = 1080, H = 1350;
 const YELLOW = "#F9B417", HL = "#FCEFB0";
 // Karusel bo'yicha ranglar: content faylida c.theme bilan almashtirsa bo'ladi
 const DEFAULT_THEME = { accent: YELLOW, bg: "#E6E3DD", card: "rgba(250,250,249,.86)", ink: "#0E0E0E",
-  muted: "#222", hl: HL, bar: "#F7D54A", btn: "#fff" };
+  muted: "#222", hl: HL, bar: "#F7D54A", btn: "#fff", paper: .55, bgPhoto: null, minimal: false };
 
 const has = (name) => !!name && fs.existsSync(path.join(__dirname, "photos", name));
 const photo = (name) => {
@@ -68,7 +68,11 @@ function cardHtml(s, i, n, t) {
   const counter = `${String(i).padStart(2, "0")} / ${String(n).padStart(2, "0")}`;
   return `<!doctype html><html><head><meta charset="utf-8"><style>${base}
   body { background: ${t.bg}; color: ${t.ink}; }
-  .paper { position: absolute; inset: 0; filter: url(#paper); opacity: .55; }
+  .paper { position: absolute; inset: 0; filter: url(#paper); opacity: ${t.paper}; }
+  .bgph { position: absolute; inset: -40px; background: center/cover; filter: blur(28px) brightness(.8); }
+  .bgph::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.18); }
+  body.min .card { padding-top: 76px; }
+  body.min .label { margin-bottom: 34px; }
   .card { position: absolute; left: 84px; right: 78px; top: 50%; transform: translateY(-50%); min-height: 845px;
           background: ${t.card}; border-radius: 50px; padding: 36px 46px 64px 72px;
           box-shadow: 0 30px 70px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.05), inset 0 0 0 2px rgba(255,255,255,.8); }
@@ -97,26 +101,27 @@ function cardHtml(s, i, n, t) {
            align-items: center; font-size: 28px; color: ${t.muted}; }
   footer .save { display: flex; align-items: center; gap: 14px; }
   footer .save svg { width: 34px; height: 34px; }
-  </style></head><body>
+  </style></head><body class="${t.minimal ? "min" : ""}">
+  ${t.bgPhoto && has(t.bgPhoto) ? `<div class="bgph" style="background-image:url(${photo(t.bgPhoto)})"></div>` : ""}
   <svg width="0" height="0" style="position:absolute"><filter id="paper">
     <feTurbulence type="fractalNoise" baseFrequency=".008 .02" numOctaves="4" seed="7"/>
     <feDiffuseLighting lighting-color="#fff" surfaceScale="2.2"><feDistantLight azimuth="45" elevation="55"/></feDiffuseLighting>
   </filter></svg>
   <div class="paper"></div>
   <div class="card">
-    <div class="bar">
+    ${t.minimal ? "" : `<div class="bar">
       <div class="btn">${svg(ICON.back)}</div>
       <div class="right">
         <div class="pill">${svg(ICON.reply)}${svg(ICON.share)}<div class="dots"><i></i><i></i><i></i></div></div>
         <span class="count">${counter}</span>
       </div>
-    </div>
+    </div>`}
     <div class="label">${s.label}</div>
     <h2 class="${s.final ? "final" : ""}">${s.title}</h2>
     <p class="body">${s.body}</p>
     <p class="note">${s.note}</p>
   </div>
-  <footer><span>${handle}</span>${s.final ? `<span class="save">Saqlab qoʻying ${svg(ICON.save)}</span>` : longArrow}</footer>
+  <footer><span>${handle}${t.minimal ? ` · ${counter}` : ""}</span>${s.final ? `<span class="save">Saqlab qoʻying ${svg(ICON.save)}</span>` : longArrow}</footer>
   </body></html>`;
 }
 
