@@ -94,6 +94,27 @@ Referens: 47.7 s, 720x1280, ovoz −14.3 LUFS, pauzasiz zich gap (jimlik yo'q), 
 - **Tuzilma:** hook-savol (0–3 s) → keyslar raqamlar bilan (3–16 s) → "albatta… produsyer bilan" (16–21) → ta'rif motion-ekranlarda (21–29)
   → sabab + B-roll (29–38) → natija (38–42) → CTA "Agar sizga ham tajribali progrev storismaker kerak bo'lsa — Direktdan murojaat qiling".
 
+## "Estetik voice-over" referensi (nomi hali berilmagan; v21 tahlili, 8c9b64db…mp4)
+Referens: 35.4 s, **gorizontal 1276x720 (16:9)**, ruscha, yuzsiz. Ovoz — yumshoq, sokin ayol voice-over (diktor ovozi, kadrda gapirmaydi),
+gaplar orasida pauza yo'q (≤0.1 s), −14.1 LUFS. Mavzu: "Reels'ni kam joylab ham akkaunt o'sadi — auditoriya muammosiga kontent".
+- **Kadrlar (B-roll, ~3–6 s dan, oddiy kesim, o'tish effekti YO'Q):** kinematografik "cozy" stok — pled ichida bloknot ushlagan qo'llar,
+  noutbukda yozish (makro, sayoz fokus), sariq abajurli chiroq + baxmal parda, stolda yotgan telefon (Instagram ochiq). Iliq kechki yorug'lik.
+- **Rang:** iliq-oltin, past to'yinganlik (YAVG≈90–98, SATAVG≈19–28, U≈110–119, V≈140–144 — sariq/apelsin tus), yumshoq kontrast, film ko'rinishi.
+- **Matn 1 — B-roll ustida:** oq **qo'lyozma (script) shrift**, kvadrat qavs ichida "[ mne lenʹ ]", 1–3 so'zdan bo'lak, so'z aytilishi bilan almashadi
+  (karaoke emas — faqat joriy ibora). Kalit so'z kattaroq va pastki qatorda ("[snimatʹ / **Reels**]"). Joyi kadrga qarab: o'ng tepa, pastki markaz yoki markaz —
+  bo'sh joyga. Yumshoq fade, harakatsiz.
+- **Matn 2 — oq "motion" ekranlar** (fon oq, chetlari kulrang vinyetka):
+  (a) 3 ta Reels muqovasi (9:16 rounded) birin-ketin "pop" bo'lib chiqadi, har birida qizil ❤ yurak-hisoblagich 0 dan sanab o'sadi (0→629);
+  (b) "АУДИТОРИЯ" — siqiq qora KATTA (Bebas/Anton) och-sariq plashkada, harflar yozilib chiqadi, burchaklarida sariq nuqta+chiziq (Figma tanlov ramkasi);
+      ostida "PROBLEMA 1 / 2 / 3" ketma-ket, keyin har biri ostida Reels muqovasi pop bo'ladi.
+- **Raqamli ro'yxat:** fon — o'sha rasmning xira (blur) kattalashtirilgan nusxasi + kulrang parda; chapda Instagram post kartasi (oq, rounded,
+  ichida rasm + vertikal KATTA so'z "STUDENT", ostida ❤💬✈ 🔖), o'ngda ulkan "1" (Bebas/Anton, oq) + 2 qator KATTA izoh. Har punktga yangi karta.
+- **Final:** split-ekran — chapda B-roll (bloknotli qo'llar), o'ngda Instagram profil skrinshoti (bio, obunachilar, "Vy podpisany ✅", highlight'lar) — CTA o'rnida.
+- **Tuzilma:** hook (0–3 s, shaxsiy e'tirof: "Reels olishga erinaman, lekin akkaunt o'smoqda") → isbot (Reels muqovalari + layklar) →
+  usul (auditoriya → muammolar → yechim) → misol 1/2/3 (kartalar) → xulosa ("odamlar aynan shunday kontent uchun keladi") →
+  ishonch ("bu men o'z akkauntimda sinagan vosita") + profil.
+- Tayyorlash uchun kerak: script shrift (lotin+kirill, masalan Great Vibes / Marck Script, OFL), Reels muqovalari, profil skrinshoti, voice-over yozuvi.
+
 ## "Ekspert montaj jigarrang": `--style ekspert-jigarrang`
 
 `expert` referensi asosida (talking-head): krem hook plashka, jigarrang matn kartalari,
