@@ -15,7 +15,7 @@ module.exports = {
         { label: "Sabr", title: "Reklamani <mark>2 kunda</mark> oʻchirish.", body: "Algoritm avval oʻrganadi, keyin optimallashtiradi.", note: "Har kuni oʻzgartirish — har kuni noldan boshlash degani." },
         { label: "Sotuv", title: "Lidlarga <mark>kech javob</mark> berish.", body: "Yozgan odamga 3 soatdan keyin javob bersangiz, u allaqachon raqobatchidan sotib olgan.", note: "Reklama mijozni olib keladi, sotish esa — sizning vazifangiz." },
         { label: "Tahlil", title: "Raqamlarni <mark>kuzatmaslik.</mark>", body: "Bitta lid qanchaga tushyapti? Bitta sotuv-chi?", note: "Oʻlchanmagan narsani yaxshilab boʻlmaydi." },
-        { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Reklama — bu kuchaytirgich.", note: "U yaxshi tizimni kuchaytiradi, yomonini esa tezroq fosh qiladi. <b>Qaysi sabab sizda bor? Izohda yozing.</b>" },
+        { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Reklama natijani yaratmaydi — uni kuchaytiradi.", note: "Taklif, profil va sotuv jarayoni tayyor boʻlsa, byudjet mijozlarga aylanadi. Tayyor boʻlmasa — kamchiliklaringizni koʻproq odamga koʻrsatadi.<br><br><b>Sizda qaysi sabab bor? Raqamini izohda yozing.</b>" },
       ],
     },
     {
