@@ -20,11 +20,11 @@ module.exports = {
     },
     {
       id: "M9-target-organik",
-      theme: bg("t04-telefon.jpg"),
-      cover: { photo: "t04-telefon.jpg", pos: "50% 25%", line1: "«Target yoqsang, profil oʻrganib qoladi»", line2: "Rostdanmi?", sub: "Oxvat haqida eng koʻp<br>eshitiladigan gap." },
+      theme: bg("s1-oqish.jpg"),
+      cover: { photo: "s1-oqish.jpg", pos: "50% 20%", line1: "«Target yoqsang, profil oʻrganib qoladi»", line2: "Aslida ham shundaymi?", sub: "Instagram rahbari Adam Mosseri<br>bu haqda oʻzi javob berdi." },
       slides: [
-        { label: "Afsona", title: "«Profil reklamaga <mark>oʻrganib qoladi.</mark>»", body: "Target yoqsangiz, keyin reklamasiz postlar uchmay qoladi — deb koʻp eshitamiz.", note: "Lekin Instagram'ning oʻzi bunday emas deydi." },
-        { label: "Haqiqat", title: "Reklama oxvatni <mark>tushirmaydi ham, oshirmaydi ham.</mark>", body: "Instagram jamoasi ochiq aytgan: reklama berish oxvatingizga taʼsir qilmaydi.", note: "Oxvatni kesish Instagram'ning oʻziga foyda emas — unga odamlar koʻradigan zoʻr kontent kerak." },
+        { label: "Afsona", title: "«Profil reklamaga <mark>oʻrganib qoladi.</mark>»", body: "Target yoqsangiz, keyin reklamasiz postlar uchmay qoladi — deb koʻp eshitamiz.", note: "Lekin Instagram rahbari Adam Mosseri bunday emas deydi." },
+        { label: "Haqiqat", title: "Reklama oxvatni <mark>tushirmaydi ham, oshirmaydi ham.</mark>", body: "Adam Mosseri ochiq aytgan: reklama berish oxvatingizga taʼsir qilmaydi.", note: "Oxvatni kesish Instagram'ning oʻziga foyda emas — unga odamlar koʻradigan zoʻr kontent kerak." },
         { label: "Nega", title: "Bular <mark>ikki xil tizim.</mark>", body: "Biri lentaga qiziq postlarni chiqaradi, ikkinchisi — reklamani.", note: "Ular bir-biriga ulanmagan." },
         { label: "Qanday ishlaydi", title: "Har bir post <mark>alohida tarqaladi.</mark>", body: "Oxvat profilga qarab emas, postga qarab beriladi: odamlar koʻrdimi, saqladimi, ulashdimi, izoh yozdimi.", note: "«Reklamaga oʻrganib qolgan profil» degan narsa yoʻq." },
         { label: "Unda nega shunday boʻlyapti?", title: "Sabab — <mark>notoʻgʻri obunachilar.</mark>", body: "Arzon «obunachi yigʻish» reklamasi postlaringizga qiziqmaydigan odamlarni olib keladi. Ular layk ham bosmaydi.", note: "Shunda postlar kam tarqaladi. Aybdor reklama emas — notoʻgʻri qoʻyilgan reklama." },
