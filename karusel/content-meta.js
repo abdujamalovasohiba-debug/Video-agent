@@ -24,13 +24,11 @@ module.exports = {
       cover: { photo: "t05-ish.jpg", pos: "50% 30%", line1: "«Target yoqsang, profil oʻrganib qoladi»", line2: "Aslida ham shundaymi?", sub: "Instagram rahbari Adam Mosseri<br>bu haqda oʻzi javob berdi." },
       slides: [
         { label: "Koʻp eshitaman", title: "«Reklama yoqsak, <mark>postlar uchmay qoladi.</mark>»", body: "Mijozlar koʻp shunday deydi: «Reklama yoqsak, keyin oddiy postlarimizni hech kim koʻrmay qoladi».", note: "Instagram rahbari Adam Mosseri esa «bunaqa emas» degan." },
-        { label: "Aslida", title: "Reklama postlarga <mark>xalaqit bermaydi.</mark>", body: "Mosseri aytgan: reklama yoqasizmi, yoqmaysizmi — postlaringiz oxvati tushmaydi ham, oshmaydi ham.", note: "Instagram'ga postlaringizni yashirish foyda emas. Odamlar qiziq post koʻrsa, Instagram'da koʻproq oʻtiradi." },
-        { label: "Nega", title: "Reklama alohida, <mark>post alohida.</mark>", body: "Reklama pul toʻlaganingiz uchun chiqadi. Oddiy post esa odamlarga yoqsa tarqaladi.", note: "Biri ikkinchisiga xalaqit bermaydi." },
+        { label: "Aslida", title: "Reklama postlarga <mark>xalaqit bermaydi.</mark>", body: "Mosseri aytgan: reklama yoqasizmi, yoqmaysizmi — postlaringiz oxvati tushmaydi ham, oshmaydi ham.", note: "Reklama alohida, post alohida — biri ikkinchisiga xalaqit bermaydi." },
         { label: "Qanday ishlaydi", title: "Instagram har bir postga <mark>alohida qaraydi.</mark>", body: "Odamlar postni oxirigacha koʻrdimi, saqladimi, kimgadir yubordimi — shunga qaraydi.", note: "Reklama yoqqaningizni «eslab qolmaydi»." },
-        { label: "Unda nega tushyapti?", title: "Koʻpincha aybdor — <mark>«boʻsh» obunachilar.</mark>", body: "Baʼzilar arzon reklama yoqib obunachi yigʻadi. Kelgan odamlarga postlaringiz qiziq emas — ochib ham koʻrishmaydi.", note: "Instagram koʻradiki, postga hech kim qiziqmadi — va uni kamroq odamga chiqaradi." },
-        { label: "Oʻzingizni tekshiring", title: "Oʻzingizdan <mark>3 ta narsani soʻrang.</mark>", body: "Post kam tashlayapmanmi? Doim bir xil narsa tashlayapmanmi? Postlarim qiziqmi?", note: "Oxvat reklama yoqqan paytingizda tushgan boʻlishi mumkin — lekin sababi boshqa." },
+        { label: "Unda nega tushyapti?", title: "Oʻzingizdan <mark>3 ta narsani soʻrang.</mark>", body: "Post kam tashlayapmanmi? Doim bir xil narsa tashlayapmanmi? Postlarim qiziqmi?", note: "Oxvat reklama yoqqan paytingizda tushgan boʻlishi mumkin — lekin sababi boshqa." },
         { label: "Men nima qilaman", title: "Men obunachi emas — <mark>xaridor</mark> olib kelaman.", body: "Mijozlarimga obunachi yigʻadigan reklama yoqmayman. Odam direktga yozadigan yoki raqam qoldiradigan reklama yoqaman.", note: "Shunda kelgan odamlar postlaringizni ham qiziqib koʻradi." },
-        { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>Reklama postlarni «oʻldirmaydi». Oxvatni zerikarli post va «boʻsh» obunachilar tushiradi.", note: "<b>Sizda ham shunday boʻlganmi? Izohda yozing.</b>" },
+        { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>Reklama postlarni «oʻldirmaydi». Oxvatni qiziq boʻlmagan postlar tushiradi.", note: "<b>Sizda ham shunday boʻlganmi? Izohda yozing.</b>" },
       ],
     },
     {
