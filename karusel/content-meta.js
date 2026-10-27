@@ -54,7 +54,7 @@ module.exports = {
     {
       id: "M11-ai-targetolog",
       theme: bg("t02-tabassum.jpg"),
-      cover: { photo: "t04-profil.jpg", pos: "50% 30%", line1: "Sunʼiy intellekt targetologlarning", line2: "oʻrnini egallaydimi?", sub: "Targetolog sifatida<br>ochiq javob beraman." },
+      cover: { photo: "t07-noutbuk.jpg", pos: "50% 50%", line1: "Sunʼiy intellekt targetologlarning", line2: "oʻrnini egallaydimi?", sub: "Targetolog sifatida<br>ochiq javob beraman." },
       slides: [
         { label: "Hozir nima boʻlyapti", title: "Sunʼiy intellekt koʻp ishni <mark>oʻzi qilyapti.</mark>", body: "Meta reklamada rasmdan video yasaydi, matn yozadi, reklamani kimga koʻrsatishni oʻzi tanlaydi.", note: "Ha, bu rost. Va bu yana kuchayadi." },
         { label: "Lekin", title: "Sunʼiy intellekt biznesingizni <mark>bilmaydi.</mark>", body: "Narxingiz qimmatmi, taklifingiz zaifmi, menejer javobni kechiktiryaptimi — sunʼiy intellekt buni koʻrmaydi.", note: "U faqat siz bergan narsa bilan ishlaydi." },
