@@ -54,7 +54,7 @@ module.exports = {
     {
       id: "M11-ai-targetolog",
       theme: bg("t02-tabassum.jpg"),
-      cover: { photo: "t02-tabassum.jpg", pos: "50% 30%", line1: "AI targetologlarning", line2: "oʻrnini egallaydimi?", sub: "Targetolog sifatida<br>ochiq javob beraman." },
+      cover: { photo: "n-haykal.jpg", pos: "50% 30%", line1: "AI targetologlarning", line2: "oʻrnini egallaydimi?", sub: "Targetolog sifatida<br>ochiq javob beraman." },
       slides: [
         { label: "Hozir nima boʻlyapti", title: "AI koʻp ishni <mark>oʻzi qilyapti.</mark>", body: "Meta reklamada rasmdan video yasaydi, matn yozadi, reklamani kimga koʻrsatishni oʻzi tanlaydi.", note: "Ha, bu rost. Va bu yana kuchayadi." },
         { label: "Lekin", title: "AI biznesingizni <mark>bilmaydi.</mark>", body: "Narxingiz qimmatmi, taklifingiz zaifmi, menejer javobni kechiktiryaptimi — AI buni koʻrmaydi.", note: "U faqat siz bergan narsa bilan ishlaydi." },
