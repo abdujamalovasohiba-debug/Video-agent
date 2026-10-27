@@ -64,5 +64,18 @@ module.exports = {
         { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>Sunʼiy intellekt targetologni almashtirmaydi. Sunʼiy intellekt bilan ishlaydigan targetolog — ishlamaydiganini almashtiradi.", note: "<b>Sizningcha-chi? Izohda yozing.</b>" },
       ],
     },
+    {
+      id: "M12-prodvigat-vs-ads-manager",
+      theme: bg("t10-tanlash.jpg"),
+      cover: { photo: "t10-tanlash.jpg", pos: "50% 20%", line1: "«Продвигать» va Ads Manager", line2: "farqi nimada?", sub: "Oson tilda tushuntiraman." },
+      slides: [
+        { label: "«Продвигать» nima", title: "Telefondagi <mark>bitta tugma.</mark>", body: "Post tagidagi «Продвигать» tugmasini bosasiz, pul toʻlaysiz — post koʻproq odamga chiqadi.", note: "Oson va tez. Lekin sozlamalari juda kam." },
+        { label: "Ads Manager nima", title: "Reklamaning <mark>toʻliq kabineti.</mark>", body: "Kimga, qachon va qanday reklama chiqishini oʻzingiz sozlaysiz.", note: "Targetologlar shu yerda ishlaydi." },
+        { label: "1-farq: natija", title: "Tugma koʻpincha <mark>layk va koʻrish</mark> olib keladi.", body: "Ads Manager'da esa aniq natija tanlaysiz: direktga yozish, raqam qoldirish yoki xarid.", note: "Layk — chiroyli. Pul esa mijozdan keladi." },
+        { label: "2-farq: kimga chiqadi", title: "Kimga chiqishini <mark>oʻzingiz boshqarasiz.</mark>", body: "Profilingizga kirganlarga qayta reklama yoqish, eski mijozlarni chiqarib tashlash, bir nechta reklamani solishtirish mumkin.", note: "Tugmada bularning koʻpi yoʻq." },
+        { label: "Qachon qaysi biri", title: "Tugma ham <mark>kerak boʻladi.</mark>", body: "Postni shunchaki koʻproq odam koʻrsin desangiz — «Продвигать» yetadi.", note: "Mijoz, zayavka, sotuv kerak boʻlsa — Ads Manager." },
+        { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>«Продвигать» — post koʻproq koʻrilsin deb. Ads Manager — mijoz kelsin deb.", note: "<b>Siz qaysi biri bilan reklama yoqasiz? Izohda yozing.</b>" },
+      ],
+    },
   ],
 };
