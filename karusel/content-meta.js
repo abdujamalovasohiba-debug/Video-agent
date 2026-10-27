@@ -51,5 +51,18 @@ module.exports = {
         { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>Layk va oxvat — chiroyli raqam. Pul topyapsizmi-yoʻqmi — CAC va ROAS aytadi.", note: "<b>Qaysi raqam sizni koʻproq chalkashtiradi? Izohda yozing.</b>" },
       ],
     },
+    {
+      id: "M11-ai-targetolog",
+      theme: bg("t02-tabassum.jpg"),
+      cover: { photo: "t02-tabassum.jpg", pos: "50% 30%", line1: "AI targetologlarning", line2: "oʻrnini egallaydimi?", sub: "Targetolog sifatida<br>ochiq javob beraman." },
+      slides: [
+        { label: "Hozir nima boʻlyapti", title: "AI koʻp ishni <mark>oʻzi qilyapti.</mark>", body: "Meta reklamada rasmdan video yasaydi, matn yozadi, reklamani kimga koʻrsatishni oʻzi tanlaydi.", note: "Ha, bu rost. Va bu yana kuchayadi." },
+        { label: "Lekin", title: "AI biznesingizni <mark>bilmaydi.</mark>", body: "Narxingiz qimmatmi, taklifingiz zaifmi, menejer javobni kechiktiryaptimi — AI buni koʻrmaydi.", note: "U faqat siz bergan narsa bilan ishlaydi." },
+        { label: "Misol", title: "Yomon reklamani AI <mark>tezroq tarqatadi.</mark>", body: "Reklamada notoʻgʻri gap yozilgan boʻlsa, AI uni shunchaki koʻproq odamga koʻrsatadi.", note: "Natija yoʻq, pul esa ketdi." },
+        { label: "Kim kerak boʻlmay qoladi", title: "Faqat <mark>knopka bosadigan</mark> targetolog.", body: "Faqat reklamani sozlashni biladigan odamning ishini AI tezroq va arzonroq qiladi.", note: "Bunday targetologlar oʻrnini AI egallaydi." },
+        { label: "Kim qoladi", title: "Biznesni tushunadigan <mark>targetolog qoladi.</mark>", body: "Nimani reklama qilish, qanday gapirish, kelgan odamni qanday mijozga aylantirish — buni odam hal qiladi.", note: "AI — yordamchi. Rulda esa odam oʻtiradi." },
+        { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>AI targetologni almashtirmaydi. AI bilan ishlaydigan targetolog — ishlamaydiganini almashtiradi.", note: "<b>Sizningcha-chi? Izohda yozing.</b>" },
+      ],
+    },
   ],
 };
