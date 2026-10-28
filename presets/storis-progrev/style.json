@@ -1,40 +1,123 @@
 {
   "name": "storis-progrev",
-  "reference": { "duration_s": 47.7, "aspect": "9:16", "fps": 30 },
-  "output": { "width": 1080, "height": 1920, "fps": 30, "loudness_lufs": -14 },
+  "reference": {
+    "duration_s": 47.7,
+    "aspect": "9:16",
+    "fps": 30
+  },
+  "output": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "loudness_lufs": -14
+  },
   "rhythm": {
-    "shot_length_s": [3, 5],
-    "on_screen_change_every_s": [0.5, 1.5],
+    "shot_length_s": [
+      3,
+      5
+    ],
+    "on_screen_change_every_s": [
+      0.5,
+      1.5
+    ],
     "visual_break_every_s": 15,
     "cut_pauses_longer_than_s": 0.3,
     "keep_pause_s": 0.1
   },
   "camera": {
-    "push_in": { "wide": [1.0, 1.15], "tight": [1.0, 1.08] },
+    "push_in": {
+      "wide": [
+        1.0,
+        1.15
+      ],
+      "tight": [
+        1.0,
+        1.08
+      ]
+    },
     "tight_punch_scale": 1.3,
     "alternate_wide_tight_on_cut": true
   },
   "transitions": {
-    "open": { "type": "whip_pan", "duration_s": 0.5, "motion_blur": true, "ease": "out_cubic" },
-    "mirror_slide": { "duration_frames": 7, "direction": "from_right", "edges": "mirror", "sfx": "whoosh" },
-    "card_swap": { "out": "rotate_y_slide_right", "in": "slide_from_left_blur", "duration_frames": 8 },
-    "hard_cut": { "with_push_in": true },
-    "white_through": { "out": "whip_up_blur", "hold_white_s": 0.4, "in": "rise_from_bottom" },
+    "open": {
+      "type": "whip_pan",
+      "duration_s": 0.5,
+      "motion_blur": true,
+      "ease": "out_cubic"
+    },
+    "mirror_slide": {
+      "duration_frames": 7,
+      "direction": "from_right",
+      "edges": "mirror",
+      "sfx": "whoosh"
+    },
+    "card_swap": {
+      "out": "rotate_y_slide_right",
+      "in": "slide_from_left_blur",
+      "duration_frames": 8
+    },
+    "hard_cut": {
+      "with_push_in": true
+    },
+    "white_through": {
+      "out": "whip_up_blur",
+      "hold_white_s": 0.4,
+      "in": "rise_from_bottom"
+    },
     "riser_before_cut_s": 0.6
   },
   "text": {
-    "word_in": { "offset_px": 40, "frames": 5, "blur": "horizontal", "ease": "out_cubic" },
+    "word_in": {
+      "offset_px": 40,
+      "frames": 5,
+      "blur": "horizontal",
+      "ease": "out_cubic"
+    },
     "highlight_wipe_frames": 6,
     "max_lines": 3,
     "tiers": {
-      "small": { "font": "Montserrat-Regular", "size_rel": 0.032, "color": "#FFFFFF" },
-      "key": { "font": "Montserrat-ExtraBold", "size_rel": 0.062, "color": "#FFFFFF" },
-      "key_italic": { "font": "Montserrat-ExtraBoldItalic", "size_rel": 0.062, "color": "#F2E600" }
+      "small": {
+        "font": "Montserrat-Regular",
+        "size_rel": 0.032,
+        "color": "#FFFFFF"
+      },
+      "key": {
+        "font": "Montserrat-ExtraBold",
+        "size_rel": 0.062,
+        "color": "#FFFFFF"
+      },
+      "key_italic": {
+        "font": "Montserrat-ExtraBoldItalic",
+        "size_rel": 0.062,
+        "color": "#F2E600"
+      }
     },
-    "hook": { "font": "Anton-Regular", "size_rel": 0.085, "color": "#F2E600", "case": "upper" },
-    "highlight_colors": { "red": "#A3141E", "olive": "#B8A21E" },
-    "quote_gradient": ["#5B3A1E", "#A8792E"],
-    "safe_zone": { "top": 0.12, "bottom": 0.2, "avoid_face": true }
+    "hook": {
+      "font": "Anton-Regular",
+      "size_rel": 0.085,
+      "color": "#F2E600",
+      "case": "upper"
+    },
+    "highlight_colors": {
+      "red": "#A3141E",
+      "olive": "#B8A21E"
+    },
+    "quote_gradient": [
+      "#5B3A1E",
+      "#A8792E"
+    ],
+    "safe_zone": {
+      "left": 0.02,
+      "right": 0.98,
+      "top": 0.095,
+      "bottom": 0.839,
+      "notch": {
+        "left": 0.872,
+        "top": 0.691
+      },
+      "margin_px": 24,
+      "_izoh": "Subtitrlar shu zonadan chiqmaydi (Instagram UI shabloni). Pastki o'ng burchakdagi tugmalar zonasi ham taqiqlangan."
+    }
   },
   "card3d": {
     "corner_radius_rel": 0.06,
@@ -44,6 +127,18 @@
     "bottom_gradient": true,
     "swap_every_s": 4
   },
-  "grade": { "contrast": 1.08, "saturation": 1.12, "warmth": 0.04, "bottom_vignette": 0.35 },
-  "audio": { "music_bed_db": -26, "sfx": ["whoosh", "riser"], "compression": "heavy" }
+  "grade": {
+    "contrast": 1.08,
+    "saturation": 1.12,
+    "warmth": 0.04,
+    "bottom_vignette": 0.35
+  },
+  "audio": {
+    "music_bed_db": -26,
+    "sfx": [
+      "whoosh",
+      "riser"
+    ],
+    "compression": "heavy"
+  }
 }

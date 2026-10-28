@@ -27,6 +27,10 @@ OLIVE = (184, 162, 30)
 BROWN_TOP, BROWN_BOT = (91, 58, 30), (168, 121, 46)
 
 # tier -> (shrift, o'lcham, rang, highlight)
+# Instagram xavfsiz zonasi (kadr ulushlarida); style.json dagi text.safe_zone bilan almashtiriladi
+SAFE = {"left": 0.02, "right": 0.98, "top": 0.095, "bottom": 0.839,
+        "notch": {"left": 0.872, "top": 0.691}, "margin_px": 24}
+
 TIERS = {
     "small": ("Montserrat-Medium", 56, (255, 255, 255)),
     "light": ("Montserrat-LightItalic", 56, (255, 255, 255)),
@@ -175,10 +179,16 @@ class Caption:
         self.align = c.get("align", "left")
         self.dir = c.get("dir", "right")
         self.end = tl.frame(c["end"])
-        maxw = c.get("maxw", 0.86) * W
+        self.lines = c["lines"]
+        m = SAFE["margin_px"]
+        self.layout(min(c.get("maxw", 0.86) * W, (SAFE["right"] - SAFE["left"]) * W - 2 * m - 80))
+        self.start = min(w["f0"] for w in self.words)
+        self.fit_safe_zone()
+
+    def layout(self, maxw):
         self.words = []
         y = self.y
-        for line in c["lines"]:
+        for line in self.lines:
             sprites = []
             for wd in line:
                 sprites.append((wd, text_sprite(wd["w"], wd["s"])))
@@ -194,11 +204,42 @@ class Caption:
             lh = max(s["h"] for _, s in sprites)
             x = self.x if self.align == "left" else (W - width) / 2
             for wd, s in sprites:
-                f0 = tl.frame(wd["t"])
+                f0 = self.tl.frame(wd["t"])
                 self.words.append(dict(spr=s, x=x, y=y + asc - s["asc"], f0=f0, hl=wd.get("hl")))
                 x += s["w"] + space
             y += lh * 0.92
-        self.start = min(w["f0"] for w in self.words)
+
+    def fit_safe_zone(self):
+        """Subtitr bloki xavfsiz zonadan (ramkadan) chiqmasligi uchun uni suradi."""
+        m = SAFE["margin_px"]
+        L, R = SAFE["left"] * W + m, SAFE["right"] * W - m
+        T, B = SAFE["top"] * H + m, SAFE["bottom"] * H - m
+        NL, NT = SAFE["notch"]["left"] * W - m, SAFE["notch"]["top"] * H - m
+
+        def bounds():
+            x0 = min(w["x"] for w in self.words) - 14
+            x1 = max(w["x"] + w["spr"]["w"] for w in self.words) + 14 + 42  # kirish siljishi
+            y0 = min(w["y"] for w in self.words)
+            y1 = max(w["y"] + w["spr"]["h"] for w in self.words)
+            return x0, x1, y0, y1
+
+        x0, x1, y0, y1 = bounds()
+        dx = (L - x0) if x0 < L else (R - x1) if x1 > R else 0
+        dy = (T - y0) if y0 < T else (B - y1) if y1 > B else 0
+        if y1 + dy > NT and x1 + dx > NL:  # pastki o'ng burchakdagi tugmalar zonasi
+            if x1 - x0 > NL - L:  # blokni toraytirib, joyida qoldiramiz
+                self.layout(NL - L - 80)
+                x0, x1, y0, y1 = bounds()
+                dy = (T - y0) if y0 < T else (B - y1) if y1 > B else 0
+            dx = min(0, NL - x1) if x0 + min(0, NL - x1) >= L else L - x0
+        for w in self.words:
+            w["x"] += dx
+            w["y"] += dy
+        x0, x1, y0, y1 = bounds()
+        if dx or dy:
+            print(f"subtitr xavfsiz zonaga surildi: dx={dx:+.0f} dy={dy:+.0f} ("
+                  f"{' '.join(str(round(v)) for v in (x0, x1, y0, y1))})", flush=True)
+        assert x0 >= L - 1 and x1 <= R + 1 and y0 >= T - 1 and y1 <= B + 1, "subtitr ramkaga sig'madi"
 
     def draw(self, frame, fi):
         if fi < self.start or fi >= self.end:
@@ -245,7 +286,17 @@ class Typewriter:
         self.y = c.get("y", 0.40) * H
         self.total = sum(len(l[0]) for l in self.lines)
         self.size = c.get("size", 64)
-        self.fonts = {l[1]: font(l[1], self.size) for l in self.lines}
+        x = 0.08 * W
+        limit = SAFE["right"] * W - SAFE["margin_px"] - x - 20
+        while True:  # eng uzun qator ramkaga sig'maguncha shriftni kichraytiramiz
+            self.fonts = {l[1]: font(l[1], self.size) for l in self.lines}
+            widest = max(self.fonts[f].getlength(t) for t, f, _ in self.lines)
+            if widest <= limit:
+                break
+            self.size -= 2
+        top = SAFE["top"] * H + SAFE["margin_px"]
+        bottom = SAFE["bottom"] * H - SAFE["margin_px"] - 20 - len(self.lines) * self.size * 1.42
+        self.y = min(max(self.y, top), bottom)
 
     def draw(self, frame, fi):
         if not (self.f0 <= fi < self.fend):
@@ -410,6 +461,7 @@ def render(cfg_path, out_path):
     base_dir = os.path.dirname(os.path.abspath(cfg_path))
     clips = {k: os.path.join(base_dir, v) if not os.path.isabs(v) else v for k, v in cfg["clips"].items()}
     style = json.load(open(os.path.join(ROOT, "presets", "storis-progrev", "style.json")))
+    SAFE.update(style["text"]["safe_zone"])
     grade = make_grade(style["grade"])
     tl = Timeline(cfg["segments"])
     framing = cfg["framing"]

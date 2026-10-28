@@ -44,6 +44,11 @@ Qoida: **kadr 3–5 s turadi, lekin ekranda har 0.5–1.5 s nimadir o'zgaradi** 
 | Highlight fon | — | `#A3141E` (qizil) yoki `#B8A21E` (zaytun-sariq) |
 | Iqtibos | Montserrat SemiBold + katta “ | jigarrang-oltin `#5B3A1E → #A8792E` |
 
+**Qoida — xavfsiz zona:** subtitrlar ramkadan chiqmaydi. Ruxsat etilgan zona (kadr ulushida):
+chap 0.02 – o'ng 0.98, tepa 0.095 – past 0.839; pastki o'ng burchak (x > 0.872, y > 0.691) —
+Instagram tugmalari, u yerga matn tushmaydi. Ichki chekka 24 px. `render.py` har bir subtitrni
+avtomatik shu zonaga suradi, sig'masa render to'xtaydi.
+
 3 pog'onali formula: `kichik kirish so'zi` / **KATTA KALIT SO'Z** / `kichik davomi`.
 Bir ekranda 2–3 qatordan ko'p emas, matn yuz ustiga tushmaydi, pastki 20 % bo'sh.
 
