@@ -275,9 +275,18 @@ class Typewriter:
 
 # ---------------------------------------------------------------- 3D card
 class Card:
-    def __init__(self, c, tl):
+    def __init__(self, c, tl, base_dir="."):
         self.f0, self.f1 = tl.frame(c["in"]), tl.frame(c["out"])
         self.cx, self.cy = c.get("cx", 0.2) * W, c.get("cy", 0.25) * H
+        self.ry0, self.enter = c.get("ry", 17), c.get("enter", "left")
+        if "image" in c:  # skrinshot / rasm karta
+            im = Image.open(os.path.join(base_dir, c["image"])).convert("RGBA")
+            cw = c.get("w", 900)
+            ch = int(im.height * cw / im.width)
+            px = np.array(im.resize((cw, ch), Image.LANCZOS)).astype(np.float32)
+            px[..., 3] *= rounded_mask(cw, ch, c.get("radius", 28))
+            self.spr = premult(px.astype(np.uint8))
+            return
         cw, ch = c.get("w", 330), c.get("h", 440)
         img = np.zeros((ch, cw, 4), np.float32)
         g = np.linspace(0, 1, ch)[:, None]
@@ -301,8 +310,15 @@ class Card:
         if not (self.f0 <= fi < self.f1):
             return
         dt, rem = fi - self.f0, self.f1 - fi
-        ry, x, y, a, blur = 17 + 2 * math.sin(fi / 20), self.cx, self.cy + 6 * math.sin(fi / 14), 1.0, 0
-        if dt < 9:  # chapdan blur bilan kirish
+        ry, x, y, a, blur = self.ry0 + 2 * math.sin(fi / 20), self.cx, self.cy + 6 * math.sin(fi / 14), 1.0, 0
+        vertical = False
+        if dt < 10 and self.enter == "up":  # pastdan blur bilan ko'tarilish
+            p = ease_out(dt / 10)
+            y = self.cy + 0.45 * H * (1 - p)
+            blur = 90 * (1 - p)
+            a = min(1, dt / 3 + 0.2)
+            vertical = True
+        elif dt < 9:  # chapdan blur bilan kirish
             p = ease_out(dt / 9)
             x = -250 + (self.cx + 250) * p
             ry = 45 - 32 * p
@@ -314,11 +330,15 @@ class Card:
             x += 260 * p
             a *= 1 - p
             blur = max(blur, 50 * p)
+            vertical = False
         out, bx, by = project_card(self.spr, x, y, ry, -4)
         pad = 0
         if blur >= 2:
-            out, pad = hblur(out, blur)
-        blit(frame, out, bx - pad, by, a)
+            out, pad = hblur(out, blur, vertical)
+        if vertical:
+            blit(frame, out, bx, by - pad, a)
+        else:
+            blit(frame, out, bx - pad, by, a)
 
 
 # ---------------------------------------------------------------- base processing
@@ -394,7 +414,7 @@ def render(cfg_path, out_path):
     tl = Timeline(cfg["segments"])
     framing = cfg["framing"]
     caps = [Caption(c, tl) for c in cfg["captions"]]
-    cards = [Card(c, tl) for c in cfg.get("cards", [])]
+    cards = [Card(c, tl, base_dir) for c in cfg.get("cards", [])]
     tws = [Typewriter(c, tl) for c in cfg.get("typewriter", [])]
     plate_bg_img = plate_bg()
     stills = {}
@@ -501,7 +521,7 @@ def build_audio(cfg, clips, tl, sfx, vid, out_path, tmp):
     n = len(tl.segs)
     voice = "".join(f"[a{k}]" for k in range(n)) + f"concat=n={n}:v=0:a=1[voice]"
     fx = [f"[voice]highpass=f=80,acompressor=threshold=-20dB:ratio=4:attack=5:release=80:makeup=3,"
-          f"loudnorm=I=-14:LRA=5:TP=-1.5[vn]"]
+          f"loudnorm=I=-14:LRA=5:TP=-1.5,apad[vn]"]
     mix = ["[vn]"]
     for j, (t, kind) in enumerate(sfx):
         if kind in ("white_through",):

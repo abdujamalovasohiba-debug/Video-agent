@@ -1,0 +1,596 @@
+{
+ "clips": {
+  "A": "media/clipA.mov",
+  "B": "media/clipB.mov"
+ },
+ "framing": {
+  "wide": {
+   "scale": [
+    1.12,
+    1.22
+   ],
+   "center": [
+    0.48,
+    0.47
+   ]
+  },
+  "tight": {
+   "scale": [
+    1.55,
+    1.63
+   ],
+   "center": [
+    0.48,
+    0.42
+   ]
+  }
+ },
+ "segments": [
+  {
+   "clip": "B",
+   "in": 0.85,
+   "out": 3.48,
+   "frame": "wide",
+   "mode": "dark",
+   "transition": "whip_in"
+  },
+  {
+   "clip": "B",
+   "in": 3.78,
+   "out": 6.44,
+   "frame": "tight",
+   "transition": "cut"
+  },
+  {
+   "clip": "B",
+   "in": 6.64,
+   "out": 9.46,
+   "frame": "wide"
+  },
+  {
+   "clip": "B",
+   "in": 9.72,
+   "out": 15.08,
+   "frame": "wide",
+   "mode": "plate",
+   "transition": "white_through",
+   "plate_delay": 10,
+   "plate_stills": [
+    {
+     "still": "b1",
+     "w": 300,
+     "h": 400,
+     "cx": 0.2,
+     "cy": 0.5,
+     "ry": 18
+    },
+    {
+     "still": "a1",
+     "w": 280,
+     "h": 360,
+     "cx": 0.84,
+     "cy": 0.86,
+     "ry": -20
+    }
+   ]
+  },
+  {
+   "clip": "B",
+   "in": 15.38,
+   "out": 20.3,
+   "frame": "wide",
+   "transition": "mirror_slide"
+  },
+  {
+   "clip": "A",
+   "in": 0.6,
+   "out": 3.77,
+   "frame": "tight"
+  },
+  {
+   "clip": "A",
+   "in": 4.4,
+   "out": 10.8,
+   "frame": "wide"
+  }
+ ],
+ "stills": {
+  "b1": [
+   "B",
+   5.0
+  ],
+  "a1": [
+   "A",
+   2.0
+  ]
+ },
+ "cards": [
+  {
+   "in": [
+    "B",
+    0.85
+   ],
+   "out": [
+    "B",
+    3.48
+   ],
+   "image": "media/savol.jpg",
+   "w": 940,
+   "cx": 0.5,
+   "cy": 0.5,
+   "ry": -6,
+   "enter": "up"
+  },
+  {
+   "in": [
+    "B",
+    7.46
+   ],
+   "out": [
+    "B",
+    9.46
+   ],
+   "big": "30%",
+   "sub": "CHEGIRMA",
+   "small": "100 ming sharafiga",
+   "w": 360,
+   "h": 480,
+   "cx": 0.18,
+   "cy": 0.36,
+   "big_size": 165
+  },
+  {
+   "in": [
+    "B",
+    15.38
+   ],
+   "out": [
+    "B",
+    17.35
+   ],
+   "big": "1–10",
+   "sub": "NOYABR",
+   "small": "chegirma muddati",
+   "w": 360,
+   "h": 480,
+   "cx": 0.18,
+   "cy": 0.36,
+   "big_size": 165
+  }
+ ],
+ "captions": [
+  {
+   "y": 0.06,
+   "align": "center",
+   "end": [
+    "B",
+    3.48
+   ],
+   "lines": [
+    [
+     {
+      "w": "SHUNAQA",
+      "s": "hook",
+      "t": [
+       "B",
+       1.25
+      ]
+     },
+     {
+      "w": "SAVOLLAR",
+      "s": "hook",
+      "t": [
+       "B",
+       1.6
+      ]
+     }
+    ],
+    [
+     {
+      "w": "JUDA",
+      "s": "hook",
+      "t": [
+       "B",
+       2.08
+      ]
+     },
+     {
+      "w": "KO’PAYDI",
+      "s": "hook",
+      "t": [
+       "B",
+       2.44
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "end": [
+    "B",
+    6.44
+   ],
+   "lines": [
+    [
+     {
+      "w": "shuning",
+      "s": "small",
+      "t": [
+       "B",
+       3.8
+      ]
+     },
+     {
+      "w": "uchun",
+      "s": "small",
+      "t": [
+       "B",
+       3.95
+      ]
+     }
+    ],
+    [
+     {
+      "w": "100 MINGTADAN",
+      "s": "key_y",
+      "t": [
+       "B",
+       4.74
+      ]
+     }
+    ],
+    [
+     {
+      "w": "oshganimiz",
+      "s": "small",
+      "t": [
+       "B",
+       5.7
+      ]
+     },
+     {
+      "w": "uchun",
+      "s": "small",
+      "t": [
+       "B",
+       6.1
+      ]
+     }
+    ]
+   ],
+   "y": 0.085
+  },
+  {
+   "end": [
+    "B",
+    7.4
+   ],
+   "lines": [
+    [
+     {
+      "w": "sizlarga",
+      "s": "small",
+      "t": [
+       "B",
+       6.82
+      ]
+     }
+    ]
+   ],
+   "y": 0.085
+  },
+  {
+   "x": 0.08,
+   "y": 0.12,
+   "dir": "up",
+   "end": [
+    "B",
+    15.08
+   ],
+   "lines": [
+    [
+     {
+      "w": "bu",
+      "s": "q_small",
+      "t": [
+       "B",
+       10.48
+      ]
+     },
+     {
+      "w": "chegirmamiz",
+      "s": "q_small",
+      "t": [
+       "B",
+       10.7
+      ]
+     }
+    ],
+    [
+     {
+      "w": "GIJJA TERAPIYA",
+      "s": "q_big",
+      "t": [
+       "B",
+       11.86
+      ]
+     }
+    ],
+    [
+     {
+      "w": "va",
+      "s": "q_small",
+      "t": [
+       "B",
+       12.6
+      ]
+     },
+     {
+      "w": "ENUREZGA",
+      "s": "q_big",
+      "t": [
+       "B",
+       12.96
+      ]
+     }
+    ],
+    [
+     {
+      "w": "ham",
+      "s": "q_small",
+      "t": [
+       "B",
+       13.9
+      ]
+     },
+     {
+      "w": "amal",
+      "s": "q_small",
+      "t": [
+       "B",
+       14.08
+      ]
+     },
+     {
+      "w": "qiladi",
+      "s": "q_small",
+      "t": [
+       "B",
+       14.4
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "end": [
+    "B",
+    20.2
+   ],
+   "lines": [
+    [
+     {
+      "w": "bemalol",
+      "s": "small",
+      "t": [
+       "B",
+       17.4
+      ]
+     }
+    ],
+    [
+     {
+      "w": "FARZANDLARINGIZNI",
+      "s": "key",
+      "t": [
+       "B",
+       18.12
+      ]
+     }
+    ],
+    [
+     {
+      "w": "MUOLAJA",
+      "s": "key_y",
+      "t": [
+       "B",
+       18.78
+      ]
+     },
+     {
+      "w": "qildiring",
+      "s": "small",
+      "t": [
+       "B",
+       19.2
+      ]
+     }
+    ]
+   ],
+   "y": 0.085
+  },
+  {
+   "end": [
+    "A",
+    3.77
+   ],
+   "lines": [
+    [
+     {
+      "w": "bu",
+      "s": "small",
+      "t": [
+       "A",
+       0.6
+      ]
+     },
+     {
+      "w": "chegirmamiz",
+      "s": "small",
+      "t": [
+       "A",
+       0.75
+      ]
+     }
+    ],
+    [
+     {
+      "w": "FILIALLARIMIZDA",
+      "s": "key_y",
+      "t": [
+       "A",
+       1.92
+      ]
+     }
+    ],
+    [
+     {
+      "w": "ham",
+      "s": "small",
+      "t": [
+       "A",
+       2.62
+      ]
+     },
+     {
+      "w": "amal",
+      "s": "small",
+      "t": [
+       "A",
+       2.76
+      ]
+     },
+     {
+      "w": "qiladi",
+      "s": "small",
+      "t": [
+       "A",
+       3.1
+      ]
+     }
+    ]
+   ],
+   "y": 0.085
+  },
+  {
+   "end": [
+    "A",
+    6.84
+   ],
+   "lines": [
+    [
+     {
+      "w": "maxsus",
+      "s": "small",
+      "t": [
+       "A",
+       4.4
+      ]
+     },
+     {
+      "w": "chegirmadagi",
+      "s": "small",
+      "t": [
+       "A",
+       4.8
+      ]
+     }
+    ],
+    [
+     {
+      "w": "MUOLAJAGA",
+      "s": "key",
+      "t": [
+       "A",
+       5.28
+      ],
+      "hl": "red"
+     }
+    ],
+    [
+     {
+      "w": "yozilish",
+      "s": "small",
+      "t": [
+       "A",
+       6.06
+      ]
+     },
+     {
+      "w": "uchun",
+      "s": "small",
+      "t": [
+       "A",
+       6.4
+      ]
+     }
+    ]
+   ],
+   "y": 0.085
+  },
+  {
+   "y": 0.07,
+   "align": "center",
+   "end": [
+    "A",
+    10.8
+   ],
+   "lines": [
+    [
+     {
+      "w": "shu",
+      "s": "small",
+      "t": [
+       "A",
+       6.9
+      ]
+     },
+     {
+      "w": "raqamlar",
+      "s": "small",
+      "t": [
+       "A",
+       7.1
+      ]
+     },
+     {
+      "w": "bilan",
+      "s": "small",
+      "t": [
+       "A",
+       7.6
+      ]
+     },
+     {
+      "w": "bog’laning",
+      "s": "small",
+      "t": [
+       "A",
+       8.04
+      ]
+     }
+    ],
+    [
+     {
+      "w": "+998 50 790 43 39",
+      "s": "hook",
+      "t": [
+       "A",
+       7.6
+      ]
+     }
+    ],
+    [
+     {
+      "w": "+998 33 545 33 22",
+      "s": "hook",
+      "t": [
+       "A",
+       7.9
+      ]
+     }
+    ]
+   ]
+  }
+ ]
+}
