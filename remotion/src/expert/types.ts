@@ -15,7 +15,7 @@ export type Item =
   | {type: 'stat'; start: number; end: number; top?: number; words: Word[]}
   | {type: 'headline'; start: number; end: number; top?: number; lines: string[]; big: string; bigAt?: number; framed?: boolean; emojis?: string[]; bg?: string; size?: number}
   | {type: 'plain'; start: number; end: number; top?: number; glow?: boolean; color?: string; caps: Word[]; script: Word[]}
-  | {type: 'point'; start: number; end: number; top?: number; label?: string; color?: string; n: number; total: number; caps: Word[]; script: Word[]}
+  | {type: 'point'; start: number; end: number; top?: number; label?: string; color?: string; size?: number; n: number; total: number; caps: Word[]; script: Word[]}
   | {type: 'tri'; start: number; end: number; top?: number; size?: number; pre?: Word[]; pill?: string; big: Word[]; post?: Word[]; wave?: boolean; tag?: string}
   | {type: 'keys'; start: number; end: number; top?: number; pre?: Word[]; keys: {c: string; t: number}[]; post?: Word[]; tag?: string}
   | {type: 'stamps'; start: number; end: number; top?: number; pre?: Word[]; cards: {icon: string; label: string; t: number}[]; tag?: string}

@@ -143,7 +143,7 @@ export const Point: React.FC<P<Extract<Item, {type: 'point'}>>> = ({item, u, w, 
           color: '#2B2620',
         }}
       >
-        <div style={{fontSize: 50 * u, fontWeight: 500, textTransform: 'uppercase', letterSpacing: 1 * u, lineHeight: 1.15}}>
+        <div style={{fontSize: (item.size ?? 50) * u, fontWeight: item.size ? 800 : 500, textTransform: 'uppercase', letterSpacing: 1 * u, lineHeight: 1.15}}>
           <Words words={item.caps} color="#2B2620" />
         </div>
         {item.script.length ? (
