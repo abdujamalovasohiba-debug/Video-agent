@@ -419,7 +419,10 @@ def render(cfg_path, out_path):
     plate_bg_img = plate_bg()
     stills = {}
     for name, ref in cfg.get("stills", {}).items():
-        stills[name] = decode(clips[ref[0]], ref[1], 1)[0]
+        if isinstance(ref, str):  # tayyor rasm fayli
+            stills[name] = cv2.imread(os.path.join(base_dir, ref))
+        else:
+            stills[name] = decode(clips[ref[0]], ref[1], 1)[0]
 
     tmp = tempfile.mkdtemp()
     vid = os.path.join(tmp, "v.mp4")
@@ -454,8 +457,9 @@ def render(cfg_path, out_path):
                 items = []
                 for st in s.get("plate_stills", []):
                     items.append((photo_card(stills[st["still"]], st["w"], st["h"]), st))
-                live = photo_card(frames[i], 520, 700)
-                items.append((live, dict(cx=0.56, cy=0.63, ry=-15)))
+                if s.get("plate_live", True):
+                    live = photo_card(frames[i], 520, 700)
+                    items.append((live, dict(cx=0.56, cy=0.63, ry=-15)))
                 for spr, st in items:
                     cx = W / 2 + (st["cx"] * W - W / 2) * drift
                     cy = H / 2 + (st["cy"] * H - H / 2) * drift + rise * 0.35 * H

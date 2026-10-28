@@ -57,7 +57,7 @@
    "plate_delay": 10,
    "plate_stills": [
     {
-     "still": "b1",
+     "still": "date",
      "w": 300,
      "h": 400,
      "cx": 0.2,
@@ -65,14 +65,23 @@
      "ry": 18
     },
     {
-     "still": "a1",
+     "still": "main",
+     "w": 520,
+     "h": 700,
+     "cx": 0.56,
+     "cy": 0.63,
+     "ry": -15
+    },
+    {
+     "still": "k100",
      "w": 280,
      "h": 360,
      "cx": 0.84,
      "cy": 0.86,
      "ry": -20
     }
-   ]
+   ],
+   "plate_live": false
   },
   {
    "clip": "B",
@@ -95,14 +104,9 @@
   }
  ],
  "stills": {
-  "b1": [
-   "B",
-   5.0
-  ],
-  "a1": [
-   "A",
-   2.0
-  ]
+  "main": "media/card_main.png",
+  "date": "media/card_date.png",
+  "k100": "media/card_100k.png"
  },
  "cards": [
   {
