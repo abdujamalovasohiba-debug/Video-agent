@@ -20,6 +20,10 @@ Yangi uslub referens bilan kelsa: tahlil qiling, foydalanuvchi bergan nom bilan 
 - Rangni referensga `signalstats` (YAVG, SATAVG, UAVG, VAVG) bilan moslang; foydalanuvchi "rang berilmagan"
   deb e'tiroz bildirgan. Telefon videolari uchun boshlang'ich: `eq=saturation=1.32:contrast=1.07:brightness=-0.02,
   colorbalance=bm=0.07:bh=0.05:rh=-0.02,unsharp=5:5:0.5` (faqat odam kadrlariga, stok B-rollga emas) va `--grade none`.
+- **Kadrni qoraytirmang** — `brightness` manfiy + saturation oshirish yopiq xonadagi (sariq chiroq) videoni to'q/qora qilib yubordi, foydalanuvchi
+  e'tiroz bildirdi. Bunday kadrlarda: `eq=gamma=1.18:contrast=1.05:saturation=1.08:brightness=0.02,colorbalance=rs=-0.04:bs=0.03:rm=-0.03:bm=0.03,
+  curves=all='0/0.03 0.5/0.55 1/1'` (YAVG ≈ 125, sariq tus kamayadi). Har doim oldin/keyin kadrini solishtiring.
+- Matn pastda bo'lsa, **pastga qora gradient** qo'ying (y 0.60→1.0, shaffoflik 0→0.82) — foydalanuvchiga yoqadi.
 - **O'tishlar silliq bo'lsin** — foydalanuvchi keskin kesishni yoqtirmaydi. Jump-cut'larda 0.3 s dissolve
   (`xfade=fade`, kesimning ikki tomonidan 0.15 s "handle" olib, ovoz vaqti o'zgarmasin), B-roll esa
   0.35 s alfa fade bilan kirib-chiqsin (overlay boshlanishi 0.175 s oldin).
