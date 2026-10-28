@@ -1,7 +1,9 @@
 {
  "clips": {
   "A": "media/clipA.mov",
-  "B": "media/clipB.mov"
+  "B": "media/clipB.mov",
+  "R1": "media/broll1.mp4",
+  "R2": "media/broll2.mp4"
  },
  "framing": {
   "wide": {
@@ -57,7 +59,10 @@
    "plate_delay": 10,
    "plate_stills": [
     {
-     "still": "date",
+     "video": [
+      "R2",
+      0.0
+     ],
      "w": 300,
      "h": 400,
      "cx": 0.2,
@@ -65,7 +70,16 @@
      "ry": 18
     },
     {
-     "still": "main",
+     "video": [
+      "R1",
+      2.5
+     ],
+     "crop": [
+      0,
+      0,
+      1,
+      0.56
+     ],
      "w": 520,
      "h": 700,
      "cx": 0.56,
@@ -73,7 +87,16 @@
      "ry": -15
     },
     {
-     "still": "k100",
+     "video": [
+      "R1",
+      6.0
+     ],
+     "crop": [
+      0,
+      0,
+      1,
+      0.56
+     ],
      "w": 280,
      "h": 360,
      "cx": 0.84,
@@ -103,11 +126,7 @@
    "frame": "wide"
   }
  ],
- "stills": {
-  "main": "media/card_main.png",
-  "date": "media/card_date.png",
-  "k100": "media/card_100k.png"
- },
+ "stills": {},
  "cards": [
   {
    "in": [

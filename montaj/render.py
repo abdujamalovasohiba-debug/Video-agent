@@ -439,6 +439,8 @@ def render(cfg_path, out_path):
         if trans:
             sfx.append((s["f0"] / FPS, trans))
         prev_static = prev
+        vids = {k: decode(clips[st["video"][0]], st["video"][1], s["n"])
+                for k, st in enumerate(s.get("plate_stills", [])) if "video" in st}
         for i in range(s["n"]):
             fi = s["f0"] + i
             p = i / max(1, s["n"] - 1)
@@ -455,8 +457,14 @@ def render(cfg_path, out_path):
                 rise = 1 - ease_out(ri / 12) if ri >= 0 else 1.0
                 vb = 60 * rise
                 items = []
-                for st in s.get("plate_stills", []):
-                    items.append((photo_card(stills[st["still"]], st["w"], st["h"]), st))
+                for k, st in enumerate(s.get("plate_stills", [])):
+                    if "video" in st:  # jonli b-roll karta
+                        src = vids[k][min(i, len(vids[k]) - 1)]
+                        x0, y0, x1, y1 = st.get("crop", (0, 0, 1, 1))
+                        src = src[int(y0 * H):int(y1 * H), int(x0 * W):int(x1 * W)]
+                    else:
+                        src = stills[st["still"]]
+                    items.append((photo_card(src, st["w"], st["h"]), st))
                 if s.get("plate_live", True):
                     live = photo_card(frames[i], 520, 700)
                     items.append((live, dict(cx=0.56, cy=0.63, ry=-15)))
