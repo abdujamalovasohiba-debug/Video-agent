@@ -82,7 +82,7 @@ module.exports = {
       theme: bg("y5-kreslo.jpg"),
       cover: { photo: "y5-kreslo.jpg", pos: "50% 35%", line1: "Arzon lid har doim ham", line2: "yaxshi natija emas", sub: "Nima uchun?" },
       slides: [
-        { label: "Koʻp eshitaman", title: "«Lid juda arzon, <mark>lekin sotuv yoʻq.</mark>»", body: "Mijozlar xursand boʻlib keladi: lid 0,5$ ga tushyapti. Bir oydan keyin esa: «Hech kim sotib olmadi».", note: "Gap shundaki, arzon lid va mijoz — bir narsa emas." },
+        { label: "Koʻp eshitaman", title: "«Lid juda arzon, <mark>lekin sotuv yoʻq.</mark>»", body: "Mijozlar xursand boʻlib keladi: lid 0,10$ dan tushyapti. Bir oydan keyin esa: «Hech kim sotib olmadi».", note: "Gap shundaki, arzon lid va mijoz — bir narsa emas." },
         { label: "Nega arzon chiqadi", title: "Arzon lid — koʻpincha <mark>«shunchaki soʻradim».</mark>", body: "Forma juda oson boʻlsa, odam oʻylamasdan bosib yuboradi. Keyin telefonni ham olmaydi.", note: "Raqam bor — qiziqish yoʻq." },
         { label: "Misol", title: "Qaysi biri <mark>arzonroq?</mark>", body: "1-reklama: 100$ ga 200 ta lid, 2 tasi sotib oldi.<br>2-reklama: 100$ ga 40 ta lid, 8 tasi sotib oldi.", note: "Birinchisida bitta mijoz 50$ ga, ikkinchisida 12,5$ ga tushdi. <b>Arzon lid qimmat mijoz boʻlib chiqdi.</b>" },
         { label: "Nimaga qarash kerak", title: "Lid narxiga emas — <mark>mijoz narxiga</mark> qarang.", body: "Reklamaga ketgan pul ÷ sotib olganlar soni.", note: "Shu raqam bitta mijozdan topadigan foydangizdan kam boʻlsa — reklama ishlayapti." },
