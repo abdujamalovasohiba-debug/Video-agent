@@ -77,5 +77,18 @@ module.exports = {
         { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>«Продвигать» — post koʻproq koʻrilsin deb. Ads Manager — mijoz kelsin deb.", note: "<b>Siz qaysi biri bilan reklama yoqasiz? Izohda yozing.</b>" },
       ],
     },
+    {
+      id: "M13-arzon-lid",
+      theme: bg("t01-oylash.jpg"),
+      cover: { photo: "t01-oylash.jpg", pos: "50% 40%", line1: "Arzon lid —", line2: "har doim ham yaxshi emas", sub: "Nega arzon lid baʼzan<br>qimmatga tushadi?" },
+      slides: [
+        { label: "Koʻp eshitaman", title: "«Lid juda arzon, <mark>lekin sotuv yoʻq.</mark>»", body: "Mijozlar xursand boʻlib keladi: lid 0,5$ ga tushyapti. Bir oydan keyin esa: «Hech kim sotib olmadi».", note: "Gap shundaki, arzon lid va mijoz — bir narsa emas." },
+        { label: "Nega arzon chiqadi", title: "Arzon lid — koʻpincha <mark>«shunchaki soʻradim».</mark>", body: "Forma juda oson boʻlsa, odam oʻylamasdan bosib yuboradi. Keyin telefonni ham olmaydi.", note: "Raqam bor — qiziqish yoʻq." },
+        { label: "Misol", title: "Qaysi biri <mark>arzonroq?</mark>", body: "1-reklama: 100$ ga 200 ta lid, 2 tasi sotib oldi.<br>2-reklama: 100$ ga 40 ta lid, 8 tasi sotib oldi.", note: "Birinchisida bitta mijoz 50$ ga, ikkinchisida 12,5$ ga tushdi. <b>Arzon lid qimmat mijoz boʻlib chiqdi.</b>" },
+        { label: "Nimaga qarash kerak", title: "Lid narxiga emas — <mark>mijoz narxiga</mark> qarang.", body: "Reklamaga ketgan pul ÷ sotib olganlar soni.", note: "Shu raqam bitta mijozdan topadigan foydangizdan kam boʻlsa — reklama ishlayapti." },
+        { label: "Men nima qilaman", title: "Formaga <mark>1–2 ta savol</mark> qoʻshaman.", body: "Masalan: «Qachon boshlamoqchisiz?» yoki «Qaysi xizmat kerak?»", note: "Lid biroz qimmatlashadi, lekin «shunchaki soʻraganlar» kamayadi." },
+        { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>Arzon lid — chiroyli raqam. Pul esa sotib olgan odamdan keladi.", note: "<b>Sizda lid qanchaga tushyapti? Izohda yozing.</b>" },
+      ],
+    },
   ],
 };
