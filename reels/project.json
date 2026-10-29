@@ -408,12 +408,13 @@
       "ss": 5
     },
     {
-      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_272633.mp4",
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_50312.mp4",
       "phrases": [
         33,
         35
       ],
-      "ss": 0.5
+      "ss": 2.5,
+      "x": 0.5
     }
   ]
 }
