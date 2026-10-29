@@ -5,56 +5,415 @@
     "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/bcbfaadb-copy_8B4C75A1-2693-4071-89E3-1AF18765EDD1.mov"
   ],
   "words": "words.json",
-  "focus": [0.42, 0.33],
-  "zooms": [1.0, 1.14],
-
-  "hook": {"l1": "OILADA NIZOLAR", "l2": "CHIQISHINING ASOSIY", "l3": "SABABI", "until": [1, 11]},
-
-  "phrases": [
-    [1, 0, 4, "OILADA NIZOLAR", "chiqishining sabablaridan bittasi", "hide"],
-    [1, 5, 11, "BU – ULAR ORASIDA", "yaqinlik yo'qligi", "hide"],
-    [1, 12, 16, "YAQINLIK", "degan qobiliyat bor insonda"],
-    [1, 17, 19, "BU TUG'MA", "bo'lmaydi"],
-    [1, 20, 22, "BUNI INSON", "rivojlantirishi kerak"],
-    [1, 33, 38, "BIR-BIRINING DUNYOSINI", "bir-biriga ochish"],
-    [2, 0, 2, "UNING DUNYOSINI", "o'rganish"],
-    [2, 3, 5, "UNING DUNYOSINI", "hurmat qilish"],
-    [2, 6, 10, "BIR-BIRINI", "yaqin tutish"],
-    [2, 11, 13, "TALAB ORQALI", "emas"],
-    [2, 14, 15, "TUSHUNISH", "orqali"],
-    [2, 16, 21, "MANA SHU YAQINLIK", "bo'lmasligi sababidan"],
-    [2, 22, 25, "KO'PINCHA ER-XOTIN", "orasida"],
-    [2, 32, 36, "U SHUNDAY", "ko'rinishda bo'ladiki"],
-    [2, 37, 42, "AVVALO U MENGA", "shuni qilib berishi kerak"],
-    [2, 43, 47, "YOKI MENGA", "shuni qila olishi kerak, deb"],
-    [2, 48, 53, "ER HAM, XOTIN HAM", "bir-biridan kutadi"],
-    [3, 0, 2, "ODDIY NARSANI", "tushuntiray"],
-    [3, 3, 6, "HAR BIR INSON", "shaxs"],
-    [3, 7, 12, "HAR BIR INSONNING", "ichki dunyosi bor"],
-    [3, 13, 22, "ICHKI DUNYOSIDA", "har birining o'z programmalari bor"],
-    [3, 23, 30, "AGAR MEN HOZIR", "kimdandir, yaqinimdan kutsam"],
-    [3, 31, 36, "MANA SHU NARSA", "menga shunaqa bo'lishi kerak desam"],
-    [3, 37, 42, "U INSON", "mayli, yaqin bo'lsin"],
-    [3, 43, 50, "ICHKI DUNYOSIGA", "bu mos kelmasligi mumkin"],
-    [3, 51, 57, "UNING PROGRAMMASIGA", "mos kelmasligi mumkin"],
-    [3, 58, 66, "UNING XAYOLIGA", "mos kelmasligi mumkin"],
-    [3, 67, 70, "NIMANIKI MEN KUTSAM", "kutaversam"],
-    [3, 71, 73, "FAQAT", "yig'ilib boradi"],
-    [3, 74, 79, "QACHON BO'LARKIN", "men kutaman, deyman"],
-    [3, 80, 86, "BUNING NATIJASIDA", "inson kutib-kutib, amalga oshmaganda"],
-    [3, 101, 105, "ANA BU", "ko'pincha nizoga olib keladi"],
-    [3, 106, 110, "ICHIDA YIG'ILIB QOLISH", "yomoni"],
-    [3, 111, 116, "ERTAMI-KECHMI", "toqati tugaganda"],
-    [3, 117, 119, "U SHU NARSALARNI", "ko'tarib"],
-    [3, 120, 125, "BIR-BIRINING YUZIGA", "soladi ko'pincha inson"]
+  "focus": [
+    0.42,
+    0.33
   ],
-
+  "zooms": [
+    1.0,
+    1.14
+  ],
+  "hook": {
+    "l1": "OILADA NIZOLAR",
+    "l2": "CHIQISHINING ASOSIY",
+    "l3": "SABABI",
+    "until": [
+      1,
+      11
+    ]
+  },
+  "phrases": [
+    [
+      1,
+      0,
+      4,
+      "OILADA NIZOLAR",
+      "chiqishining sabablaridan bittasi",
+      "hide"
+    ],
+    [
+      1,
+      5,
+      11,
+      "BU – ULAR ORASIDA",
+      "yaqinlik yo'qligi",
+      "hide"
+    ],
+    [
+      1,
+      12,
+      16,
+      "YAQINLIK",
+      "degan qobiliyat bor insonda"
+    ],
+    [
+      1,
+      17,
+      19,
+      "BU TUG'MA",
+      "bo'lmaydi"
+    ],
+    [
+      1,
+      20,
+      22,
+      "BUNI INSON",
+      "rivojlantirishi kerak"
+    ],
+    [
+      1,
+      33,
+      38,
+      "BIR-BIRINING DUNYOSINI",
+      "bir-biriga ochish"
+    ],
+    [
+      2,
+      0,
+      2,
+      "UNING DUNYOSINI",
+      "o'rganish"
+    ],
+    [
+      2,
+      3,
+      5,
+      "UNING DUNYOSINI",
+      "hurmat qilish"
+    ],
+    [
+      2,
+      6,
+      10,
+      "BIR-BIRINI",
+      "yaqin tutish"
+    ],
+    [
+      2,
+      11,
+      13,
+      "TALAB ORQALI",
+      "emas"
+    ],
+    [
+      2,
+      14,
+      15,
+      "TUSHUNISH",
+      "orqali"
+    ],
+    [
+      2,
+      16,
+      21,
+      "MANA SHU YAQINLIK",
+      "bo'lmasligi sababidan"
+    ],
+    [
+      2,
+      22,
+      25,
+      "KO'PINCHA ER-XOTIN",
+      "orasida"
+    ],
+    [
+      2,
+      32,
+      36,
+      "U SHUNDAY",
+      "ko'rinishda bo'ladiki"
+    ],
+    [
+      2,
+      37,
+      42,
+      "AVVALO U MENGA",
+      "shuni qilib berishi kerak"
+    ],
+    [
+      2,
+      43,
+      47,
+      "YOKI MENGA",
+      "shuni qila olishi kerak, deb"
+    ],
+    [
+      2,
+      48,
+      53,
+      "ER HAM, XOTIN HAM",
+      "bir-biridan kutadi"
+    ],
+    [
+      3,
+      0,
+      2,
+      "ODDIY NARSANI",
+      "tushuntiray"
+    ],
+    [
+      3,
+      3,
+      6,
+      "HAR BIR INSON",
+      "shaxs"
+    ],
+    [
+      3,
+      7,
+      12,
+      "HAR BIR INSONNING",
+      "ichki dunyosi bor"
+    ],
+    [
+      3,
+      13,
+      22,
+      "ICHKI DUNYOSIDA",
+      "har birining o'z programmalari bor"
+    ],
+    [
+      3,
+      23,
+      30,
+      "AGAR MEN HOZIR",
+      "kimdandir, yaqinimdan kutsam"
+    ],
+    [
+      3,
+      31,
+      36,
+      "MANA SHU NARSA",
+      "menga shunaqa bo'lishi kerak desam"
+    ],
+    [
+      3,
+      37,
+      42,
+      "U INSON",
+      "mayli, yaqin bo'lsin"
+    ],
+    [
+      3,
+      43,
+      50,
+      "ICHKI DUNYOSIGA",
+      "bu mos kelmasligi mumkin"
+    ],
+    [
+      3,
+      51,
+      57,
+      "UNING PROGRAMMASIGA",
+      "mos kelmasligi mumkin"
+    ],
+    [
+      3,
+      58,
+      66,
+      "UNING XAYOLIGA",
+      "mos kelmasligi mumkin"
+    ],
+    [
+      3,
+      67,
+      70,
+      "NIMANIKI MEN KUTSAM",
+      "kutaversam"
+    ],
+    [
+      3,
+      71,
+      73,
+      "FAQAT",
+      "yig'ilib boradi"
+    ],
+    [
+      3,
+      74,
+      79,
+      "QACHON BO'LARKIN",
+      "men kutaman, deyman"
+    ],
+    [
+      3,
+      80,
+      86,
+      "BUNING NATIJASIDA",
+      "inson kutib-kutib, amalga oshmaganda"
+    ],
+    [
+      3,
+      101,
+      105,
+      "ANA BU",
+      "ko'pincha nizoga olib keladi"
+    ],
+    [
+      3,
+      106,
+      110,
+      "ICHIDA YIG'ILIB QOLISH",
+      "yomoni"
+    ],
+    [
+      3,
+      111,
+      116,
+      "ERTAMI-KECHMI",
+      "toqati tugaganda"
+    ],
+    [
+      3,
+      117,
+      119,
+      "U SHU NARSALARNI",
+      "ko'tarib"
+    ],
+    [
+      3,
+      120,
+      125,
+      "BIR-BIRINING YUZIGA",
+      "soladi ko'pincha inson"
+    ]
+  ],
   "cards": [
-    {"num": "1", "clip": 1, "from": 23, "to": 32, "lines": [
-      [23, 23, "YAQINLIK"], [24, 27, "deganda nimani olamiz?"], [28, 32, "bir-birini eshita bilish"]]},
-    {"num": "2", "clip": 2, "from": 26, "to": 31, "lines": [
-      [28, 28, "KUTISH"], [29, 30, "paydo bo'ladi"], [31, 31, "kutadi..."]]},
-    {"num": "3", "clip": 3, "from": 87, "to": 100, "lines": [
-      [88, 88, "UMIDSIZLIK"], [89, 91, "olib keladi"], [92, 97, "yoki bir-biridan ko'ngil qolish"]]}
+    {
+      "num": "1",
+      "clip": 1,
+      "from": 23,
+      "to": 32,
+      "lines": [
+        [
+          23,
+          23,
+          "YAQINLIK"
+        ],
+        [
+          24,
+          27,
+          "deganda nimani olamiz?"
+        ],
+        [
+          28,
+          32,
+          "bir-birini eshita bilish"
+        ]
+      ]
+    },
+    {
+      "num": "2",
+      "clip": 2,
+      "from": 26,
+      "to": 31,
+      "lines": [
+        [
+          28,
+          28,
+          "KUTISH"
+        ],
+        [
+          29,
+          30,
+          "paydo bo'ladi"
+        ],
+        [
+          31,
+          31,
+          "kutadi..."
+        ]
+      ]
+    },
+    {
+      "num": "3",
+      "clip": 3,
+      "from": 87,
+      "to": 100,
+      "lines": [
+        [
+          88,
+          88,
+          "UMIDSIZLIK"
+        ],
+        [
+          89,
+          91,
+          "olib keladi"
+        ],
+        [
+          92,
+          97,
+          "yoki bir-biridan ko'ngil qolish"
+        ]
+      ]
+    }
+  ],
+  "broll": [
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_50311.mp4",
+      "phrases": [
+        0,
+        0
+      ],
+      "ss": 0,
+      "x": 0.45
+    },
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_272632.mp4",
+      "phrases": [
+        1,
+        1
+      ],
+      "ss": 1
+    },
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_233399.mp4",
+      "phrases": [
+        6,
+        8
+      ],
+      "ss": 1.5
+    },
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_301635.mp4",
+      "phrases": [
+        11,
+        12
+      ],
+      "ss": 0.5
+    },
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_245932.mp4",
+      "phrases": [
+        14,
+        16
+      ],
+      "ss": 0
+    },
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_326218.mp4",
+      "phrases": [
+        19,
+        20
+      ],
+      "ss": 0.5
+    },
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_217105.mp4",
+      "phrases": [
+        27,
+        29
+      ],
+      "ss": 5
+    },
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_272633.mp4",
+      "phrases": [
+        33,
+        35
+      ],
+      "ss": 0.5
+    }
   ]
 }

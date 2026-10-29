@@ -195,7 +195,7 @@ def build_ass(proj, words, tl, fonts, broll_spans=()):
         t_last = tl.map(c, cw[i1]["e"])
         nxt = min(x for x in nexts if x > t0 + 0.01)
         t1 = min(nxt, t_last + 0.7)
-        on_broll = any(a <= t0 + 0.05 and t0 < b for a, b in broll_spans)
+        on_broll = any(a <= t0 + 0.05 and t0 < b - 0.2 for a, b in broll_spans)
         c1 = "\\c" + WHITE if on_broll else ""   # b-roll ustida ikkala qator oq (referensdagidek)
         add(10, t0, t1, "Sub1", f"{{\\an5\\pos({W // 2},1165)\\fs{fit_size('Sub1', l1, fonts, SUB_MAXW)}{c1}}}"
             + reveal(l1, times[:n1], t0))
@@ -261,22 +261,24 @@ def build_video(proj, tl, ass_path, fonts, out, brolls=()):
         fc.append(f"[{c - 1}:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,afade=t=out:st={max(d - 0.02, 0):.3f}:d=0.02[a{k}]")
         vl.append(f"[v{k}][a{k}]")
     n = len(tl.segs)
-    fc.append("".join(vl) + f"concat=n={n}:v=1:a=1[vc][ac]")
+    fc.append("".join(vl) + f"concat=n={n}:v=1:a=1[vraw][ac]")
+    # rang faqat spiker kadriga (b-rollga vinyetka tushsa osmonda halqa paydo bo'ladi)
+    fc.append("[vraw]eq=contrast=1.06:saturation=1.08:brightness=-0.01,colorbalance=rs=0.03:gs=0.01:bs=-0.03,"
+              "vignette=PI/5[vc]")
     base = "vc"
-    for k, (path, ss, a, b) in enumerate(brolls):
+    for k, (path, ss, a, b, bx) in enumerate(brolls):
         i = len(clips) + k
         fc.append(f"[{i}:v]trim={ss}:{ss + b - a},setpts=PTS-STARTPTS+{a}/TB,fps={FPS},"
-                  f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setsar=1,"
+                  f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}:(iw-{W})*{bx}:(ih-{H})/2,setsar=1,"
                   f"eq=contrast=1.04:saturation=1.05[br{k}]")
         fc.append(f"[{base}][br{k}]overlay=enable='between(t,{a:.3f},{b:.3f})':eof_action=pass[ov{k}]")
         base = f"ov{k}"
-    fc.append(f"[{base}]eq=contrast=1.06:saturation=1.08:brightness=-0.01,colorbalance=rs=0.03:gs=0.01:bs=-0.03,"
-              f"vignette=PI/5,fps={FPS},ass={ass_path}:fontsdir={fonts},format=yuv420p[vo]")
+    fc.append(f"[{base}]fps={FPS},ass={ass_path}:fontsdir={fonts},format=yuv420p[vo]")
     fc.append("[ac]highpass=f=80,acompressor=threshold=0.1:ratio=3:attack=10:release=200,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[ao]")
     cmd = ["ffmpeg", "-y", "-v", "error"]
     for p in clips:
         cmd += ["-i", p]
-    for path, _, _, _ in brolls:
+    for path, *_ in brolls:
         cmd += ["-an", "-i", path]
     cmd += ["-filter_complex", ";".join(fc), "-map", "[vo]", "-map", "[ao]",
             "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-profile:v", "high",
@@ -298,12 +300,13 @@ def main():
     ph = proj["phrases"]
     for br in proj.get("broll", []):
         p0, p1 = ph[br["phrases"][0]], ph[br["phrases"][1]]
-        a = tl.map(p0[0], words[str(p0[0])][p0[1]]["s"]) - 0.05
+        a = max(0.0, tl.map(p0[0], words[str(p0[0])][p0[1]]["s"]) - 0.05)
         b = tl.map(p1[0], words[str(p1[0])][p1[2]]["e"]) + 0.15
         path = br["file"] if os.path.isabs(br["file"]) else os.path.join(base, br["file"])
-        brolls.append((path, br.get("ss", 0), round(a, 3), round(min(b, a + duration(path) - br.get("ss", 0)), 3)))
+        brolls.append((path, br.get("ss", 0), round(a, 3), round(min(b, a + duration(path) - br.get("ss", 0)), 3),
+                       br.get("x", 0.5)))
     ass_path = os.path.join(out_dir, "subs.ass")
-    open(ass_path, "w").write(build_ass(proj, words, tl, fonts, [(a, b) for _, _, a, b in brolls]))
+    open(ass_path, "w").write(build_ass(proj, words, tl, fonts, [(a, b) for _, _, a, b, _ in brolls]))
     json.dump([dict(clip=c, src=[a, b], out=round(o, 3)) for c, a, b, o in tl.segs],
               open(os.path.join(out_dir, "timeline.json"), "w"), indent=1)
     print(f"{len(tl.segs)} ta bo'lak, yakuniy davomiylik {tl.total:.1f} s")
