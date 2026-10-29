@@ -1,0 +1,218 @@
+#!/usr/bin/env python3
+"""Reels montaji: pauzalarni kesish + punch-in zoom + so'zma-so'z subtitr + raqamli kartalar.
+
+Foydalanish: python3 build.py project.json out_dir fonts_dir
+"""
+import json, os, re, subprocess, sys
+
+W, H, FPS = 1080, 1920, 30
+BROWN = "&H00122645&"      # #452612
+YELLOW = "&H001CB2F2&"     # #F2B21C
+WHITE = "&H00FFFFFF&"
+CARD_BG = "&H00FCFCFC&"
+
+SIL_DB, SIL_MIN, PAD = -35, 0.45, 0.15
+
+
+def run(cmd, **kw):
+    return subprocess.run(cmd, check=True, capture_output=True, text=True, **kw)
+
+
+def duration(path):
+    out = run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", path]).stdout
+    return float(out.strip())
+
+
+def speech_segments(path):
+    """Ovoz bor bo'laklar (src_start, src_end): uzun pauzalar PAD qoldirib kesiladi."""
+    err = run(["ffmpeg", "-i", path, "-af", f"silencedetect=n={SIL_DB}dB:d={SIL_MIN}", "-f", "null", "-"]).stderr
+    starts = [float(x) for x in re.findall(r"silence_start: ([0-9.]+)", err)]
+    ends = [float(x) for x in re.findall(r"silence_end: ([0-9.]+)", err)]
+    dur = duration(path)
+    segs, cur = [], 0.0
+    for s, e in zip(starts, ends + [dur] * (len(starts) - len(ends))):
+        if s - PAD > cur:
+            segs.append((cur, min(s + PAD, dur)))
+        cur = max(cur, e - PAD)
+    if dur - cur > 0.1:
+        segs.append((cur, dur))
+    return [(round(a, 3), round(b, 3)) for a, b in segs if b - a > 0.15]
+
+
+class Timeline:
+    def __init__(self, clips):
+        self.segs = []  # (clip_no, src_start, src_end, out_start)
+        t = 0.0
+        for ci, path in enumerate(clips, 1):
+            for a, b in speech_segments(path):
+                self.segs.append((ci, a, b, t))
+                t += b - a
+        self.total = t
+
+    def map(self, clip, t):
+        cand = [s for s in self.segs if s[0] == clip]
+        for c, a, b, o in cand:
+            if t <= b:
+                return o + max(0.0, t - a)
+        c, a, b, o = cand[-1]
+        return o + (b - a)
+
+
+def ts(t):
+    t = max(0.0, t)
+    cs = int(round(t * 100))
+    return f"{cs // 360000}:{cs // 6000 % 60:02d}:{cs // 100 % 60:02d}.{cs % 100:02d}"
+
+
+def rrect(w, h, r):
+    k = r * 0.45
+    return (f"m {r} 0 l {w - r} 0 b {w - k} 0 {w} {k} {w} {r} l {w} {h - r} b {w} {h - k} {w - k} {h} {w - r} {h} "
+            f"l {r} {h} b {k} {h} 0 {h - k} 0 {h - r} l 0 {r} b 0 {k} {k} 0 {r} 0")
+
+
+def word_times(words, i0, i1, n, tl, clip):
+    """n ta ko'rinadigan so'zni ASR so'zlari [i0..i1] vaqtlariga taqsimlash."""
+    idx = list(range(i0, i1 + 1))
+    out = []
+    for k in range(n):
+        j = idx[round(k * (len(idx) - 1) / max(1, n - 1))] if n > 1 else idx[0]
+        out.append(tl.map(clip, words[j]["s"]))
+    return out
+
+
+def reveal(text, times, t0, dur=0.18, blur=10):
+    """Har bir so'z o'z vaqtida blurdan aniqlikka + shaffoflikdan chiqadi; joylashuv oldindan tayyor."""
+    parts = []
+    for w, t in zip(text.split(), times):
+        a = int((t - t0) * 1000)
+        b = a + int(dur * 1000)
+        parts.append(f"{{\\alpha&HFF&\\blur{blur}\\t({max(a, 0)},{max(b, 1)},\\alpha&H00&\\blur0)}}{w}")
+    return " ".join(parts)
+
+
+def build_ass(proj, words, tl):
+    ev = []
+
+    def add(layer, a, b, style, text):
+        ev.append(f"Dialogue: {layer},{ts(a)},{ts(b)},{style},,0,0,0,,{text}")
+
+    # --- hook plashkasi (statik, referensdagidek)
+    hk = proj["hook"]
+    hc, hi = hk["until"]
+    t_end = tl.map(hc, words[str(hc)][hi]["e"]) + 0.1
+    bw, bh, x0, y0 = 900, 250, (W - 900) // 2, 1080
+    add(5, 0, t_end, "Box", f"{{\\an7\\pos({x0 - 5},{y0 - 5})\\p1\\c{WHITE}}}{rrect(bw + 10, bh + 10, 26)}")
+    add(6, 0, t_end, "Box", f"{{\\an7\\pos({x0},{y0})\\p1\\c{BROWN}}}{rrect(bw, bh, 22)}")
+    add(7, 0, t_end, "Hook", f"{{\\an8\\pos({W // 2},{y0 + 22})\\fs138}}{hk['l1']}")
+    add(7, 0, t_end, "Hook", f"{{\\an8\\pos({W // 2},{y0 + 152})\\fs84}}{hk['l2']}")
+    sw, sh = 600, 120
+    add(6, 0, t_end, "Box", f"{{\\an7\\pos({(W - sw) // 2 - 5},{y0 + bh + 8})\\p1\\c{BROWN}}}{rrect(sw + 10, sh + 10, 20)}")
+    add(7, 0, t_end, "Box", f"{{\\an7\\pos({(W - sw) // 2},{y0 + bh + 13})\\p1\\c{WHITE}}}{rrect(sw, sh, 16)}")
+    add(8, 0, t_end, "Hook", f"{{\\an5\\pos({W // 2},{y0 + bh + 13 + sh // 2 + 4})\\fs110\\c{BROWN}\\3c{BROWN}\\shad0}}{hk['l3']}")
+
+    # --- subtitrlar: 1-qator sariq BOSH HARF, 2-qator oq
+    ph = [p for p in proj["phrases"]]
+    starts = []
+    for p in ph:
+        c, i0, i1 = p[:3]
+        starts.append(tl.map(c, words[str(c)][i0]["s"]))
+    card_spans = []
+    for cd in proj["cards"]:
+        cw = words[str(cd["clip"])]
+        card_spans.append((tl.map(cd["clip"], cw[cd["from"]]["s"]) - 0.35, tl.map(cd["clip"], cw[cd["to"]]["e"]) + 0.25))
+    nexts = sorted(starts + [a for a, _ in card_spans] + [tl.total])
+
+    for p, t0 in zip(ph, starts):
+        c, i0, i1, l1, l2 = p[:5]
+        if "hide" in p[5:]:
+            continue
+        cw = words[str(c)]
+        n1, n2 = len(l1.split()), len(l2.split())
+        times = word_times(cw, i0, i1, n1 + n2, tl, c)
+        t_last = tl.map(c, cw[i1]["e"])
+        nxt = min(x for x in nexts if x > t0 + 0.01)
+        t1 = min(nxt, t_last + 0.7)
+        add(10, t0, t1, "Sub1", f"{{\\an5\\pos({W // 2},1170)}}" + reveal(l1, times[:n1], t0))
+        if l2:
+            add(10, t0, t1, "Sub2", f"{{\\an5\\pos({W // 2},1252)}}" + reveal(l2, times[n1:], t0))
+
+    # --- raqamli kartalar: oq fon, raqam pastdan blur bilan ko'tariladi, matn so'zma-so'z
+    for cd, (a, b) in zip(proj["cards"], card_spans):
+        c, cw = cd["clip"], words[str(cd["clip"])]
+        add(20, a, b, "Box", f"{{\\an7\\pos(0,0)\\p1\\c{CARD_BG}}}m 0 0 l {W} 0 {W} {H} 0 {H}")
+        r0, r1 = 120, 620  # ms
+        add(21, a, b, "Num", f"{{\\an2\\move(290,1930,290,1625,{r0},{r1})\\alpha&HFF&\\blur28"
+                             f"\\t({r0},{r1},0.5,\\alpha&H00&\\blur0)}}{cd['num']}")
+        for k, (j0, j1, text) in enumerate(cd["lines"]):
+            style, y = [("Card1", 925), ("Card2", 995), ("Card3", 1050)][k]
+            times = word_times(cw, j0, j1, len(text.split()), tl, c)
+            add(22, a, b, style, f"{{\\an4\\pos(545,{y})}}" + reveal(text, times, a, blur=8))
+
+    head = f"""[Script Info]
+ScriptType: v4.00+
+PlayResX: {W}
+PlayResY: {H}
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub1,Poppins,70,{YELLOW},{YELLOW},&H00000000,&H8C000000,-1,0,0,0,100,100,0,0,1,0,3,5,0,0,0,1
+Style: Sub2,Poppins,56,{WHITE},{WHITE},&H00000000,&H8C000000,0,0,0,0,100,100,0,0,1,0,3,5,0,0,0,1
+Style: Hook,Bebas Neue,120,{WHITE},{WHITE},{WHITE},&H64000000,0,0,0,0,100,100,1,0,1,1.5,2,8,0,0,0,1
+Style: Box,Arial,20,{WHITE},{WHITE},&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
+Style: Num,Anton,1500,{BROWN},{BROWN},&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,2,0,0,0,1
+Style: Card1,Poppins,72,{BROWN},{BROWN},&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,0,0,4,0,0,0,1
+Style: Card2,Poppins Medium,50,{BROWN},{BROWN},&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,4,0,0,0,1
+Style: Card3,Poppins,36,{BROWN},{BROWN},&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,4,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+"""
+    return head + "\n".join(ev) + "\n"
+
+
+def build_video(proj, tl, ass_path, fonts, out):
+    clips = proj["clips"]
+    fx, fy = proj["focus"]
+    zooms = proj["zooms"]
+    fc, vl, al = [], [], []
+    for k, (c, a, b, _) in enumerate(tl.segs):
+        z = zooms[k % len(zooms)]
+        sw, sh = int(W * z) // 2 * 2, int(H * z) // 2 * 2
+        cx, cy = int(min(max(fx * sw - W * fx, 0), sw - W)), int(min(max(fy * sh - H * fy, 0), sh - H))
+        d = b - a
+        fc.append(f"[{c - 1}:v]trim={a}:{b},setpts=PTS-STARTPTS,scale={sw}:{sh}:flags=lanczos,crop={W}:{H}:{cx}:{cy},setsar=1[v{k}]")
+        fc.append(f"[{c - 1}:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,afade=t=out:st={max(d - 0.02, 0):.3f}:d=0.02[a{k}]")
+        vl.append(f"[v{k}][a{k}]")
+    n = len(tl.segs)
+    fc.append("".join(vl) + f"concat=n={n}:v=1:a=1[vc][ac]")
+    fc.append("[vc]eq=contrast=1.06:saturation=1.08:brightness=-0.01,colorbalance=rs=0.03:gs=0.01:bs=-0.03,"
+              f"vignette=PI/5,fps={FPS},ass={ass_path}:fontsdir={fonts},format=yuv420p[vo]")
+    fc.append("[ac]highpass=f=80,acompressor=threshold=0.1:ratio=3:attack=10:release=200,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[ao]")
+    cmd = ["ffmpeg", "-y", "-v", "error"]
+    for p in clips:
+        cmd += ["-i", p]
+    cmd += ["-filter_complex", ";".join(fc), "-map", "[vo]", "-map", "[ao]",
+            "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-profile:v", "high",
+            "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", out]
+    subprocess.run(cmd, check=True)
+
+
+def main():
+    proj_path, out_dir, fonts = sys.argv[1:4]
+    base = os.path.dirname(os.path.abspath(proj_path))
+    proj = json.load(open(proj_path))
+    words = json.load(open(os.path.join(base, proj["words"])))
+    os.makedirs(out_dir, exist_ok=True)
+    tl = Timeline(proj["clips"])
+    ass_path = os.path.join(out_dir, "subs.ass")
+    open(ass_path, "w").write(build_ass(proj, words, tl))
+    json.dump([dict(clip=c, src=[a, b], out=round(o, 3)) for c, a, b, o in tl.segs],
+              open(os.path.join(out_dir, "timeline.json"), "w"), indent=1)
+    print(f"{len(tl.segs)} ta bo'lak, yakuniy davomiylik {tl.total:.1f} s")
+    build_video(proj, tl, ass_path, fonts, os.path.join(out_dir, "final.mp4"))
+
+
+if __name__ == "__main__":
+    main()
