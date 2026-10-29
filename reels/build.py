@@ -110,6 +110,39 @@ def word_times(words, i0, i1, n, tl, clip):
     return out
 
 
+FONT_FILES = {"Sub1": "Poppins-Bold.ttf", "Sub2": "Poppins-Regular.ttf", "Card1": "Poppins-Bold.ttf",
+              "Card2": "Poppins-Medium.ttf", "Card3": "Poppins-Regular.ttf"}
+SIZES = {"Sub1": 92, "Sub2": 72, "Card1": 100, "Card2": 68, "Card3": 54}
+ROW_H = {"Card1": 108, "Card2": 80, "Card3": 64}
+SUB_MAXW, CARD_X, CARD_MAXW = 980, 545, 505
+_fonts = {}
+
+
+def text_width(style, text, fs, fonts_dir):
+    """libass o'lchamidagi (fs) matn kengligi, px."""
+    from PIL import ImageFont
+    f = _fonts.setdefault(style, ImageFont.truetype(os.path.join(fonts_dir, FONT_FILES[style]), 200))
+    asc, desc = f.getmetrics()
+    return f.getlength(text) * fs / (asc + desc)
+
+
+def fit_size(style, text, fonts_dir, maxw):
+    fs = SIZES[style]
+    w = text_width(style, text, fs, fonts_dir)
+    return fs if w <= maxw else int(fs * maxw / w)
+
+
+def wrap(style, words, fonts_dir, maxw):
+    """So'zlar ro'yxatini maxw ga sig'adigan qatorlarga bo'lish (indekslar bilan)."""
+    rows, cur = [], []
+    for i, w in enumerate(words):
+        if cur and text_width(style, " ".join(words[j] for j in cur + [i]), SIZES[style], fonts_dir) > maxw:
+            rows.append(cur)
+            cur = []
+        cur.append(i)
+    return rows + [cur] if cur else rows
+
+
 def reveal(text, times, t0, dur=0.18, blur=10):
     """Har bir so'z o'z vaqtida blurdan aniqlikka + shaffoflikdan chiqadi; joylashuv oldindan tayyor."""
     parts = []
@@ -120,7 +153,7 @@ def reveal(text, times, t0, dur=0.18, blur=10):
     return " ".join(parts)
 
 
-def build_ass(proj, words, tl):
+def build_ass(proj, words, tl, fonts, broll_spans=()):
     ev = []
 
     def add(layer, a, b, style, text):
@@ -162,9 +195,13 @@ def build_ass(proj, words, tl):
         t_last = tl.map(c, cw[i1]["e"])
         nxt = min(x for x in nexts if x > t0 + 0.01)
         t1 = min(nxt, t_last + 0.7)
-        add(10, t0, t1, "Sub1", f"{{\\an5\\pos({W // 2},1170)}}" + reveal(l1, times[:n1], t0))
+        on_broll = any(a <= t0 + 0.05 and t0 < b for a, b in broll_spans)
+        c1 = "\\c" + WHITE if on_broll else ""   # b-roll ustida ikkala qator oq (referensdagidek)
+        add(10, t0, t1, "Sub1", f"{{\\an5\\pos({W // 2},1165)\\fs{fit_size('Sub1', l1, fonts, SUB_MAXW)}{c1}}}"
+            + reveal(l1, times[:n1], t0))
         if l2:
-            add(10, t0, t1, "Sub2", f"{{\\an5\\pos({W // 2},1252)}}" + reveal(l2, times[n1:], t0))
+            add(10, t0, t1, "Sub2", f"{{\\an5\\pos({W // 2},1268)\\fs{fit_size('Sub2', l2, fonts, SUB_MAXW)}}}"
+                + reveal(l2, times[n1:], t0))
 
     # --- raqamli kartalar: oq fon, raqam pastdan blur bilan ko'tariladi, matn so'zma-so'z
     for cd, (a, b) in zip(proj["cards"], card_spans):
@@ -173,10 +210,18 @@ def build_ass(proj, words, tl):
         r0, r1 = 120, 620  # ms
         add(21, a, b, "Num", f"{{\\an2\\move(290,1930,290,1625,{r0},{r1})\\alpha&HFF&\\blur28"
                              f"\\t({r0},{r1},0.5,\\alpha&H00&\\blur0)}}{cd['num']}")
+        rows = []  # (style, so'zlar, vaqtlar)
         for k, (j0, j1, text) in enumerate(cd["lines"]):
-            style, y = [("Card1", 925), ("Card2", 995), ("Card3", 1050)][k]
-            times = word_times(cw, j0, j1, len(text.split()), tl, c)
-            add(22, a, b, style, f"{{\\an4\\pos(545,{y})}}" + reveal(text, times, a, blur=8))
+            style = ["Card1", "Card2", "Card3"][min(k, 2)]
+            ws = text.split()
+            times = word_times(cw, j0, j1, len(ws), tl, c)
+            for r in wrap(style, ws, fonts, CARD_MAXW):
+                rows.append((style, [ws[i] for i in r], [times[i] for i in r]))
+        y = 960 - sum(ROW_H[st] for st, _, _ in rows) / 2
+        for st, ws, times in rows:
+            y += ROW_H[st] / 2
+            add(22, a, b, st, f"{{\\an4\\pos({CARD_X},{int(y)})}}" + reveal(" ".join(ws), times, a, blur=8))
+            y += ROW_H[st] / 2
 
     head = f"""[Script Info]
 ScriptType: v4.00+
@@ -187,14 +232,14 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Sub1,Poppins,70,{YELLOW},{YELLOW},&H00000000,&H8C000000,-1,0,0,0,100,100,0,0,1,0,3,5,0,0,0,1
-Style: Sub2,Poppins,56,{WHITE},{WHITE},&H00000000,&H8C000000,0,0,0,0,100,100,0,0,1,0,3,5,0,0,0,1
+Style: Sub1,Poppins,92,{YELLOW},{YELLOW},&H00000000,&H8C000000,-1,0,0,0,100,100,0,0,1,0,3,5,0,0,0,1
+Style: Sub2,Poppins,72,{WHITE},{WHITE},&H00000000,&H8C000000,0,0,0,0,100,100,0,0,1,0,3,5,0,0,0,1
 Style: Hook,Bebas Neue,120,{WHITE},{WHITE},{WHITE},&H64000000,0,0,0,0,100,100,1,0,1,1.5,2,8,0,0,0,1
 Style: Box,Arial,20,{WHITE},{WHITE},&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
 Style: Num,Anton,1500,{BROWN},{BROWN},&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,2,0,0,0,1
-Style: Card1,Poppins,72,{BROWN},{BROWN},&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,0,0,4,0,0,0,1
-Style: Card2,Poppins Medium,50,{BROWN},{BROWN},&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,4,0,0,0,1
-Style: Card3,Poppins,36,{BROWN},{BROWN},&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,4,0,0,0,1
+Style: Card1,Poppins,100,{BROWN},{BROWN},&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,0,0,4,0,0,0,1
+Style: Card2,Poppins Medium,68,{BROWN},{BROWN},&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,4,0,0,0,1
+Style: Card3,Poppins,54,{BROWN},{BROWN},&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,4,0,0,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -202,7 +247,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     return head + "\n".join(ev) + "\n"
 
 
-def build_video(proj, tl, ass_path, fonts, out):
+def build_video(proj, tl, ass_path, fonts, out, brolls=()):
     clips = proj["clips"]
     fx, fy = proj["focus"]
     zooms = proj["zooms"]
@@ -217,12 +262,22 @@ def build_video(proj, tl, ass_path, fonts, out):
         vl.append(f"[v{k}][a{k}]")
     n = len(tl.segs)
     fc.append("".join(vl) + f"concat=n={n}:v=1:a=1[vc][ac]")
-    fc.append("[vc]eq=contrast=1.06:saturation=1.08:brightness=-0.01,colorbalance=rs=0.03:gs=0.01:bs=-0.03,"
+    base = "vc"
+    for k, (path, ss, a, b) in enumerate(brolls):
+        i = len(clips) + k
+        fc.append(f"[{i}:v]trim={ss}:{ss + b - a},setpts=PTS-STARTPTS+{a}/TB,fps={FPS},"
+                  f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setsar=1,"
+                  f"eq=contrast=1.04:saturation=1.05[br{k}]")
+        fc.append(f"[{base}][br{k}]overlay=enable='between(t,{a:.3f},{b:.3f})':eof_action=pass[ov{k}]")
+        base = f"ov{k}"
+    fc.append(f"[{base}]eq=contrast=1.06:saturation=1.08:brightness=-0.01,colorbalance=rs=0.03:gs=0.01:bs=-0.03,"
               f"vignette=PI/5,fps={FPS},ass={ass_path}:fontsdir={fonts},format=yuv420p[vo]")
     fc.append("[ac]highpass=f=80,acompressor=threshold=0.1:ratio=3:attack=10:release=200,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[ao]")
     cmd = ["ffmpeg", "-y", "-v", "error"]
     for p in clips:
         cmd += ["-i", p]
+    for path, _, _, _ in brolls:
+        cmd += ["-an", "-i", path]
     cmd += ["-filter_complex", ";".join(fc), "-map", "[vo]", "-map", "[ao]",
             "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-profile:v", "high",
             "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", out]
@@ -239,12 +294,20 @@ def main():
     for c, i0 in [(p[0], p[1]) for p in proj["phrases"]] + [(cd["clip"], cd["from"]) for cd in proj["cards"]]:
         splits.setdefault(c, []).append(round(words[str(c)][i0]["s"] - 0.05, 3))
     tl = Timeline(proj["clips"], splits)
+    brolls = []
+    ph = proj["phrases"]
+    for br in proj.get("broll", []):
+        p0, p1 = ph[br["phrases"][0]], ph[br["phrases"][1]]
+        a = tl.map(p0[0], words[str(p0[0])][p0[1]]["s"]) - 0.05
+        b = tl.map(p1[0], words[str(p1[0])][p1[2]]["e"]) + 0.15
+        path = br["file"] if os.path.isabs(br["file"]) else os.path.join(base, br["file"])
+        brolls.append((path, br.get("ss", 0), round(a, 3), round(min(b, a + duration(path) - br.get("ss", 0)), 3)))
     ass_path = os.path.join(out_dir, "subs.ass")
-    open(ass_path, "w").write(build_ass(proj, words, tl))
+    open(ass_path, "w").write(build_ass(proj, words, tl, fonts, [(a, b) for _, _, a, b in brolls]))
     json.dump([dict(clip=c, src=[a, b], out=round(o, 3)) for c, a, b, o in tl.segs],
               open(os.path.join(out_dir, "timeline.json"), "w"), indent=1)
     print(f"{len(tl.segs)} ta bo'lak, yakuniy davomiylik {tl.total:.1f} s")
-    build_video(proj, tl, ass_path, fonts, os.path.join(out_dir, "final.mp4"))
+    build_video(proj, tl, ass_path, fonts, os.path.join(out_dir, "final.mp4"), brolls)
 
 
 if __name__ == "__main__":
