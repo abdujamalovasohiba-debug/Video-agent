@@ -11,7 +11,9 @@ YELLOW = "&H001CB2F2&"     # #F2B21C
 WHITE = "&H00FFFFFF&"
 CARD_BG = "&H00FCFCFC&"
 
-SIL_DB, SIL_MIN, PAD = -35, 0.45, 0.15
+# Pauza kesish sozlamalari: gap oxiridan TAIL, keyingi gap boshidan LEAD qoldiriladi
+SIL_DB, SIL_MIN = -40, 0.55
+TAIL, LEAD, MIN_CUT, MIN_SEG = 0.3, 0.2, 0.25, 1.2
 
 
 def run(cmd, **kw):
@@ -24,29 +26,57 @@ def duration(path):
 
 
 def speech_segments(path):
-    """Ovoz bor bo'laklar (src_start, src_end): uzun pauzalar PAD qoldirib kesiladi."""
+    """Ovoz bor bo'laklar (src_start, src_end).
+
+    Faqat uzun pauzalar kesiladi: gap oxiridan TAIL qoldiriladi (so'zning so'nggi
+    tovushi yutilmasin), MIN_SEG dan qisqa bo'lak hosil qiladigan kesish tashlanadi.
+    """
     err = run(["ffmpeg", "-i", path, "-af", f"silencedetect=n={SIL_DB}dB:d={SIL_MIN}", "-f", "null", "-"]).stderr
     starts = [float(x) for x in re.findall(r"silence_start: ([0-9.]+)", err)]
     ends = [float(x) for x in re.findall(r"silence_end: ([0-9.]+)", err)]
     dur = duration(path)
+    ends += [dur] * (len(starts) - len(ends))
+    cuts = []
+    for s, e in zip(starts, ends):
+        a, b = s + TAIL, e - LEAD
+        if s < 0.7 and not cuts:      # klip boshidagi shovqin/sukut
+            a = 0.0
+        if e >= dur - 0.05:           # klip oxiridagi sukut
+            b = dur
+        if b - a >= MIN_CUT:
+            cuts.append((max(a, 0.0), min(b, dur)))
     segs, cur = [], 0.0
-    for s, e in zip(starts, ends + [dur] * (len(starts) - len(ends))):
-        if s - PAD > cur:
-            segs.append((cur, min(s + PAD, dur)))
-        cur = max(cur, e - PAD)
+    for a, b in cuts:
+        if a <= 0.01:          # klip boshidagi sukut
+            cur = b
+            continue
+        if a - cur < MIN_SEG and b < dur - 0.01:   # juda qisqa bo'lak hosil qilmaslik
+            continue
+        segs.append((cur, a))
+        cur = b
     if dur - cur > 0.1:
         segs.append((cur, dur))
     return [(round(a, 3), round(b, 3)) for a, b in segs if b - a > 0.15]
 
 
+ZOOM_EVERY = 2.5  # uzun bo'lakda zoom shu oraliqdan keyin, yangi jumla boshida almashadi
+
+
 class Timeline:
-    def __init__(self, clips):
+    def __init__(self, clips, splits=None):
+        """splits: {clip_no: [jumla boshlanish vaqtlari]} - vaqt kesilmaydi, faqat zoom almashadi."""
         self.segs = []  # (clip_no, src_start, src_end, out_start)
         t = 0.0
         for ci, path in enumerate(clips, 1):
             for a, b in speech_segments(path):
-                self.segs.append((ci, a, b, t))
-                t += b - a
+                cur = a
+                for x in sorted((splits or {}).get(ci, [])):
+                    if cur + ZOOM_EVERY <= x <= b - 1.0:
+                        self.segs.append((ci, cur, x, t))
+                        t += x - cur
+                        cur = x
+                self.segs.append((ci, cur, b, t))
+                t += b - cur
         self.total = t
 
     def map(self, clip, t):
@@ -205,7 +235,10 @@ def main():
     proj = json.load(open(proj_path))
     words = json.load(open(os.path.join(base, proj["words"])))
     os.makedirs(out_dir, exist_ok=True)
-    tl = Timeline(proj["clips"])
+    splits = {}
+    for c, i0 in [(p[0], p[1]) for p in proj["phrases"]] + [(cd["clip"], cd["from"]) for cd in proj["cards"]]:
+        splits.setdefault(c, []).append(round(words[str(c)][i0]["s"] - 0.05, 3))
+    tl = Timeline(proj["clips"], splits)
     ass_path = os.path.join(out_dir, "subs.ass")
     open(ass_path, "w").write(build_ass(proj, words, tl))
     json.dump([dict(clip=c, src=[a, b], out=round(o, 3)) for c, a, b, o in tl.segs],
