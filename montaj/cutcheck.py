@@ -12,7 +12,7 @@ def env(clip,t):
     x=cache[clip]; a=int(max(t,0)*16000); seg=x[a:a+800]
     return 20*np.log10(np.sqrt(np.mean(seg**2))+1e-9) if len(seg) else -99
 for s in c['segments']:
-    pre=max(env(s['clip'],s['in']-0.05*k) for k in (1,2))
-    post=max(env(s['clip'],s['out']+0.05*k) for k in (0,1))
-    flag=("  <-- KIRISH kesilgan?" if pre>-42 else "")+("  <-- OXIRI kesilgan?" if post>-42 else "")
+    pre=max(env(s['clip'],s['in']-0.05*k) for k in (1,2,3))
+    post=max(env(s['clip'],s['out']+0.05*k) for k in (0,1,2))
+    flag=("  <-- KIRISH kesilgan?" if pre>-50 else "")+("  <-- OXIRI kesilgan?" if post>-50 else "")
     print(f"{s['clip']} {s['in']:.2f}-{s['out']:.2f}  oldin {pre:5.1f}dB  keyin {post:5.1f}dB{flag}")

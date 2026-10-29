@@ -39,19 +39,19 @@
   {
    "clip": "B",
    "in": 3.78,
-   "out": 6.44,
+   "out": 6.52,
    "frame": "tight",
    "transition": "cut"
   },
   {
    "clip": "B",
    "in": 6.64,
-   "out": 9.46,
+   "out": 9.62,
    "frame": "wide"
   },
   {
    "clip": "B",
-   "in": 9.72,
+   "in": 9.67,
    "out": 15.08,
    "frame": "wide",
    "mode": "plate",
@@ -151,7 +151,7 @@
    ],
    "out": [
     "B",
-    9.46
+    9.62
    ],
    "big": "30%",
    "sub": "CHEGIRMA",
