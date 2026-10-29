@@ -74,7 +74,7 @@ module.exports = {
         { label: "1-farq: natija", title: "«Продвигать» koʻpincha <mark>layk va koʻrish</mark> olib keladi.", body: "Ads Manager'da esa aniq natija tanlaysiz: direktga yozish, raqam qoldirish yoki xarid.", note: "Layk — chiroyli. Pul esa mijozdan keladi." },
         { label: "2-farq: kimga chiqadi", title: "Kimga chiqishini <mark>oʻzingiz boshqarasiz.</mark>", body: "Profilingizga kirganlarga qayta reklama yoqish, eski mijozlarni chiqarib tashlash, bir nechta reklamani solishtirish mumkin.", note: "«Продвигать»da bularning koʻpi yoʻq." },
         { label: "Qachon qaysi biri", title: "«Продвигать» ham <mark>kerak boʻladi.</mark>", body: "Postni shunchaki koʻproq odam koʻrsin desangiz — «Продвигать» yetadi.", note: "Mijoz, zayavka, sotuv kerak boʻlsa — Ads Manager." },
-        { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>«Продвигать» — post koʻproq koʻrilsin deb. Ads Manager — mijoz kelsin deb.", note: "<b>Siz qaysi biri bilan reklama yoqasiz? Izohda yozing.</b>" },
+        { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>«Продвигать» — post koʻproq koʻrilsin deb. Ads Manager — mijoz kelsin deb.", note: "<b>Reklama haqida oson tilda bilib borish uchun obuna boʻling — @sohiba_abdujamolova</b>" },
       ],
     },
     {
