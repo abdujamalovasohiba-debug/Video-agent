@@ -66,13 +66,13 @@
   {
    "clip": "1",
    "in": 12.55,
-   "out": 15.5,
+   "out": 15.6,
    "frame": "wide"
   },
   {
    "clip": "2",
    "in": 0.45,
-   "out": 2.16,
+   "out": 2.24,
    "frame": "wide2"
   },
   {
@@ -85,15 +85,15 @@
   },
   {
    "clip": "2",
-   "in": 4.45,
-   "out": 5.6,
+   "in": 4.42,
+   "out": 5.66,
    "frame": "wide",
    "mode": "dark"
   },
   {
    "clip": "2",
-   "in": 5.6,
-   "out": 8.65,
+   "in": 5.66,
+   "out": 8.74,
    "frame": "wide",
    "mode": "plate",
    "transition": "white_through",
@@ -132,8 +132,8 @@
   },
   {
    "clip": "3",
-   "in": 7.56,
-   "out": 10.45,
+   "in": 7.48,
+   "out": 10.5,
    "frame": "wide2"
   },
   {
@@ -199,11 +199,11 @@
    ],
    "to": [
     "2",
-    5.35
+    5.42
    ],
    "until": [
     "2",
-    5.6
+    5.66
    ],
    "y": 0.4,
    "lines": [

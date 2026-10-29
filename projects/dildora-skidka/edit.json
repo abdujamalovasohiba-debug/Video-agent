@@ -108,8 +108,8 @@
   },
   {
    "clip": "B",
-   "in": 15.38,
-   "out": 20.3,
+   "in": 15.3,
+   "out": 20.55,
    "frame": "wide",
    "transition": "mirror_slide"
   },
