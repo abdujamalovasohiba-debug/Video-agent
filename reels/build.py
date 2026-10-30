@@ -73,12 +73,18 @@ ZOOM_EVERY = 2.5  # uzun bo'lakda zoom shu oraliqdan keyin, yangi jumla boshida 
 
 
 class Timeline:
-    def __init__(self, clips, splits=None):
-        """splits: {clip_no: [jumla boshlanish vaqtlari]} - vaqt kesilmaydi, faqat zoom almashadi."""
+    def __init__(self, clips, splits=None, ends=None):
+        """splits: {clip_no: [jumla boshlanish vaqtlari]} - vaqt kesilmaydi, faqat zoom almashadi.
+        ends: {clip_no: soniya} - klipni shu joyda tugatish (yozuv chala gap bilan tugaganda)."""
         self.segs = []  # (clip_no, src_start, src_end, out_start)
         t = 0.0
         for ci, path in enumerate(clips, 1):
+            end = (ends or {}).get(str(ci))
             for a, b in speech_segments(path):
+                if end is not None:
+                    if a >= end:
+                        continue
+                    b = min(b, end)
                 cur = a
                 for x in sorted((splits or {}).get(ci, [])):
                     if cur + ZOOM_EVERY <= x <= b - 1.0:
@@ -308,7 +314,7 @@ def main():
     splits = {}
     for c, i0 in [(p[0], p[1]) for p in proj["phrases"]] + [(cd["clip"], cd["from"]) for cd in proj["cards"]]:
         splits.setdefault(c, []).append(round(words[str(c)][i0]["s"] - 0.05, 3))
-    tl = Timeline(proj["clips"], splits)
+    tl = Timeline(proj["clips"], splits, proj.get("clip_end"))
     brolls = []
     ph = proj["phrases"]
     for br in proj.get("broll", []):
