@@ -112,9 +112,9 @@ def word_times(words, i0, i1, n, tl, clip):
 
 FONT_FILES = {"Sub1": "Poppins-Bold.ttf", "Sub2": "Poppins-Regular.ttf", "Card1": "Poppins-Bold.ttf",
               "Card2": "Poppins-Medium.ttf", "Card3": "Poppins-Regular.ttf"}
-SIZES = {"Sub1": 92, "Sub2": 72, "Card1": 100, "Card2": 68, "Card3": 54}
+SIZES = {"Sub1": 104, "Sub2": 82, "Card1": 100, "Card2": 68, "Card3": 54}
 ROW_H = {"Card1": 108, "Card2": 80, "Card3": 64}
-SUB_MAXW, CARD_X, CARD_MAXW = 980, 545, 505
+SUB_MAXW, CARD_X, CARD_MAXW = 1000, 545, 505
 _fonts = {}
 
 
@@ -200,10 +200,10 @@ def build_ass(proj, words, tl, fonts, broll_spans=()):
         t1 = min(nxt, t_last + 0.7)
         on_broll = any(a <= t0 + 0.05 and t0 < b - 0.2 for a, b in broll_spans)
         c1 = "\\c" + WHITE if on_broll else ""   # b-roll ustida ikkala qator oq (referensdagidek)
-        add(10, t0, t1, "Sub1", f"{{\\an5\\pos({W // 2},1165)\\fs{fit_size('Sub1', l1, fonts, SUB_MAXW)}{c1}}}"
+        add(10, t0, t1, "Sub1", f"{{\\an5\\pos({W // 2},1160)\\fs{fit_size('Sub1', l1, fonts, SUB_MAXW)}{c1}}}"
             + reveal(l1, times[:n1], t0))
         if l2:
-            add(10, t0, t1, "Sub2", f"{{\\an5\\pos({W // 2},1268)\\fs{fit_size('Sub2', l2, fonts, SUB_MAXW)}}}"
+            add(10, t0, t1, "Sub2", f"{{\\an5\\pos({W // 2},1278)\\fs{fit_size('Sub2', l2, fonts, SUB_MAXW)}}}"
                 + reveal(l2, times[n1:], t0))
 
     # --- raqamli kartalar: oq fon, raqam pastdan blur bilan ko'tariladi, matn so'zma-so'z
@@ -235,8 +235,8 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Sub1,Poppins,92,{YELLOW},{YELLOW},&H00000000,&H8C000000,-1,0,0,0,100,100,0,0,1,0,3,5,0,0,0,1
-Style: Sub2,Poppins,72,{WHITE},{WHITE},&H00000000,&H8C000000,0,0,0,0,100,100,0,0,1,0,3,5,0,0,0,1
+Style: Sub1,Poppins,104,{YELLOW},{YELLOW},&H00000000,&H8C000000,-1,0,0,0,100,100,0,0,1,0,3,5,0,0,0,1
+Style: Sub2,Poppins,82,{WHITE},{WHITE},&H00000000,&H8C000000,0,0,0,0,100,100,0,0,1,0,3,5,0,0,0,1
 Style: Hook,Bebas Neue,120,{WHITE},{WHITE},{WHITE},&H64000000,0,0,0,0,100,100,1,0,1,1.5,2,8,0,0,0,1
 Style: Box,Arial,20,{WHITE},{WHITE},&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
 Style: Num,Anton,1500,{BROWN},{BROWN},&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,2,0,0,0,1
