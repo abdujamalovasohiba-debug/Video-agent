@@ -1,0 +1,223 @@
+{
+  "clips": [
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/6922a69c-copy_A787C18C-CD5B-4F23-9C79-08C4E838B2F9.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/10cc8ba5-copy_62A36B10-CEA0-447F-AF96-9D8C43DA02BE.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/8b0389cf-copy_76727608-E8C7-4741-9381-15107762E190.mov"
+  ],
+  "words": "words.json",
+  "focus": [
+    0.42,
+    0.33
+  ],
+  "zooms": [
+    1.0,
+    1.14
+  ],
+  "hook": {
+    "l1": "XAVOTIRLI",
+    "l2": "BOG'LANISH SEVGINI",
+    "l3": "BUZADI",
+    "until": [
+      1,
+      13
+    ]
+  },
+  "phrases": [
+    [
+      1,
+      0,
+      7,
+      "SHUNDAY BO'LADIKI",
+      "bir inson sevadi, yaxshi ko'radi",
+      "hide"
+    ],
+    [
+      1,
+      8,
+      13,
+      "LEKIN ICHKI DUNYOSIDA",
+      "muammo bor",
+      "hide"
+    ],
+    [
+      1,
+      14,
+      19,
+      "SHUNDA",
+      "bir-biriga bog'lanish buzilgan bo'ladi"
+    ],
+    [
+      1,
+      20,
+      26,
+      "BOG'LANISH",
+      "o'sha yoshidan shakllanadi"
+    ],
+    [
+      2,
+      0,
+      2,
+      "XAVOTIRLI BOG'LANISH",
+      "deymiz"
+    ],
+    [
+      2,
+      3,
+      10,
+      "BUNDA INSON",
+      "yaxshi ko'rib turib"
+    ],
+    [
+      2,
+      11,
+      15,
+      "O'SHA ODAMNI",
+      "yaxshi ko'rgani uchun"
+    ],
+    [
+      2,
+      33,
+      42,
+      "U O'YLAYDIKI",
+      "shunday qilib sevgimni saqlab qolaman"
+    ],
+    [
+      2,
+      43,
+      52,
+      "VAHOLANKI KUCHLI NAZORAT",
+      "yo'qotaman degan qo'rquv"
+    ],
+    [
+      2,
+      53,
+      56,
+      "U IKKINCHI TARAFNI",
+      ""
+    ],
+    [
+      3,
+      12,
+      18,
+      "VAHOLANKI NAZORAT",
+      "kuchli bo'lsa"
+    ],
+    [
+      3,
+      19,
+      24,
+      "NIMAGA MENDA NAZORAT?",
+      "nega men ishonmayman?"
+    ],
+    [
+      3,
+      25,
+      27,
+      "DEGAN SAVOLNI",
+      "qo'ymaydi"
+    ],
+    [
+      3,
+      28,
+      31,
+      "U MUAMMONI",
+      "boshqasidan ko'radi"
+    ],
+    [
+      3,
+      32,
+      33,
+      "DAVOLANISH KERAK",
+      ""
+    ]
+  ],
+  "cards": [
+    {
+      "num": "1",
+      "clip": 1,
+      "from": 27,
+      "to": 35,
+      "lines": [
+        [
+          27,
+          29,
+          "XAVOTIR"
+        ],
+        [
+          30,
+          32,
+          "inson sevadi-yu"
+        ],
+        [
+          33,
+          35,
+          "lekin ichida xavotir"
+        ]
+      ]
+    },
+    {
+      "num": "2",
+      "clip": 2,
+      "from": 16,
+      "to": 32,
+      "lines": [
+        [
+          16,
+          19,
+          "NAZORAT"
+        ],
+        [
+          20,
+          28,
+          "qayerga ketyapsan, nima qilyapsan, kim bilan yuribsan?"
+        ],
+        [
+          29,
+          32,
+          "hammasini nazorat qiladi"
+        ]
+      ]
+    },
+    {
+      "num": "3",
+      "clip": 3,
+      "from": 0,
+      "to": 11,
+      "lines": [
+        [
+          0,
+          1,
+          "UZOQLASHISH"
+        ],
+        [
+          2,
+          3,
+          "chegara qo'yish"
+        ],
+        [
+          4,
+          11,
+          "kelishmovchilikka olib keladi"
+        ]
+      ]
+    }
+  ],
+  "broll": [
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_291961.mp4",
+      "phrases": [
+        3,
+        3
+      ],
+      "ss": 0.5
+    },
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_326106.mp4",
+      "phrases": [
+        5,
+        6
+      ],
+      "ss": 1
+    }
+  ]
+}

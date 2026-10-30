@@ -25,6 +25,15 @@ def duration(path):
     return float(out.strip())
 
 
+def rms_db(path, a, b):
+    """[a, b] oraliqdagi o'rtacha ovoz balandligi, dB."""
+    import numpy as np
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", str(a), "-t", str(max(b - a, 0.02)), "-i", path,
+                          "-ac", "1", "-ar", "16000", "-f", "s16le", "-"], check=True, capture_output=True).stdout
+    x = np.frombuffer(raw, np.int16).astype(float) / 32768
+    return 20 * np.log10(np.sqrt((x ** 2).mean()) + 1e-9) if len(x) else -120.0
+
+
 def speech_segments(path):
     """Ovoz bor bo'laklar (src_start, src_end).
 
@@ -39,9 +48,10 @@ def speech_segments(path):
     cuts = []
     for s, e in zip(starts, ends):
         a, b = s + TAIL, e - LEAD
-        if s < 0.7 and not cuts:      # klip boshidagi shovqin/sukut
+        # klip boshidagi shovqin/sukut: klipning umumiy ovozidan ancha past bo'lsagina kesiladi
+        if not cuts and s < 0.7 and rms_db(path, 0, s) < rms_db(path, 0, dur) - 12:
             a = 0.0
-        if e >= dur - 0.05:           # klip oxiridagi sukut
+        if e >= dur - 0.4:            # klip oxiridagi sukut
             b = dur
         if b - a >= MIN_CUT:
             cuts.append((max(a, 0.0), min(b, dur)))
