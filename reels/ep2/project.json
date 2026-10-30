@@ -1,0 +1,233 @@
+{
+  "clips": [
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/eabfc445-copy_F03DDC0F-DEF4-4CED-A572-2D72FD816059.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/ed8decaf-copy_6B3D86BB-A4DE-4DBE-9ABB-E5EEC528536A.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/8a34d151-copy_BA142C1B-D976-4B4F-9933-DAFC0F3F9D31.mov"
+  ],
+  "words": "words.json",
+  "focus": [
+    0.42,
+    0.33
+  ],
+  "zooms": [
+    1.0,
+    1.14
+  ],
+  "hook": {
+    "l1": "KUTISHLAR",
+    "l2": "QAYERDAN PAYDO BO'LADI",
+    "l3": "3 MANBA",
+    "until": [
+      1,
+      9
+    ]
+  },
+  "phrases": [
+    [
+      1,
+      0,
+      4,
+      "KO'PINCHA INSON",
+      "o'ziga ustanovka qilib qo'yadi",
+      "hide"
+    ],
+    [
+      1,
+      5,
+      9,
+      "MANA SHUNDAY",
+      "bo'lsa yaxshi, deb",
+      "hide"
+    ],
+    [
+      2,
+      6,
+      11,
+      "MANA BUNAQA",
+      "bo'lishi kerak edi, deb"
+    ],
+    [
+      2,
+      12,
+      19,
+      "HOLBUKI HAR BIR INSONNING",
+      "ichki dunyosi noyob"
+    ],
+    [
+      2,
+      20,
+      23,
+      "AGAR UNING DUNYOSINI",
+      "bilmasdan turib"
+    ],
+    [
+      2,
+      24,
+      31,
+      "MANA BUNAQA BO'LISHI",
+      "kerak desak..."
+    ],
+    [
+      3,
+      0,
+      9,
+      "IKKINCHI TARAF",
+      "eri mi, xotini mi – xayoliga ham kelmagan"
+    ],
+    [
+      3,
+      10,
+      13,
+      "NEGA?",
+      "bu – qobiliyat"
+    ],
+    [
+      3,
+      14,
+      19,
+      "AVVALO",
+      "biz aytgandek, yaqinlik yo'q"
+    ],
+    [
+      3,
+      20,
+      22,
+      "BIR-BIRINI",
+      "tushunish"
+    ],
+    [
+      3,
+      23,
+      26,
+      "BIR-BIRI BILAN",
+      "muloqotda bo'lish"
+    ],
+    [
+      3,
+      27,
+      30,
+      "BIR-BIRINING",
+      "hurmatini oshirish"
+    ],
+    [
+      3,
+      31,
+      37,
+      "BIR-BIRINING DUNYOSINI",
+      "o'rganish – bu qobiliyat"
+    ],
+    [
+      3,
+      38,
+      43,
+      "TALAB EMAS",
+      "qabul qilish kerak, qadrlab"
+    ]
+  ],
+  "cards": [
+    {
+      "num": "1",
+      "clip": 1,
+      "from": 10,
+      "to": 17,
+      "lines": [
+        [
+          10,
+          13,
+          "OTA-ONA"
+        ],
+        [
+          14,
+          14,
+          "tushunchasi"
+        ],
+        [
+          15,
+          17,
+          "xayolida bo'ladi"
+        ]
+      ]
+    },
+    {
+      "num": "2",
+      "clip": 1,
+      "from": 18,
+      "to": 23,
+      "lines": [
+        [
+          18,
+          19,
+          "DO'STLAR"
+        ],
+        [
+          20,
+          22,
+          "o'zi qayerdandir oladi"
+        ],
+        [
+          23,
+          23,
+          "do'stlardan"
+        ]
+      ]
+    },
+    {
+      "num": "3",
+      "clip": 2,
+      "from": 0,
+      "to": 5,
+      "lines": [
+        [
+          0,
+          0,
+          "INTERNET"
+        ],
+        [
+          1,
+          2,
+          "Instagramda"
+        ],
+        [
+          3,
+          5,
+          "holat ko'p"
+        ]
+      ]
+    }
+  ],
+  "broll": [
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_233390.mp4",
+      "phrases": [
+        2,
+        2
+      ],
+      "ss": 3
+    },
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_183448.mp4",
+      "phrases": [
+        6,
+        6
+      ],
+      "ss": 2,
+      "x": 0.45
+    },
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_177254.mp4",
+      "phrases": [
+        9,
+        10
+      ],
+      "ss": 2
+    },
+    {
+      "file": "/tmp/claude-0/-home-user-Video-agent/ee456e2a-081f-5c18-9c9d-5172a2dcb322/scratchpad/broll/px_146632.mp4",
+      "phrases": [
+        13,
+        13
+      ],
+      "ss": 1
+    }
+  ]
+}

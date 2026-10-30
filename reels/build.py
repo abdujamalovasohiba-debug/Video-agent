@@ -183,6 +183,9 @@ def build_ass(proj, words, tl, fonts, broll_spans=()):
     for cd in proj["cards"]:
         cw = words[str(cd["clip"])]
         card_spans.append((tl.map(cd["clip"], cw[cd["from"]]["s"]) - 0.35, tl.map(cd["clip"], cw[cd["to"]]["e"]) + 0.25))
+    # ketma-ket kartalar ustma-ust tushmasin
+    card_spans = [(a, min(b, card_spans[k + 1][0]) if k + 1 < len(card_spans) else b)
+                  for k, (a, b) in enumerate(card_spans)]
     nexts = sorted(starts + [a for a, _ in card_spans] + [tl.total])
 
     for p, t0 in zip(ph, starts):
