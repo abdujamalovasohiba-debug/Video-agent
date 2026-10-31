@@ -2,7 +2,8 @@ import sys, json, glob, os
 from faster_whisper import WhisperModel
 import wave, numpy as np
 def load(p):
-    w=wave.open(p); return np.frombuffer(w.readframes(w.getnframes()),np.int16).astype(np.float32)/32768
+    w=wave.open(p); x=np.frombuffer(w.readframes(w.getnframes()),np.int16).astype(np.float32)/32768
+    return x / (np.abs(x).max() + 1e-9) * 0.9   # sokin yozuvlarda so'zlar yo'qolmasin
 m = WhisperModel(sys.argv[1], device="cpu", compute_type="int8")
 out = {}
 n = len(glob.glob(os.path.join(sys.argv[2], "a*.wav")))

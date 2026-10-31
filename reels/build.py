@@ -11,8 +11,10 @@ YELLOW = "&H001CB2F2&"     # #F2B21C
 WHITE = "&H00FFFFFF&"
 CARD_BG = "&H00FCFCFC&"
 
-# Pauza kesish sozlamalari: gap oxiridan TAIL, keyingi gap boshidan LEAD qoldiriladi
-SIL_DB, SIL_MIN = -40, 0.55
+# Pauza kesish sozlamalari: gap oxiridan TAIL, keyingi gap boshidan LEAD qoldiriladi.
+# Jimlik chegarasi klipning baland nutqidan (90-persentil) SIL_BELOW dB past: so'z oxirlari
+# ko'pincha -55..-60 dB gacha so'nadi, qat'iy -40 dB ularni kesib yuborardi.
+SIL_BELOW, SIL_MIN = 22, 0.55
 TAIL, LEAD, MIN_CUT, MIN_SEG = 0.3, 0.2, 0.25, 1.2
 
 
@@ -34,13 +36,24 @@ def rms_db(path, a, b):
     return 20 * np.log10(np.sqrt((x ** 2).mean()) + 1e-9) if len(x) else -120.0
 
 
+def speech_level(path):
+    """Klipdagi baland nutq darajasi: 50 ms bo'laklar RMS ining 90-persentili, dB."""
+    import numpy as np
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-ac", "1", "-ar", "16000", "-f", "s16le", "-"],
+                         check=True, capture_output=True).stdout
+    x = np.frombuffer(raw, np.int16).astype(float) / 32768
+    f = x[:len(x) // 800 * 800].reshape(-1, 800)
+    return float(np.percentile(20 * np.log10(np.sqrt((f ** 2).mean(1)) + 1e-9), 90))
+
+
 def speech_segments(path):
     """Ovoz bor bo'laklar (src_start, src_end).
 
     Faqat uzun pauzalar kesiladi: gap oxiridan TAIL qoldiriladi (so'zning so'nggi
     tovushi yutilmasin), MIN_SEG dan qisqa bo'lak hosil qiladigan kesish tashlanadi.
     """
-    err = run(["ffmpeg", "-i", path, "-af", f"silencedetect=n={SIL_DB}dB:d={SIL_MIN}", "-f", "null", "-"]).stderr
+    sil_db = min(-45.0, speech_level(path) - SIL_BELOW)
+    err = run(["ffmpeg", "-i", path, "-af", f"silencedetect=n={sil_db:.1f}dB:d={SIL_MIN}", "-f", "null", "-"]).stderr
     starts = [float(x) for x in re.findall(r"silence_start: ([0-9.]+)", err)]
     ends = [float(x) for x in re.findall(r"silence_end: ([0-9.]+)", err)]
     dur = duration(path)

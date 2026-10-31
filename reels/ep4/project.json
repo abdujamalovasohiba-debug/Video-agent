@@ -184,14 +184,28 @@
     [
       5,
       0,
-      0,
-      "QOBILIYAT",
+      6,
+      "“MEN YOMON KO'RIB QOLDIM”",
+      "bu sevgi tugadi"
+    ],
+    [
+      5,
+      7,
+      9,
+      "MUHABBAT – BU",
+      "qobiliyat"
+    ],
+    [
+      5,
+      10,
+      12,
+      "BUNING FARQI BOR",
       ""
     ],
     [
       5,
-      1,
-      4,
+      13,
+      15,
       "QOBILIYATNI",
       "inson rivojlantiradi"
     ]
