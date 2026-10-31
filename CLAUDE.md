@@ -184,6 +184,10 @@ Foydalanuvchi yuzini ko'rsatmaslikni so'rasa: xiralik/emoji EMAS — ovoz + mavz
   Faqat "mm/eee" va uzun pauzalarni olib tashlash mumkin; gapni olib tashlash uchun avval so'rang. Teaser hook (kuchli gapni boshga
   NUSXA qilish) va `atempo=1.08` ga ruxsat bor (tasdiqlangan), lekin gap asl joyida ham qolsin; oxirgi so'z tugaguncha kesmang.
 
+- Pipeline kesganda oxirgi so'z kesilib qolishi mumkin (fix_transcript oxirgi so'z vaqtini erta qo'yadi). Oxirgi gap tugashini
+  `silencedetect` bilan aniqlang, pauzalarni o'zingiz kesing (`cut.py` uslubida) va `--no-cut` bilan render qiling; tayyor videoning oxirini Whisper bilan tekshiring.
+- Mixkit'ning yangi kliplari (id ≥ 100000) `.../videos/<id>/<id>-1080.mp4` da yo'q: sahifadagi `"contentUrl"` havolasidan oling. Yashil fon (green screen) kliplarini ishlatmang.
+
 ## Shovqin
 - Pipeline ovozni −14 LUFS gacha kuchaytiradi (+20 dB atrofida), shu bilan pauzadagi qoldiq shovqin ham ko'tariladi. Shuning uchun ovozni o'zingiz tayyorlang:
   pauzalardan olingan shovqin profili bilan `noisereduce` (prop_decrease=1.0), kompressor, gain → −14 LUFS, so'ng `agate` (pauza ≲ −45 dB).
