@@ -361,7 +361,10 @@ def main():
     for br in proj.get("broll", []):
         p0, p1 = ph[br["phrases"][0]], ph[br["phrases"][1]]
         a = max(0.0, tl.map(p0[0], words[str(p0[0])][p0[1]]["s"]) - 0.05)
-        b = tl.map(p1[0], words[str(p1[0])][p1[2]]["e"]) + 0.15
+        # subtitr bilan birga tugasin: oxirgi so'zdan 0.7 s keyin yoki keyingi jumla boshida
+        i1 = br["phrases"][1]
+        nxt = (tl.map(ph[i1 + 1][0], words[str(ph[i1 + 1][0])][ph[i1 + 1][1]]["s"]) if i1 + 1 < len(ph) else tl.total)
+        b = min(nxt, tl.map(p1[0], words[str(p1[0])][p1[2]]["e"]) + 0.7)
         path = br["file"] if os.path.isabs(br["file"]) else os.path.join(base, br["file"])
         brolls.append((path, br.get("ss", 0), round(a, 3), round(min(b, a + duration(path) - br.get("ss", 0)), 3),
                        br.get("x", 0.5)))

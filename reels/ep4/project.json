@@ -273,6 +273,14 @@
   ],
   "broll": [
     {
+      "file": "/home/user/Video-agent/work/broll/px_245932.mp4",
+      "phrases": [
+        2,
+        2
+      ],
+      "ss": 0
+    },
+    {
       "file": "/home/user/Video-agent/work/broll/px_177254.mp4",
       "phrases": [
         6,
@@ -289,6 +297,22 @@
       "ss": 1.5
     },
     {
+      "file": "/home/user/Video-agent/work/broll/px_228180.mp4",
+      "phrases": [
+        9,
+        10
+      ],
+      "ss": 0
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_254005.mp4",
+      "phrases": [
+        12,
+        12
+      ],
+      "ss": 0.5
+    },
+    {
       "file": "/home/user/Video-agent/work/broll/px_301636.mp4",
       "phrases": [
         16,
@@ -297,12 +321,36 @@
       "ss": 5
     },
     {
+      "file": "/home/user/Video-agent/work/broll/px_326106.mp4",
+      "phrases": [
+        17,
+        17
+      ],
+      "ss": 1
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_337745.mp4",
+      "phrases": [
+        18,
+        19
+      ],
+      "ss": 3.5
+    },
+    {
       "file": "/home/user/Video-agent/work/broll/px_231762.mp4",
       "phrases": [
         20,
         21
       ],
       "ss": 0
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_272632.mp4",
+      "phrases": [
+        22,
+        22
+      ],
+      "ss": 1
     }
   ],
   "cta": {
