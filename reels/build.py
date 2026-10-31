@@ -244,6 +244,24 @@ def build_ass(proj, words, tl, fonts, broll_spans=()):
             add(22, a, b, st, f"{{\\an4\\pos({CARD_X},{int(y)})}}" + reveal(" ".join(ws), times, a, blur=8))
             y += ROW_H[st] / 2
 
+    # --- CTA: oxirgi kadr to'xtaydi va xiralashadi, plashka "pop" bilan chiqadi
+    cta = proj.get("cta")
+    if cta:
+        a, b = tl.total, tl.total + cta.get("dur", 3.0)
+        pop = "\\fscx70\\fscy70\\alpha&HFF&\\t(0,260,0.6,\\fscx100\\fscy100\\alpha&H00&)"
+        add(30, a, b, "Box", f"{{\\an7\\pos(0,0)\\p1\\c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H70&)}}m 0 0 l {W} 0 {W} {H} 0 {H}")
+        bw, bh, cy = 920, 300, 900
+        add(31, a, b, "Box", f"{{\\an5\\pos({W // 2},{cy})\\p1\\c{WHITE}{pop}}}{rrect(bw + 10, bh + 10, 28)}")
+        add(32, a, b, "Box", f"{{\\an5\\pos({W // 2},{cy})\\p1\\c{BROWN}{pop}}}{rrect(bw, bh, 24)}")
+        add(33, a, b, "Hook", f"{{\\an5\\pos({W // 2},{cy - 55})\\fs130{pop}}}{cta['l1']}")
+        add(33, a, b, "Hook", f"{{\\an5\\pos({W // 2},{cy + 70})\\fs84{pop}}}{cta['l2']}")
+        # tugma biroz kechikib chiqadi va bir marta "urib" qo'yadi
+        btn = ("\\fscx60\\fscy60\\alpha&HFF&\\t(350,600,0.6,\\fscx100\\fscy100\\alpha&H00&)"
+               "\\t(1100,1250,\\fscx108\\fscy108)\\t(1250,1400,\\fscx100\\fscy100)")
+        add(32, a, b, "Box", f"{{\\an5\\pos({W // 2},{cy + 250})\\p1\\c{BROWN}{btn}}}{rrect(630, 140, 70)}")
+        add(33, a, b, "Box", f"{{\\an5\\pos({W // 2},{cy + 250})\\p1\\c{WHITE}{btn}}}{rrect(620, 130, 65)}")
+        add(34, a, b, "Hook", f"{{\\an5\\pos({W // 2},{cy + 254})\\fs96\\c{BROWN}\\3c{BROWN}\\shad0{btn}}}{cta['l3']}")
+
     head = f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: {W}
@@ -297,8 +315,13 @@ def build_video(proj, tl, ass_path, fonts, out, brolls=()):
                   f"eq=contrast=1.04:saturation=1.05[br{k}]")
         fc.append(f"[{base}][br{k}]overlay=enable='between(t,{a:.3f},{b:.3f})':eof_action=pass[ov{k}]")
         base = f"ov{k}"
-    fc.append(f"[{base}]fps={FPS},ass={ass_path}:fontsdir={fonts},format=yuv420p[vo]")
-    fc.append("[ac]highpass=f=80,acompressor=threshold=0.1:ratio=3:attack=10:release=200,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[ao]")
+    tail = ""
+    if proj.get("cta"):
+        d = proj["cta"].get("dur", 3.0)
+        tail = (f"tpad=stop_mode=clone:stop_duration={d},"
+                f"boxblur=12:2:enable='gte(t,{tl.total:.3f})',")
+    fc.append(f"[{base}]fps={FPS},{tail}ass={ass_path}:fontsdir={fonts},format=yuv420p[vo]")
+    fc.append("[ac]" + (f"apad=pad_dur={proj['cta'].get('dur', 3.0)}," if proj.get("cta") else "") + "highpass=f=80,acompressor=threshold=0.1:ratio=3:attack=10:release=200,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[ao]")
     cmd = ["ffmpeg", "-y", "-v", "error"]
     for p in clips:
         cmd += ["-i", p]

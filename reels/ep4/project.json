@@ -1,0 +1,300 @@
+{
+  "clips": [
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/f0c14ab1-copy_1401DCCD-EFCA-45A2-A725-5158061F4640.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/2eaa72bf-copy_6EEBC869-ABF8-4F5F-BD6F-E14B9DE90178.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/30fa5dd5-copy_64CDAD49-33DE-44B1-AAEE-4E278C2DE9ED.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/8728aa48-copy_BE775574-01EC-4A64-8D77-AC2943AF86C3.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/bf4b8da2-copy_15301268-797F-4830-A078-3A130BC025D6.mov"
+  ],
+  "words": "words.json",
+  "focus": [
+    0.42,
+    0.33
+  ],
+  "zooms": [
+    1.0,
+    1.14
+  ],
+  "hook": {
+    "l1": "CHUQUR MUHABBAT",
+    "l2": "UCHUN KERAK BO'LGAN",
+    "l3": "3 NARSA",
+    "until": [
+      1,
+      9
+    ]
+  },
+  "phrases": [
+    [
+      1,
+      0,
+      4,
+      "HAQIQIY MUHABBAT",
+      "degan so'zni ishlatmaymiz",
+      "hide"
+    ],
+    [
+      1,
+      5,
+      9,
+      "CHUQUR, TO'LIQ",
+      "muhabbat deymiz",
+      "hide"
+    ],
+    [
+      1,
+      10,
+      15,
+      "TO'LIQ MUHABBATDA",
+      "uchta narsa bo'lishi kerak"
+    ],
+    [
+      1,
+      27,
+      28,
+      "VA UCHINCHISI",
+      ""
+    ],
+    [
+      2,
+      3,
+      7,
+      "MAJBURIYAT DEGANDA",
+      "inson bir-biriga"
+    ],
+    [
+      2,
+      8,
+      14,
+      "MAJBURIYAT DEGANDA",
+      "nimani tushunadi – kelishuv bo'ladi"
+    ],
+    [
+      2,
+      15,
+      21,
+      "U DEGANDA",
+      "o'sha oiladagi javobgarlik"
+    ],
+    [
+      2,
+      22,
+      26,
+      "QIYINCHILIKDAN",
+      "birga chiqishga majburiyat"
+    ],
+    [
+      2,
+      27,
+      33,
+      "BIR-BIRINI TUSHUNIB",
+      "suhbatlashishga majburiyat"
+    ],
+    [
+      2,
+      34,
+      36,
+      "QACHONKI BITTASI",
+      "kasal..."
+    ],
+    [
+      3,
+      0,
+      5,
+      "KASAL BO'LGANDA",
+      ""
+    ],
+    [
+      3,
+      6,
+      14,
+      "YONIDA QOLISHIM KERAK",
+      "degan majburiyat"
+    ],
+    [
+      3,
+      15,
+      20,
+      "MEN BU OILAGA",
+      "xos bo'lishim kerak"
+    ],
+    [
+      3,
+      21,
+      26,
+      "CHUQUR TO'LIQ MUHABBATDA",
+      "bu bo'lishi kerak"
+    ],
+    [
+      3,
+      27,
+      38,
+      "BIR ODAM",
+      "kasal bo'lib qolganda"
+    ],
+    [
+      3,
+      39,
+      45,
+      "“UNI YOMON KO'RIB QOLDIM”",
+      "demaydi"
+    ],
+    [
+      3,
+      46,
+      52,
+      "SHUNDA HAM",
+      "yaxshi ko'radi – u muhabbatda"
+    ],
+    [
+      4,
+      0,
+      9,
+      "MUHABBAT – BU",
+      "qalbdan, o'sha insonni to'liq qabul qilish"
+    ],
+    [
+      4,
+      10,
+      13,
+      "BU RIVOJLANADI",
+      "bu qobiliyat"
+    ],
+    [
+      4,
+      14,
+      19,
+      "UNI O'RGANIB",
+      "oshirish kerak"
+    ],
+    [
+      4,
+      20,
+      28,
+      "BU FAQAT",
+      "“sevib qoldim, yaxshi ko'rib qoldim”"
+    ],
+    [
+      4,
+      29,
+      31,
+      "ORTIQ GAP YO'Q",
+      ""
+    ],
+    [
+      5,
+      0,
+      0,
+      "QOBILIYAT",
+      ""
+    ],
+    [
+      5,
+      1,
+      4,
+      "QOBILIYATNI",
+      "inson rivojlantiradi"
+    ]
+  ],
+  "cards": [
+    {
+      "num": "1",
+      "clip": 1,
+      "from": 16,
+      "to": 18,
+      "lines": [
+        [
+          16,
+          17,
+          "YAQINLIK"
+        ],
+        [
+          18,
+          18,
+          "bo'lishi kerak"
+        ]
+      ]
+    },
+    {
+      "num": "2",
+      "clip": 1,
+      "from": 19,
+      "to": 26,
+      "lines": [
+        [
+          19,
+          22,
+          "ISHQ"
+        ],
+        [
+          23,
+          23,
+          "bo'lishi kerak"
+        ],
+        [
+          24,
+          26,
+          "ehtiros – strast deymiz"
+        ]
+      ]
+    },
+    {
+      "num": "3",
+      "clip": 2,
+      "from": 0,
+      "to": 2,
+      "lines": [
+        [
+          0,
+          0,
+          "MAJBURIYAT"
+        ],
+        [
+          1,
+          2,
+          "bo'lishi kerak"
+        ]
+      ]
+    }
+  ],
+  "broll": [
+    {
+      "file": "/home/user/Video-agent/work/broll/px_177254.mp4",
+      "phrases": [
+        6,
+        7
+      ],
+      "ss": 2
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_233399.mp4",
+      "phrases": [
+        8,
+        8
+      ],
+      "ss": 1.5
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_301636.mp4",
+      "phrases": [
+        16,
+        16
+      ],
+      "ss": 5
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_231762.mp4",
+      "phrases": [
+        20,
+        21
+      ],
+      "ss": 0
+    }
+  ],
+  "cta": {
+    "l1": "SAQLAB QO'YING",
+    "l2": "VA JUFTINGIZGA YUBORING",
+    "l3": "OBUNA BO'LING",
+    "dur": 3.0
+  }
+}
