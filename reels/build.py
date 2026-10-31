@@ -321,11 +321,11 @@ def build_video(proj, tl, ass_path, fonts, out, brolls=()):
     fc.append("[vraw]eq=contrast=1.06:saturation=1.08:brightness=-0.01,colorbalance=rs=0.03:gs=0.01:bs=-0.03,"
               "vignette=PI/5[vc]")
     base = "vc"
-    for k, (path, ss, a, b, bx) in enumerate(brolls):
+    for k, (path, ss, a, b, bx, dim) in enumerate(brolls):
         i = len(clips) + k
         fc.append(f"[{i}:v]trim={ss}:{ss + b - a},setpts=PTS-STARTPTS+{a}/TB,fps={FPS},"
                   f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}:(iw-{W})*{bx}:(ih-{H})/2,setsar=1,"
-                  f"eq=contrast=1.04:saturation=1.05[br{k}]")
+                  f"eq=contrast=1.04:saturation=1.05:brightness={-dim}[br{k}]")
         fc.append(f"[{base}][br{k}]overlay=enable='between(t,{a:.3f},{b:.3f})':eof_action=pass[ov{k}]")
         base = f"ov{k}"
     tail = ""
@@ -367,9 +367,9 @@ def main():
         b = min(nxt, tl.map(p1[0], words[str(p1[0])][p1[2]]["e"]) + 0.7)
         path = br["file"] if os.path.isabs(br["file"]) else os.path.join(base, br["file"])
         brolls.append((path, br.get("ss", 0), round(a, 3), round(min(b, a + duration(path) - br.get("ss", 0)), 3),
-                       br.get("x", 0.5)))
+                       br.get("x", 0.5), br.get("dim", 0)))  # dim: och fonli kadrda oq subtitr o'qilsin
     ass_path = os.path.join(out_dir, "subs.ass")
-    open(ass_path, "w").write(build_ass(proj, words, tl, fonts, [(a, b) for _, _, a, b, _ in brolls]))
+    open(ass_path, "w").write(build_ass(proj, words, tl, fonts, [(a, b) for _, _, a, b, *_ in brolls]))
     json.dump([dict(clip=c, src=[a, b], out=round(o, 3)) for c, a, b, o in tl.segs],
               open(os.path.join(out_dir, "timeline.json"), "w"), indent=1)
     print(f"{len(tl.segs)} ta bo'lak, yakuniy davomiylik {tl.total:.1f} s")

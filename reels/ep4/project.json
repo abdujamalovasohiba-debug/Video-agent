@@ -297,12 +297,13 @@
       "ss": 1.5
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_228180.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_61296.mp4",
       "phrases": [
         9,
         10
       ],
-      "ss": 0
+      "ss": 0.5,
+      "x": 0.55
     },
     {
       "file": "/home/user/Video-agent/work/broll/px_254005.mp4",
@@ -311,6 +312,15 @@
         12
       ],
       "ss": 0.5
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_38220.mp4",
+      "phrases": [
+        14,
+        14
+      ],
+      "ss": 2,
+      "dim": 0.22
     },
     {
       "file": "/home/user/Video-agent/work/broll/px_301636.mp4",
