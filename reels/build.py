@@ -260,7 +260,7 @@ def build_ass(proj, words, tl, fonts, broll_spans=()):
     # --- CTA: oxirgi kadr to'xtaydi va xiralashadi, plashka "pop" bilan chiqadi
     cta = proj.get("cta")
     if cta:
-        a, b = tl.total, tl.total + cta.get("dur", 3.0)
+        a, b = tl.total, tl.total + cta.get("dur", 3.0) + 0.5   # +0.5: kadr yaxlitlanishida oxiri ochilib qolmasin
         pop = "\\fscx70\\fscy70\\alpha&HFF&\\t(0,260,0.6,\\fscx100\\fscy100\\alpha&H00&)"
         add(30, a, b, "Box", f"{{\\an7\\pos(0,0)\\p1\\c&H000000&\\alpha&HFF&\\t(0,200,\\alpha&H70&)}}m 0 0 l {W} 0 {W} {H} 0 {H}")
         bw, bh, cy = 920, 300, 900

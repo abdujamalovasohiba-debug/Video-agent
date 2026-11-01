@@ -300,21 +300,20 @@
   ],
   "broll": [
     {
-      "file": "/home/user/Video-agent/work/broll/px_50311.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_116261.mp4",
       "phrases": [
         0,
         0
       ],
-      "ss": 0,
-      "x": 0.45
+      "ss": 0.5
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_272632.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_145566.mp4",
       "phrases": [
         1,
         1
       ],
-      "ss": 1
+      "ss": 4
     },
     {
       "file": "/home/user/Video-agent/work/broll/px_335943.mp4",
@@ -333,12 +332,12 @@
       "ss": 2
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_301631.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_77929.mp4",
       "phrases": [
         9,
         9
       ],
-      "ss": 1
+      "ss": 2
     },
     {
       "file": "/home/user/Video-agent/work/broll/px_272633.mp4",
@@ -357,37 +356,45 @@
       "ss": 4
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_254009.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_297858.mp4",
       "phrases": [
         19,
         19
       ],
-      "ss": 2
+      "ss": 1
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_50312.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_380729.mp4",
       "phrases": [
         23,
         23
       ],
-      "ss": 2.5,
-      "x": 0.5
+      "ss": 1
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_233390.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_187516.mp4",
+      "phrases": [
+        24,
+        24
+      ],
+      "ss": 5,
+      "x": 0.8
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_130647.mp4",
       "phrases": [
         25,
         26
       ],
-      "ss": 3
+      "ss": 6
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_291961.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_349366.mp4",
       "phrases": [
         28,
         28
       ],
-      "ss": 0.5
+      "ss": 2
     }
   ],
   "cta": {
