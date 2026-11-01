@@ -71,6 +71,12 @@ Referens: 25 s, 720x1280, yigit ko'chada (shisha binolar), qo'lda kamera, tez ga
 Referens: tepada kontent (oq karta / skrinshot), pastda gapiruvchi, chegarada 2 qatorli subtitr (aytilgan so'z oq, keyingisi kulrang).
 Pastda gapiruvchining o'z videosi (sinxron, `crop=1080:1060:0:430`, kesimlarda navbatma-navbat 6% zoom; foydalanuvchi shuni tanladi): tepada oq panel (qora ikonka + KATTA so'z + qizil ✗ / yashil ✓ pill), pastki qism y=860..1920, subtitr `top≈0.40`. "Muammo → Demak, ..." formatida har savol-javobga bitta panel; namunasi: v14.
 
+## "Psixolog 50/50" (namunasi v26) — `tools/build_split.py` + Remotion `headline`, `karaoke`
+Tepa 1080x960: mavzuga mos realistik B-roll (Mixkit: anxiety, depression, pills, insomnia, argument, sad-woman; o'pish/alkogol YO'Q),
+har 4–8 s da almashadi, doim to'la. Past 1080x960: gapiruvchi (`crop=1080:960:0:200`, boshi uchun joy qoldiring), kesimlarda 1.0/1.06 zoom.
+Tepaning pastiga qora gradient (geq, y 600→960, 0→0.7), karaoke `top≈0.385` (ikki qator tepa qismda). Hook: yashil framed headline `top≈0.16`
++ 3D stikerlar, o'rtada asosiy fikr ham headline. Musiqa: Mixkit 139 (Relax Beat) 12%.
+
 ## Yuzsiz viral "N ta sabab" (namunasi v16) — Remotion: `diag`, `karaoke`, `headline` (framed, `size`)
 To'liq ekran realistik B-roll (har juftga bitta klip, `eq=brightness=-0.06`), markazda oq "diagnoz" kartasi (ikonka + KATTA so'z +
 qizil ✗ muammo / yashil ✓ "Demak"), o'ng tepada n/jami, pastda (`top≈0.70`) karaoke subtitr. Hook: "…YO'QMI? N TA SABAB 👇" + 3D stikerlar.
