@@ -188,6 +188,10 @@ Foydalanuvchi yuzini ko'rsatmaslikni so'rasa: xiralik/emoji EMAS — ovoz + mavz
   `silencedetect` bilan aniqlang, pauzalarni o'zingiz kesing (`cut.py` uslubida) va `--no-cut` bilan render qiling; tayyor videoning oxirini Whisper bilan tekshiring.
 - Mixkit'ning yangi kliplari (id ≥ 100000) `.../videos/<id>/<id>-1080.mp4` da yo'q: sahifadagi `"contentUrl"` havolasidan oling. Yashil fon (green screen) kliplarini ishlatmang.
 
+- **Pauzani toza ovozda (`voice.wav`) `silencedetect=n=-55dB:d=0.45` bilan toping** — xom ovozda −42 dB so'z oxirlarini (yumshoq bo'g'inlar)
+  pauza deb oldi va so'zlar qirqildi, foydalanuvchi "gap tugallanmay qolgan" dedi. Kesimda pauza boshidan 0.22 s, oxiridan 0.12 s qoldiring;
+  kesilgan videoni Whisper bilan qayta o'qib, so'zlar butunligini tekshiring.
+
 ## Shovqin
 - Pipeline ovozni −14 LUFS gacha kuchaytiradi (+20 dB atrofida), shu bilan pauzadagi qoldiq shovqin ham ko'tariladi. Shuning uchun ovozni o'zingiz tayyorlang:
   pauzalardan olingan shovqin profili bilan `noisereduce` (prop_decrease=1.0), kompressor, gain → −14 LUFS, so'ng `agate` (pauza ≲ −45 dB).
