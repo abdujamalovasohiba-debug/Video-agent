@@ -1,0 +1,382 @@
+{
+  "clips": [
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/ba788238-copy_615CC247-68D3-45E6-9D47-A23A27A6C970.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/be7d0d4a-copy_F8AC8FC7-26FF-4E2B-AD09-662C70BD869F.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/420cf28d-copy_E9CC108C-8637-4417-836D-3397A0F23AB5.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/e0222786-copy_D3E5EAD1-BAB4-4EEE-A774-6F77DB7D32AB.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/2e68f690-copy_3C4CDE3C-7B53-4C9C-B300-07F02F4BE807.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/57940bb4-copy_4F01505F-1229-4438-BB0E-49E3A8A359E1.mov"
+  ],
+  "words": "words.json",
+  "focus": [
+    0.42,
+    0.33
+  ],
+  "zooms": [
+    1.0,
+    1.14
+  ],
+  "hook": {
+    "l1": "90% OILADA",
+    "l2": "CHUQUR MUHABBAT YO'Q",
+    "l3": "NEGA?",
+    "until": [
+      1,
+      11
+    ]
+  },
+  "phrases": [
+    [
+      1,
+      0,
+      8,
+      "LEKIN MEN HAQIQATDA",
+      "o'z tajribamdan kelib chiqqan holda",
+      "hide"
+    ],
+    [
+      1,
+      9,
+      11,
+      "KO'P OILALARNI",
+      "ko'ramiz",
+      "hide"
+    ],
+    [
+      1,
+      12,
+      17,
+      "90 FOIZ OILALARDA",
+      "rostakam"
+    ],
+    [
+      1,
+      18,
+      20,
+      "CHUQUR MUHABBAT",
+      "yo'q"
+    ],
+    [
+      1,
+      21,
+      27,
+      "XO'SH, O'ZI NIMA",
+      "bu to'liq, chuqur muhabbat?"
+    ],
+    [
+      1,
+      28,
+      35,
+      "KO'P YOSHLAR",
+      "muhabbatning sababini bilmaydi"
+    ],
+    [
+      2,
+      8,
+      12,
+      "TUYG'U",
+      "keladi-ketadi"
+    ],
+    [
+      2,
+      19,
+      22,
+      "INSONGA SEVGI",
+      "keladi"
+    ],
+    [
+      2,
+      23,
+      27,
+      "YOSHLIKDA",
+      "yaxshi ko'rib qoladi"
+    ],
+    [
+      2,
+      28,
+      31,
+      "LEKIN TURMUSH",
+      "qurgandan keyin"
+    ],
+    [
+      2,
+      32,
+      35,
+      "BITTA QIYINCHILIK",
+      "bo'lgan joyda"
+    ],
+    [
+      3,
+      0,
+      5,
+      "SABABI",
+      "ularning sevgisi bor, oshiqligi bor"
+    ],
+    [
+      3,
+      6,
+      12,
+      "LEKIN MUHABBAT",
+      "nimaligini to'liq bilmaydi"
+    ],
+    [
+      3,
+      13,
+      16,
+      "KO'PCHILIKDA",
+      "bu narsa yo'q"
+    ],
+    [
+      3,
+      17,
+      25,
+      "MEN AYTGANIMDEK",
+      "muhabbat – bu qobiliyat"
+    ],
+    [
+      3,
+      26,
+      28,
+      "MISOL UCHUN",
+      "inson matematikani"
+    ],
+    [
+      4,
+      0,
+      5,
+      "QANDAYDIR HUNAR",
+      "qandaydir kasb, qandaydir tilni"
+    ],
+    [
+      4,
+      6,
+      9,
+      "LEKIN SHU QOBILIYATNI",
+      "muhabbatni"
+    ],
+    [
+      4,
+      10,
+      13,
+      "RIVOJLANTIRISH QOBILIYATINI",
+      "ham o'rganib rivojlantirsa"
+    ],
+    [
+      4,
+      14,
+      21,
+      "ANA O'SHANDA",
+      "yildan-yilga oilasi mustahkamlanib boradi"
+    ],
+    [
+      4,
+      22,
+      29,
+      "KO'PCHILIK",
+      "faqat sevgi bilan yuritadi"
+    ],
+    [
+      5,
+      0,
+      10,
+      "KIMDADIR BIR YILGA",
+      "kimdadir uch yilga yetadi"
+    ],
+    [
+      5,
+      11,
+      18,
+      "YIGIRMA YIL",
+      "birga yashab turgan oilada"
+    ],
+    [
+      5,
+      19,
+      25,
+      "BIR-BIRINI",
+      "ko'rishga ko'zi yo'q"
+    ],
+    [
+      5,
+      26,
+      34,
+      "BIR-BIRINING",
+      "tuyg'usini ham, dunyosini ham bilmaydi"
+    ],
+    [
+      5,
+      35,
+      42,
+      "O'TIRIB GAPLASHISHGA",
+      "imkoniyat bo'lmaydi"
+    ],
+    [
+      5,
+      43,
+      44,
+      "XOHISH YO'Q",
+      ""
+    ],
+    [
+      5,
+      45,
+      46,
+      "OILA BOR",
+      ""
+    ],
+    [
+      6,
+      12,
+      19,
+      "VA O'Z OILASINI",
+      "shunday rivojlantirib boradi"
+    ]
+  ],
+  "cards": [
+    {
+      "num": "1",
+      "clip": 2,
+      "from": 0,
+      "to": 7,
+      "lines": [
+        [
+          0,
+          2,
+          "SEVGI"
+        ],
+        [
+          3,
+          7,
+          "bu – tuyg'u"
+        ]
+      ]
+    },
+    {
+      "num": "2",
+      "clip": 2,
+      "from": 13,
+      "to": 18,
+      "lines": [
+        [
+          13,
+          14,
+          "MUHABBAT"
+        ],
+        [
+          15,
+          16,
+          "to'liq muhabbat"
+        ],
+        [
+          17,
+          18,
+          "bu – qobiliyat"
+        ]
+      ]
+    },
+    {
+      "num": "3",
+      "clip": 6,
+      "from": 0,
+      "to": 11,
+      "lines": [
+        [
+          0,
+          1,
+          "FARZANDLAR"
+        ],
+        [
+          2,
+          7,
+          "ko'pincha ularning"
+        ],
+        [
+          8,
+          11,
+          "xususiyatini ko'chirib oladi"
+        ]
+      ]
+    }
+  ],
+  "broll": [
+    {
+      "file": "/home/user/Video-agent/work/broll/px_335943.mp4",
+      "phrases": [
+        2,
+        3
+      ],
+      "ss": 1
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_301637.mp4",
+      "phrases": [
+        8,
+        8
+      ],
+      "ss": 2
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_301631.mp4",
+      "phrases": [
+        9,
+        9
+      ],
+      "ss": 1
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_272633.mp4",
+      "phrases": [
+        10,
+        10
+      ],
+      "ss": 0.5
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_21941.mp4",
+      "phrases": [
+        15,
+        16
+      ],
+      "ss": 4
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_254009.mp4",
+      "phrases": [
+        19,
+        19
+      ],
+      "ss": 2
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_50311.mp4",
+      "phrases": [
+        23,
+        23
+      ],
+      "ss": 0,
+      "x": 0.45
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_233390.mp4",
+      "phrases": [
+        25,
+        26
+      ],
+      "ss": 3
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_291961.mp4",
+      "phrases": [
+        28,
+        28
+      ],
+      "ss": 0.5
+    }
+  ],
+  "cta": {
+    "l1": "SAQLAB QO'YING",
+    "l2": "VA JUFTINGIZGA YUBORING",
+    "l3": "OBUNA BO'LING",
+    "dur": 3.0
+  }
+}
