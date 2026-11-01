@@ -30,6 +30,10 @@ export type Item =
   | {type: 'labels'; start: number; end: number; top?: number; left?: number; lines: Word[]}
   | {type: 'quote'; start: number; end: number; top?: number; size?: number; big: Word[]; post?: Word[]}
   | {type: 'ask'; start: number; end: number; rect?: [number, number, number, number]; title: string; question: string; size?: number}
+  | {type: 'plaque'; start: number; end: number; top?: number; size?: number; lines: string[]; pill?: string}
+  | {type: 'numscreen'; start: number; end: number; n: number; title: Word[]; lines: Word[][]}
+  | {type: 'duet'; start: number; end: number; top?: number; size?: number; broll?: boolean; caps: Word[]; small?: Word[]}
+  | {type: 'profile'; start: number; end: number; top?: number; image?: string; name: string; stats?: string[]}
   | {type: 'follow'; start: number; end: number; image: string; label?: string; done?: string};
 
 export type Palette = {brown: string; cream: string; hookBg: string; keyword: string; text: string};

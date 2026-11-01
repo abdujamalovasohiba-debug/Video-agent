@@ -6,6 +6,7 @@ import {Bubble, Duo, GoldLine, Stat} from './Gold';
 import {Headline, Plain, Point} from './Podcast';
 import {Diag, Glow, Karaoke, Keys, Panel, Stamps, Tri, White} from './Explainer';
 import {Ask, Labels, Quote, Story} from './Story';
+import {Duet, NumScreen, Plaque, Profile} from './Pair';
 import {Item, PALETTE, Palette} from './types';
 
 loadFonts();
@@ -20,7 +21,7 @@ export type ExpertProps = {
   captionTop?: number; // so'zma-so'z matn balandligi (yuzdan pastda bo'lishi uchun)
 };
 
-const ORDER = {card: 0, caption: 1, number: 1, duo: 1, gold: 1, stat: 1, plain: 1, point: 1, hook: 2, headline: 2, tri: 2, keys: 2, stamps: 2, white: 3, glow: 5, panel: 1, karaoke: 2, diag: 1, bubble: 2, follow: 2, leak: 3, flash: 4, story: 2, labels: 2, quote: 3, ask: 1} as const;
+const ORDER = {card: 0, caption: 1, number: 1, duo: 1, gold: 1, stat: 1, plain: 1, point: 1, hook: 2, headline: 2, tri: 2, keys: 2, stamps: 2, white: 3, glow: 5, panel: 1, karaoke: 2, diag: 1, bubble: 2, follow: 2, leak: 3, flash: 4, story: 2, labels: 2, quote: 3, ask: 1, plaque: 2, numscreen: 3, duet: 2, profile: 2} as const;
 
 // Butun video uchun bitta shaffof overlay: rejadagi har bir element o'z vaqtida chiqadi.
 // Elementlar absolyut vaqt (soniya) bilan ishlaydi, shuning uchun Sequence ishlatilmaydi.
@@ -67,6 +68,10 @@ export const ExpertOverlay: React.FC<ExpertProps> = (p) => {
           {it.type === 'labels' && <Labels item={it} {...common} />}
           {it.type === 'quote' && <Quote item={it} {...common} />}
           {it.type === 'ask' && <Ask item={it} {...common} />}
+          {it.type === 'plaque' && <Plaque item={it} {...common} />}
+          {it.type === 'numscreen' && <NumScreen item={it} {...common} />}
+          {it.type === 'duet' && <Duet item={it} {...common} />}
+          {it.type === 'profile' && <Profile item={it} {...common} />}
         </AbsoluteFill>
       ))}
     </AbsoluteFill>
