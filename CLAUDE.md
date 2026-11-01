@@ -77,6 +77,14 @@ har 4–8 s da almashadi, doim to'la. Past 1080x960: gapiruvchi (`crop=1080:960:
 Tepaning pastiga qora gradient (geq, y 600→960, 0→0.7), karaoke `top≈0.385` (ikki qator tepa qismda). Hook: yashil framed headline `top≈0.16`
 + 3D stikerlar, o'rtada asosiy fikr ham headline. Musiqa: Mixkit 139 (Relax Beat) 12%.
 
+## "Juftlik psixologiyasi" referensi (nomi hali berilmagan; namunasi v27, fae79fd1…mp4) — Remotion `Pair.tsx`
+Referens: 68 s, gapiruvchi (iliq, qorong'i studiya) + romantik/oilaviy B-roll, musiqa past. Elementlar:
+- `plaque` — hook: B-roll ustida to'q jigarrang yumaloq plashka, krem Oswald KATTA qatorlar, ostida oq pill ("3 SIRI" / "PSIXOLOG JAVOBI"), `top≈0.56`.
+- `numscreen` — oq ekran, chapda ulkan jigarrang Anton raqam (xiralikdan tiniqlashadi), o'ngda KATTA sarlavha + so'zma-so'z kichik qatorlar (~3 s, ovoz davom etadi).
+- `duet` — gapiruvchi ustida sariq (#F2C230) KATTA 1–3 so'z + oq kichik qator, aytilmagan so'z xira; B-roll ustida (`broll: true`) oq kursiv.
+- `profile` — oxirida doira avatar + oq mini profil kartasi (obuna tugmasi bosiladi).
+Foydalanuvchi talabi: yashil animatsion hook yozuvi kerak emas; videoni KESMANG (yuborgan barcha kadr va gaplar qolsin).
+
 ## Yuzsiz viral "N ta sabab" (namunasi v16) — Remotion: `diag`, `karaoke`, `headline` (framed, `size`)
 To'liq ekran realistik B-roll (har juftga bitta klip, `eq=brightness=-0.06`), markazda oq "diagnoz" kartasi (ikonka + KATTA so'z +
 qizil ✗ muammo / yashil ✓ "Demak"), o'ng tepada n/jami, pastda (`top≈0.70`) karaoke subtitr. Hook: "…YO'QMI? N TA SABAB 👇" + 3D stikerlar.
