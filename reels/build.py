@@ -396,6 +396,37 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     return head + "\n".join(e.replace(",,0,0,0,,{", ",,0,0,0,,{\\blur7", 1) for e in ev) + "\n"
 
 
+def music_mix(proj, fc, cmd, total):
+    """Fon musiqasi: kerakli uzunlikkacha crossfade bilan takrorlanadi, nutq paytida pasayadi (ducking).
+
+    project.json: "music": {"file": "...", "gain_db": -17}. [ao] ni [ao] (aralashgan) bilan almashtiradi.
+    """
+    m = proj.get("music")
+    if not m:
+        return
+    src, xf = m["file"], 2.0
+    d = duration(src)
+    n = int(total // (d - xf)) + 1
+    loop = os.path.join(os.path.dirname(cmd[-1]), "music_loop.wav")
+    ins, chain, prev = [], [], "0:a"
+    for k in range(n):
+        ins += ["-i", src]
+    for k in range(1, n):
+        chain.append(f"[{prev}][{k}:a]acrossfade=d={xf}:c1=tri:c2=tri[m{k}]")
+        prev = f"m{k}"
+    filt = ";".join(chain) + (";" if chain else "") + f"[{prev}]atrim=0:{total:.3f},loudnorm=I=-14:TP=-2[mo]"
+    subprocess.run(["ffmpeg", "-y", "-v", "error", *ins, "-filter_complex", filt, "-map", "[mo]",
+                    "-ar", "48000", "-ac", "2", loop], check=True)
+    i = sum(1 for x in cmd if x == "-i")
+    fc[-1] = fc[-1].replace("[ao]", "[voice]")
+    g = m.get("gain_db", -17)
+    fc.append(f"[{i}:a]volume={g}dB,afade=t=in:d=1.5,afade=t=out:st={max(total - 2.5, 0):.3f}:d=2.5[mus]")
+    fc.append("[voice]asplit=2[v1][vk]")
+    fc.append("[mus][vk]sidechaincompress=threshold=0.05:ratio=4:attack=30:release=600:makeup=1[duck]")
+    fc.append("[v1][duck]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.95[ao]")
+    return ["-i", loop]
+
+
 def build_video_cinema(proj, tl, ass_path, fonts, out, brolls):
     """Spiker ko'rinmaydi: kadrlar avval alohida tayyorlanadi (xotira tejaladi), keyin xfade bilan ulanadi."""
     clips = proj["clips"]
@@ -446,6 +477,8 @@ def build_video_cinema(proj, tl, ass_path, fonts, out, brolls):
         cmd += ["-i", part]
     for p in clips:
         cmd += ["-vn", "-i", p]
+    total = tl.total + (proj["cta"].get("dur", 3.0) if proj.get("cta") else 0)
+    cmd += music_mix(proj, fc, cmd + [out], total) or []
     cmd += ["-filter_complex", ";".join(fc), "-map", "[vo]", "-map", "[ao]", "-shortest",
             "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-profile:v", "high",
             "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", out]
@@ -513,6 +546,8 @@ def build_video(proj, tl, ass_path, fonts, out, brolls=()):
         cmd += ["-i", p]
     for path, *_ in brolls:
         cmd += ["-an", "-stream_loop", "-1", "-i", path]   # qisqa kadr ham oraliqni to'liq qoplasin
+    total = tl.total + (proj["cta"].get("dur", 3.0) if proj.get("cta") else 0)
+    cmd += music_mix(proj, fc, cmd + [out], total) or []
     cmd += ["-filter_complex", ";".join(fc), "-map", "[vo]", "-map", "[ao]",
             "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-profile:v", "high",
             "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", out]

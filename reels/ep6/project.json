@@ -575,5 +575,9 @@
     "l2": "VA YAQINLARINGIZGA YUBORING",
     "l3": "OBUNA BO'LING",
     "dur": 3.5
+  },
+  "music": {
+    "file": "/home/user/Video-agent/work/music/ref2_music.wav",
+    "gain_db": -17
   }
 }
