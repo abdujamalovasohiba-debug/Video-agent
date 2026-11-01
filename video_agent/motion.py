@@ -57,6 +57,7 @@ def find_browser() -> str | None:
     if env:
         return env
     for pattern in ("/opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell",
+                    "/opt/pw-browsers/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell",
                     os.path.expanduser("~/.cache/ms-playwright/chromium_headless_shell-*/chrome-linux/headless_shell")):
         hits = sorted(glob.glob(pattern))
         if hits:
