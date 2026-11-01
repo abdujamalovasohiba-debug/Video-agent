@@ -267,81 +267,70 @@
         0,
         0
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.22
+      "ss": 1,
+      "ty": 0.75,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_175213.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_44646.mp4",
       "phrases": [
         1,
         1
       ],
-      "ss": 0.0,
-      "x": 0.5,
-      "ty": 0.7
+      "ss": 0,
+      "ty": 0.78,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_346861.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_44647.mp4",
       "phrases": [
         2,
         2
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.2
+      "ss": 1,
+      "ty": 0.78,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_219140.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_231147.mp4",
       "phrases": [
         3,
-        3
+        4
       ],
-      "ss": 1.0,
-      "x": 0.5,
+      "ss": 1,
       "ty": 0.3,
+      "dim": 0,
       "blur": 1
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_114840.mp4",
-      "phrases": [
-        4,
-        4
-      ],
-      "ss": 0.5,
-      "x": 0.5,
-      "ty": 0.25
-    },
-    {
-      "file": "/home/user/Video-agent/work/broll/px_25030.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_61294.mp4",
       "phrases": [
         5,
         5
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.75,
-      "blur": 1
+      "ss": 0,
+      "ty": 0.78,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_326213.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_44648.mp4",
       "phrases": [
         6,
         6
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.75
+      "ss": 1,
+      "ty": 0.78,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_96691.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_40136.mp4",
       "phrases": [
         7,
         7
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.25
+      "ss": 1,
+      "ty": 0.25,
+      "dim": 0.1
     },
     {
       "file": "/home/user/Video-agent/work/broll/px_61299.mp4",
@@ -349,91 +338,90 @@
         8,
         8
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.75
+      "ss": 1,
+      "ty": 0.78,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_272619.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_45288.mp4",
       "phrases": [
         9,
         9
       ],
-      "ss": 0.5,
-      "x": 0.35,
-      "ty": 0.3
+      "ss": 0,
+      "ty": 0.78,
+      "dim": 0.22
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_216500.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_45286.mp4",
       "phrases": [
         10,
         10
       ],
-      "ss": 2.0,
-      "x": 0.5,
-      "ty": 0.25,
-      "blur": 1
+      "ss": 0,
+      "ty": 0.78,
+      "dim": 0.22
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_143376.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_61300.mp4",
       "phrases": [
         11,
         11
       ],
-      "ss": 0.5,
-      "x": 0.6,
-      "ty": 0.3
+      "ss": 1,
+      "ty": 0.78,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_123.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_190021.mp4",
       "phrases": [
         12,
         12
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.3
+      "ss": 1,
+      "ty": 0.3,
+      "dim": 0,
+      "blur": 1
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_139743.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_44645.mp4",
       "phrases": [
         13,
         13
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.25
+      "ss": 0,
+      "ty": 0.78,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_130513.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_61292.mp4",
       "phrases": [
         14,
         14
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.3
+      "ss": 0,
+      "ty": 0.78,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_67826.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_44639.mp4",
       "phrases": [
         15,
         16
       ],
-      "ss": 1.0,
-      "x": 0.62,
-      "ty": 0.25,
-      "blur": 1
+      "ss": 0,
+      "ty": 0.78,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_71291.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_45284.mp4",
       "phrases": [
         17,
         18
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.3
+      "ss": 0,
+      "ty": 0.78,
+      "dim": 0.22
     },
     {
       "file": "/home/user/Video-agent/work/broll/px_45287.mp4",
@@ -441,91 +429,91 @@
         19,
         19
       ],
-      "ss": 0.5,
-      "x": 0.5,
-      "ty": 0.78
+      "ss": 0,
+      "ty": 0.78,
+      "dim": 0.22
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_336565.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_44641.mp4",
       "phrases": [
         20,
         20
       ],
-      "ss": 0.5,
-      "x": 0.5,
-      "ty": 0.3
+      "ss": 1,
+      "ty": 0.78,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_381103.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_350800.mp4",
       "phrases": [
         21,
         22
       ],
-      "ss": 0.0,
-      "x": 0.5,
-      "ty": 0.78,
+      "ss": 0,
+      "ty": 0.72,
+      "dim": 0,
       "blur": 1
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_187612.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_99388.mp4",
       "phrases": [
         23,
         24
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.3
+      "ss": 0,
+      "ty": 0.3,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_76887.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_29870.mp4",
       "phrases": [
         25,
         25
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.3
+      "ss": 0,
+      "ty": 0.3,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_80519.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_61290.mp4",
       "phrases": [
         27,
         27
       ],
-      "ss": 1.0,
-      "x": 0.45,
-      "ty": 0.3,
+      "ss": 0,
+      "ty": 0.78,
+      "dim": 0,
       "blur": 1
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_172667.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_61291.mp4",
       "phrases": [
         28,
         28
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.22
+      "ss": 0,
+      "ty": 0.78,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_244124.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_45282.mp4",
       "phrases": [
         29,
         29
       ],
-      "ss": 0.5,
-      "x": 0.5,
-      "ty": 0.75
+      "ss": 0,
+      "ty": 0.78,
+      "dim": 0.22
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_153912.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_44637.mp4",
       "phrases": [
         30,
         30
       ],
-      "ss": 0.5,
-      "x": 0.5,
-      "ty": 0.25
+      "ss": 6,
+      "ty": 0.75,
+      "dim": 0
     },
     {
       "file": "/home/user/Video-agent/work/broll/px_225162.mp4",
@@ -533,40 +521,40 @@
         31,
         31
       ],
-      "ss": 0.5,
-      "x": 0.5,
-      "ty": 0.22
+      "ss": 0,
+      "ty": 0.22,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_333698.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_45283.mp4",
       "phrases": [
         32,
         32
       ],
-      "ss": 0.5,
-      "x": 0.5,
-      "ty": 0.3,
+      "ss": 0,
+      "ty": 0.78,
+      "dim": 0.22,
       "blur": 1
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_198866.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_224421.mp4",
       "phrases": [
         33,
         33
       ],
-      "ss": 1.0,
-      "x": 0.5,
-      "ty": 0.75
+      "ss": 0,
+      "ty": 0.75,
+      "dim": 0
     },
     {
-      "file": "/home/user/Video-agent/work/broll/px_153821.mp4",
+      "file": "/home/user/Video-agent/work/broll/px_31459.mp4",
       "phrases": [
         33,
         33
       ],
-      "ss": 0.0,
-      "x": 0.5,
-      "ty": 0.4,
+      "ss": 0,
+      "ty": 0.72,
+      "dim": 0,
       "cta": 1
     }
   ],
