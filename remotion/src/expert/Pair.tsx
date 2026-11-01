@@ -70,16 +70,16 @@ export const NumScreen: React.FC<P<Extract<Item, {type: 'numscreen'}>>> = ({item
     <AbsoluteFill style={{background: `rgba(250,250,248,${bg})`}}>
       <div style={{position: 'absolute', top: h * 0.5, left: w * 0.06, transform: 'translateY(-50%)', display: 'flex', alignItems: 'center',
                    gap: 22 * u, opacity: bg}}>
-        <div style={{fontFamily: 'Anton', fontSize: 420 * u, lineHeight: 1, color: BROWN, filter: `blur(${(1 - inP) * 24}px)`,
+        <div style={{fontFamily: 'Anton', fontSize: 560 * u, lineHeight: 1, color: BROWN, filter: `blur(${(1 - inP) * 24}px)`,
                      transform: `scale(${1.25 - 0.25 * inP})`}}>
           {item.n}
         </div>
-        <div style={{display: 'flex', flexDirection: 'column', maxWidth: w * 0.52}}>
-          <div style={{fontFamily: 'Montserrat', fontWeight: 800, fontSize: 64 * u, lineHeight: 1.05, textTransform: 'uppercase'}}>
+        <div style={{display: 'flex', flexDirection: 'column', maxWidth: w * 0.5}}>
+          <div style={{fontFamily: 'Montserrat', fontWeight: 800, fontSize: 80 * u, lineHeight: 1.05, textTransform: 'uppercase'}}>
             <Lit words={item.title} color={BROWN} dim={0} />
           </div>
           {item.lines.map((ln, i) => (
-            <div key={i} style={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: Math.max(26, 44 - i * 7) * u, lineHeight: 1.15,
+            <div key={i} style={{fontFamily: 'Montserrat', fontWeight: 500, fontSize: Math.max(34, 52 - i * 8) * u, lineHeight: 1.15,
                                  marginTop: 4 * u}}>
               <Lit words={ln} color={BROWN} dim={0} />
             </div>
