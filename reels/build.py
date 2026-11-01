@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Reels montaji: pauzalarni kesish + punch-in zoom + so'zma-so'z subtitr + raqamli kartalar.
 
+project.json da "style": "cinema" bo'lsa (2-referens uslubi): spiker ko'rinmaydi, b-roll butun
+videoni qoplaydi va crossfade/blur bilan almashadi, matn harfma-harf sariq glow bilan chiqadi.
+
 Foydalanish: python3 build.py project.json out_dir fonts_dir
 """
 import json, os, re, subprocess, sys
@@ -10,6 +13,8 @@ BROWN = "&H00122645&"      # #452612
 YELLOW = "&H001CB2F2&"     # #F2B21C
 WHITE = "&H00FFFFFF&"
 CARD_BG = "&H00FCFCFC&"
+CINE_YELLOW = "&H0067E0EA&"   # #EAE067 - 2-referensdagi limon-sariq
+XF = 0.45                      # cinema: kadrlar orasidagi crossfade, s
 
 # Pauza kesish sozlamalari: gap oxiridan TAIL, keyingi gap boshidan LEAD qoldiriladi.
 # Jimlik chegarasi klipning baland nutqidan (90-persentil) SIL_BELOW dB past: so'z oxirlari
@@ -141,9 +146,9 @@ def word_times(words, i0, i1, n, tl, clip):
     return out
 
 
-FONT_FILES = {"Sub1": "Poppins-Bold.ttf", "Sub2": "Poppins-Regular.ttf", "Card1": "Poppins-Bold.ttf",
+FONT_FILES = {"Cine": "BebasNeue-Regular.ttf", "Sub1": "Poppins-Bold.ttf", "Sub2": "Poppins-Regular.ttf", "Card1": "Poppins-Bold.ttf",
               "Card2": "Poppins-Medium.ttf", "Card3": "Poppins-Regular.ttf"}
-SIZES = {"Sub1": 104, "Sub2": 82, "Card1": 100, "Card2": 68, "Card3": 54}
+SIZES = {"Cine": 122, "Sub1": 104, "Sub2": 82, "Card1": 100, "Card2": 68, "Card3": 54}
 ROW_H = {"Card1": 108, "Card2": 80, "Card3": 64}
 SUB_MAXW, CARD_X, CARD_MAXW = 1000, 545, 505
 _fonts = {}
@@ -189,6 +194,9 @@ def build_ass(proj, words, tl, fonts, broll_spans=()):
 
     def add(layer, a, b, style, text):
         ev.append(f"Dialogue: {layer},{ts(a)},{ts(b)},{style},,0,0,0,,{text}")
+
+    if proj.get("style") == "cinema":
+        return build_ass_cinema(proj, words, tl, fonts, broll_spans)
 
     # --- hook plashkasi (statik, referensdagidek)
     hk = proj["hook"]
@@ -299,7 +307,154 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     return head + "\n".join(ev) + "\n"
 
 
+def letters(text, t_words, t0, big_first=True):
+    """Harfma-harf chiqish: har bir harf kichikdan, shaffoflikdan o'z o'lchamiga "sakraydi".
+
+    t_words: har bir so'z uchun (boshlanish, tugash) - harflar shu oraliqqa taqsimlanadi.
+    big_first: qatorning birinchi harfi 2-referensdagidek biroz kattaroq.
+    """
+    out = []
+    for wi, (w, (ws, we)) in enumerate(zip(text.split(), t_words)):
+        step = min(0.055, max(we - ws, 0.12) / max(len(w), 1))
+        for ci, ch in enumerate(w):
+            a = int((ws + ci * step - t0) * 1000)
+            sc = 118 if (big_first and wi == 0 and ci == 0) else 100
+            out.append(f"{{\\1a&HFF&\\3a&HFF&\\4a&HFF&\\fscx35\\fscy35"
+                       f"\\t({max(a, 0)},{max(a, 0) + 110},0.6,\\1a&H00&\\3a&H90&\\4a&H60&\\fscx{sc}\\fscy{sc})}}{ch}")
+        out.append(" ")
+    return "".join(out).rstrip()
+
+
+def build_ass_cinema(proj, words, tl, fonts, broll_spans):
+    ev = []
+
+    def add(layer, a, b, style, text):
+        ev.append(f"Dialogue: {layer},{ts(a)},{ts(b)},{style},,0,0,0,,{text}")
+
+    ph = proj["phrases"]
+    starts = [tl.map(p[0], words[str(p[0])][p[1]]["s"]) for p in ph]
+    # matn balandligi: jumla qaysi b-roll ustida bo'lsa, o'shaning "ty" si (kadrdagi bo'sh joy)
+    tys = []
+    for t0 in starts:
+        ty = 0.3
+        for (a, b), br in zip(broll_spans, proj["broll"]):
+            if a <= t0 + 0.05:
+                ty = br.get("ty", 0.3)
+        tys.append(ty)
+    for k, (p, t0) in enumerate(zip(ph, starts)):
+        c, i0, i1 = p[:3]
+        if "hide" in p[5:]:
+            continue
+        cw = words[str(c)]
+        lines = [x for x in p[3:5] if x]
+        allw = " ".join(lines).split()
+        idx = list(range(i0, i1 + 1))
+        spans = []
+        for j in range(len(allw)):
+            wj = cw[idx[round(j * (len(idx) - 1) / max(1, len(allw) - 1))] if len(allw) > 1 else i0]
+            spans.append((tl.map(c, wj["s"]), tl.map(c, wj["e"])))
+        nxt = starts[k + 1] if k + 1 < len(ph) else tl.total
+        t1 = min(nxt, tl.map(c, cw[i1]["e"]) + 1.0)
+        fs = SIZES["Cine"] + (14 if k == 0 else 0)   # hook biroz kattaroq
+        rows, pos = [], 0
+        for line in lines:
+            ws_ = line.split()
+            for r in wrap("Cine", ws_, fonts, 940 * SIZES["Cine"] / fs):
+                rows.append(([ws_[i] for i in r], spans[pos + r[0]:pos + r[-1] + 1]))
+            pos += len(ws_)
+        lh = fs * 0.98
+        y = tys[k] * H - lh * (len(rows) - 1) / 2
+        for ws_, sp in rows:
+            add(10, t0, t1, "Cine", f"{{\\an5\\pos({W // 2},{int(y)})\\fs{fs}\\fad(0,180)}}"
+                + letters(" ".join(ws_), sp, t0))
+            y += lh
+
+    cta = proj.get("cta")
+    if cta:
+        a, b = tl.total, tl.total + cta.get("dur", 3.0) + 0.5
+        for j, (txt, col, fs, y) in enumerate([(cta["l1"], "", 130, 860), (cta["l2"], "", 84, 975),
+                                               (cta["l3"], f"\\c{WHITE}\\3c{WHITE}", 92, 1110)]):
+            n = len(txt.split())
+            sp = [(a + 0.15 + 0.45 * j + 0.12 * i, a + 0.27 + 0.45 * j + 0.12 * i) for i in range(n)]
+            add(30, a, b, "Cine", f"{{\\an5\\pos({W // 2},{y})\\fs{fs}{col}}}" + letters(txt, sp, a))
+
+    head = f"""[Script Info]
+ScriptType: v4.00+
+PlayResX: {W}
+PlayResY: {H}
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cine,Bebas Neue,{SIZES["Cine"]},{CINE_YELLOW},{CINE_YELLOW},{CINE_YELLOW},&HA0000000,0,0,0,0,100,100,1,0,1,5,2,5,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+"""
+    # glow: konturni xira qilib yoyish (blur) - neon effekti
+    return head + "\n".join(e.replace(",,0,0,0,,{", ",,0,0,0,,{\\blur7", 1) for e in ev) + "\n"
+
+
+def build_video_cinema(proj, tl, ass_path, fonts, out, brolls):
+    """Spiker ko'rinmaydi: kadrlar avval alohida tayyorlanadi (xotira tejaladi), keyin xfade bilan ulanadi."""
+    clips = proj["clips"]
+    tmp = os.path.join(os.path.dirname(out), "cine_parts")
+    os.makedirs(tmp, exist_ok=True)
+    parts = []
+    for k, (path, ss, a, b, bx, dim, opt) in enumerate(brolls):
+        d = b - a
+        vf = [f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos",
+              f"crop={W}:{H}:(iw-{W})*{bx}:(ih-{H})/2", "setsar=1", f"fps={FPS}",
+              f"eq=contrast=1.06:saturation=0.92:brightness={-dim}"]
+        if k > 0 and opt.get("blur"):         # blur o'tish: kirishda xiradan aniqqa
+            vf += ["gblur=sigma=40:enable='lt(t,0.15)'", "gblur=sigma=16:enable='between(t,0.15,0.3)'",
+                   "gblur=sigma=5:enable='between(t,0.3,0.45)'"]
+        if k + 1 < len(brolls) and brolls[k + 1][6].get("blur"):   # ...va chiqishda xiralashadi
+            vf += [f"gblur=sigma=5:enable='between(t,{d - 0.45:.3f},{d - 0.3:.3f})'",
+                   f"gblur=sigma=16:enable='between(t,{d - 0.3:.3f},{d - 0.15:.3f})'",
+                   f"gblur=sigma=40:enable='gte(t,{d - 0.15:.3f})'"]
+        part = os.path.join(tmp, f"{k:02d}.mp4")
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-stream_loop", "-1", "-ss", str(ss), "-i", path, "-t", f"{d:.3f}",
+                        "-an", "-vf", ",".join(vf), "-c:v", "libx264", "-preset", "veryfast", "-crf", "16",
+                        "-pix_fmt", "yuv420p", part], check=True)
+        parts.append((part, a, d))
+    fc = []
+    prev = "0:v"
+    for k in range(1, len(parts)):
+        fc.append(f"[{prev}][{k}:v]xfade=transition=fade:duration={XF}:offset={parts[k][1]:.3f}[x{k}]")
+        prev = f"x{k}"
+    tail = ""
+    if proj.get("cta"):
+        tail = f"boxblur=10:2:enable='gte(t,{tl.total + 0.3:.3f})',"
+    fc.append(f"[{prev}]vignette=PI/4.5,{tail}ass={ass_path}:fontsdir={fonts},format=yuv420p[vo]")
+    n = len(parts)
+    al = []
+    for k, (c, a, b, _) in enumerate(tl.segs):
+        d = b - a
+        gain = "".join(f",volume={g}dB:enable='between(t,{max(x0 - a, 0):.3f},{x1 - a:.3f})'"
+                       for x0, x1, g in proj.get("boost", {}).get(str(c), []) if x1 > a and x0 < b)
+        fc.append(f"[{n + c - 1}:a]atrim={a}:{b},asetpts=PTS-STARTPTS{gain},afade=t=in:d=0.015,"
+                  f"afade=t=out:st={max(d - 0.02, 0):.3f}:d=0.02[a{k}]")
+        al.append(f"[a{k}]")
+    fc.append("".join(al) + f"concat=n={len(al)}:v=0:a=1[ac]")
+    fc.append("[ac]" + (f"apad=pad_dur={proj['cta'].get('dur', 3.0)}," if proj.get("cta") else "")
+              + "highpass=f=80,acompressor=threshold=0.1:ratio=3:attack=10:release=200,"
+              "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[ao]")
+    cmd = ["ffmpeg", "-y", "-v", "error"]
+    for part, _, _ in parts:
+        cmd += ["-i", part]
+    for p in clips:
+        cmd += ["-vn", "-i", p]
+    cmd += ["-filter_complex", ";".join(fc), "-map", "[vo]", "-map", "[ao]", "-shortest",
+            "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-profile:v", "high",
+            "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", out]
+    subprocess.run(cmd, check=True)
+
+
 def build_video(proj, tl, ass_path, fonts, out, brolls=()):
+    if proj.get("style") == "cinema":
+        return build_video_cinema(proj, tl, ass_path, fonts, out, brolls)
     clips = proj["clips"]
     fx, fy = proj["focus"]
     zooms = proj["zooms"]
@@ -321,13 +476,31 @@ def build_video(proj, tl, ass_path, fonts, out, brolls=()):
     fc.append("[vraw]eq=contrast=1.06:saturation=1.08:brightness=-0.01,colorbalance=rs=0.03:gs=0.01:bs=-0.03,"
               "vignette=PI/5[vc]")
     base = "vc"
-    for k, (path, ss, a, b, bx, dim) in enumerate(brolls):
+    cinema = proj.get("style") == "cinema"
+    for k, (path, ss, a, b, bx, dim, opt) in enumerate(brolls):
         i = len(clips) + k
-        fc.append(f"[{i}:v]trim={ss}:{ss + b - a},setpts=PTS-STARTPTS+{a}/TB,fps={FPS},"
+        trans = ""
+        if cinema and k > 0:
+            # crossfade: yangi kadr oldingisining ustiga shaffoflikdan chiqadi
+            trans = f",format=yuva420p,fade=t=in:st=0:d={XF}:alpha=1"
+            if opt.get("blur"):   # blur o'tish: kirishda xiradan aniqqa
+                trans = (",gblur=sigma=40:enable='lt(t,0.15)',gblur=sigma=16:enable='between(t,0.15,0.3)',"
+                         "gblur=sigma=5:enable='between(t,0.3,0.45)'" + trans)
+        if cinema and k + 1 < len(brolls) and brolls[k + 1][6].get("blur"):
+            e = b - a   # chiqishda ham xiralashadi
+            trans = (f",gblur=sigma=5:enable='between(t,{e - 0.45:.3f},{e - 0.3:.3f})',"
+                     f"gblur=sigma=16:enable='between(t,{e - 0.3:.3f},{e - 0.15:.3f})',"
+                     f"gblur=sigma=40:enable='gte(t,{e - 0.15:.3f})'") + trans
+        grade = ("eq=contrast=1.06:saturation=0.92:brightness={b0}" if cinema
+                 else "eq=contrast=1.04:saturation=1.05:brightness={b0}").format(b0=-dim)
+        fc.append(f"[{i}:v]trim={ss}:{ss + b - a},setpts=PTS-STARTPTS,fps={FPS},"
                   f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}:(iw-{W})*{bx}:(ih-{H})/2,setsar=1,"
-                  f"eq=contrast=1.04:saturation=1.05:brightness={-dim}[br{k}]")
+                  f"{grade}{trans},setpts=PTS+{a}/TB[br{k}]")
         fc.append(f"[{base}][br{k}]overlay=enable='between(t,{a:.3f},{b:.3f})':eof_action=pass[ov{k}]")
         base = f"ov{k}"
+    if cinema:   # kinematografik ko'rinish: yengil vinyetka butun kadrga
+        fc.append(f"[{base}]vignette=PI/4.5[vg]")
+        base = "vg"
     tail = ""
     if proj.get("cta"):
         d = proj["cta"].get("dur", 3.0)
@@ -339,7 +512,7 @@ def build_video(proj, tl, ass_path, fonts, out, brolls=()):
     for p in clips:
         cmd += ["-i", p]
     for path, *_ in brolls:
-        cmd += ["-an", "-i", path]
+        cmd += ["-an", "-stream_loop", "-1", "-i", path]   # qisqa kadr ham oraliqni to'liq qoplasin
     cmd += ["-filter_complex", ";".join(fc), "-map", "[vo]", "-map", "[ao]",
             "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-profile:v", "high",
             "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", out]
@@ -353,12 +526,21 @@ def main():
     words = json.load(open(os.path.join(base, proj["words"])))
     os.makedirs(out_dir, exist_ok=True)
     splits = {}
-    for c, i0 in [(p[0], p[1]) for p in proj["phrases"]] + [(cd["clip"], cd["from"]) for cd in proj["cards"]]:
+    for c, i0 in [(p[0], p[1]) for p in proj["phrases"]] + [(cd["clip"], cd["from"]) for cd in proj.get("cards", [])]:
         splits.setdefault(c, []).append(round(words[str(c)][i0]["s"] - 0.05, 3))
     tl = Timeline(proj["clips"], splits, proj.get("clip_end"))
     brolls = []
     ph = proj["phrases"]
-    for br in proj.get("broll", []):
+    if proj.get("style") == "cinema":
+        # b-roll butun videoni qoplaydi: har biri o'z birinchi jumlasidan keyingisigacha (+crossfade)
+        bl = proj["broll"]
+        st = [0.0] + [round(tl.map(ph[br["phrases"][0]][0], words[str(ph[br["phrases"][0]][0])][ph[br["phrases"][0]][1]]["s"])
+                            - 0.1, 3) if not br.get("cta") else round(tl.total - XF, 3) for br in bl[1:]]
+        end = tl.total + (proj["cta"].get("dur", 3.0) + 0.5 if proj.get("cta") else 0)
+        for k, br in enumerate(bl):
+            b = st[k + 1] + XF if k + 1 < len(bl) else end
+            brolls.append((br["file"], br.get("ss", 0), st[k], round(b, 3), br.get("x", 0.5), br.get("dim", 0), br))
+    for br in ([] if proj.get("style") == "cinema" else proj.get("broll", [])):
         p0, p1 = ph[br["phrases"][0]], ph[br["phrases"][1]]
         a = max(0.0, tl.map(p0[0], words[str(p0[0])][p0[1]]["s"]) - 0.05)
         # subtitr bilan birga tugasin: oxirgi so'zdan 0.7 s keyin yoki keyingi jumla boshida
@@ -367,7 +549,7 @@ def main():
         b = min(nxt, tl.map(p1[0], words[str(p1[0])][p1[2]]["e"]) + 0.7)
         path = br["file"] if os.path.isabs(br["file"]) else os.path.join(base, br["file"])
         brolls.append((path, br.get("ss", 0), round(a, 3), round(min(b, a + duration(path) - br.get("ss", 0)), 3),
-                       br.get("x", 0.5), br.get("dim", 0)))  # dim: och fonli kadrda oq subtitr o'qilsin
+                       br.get("x", 0.5), br.get("dim", 0), br))  # dim: och fonli kadrda oq subtitr o'qilsin
     ass_path = os.path.join(out_dir, "subs.ass")
     open(ass_path, "w").write(build_ass(proj, words, tl, fonts, [(a, b) for _, _, a, b, *_ in brolls]))
     json.dump([dict(clip=c, src=[a, b], out=round(o, 3)) for c, a, b, o in tl.segs],

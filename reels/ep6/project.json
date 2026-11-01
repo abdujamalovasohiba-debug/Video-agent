@@ -1,0 +1,579 @@
+{
+  "style": "cinema",
+  "clips": [
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/96166756-copy_1E43168B-931B-4739-BD10-F55BB284C6CB.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/12547c3f-copy_1FC5D19F-0598-4EC7-AE10-A143BC76DF71.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/ce7a1dfe-copy_169AD51A-E834-4B35-9D6E-4301D8BCEC97.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/fb55e57b-copy_D2D92392-DBC0-4001-A72F-A976237F935D.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/201e340d-copy_C4F6D47A-5F6B-4C5B-BF66-B7CB42C3B2D9.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/586c79d8-copy_35B9D5D6-D5DC-496C-AFFB-5C641333F2E2.mov",
+    "/root/.claude/uploads/ee456e2a-081f-5c18-9c9d-5172a2dcb322/609dc959-copy_3BFCCC95-2619-4F26-AE27-23A29A0F1814.mov"
+  ],
+  "words": "words.json",
+  "focus": [
+    0.42,
+    0.33
+  ],
+  "zooms": [
+    1.0,
+    1.0
+  ],
+  "phrases": [
+    [
+      1,
+      0,
+      8,
+      "Psixologik yordam –",
+      "faqat oilani saqlab qolish emas"
+    ],
+    [
+      1,
+      9,
+      15,
+      "Psixologik maqsad:",
+      "shu odam kuyib, nobud bo'lib ketmasin"
+    ],
+    [
+      1,
+      16,
+      20,
+      "Nevroz bo'lsa –",
+      "nevrozdan qutulish kerak"
+    ],
+    [
+      1,
+      21,
+      29,
+      "Necha marta bo'lganki",
+      "turmushi buzilganda"
+    ],
+    [
+      1,
+      30,
+      34,
+      "ajrashgandan keyin",
+      "tuzalib ketdi"
+    ],
+    [
+      1,
+      35,
+      43,
+      "Nevroz chaqiruvchi zulm –",
+      "eridanmi, qaynonadanmi"
+    ],
+    [
+      2,
+      0,
+      13,
+      "o'zi nevroz bo'lib,",
+      "o'zi duduqlanib, o'zi qo'rqib"
+    ],
+    [
+      2,
+      14,
+      22,
+      "Qancha dori bersang ham",
+      "tiklanmaydi – zulm davom etadi"
+    ],
+    [
+      2,
+      23,
+      35,
+      "U qanchalik xafa bo'lsa",
+      "zulm shunchalik ko'payadi"
+    ],
+    [
+      2,
+      36,
+      41,
+      "Axir shunaqa paytda",
+      "kasal bo'ladi"
+    ],
+    [
+      3,
+      0,
+      3,
+      "Ruhiy kasalligi",
+      "ko'payib ketadi"
+    ],
+    [
+      3,
+      4,
+      18,
+      "Davolasa ham",
+      "o'sha zulm turibdi"
+    ],
+    [
+      3,
+      19,
+      26,
+      "Shuning uchun",
+      "oiladan ketgandan keyin tuzalganlar bor"
+    ],
+    [
+      3,
+      27,
+      30,
+      "Ya'ni",
+      "nevrozning sababi bor"
+    ],
+    [
+      3,
+      31,
+      38,
+      "Sababini yo'qotmasa –",
+      "qancha dori bersa ham, tuzalmaydi"
+    ],
+    [
+      3,
+      39,
+      41,
+      "Nima kerak?",
+      ""
+    ],
+    [
+      4,
+      0,
+      5,
+      "Nevroz yaratgan",
+      "sababni yo'qotish kerak"
+    ],
+    [
+      4,
+      6,
+      10,
+      "Ko'pincha",
+      "bu sabab – oilada"
+    ],
+    [
+      4,
+      11,
+      17,
+      "Agar ayol kishida",
+      "nevroz paydo bo'lgan bo'lsa"
+    ],
+    [
+      4,
+      18,
+      28,
+      "ko'pincha eridan, zulmidan,",
+      "qaynonasidan bo'ladi"
+    ],
+    [
+      4,
+      29,
+      45,
+      "o'sha ko'rgan narsasidan",
+      "kasal bo'lib qoladi"
+    ],
+    [
+      5,
+      0,
+      5,
+      "Bunday oilani",
+      "davom ettirish kerak emas"
+    ],
+    [
+      5,
+      6,
+      18,
+      "Bu – o'tib ketgan daraja,",
+      "qachonlardir uzilib ketgan"
+    ],
+    [
+      5,
+      19,
+      25,
+      "O'sha qatorda",
+      "boshqalarni saqlab qolish kerak"
+    ],
+    [
+      5,
+      26,
+      34,
+      "Psixologiyada ham",
+      "\"oilani saqlab qolish\" degan so'z yo'q"
+    ],
+    [
+      5,
+      35,
+      47,
+      "",
+      "",
+      "hide"
+    ],
+    [
+      6,
+      0,
+      8,
+      "",
+      "",
+      "hide"
+    ],
+    [
+      6,
+      9,
+      12,
+      "Afsuski,",
+      "bu yerda shunaqa"
+    ],
+    [
+      6,
+      13,
+      19,
+      "Oilani qurishga harakat qilishdi,",
+      "lekin oilada nizo"
+    ],
+    [
+      6,
+      20,
+      27,
+      "Bir-birini urgan, tepgan,",
+      "nafrat, xiyonat"
+    ],
+    [
+      6,
+      28,
+      33,
+      "Bu yerda chuqurlashib ketgan",
+      "qiyinchiliklar"
+    ],
+    [
+      6,
+      34,
+      45,
+      "Shu muhit davom etsa –",
+      "bolalariga, boshqalarga qiyinchiliklar"
+    ],
+    [
+      7,
+      0,
+      6,
+      "Qancha erta to'g'ri",
+      "yo'naltirilsa – boshqacha"
+    ],
+    [
+      7,
+      7,
+      10,
+      "O'tib ketgandan keyin",
+      "tuzatish qiyin"
+    ]
+  ],
+  "broll": [
+    {
+      "file": "/home/user/Video-agent/work/broll/px_44637.mp4",
+      "phrases": [
+        0,
+        0
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.22
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_175213.mp4",
+      "phrases": [
+        1,
+        1
+      ],
+      "ss": 0.0,
+      "x": 0.5,
+      "ty": 0.7
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_346861.mp4",
+      "phrases": [
+        2,
+        2
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.2
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_219140.mp4",
+      "phrases": [
+        3,
+        3
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.3,
+      "blur": 1
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_114840.mp4",
+      "phrases": [
+        4,
+        4
+      ],
+      "ss": 0.5,
+      "x": 0.5,
+      "ty": 0.25
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_25030.mp4",
+      "phrases": [
+        5,
+        5
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.75,
+      "blur": 1
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_326213.mp4",
+      "phrases": [
+        6,
+        6
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.75
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_96691.mp4",
+      "phrases": [
+        7,
+        7
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.25
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_61299.mp4",
+      "phrases": [
+        8,
+        8
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.75
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_272619.mp4",
+      "phrases": [
+        9,
+        9
+      ],
+      "ss": 0.5,
+      "x": 0.35,
+      "ty": 0.3
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_216500.mp4",
+      "phrases": [
+        10,
+        10
+      ],
+      "ss": 2.0,
+      "x": 0.5,
+      "ty": 0.25,
+      "blur": 1
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_143376.mp4",
+      "phrases": [
+        11,
+        11
+      ],
+      "ss": 0.5,
+      "x": 0.6,
+      "ty": 0.3
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_123.mp4",
+      "phrases": [
+        12,
+        12
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.3
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_139743.mp4",
+      "phrases": [
+        13,
+        13
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.25
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_130513.mp4",
+      "phrases": [
+        14,
+        14
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.3
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_67826.mp4",
+      "phrases": [
+        15,
+        16
+      ],
+      "ss": 1.0,
+      "x": 0.62,
+      "ty": 0.25,
+      "blur": 1
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_71291.mp4",
+      "phrases": [
+        17,
+        18
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.3
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_45287.mp4",
+      "phrases": [
+        19,
+        19
+      ],
+      "ss": 0.5,
+      "x": 0.5,
+      "ty": 0.78
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_336565.mp4",
+      "phrases": [
+        20,
+        20
+      ],
+      "ss": 0.5,
+      "x": 0.5,
+      "ty": 0.3
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_381103.mp4",
+      "phrases": [
+        21,
+        22
+      ],
+      "ss": 0.0,
+      "x": 0.5,
+      "ty": 0.78,
+      "blur": 1
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_187612.mp4",
+      "phrases": [
+        23,
+        24
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.3
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_76887.mp4",
+      "phrases": [
+        25,
+        25
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.3
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_80519.mp4",
+      "phrases": [
+        27,
+        27
+      ],
+      "ss": 1.0,
+      "x": 0.45,
+      "ty": 0.3,
+      "blur": 1
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_172667.mp4",
+      "phrases": [
+        28,
+        28
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.22
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_244124.mp4",
+      "phrases": [
+        29,
+        29
+      ],
+      "ss": 0.5,
+      "x": 0.5,
+      "ty": 0.75
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_153912.mp4",
+      "phrases": [
+        30,
+        30
+      ],
+      "ss": 0.5,
+      "x": 0.5,
+      "ty": 0.25
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_225162.mp4",
+      "phrases": [
+        31,
+        31
+      ],
+      "ss": 0.5,
+      "x": 0.5,
+      "ty": 0.22
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_333698.mp4",
+      "phrases": [
+        32,
+        32
+      ],
+      "ss": 0.5,
+      "x": 0.5,
+      "ty": 0.3,
+      "blur": 1
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_198866.mp4",
+      "phrases": [
+        33,
+        33
+      ],
+      "ss": 1.0,
+      "x": 0.5,
+      "ty": 0.75
+    },
+    {
+      "file": "/home/user/Video-agent/work/broll/px_153821.mp4",
+      "phrases": [
+        33,
+        33
+      ],
+      "ss": 0.0,
+      "x": 0.5,
+      "ty": 0.4,
+      "cta": 1
+    }
+  ],
+  "cta": {
+    "l1": "SAQLAB QO'YING",
+    "l2": "VA YAQINLARINGIZGA YUBORING",
+    "l3": "OBUNA BO'LING",
+    "dur": 3.5
+  }
+}
