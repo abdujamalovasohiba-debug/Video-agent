@@ -79,8 +79,8 @@ module.exports = {
     },
     {
       id: "M13-arzon-lid",
-      theme: bg("y5-kreslo.jpg"),
-      cover: { photo: "y5-kreslo.jpg", pos: "50% 35%", line1: "Arzon lid har doim ham", line2: "yaxshi natija emas", sub: "Nima uchun?" },
+      theme: bg("y6-kitob-varaqlash.jpg"),
+      cover: { photo: "y6-kitob-varaqlash.jpg", pos: "50% 30%", line1: "Arzon lid har doim ham", line2: "yaxshi natija emas", sub: "Nima uchun?" },
       slides: [
         { label: "Koʻp eshitaman", title: "«Lid juda arzon, <mark>lekin sotuv yoʻq.</mark>»", body: "Mijozlar xursand boʻlib keladi: lid 0,10$ dan tushyapti. Bir oydan keyin esa: «Hech kim sotib olmadi».", note: "Gap shundaki, arzon lid va mijoz — bir narsa emas." },
         { label: "Nega arzon chiqadi", title: "Arzon lid — koʻpincha <mark>«shunchaki soʻradim».</mark>", body: "Forma juda oson boʻlsa, odam oʻylamasdan bosib yuboradi. Keyin telefonni ham olmaydi.", note: "Raqam bor — qiziqish yoʻq." },
