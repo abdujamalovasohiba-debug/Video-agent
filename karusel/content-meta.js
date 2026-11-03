@@ -86,7 +86,7 @@ module.exports = {
         { label: "Nega arzon chiqadi", title: "Arzon lid — koʻpincha <mark>«shunchaki soʻradim».</mark>", body: "Forma juda oson boʻlsa, odam oʻylamasdan bosib yuboradi. Keyin telefonni ham olmaydi.", note: "Raqam bor — qiziqish yoʻq." },
         { label: "Misol", title: "Qaysi biri <mark>arzonroq?</mark>", body: "1-reklama: 100$ ga 200 ta lid, 2 tasi sotib oldi.<br>2-reklama: 100$ ga 40 ta lid, 8 tasi sotib oldi.", note: "Birinchisida bitta mijoz 50$ ga, ikkinchisida 12,5$ ga tushdi. <b>Arzon lid qimmat mijoz boʻlib chiqdi.</b>" },
         { label: "Nimaga qarash kerak", title: "Lid narxiga emas — <mark>mijoz narxiga</mark> qarang.", body: "Reklamaga ketgan pul ÷ sotib olganlar soni.", note: "Shu raqam bitta mijozdan topadigan foydangizdan kam boʻlsa — reklama ishlayapti." },
-        { label: "Men nima qilaman", title: "Formaga <mark>1–2 ta savol</mark> qoʻshaman.", body: "Masalan: «Qachon boshlamoqchisiz?» yoki «Qaysi xizmat kerak?»", note: "Lid biroz qimmatlashadi, lekin «shunchaki soʻraganlar» kamayadi." },
+        { label: "Men nima qilaman", title: "Formaga <mark>filtr qoʻyaman.</mark>", body: "Yaʼni koʻproq savol qoʻshaman: «Qachon boshlamoqchisiz?», «Qaysi xizmat kerak?», «Byudjetingiz qancha?»", note: "Lid biroz qimmatlashadi, lekin «shunchaki soʻraganlar» kamayadi." },
         { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>Arzon lid — chiroyli raqam. Pul esa sotib olgan odamdan keladi.", note: "<b>Sizda lid qanchaga tushyapti? Izohda yozing.</b><span style=\"display:block;margin-top:34px;font-size:50px;line-height:1.2;font-weight:800;letter-spacing:-1px\">👉 Obuna boʻling — <mark>@sohiba_abdujamolova</mark></span>" },
       ],
     },
