@@ -1,0 +1,219 @@
+# Video agent — ish tartibi
+
+Foydalanuvchi (targetolog, o'zbek tilida yozadi) video yuklaydi va uni **o'zi tasdiqlagan uslubda**
+montaj qilishni kutadi. Javoblar o'zbek tilida, qisqa va aniq bo'lsin.
+
+## Uslublar katalogi
+
+Foydalanuvchi har safar uslub **nomini** yozadi. Nom yozilmasa — taxmin qilmang, qaysi uslub ekanini so'rang.
+Yangi uslub referens bilan kelsa: tahlil qiling, foydalanuvchi bergan nom bilan preset qiling
+(`video_agent/config.py` STYLES + ALIASES), shu katalogga qo'shing va sinov videosini ko'rsating.
+
+| Foydalanuvchi aytadigan nom | `--style` | Qisqacha |
+|---|---|---|
+| **Ekspert montaj jigarrang** | `ekspert-jigarrang` | quyida batafsil |
+| **Ekspert montaj yashil** | `ekspert-yashil` | aynan shu, faqat jigarrang o'rniga to'q yashil (#1F4A38) |
+| **AI explainer oltin** | `ai-explainer-oltin` | oltin gradient KATTA so'z + kichik kursiv, klaviatura tugmalari, markalar, oq ekranlar (suyuq parda), oltin nur |
+| **Doktor oltin** | `doktor-oltin` | shifokor referensi: chat-pufak hook, oq KATTA + oltin qo'lyozma, B-roll, telefon raqami |
+
+## Rang va tovush (barcha uslublar)
+- Rangni referensga `signalstats` (YAVG, SATAVG, UAVG, VAVG) bilan moslang; foydalanuvchi "rang berilmagan"
+  deb e'tiroz bildirgan. Telefon videolari uchun boshlang'ich: `eq=saturation=1.32:contrast=1.07:brightness=-0.02,
+  colorbalance=bm=0.07:bh=0.05:rh=-0.02,unsharp=5:5:0.5` (faqat odam kadrlariga, stok B-rollga emas) va `--grade none`.
+- **Kadrni qoraytirmang** — `brightness` manfiy + saturation oshirish yopiq xonadagi (sariq chiroq) videoni to'q/qora qilib yubordi, foydalanuvchi
+  e'tiroz bildirdi. Bunday kadrlarda: `eq=gamma=1.18:contrast=1.05:saturation=1.08:brightness=0.02,colorbalance=rs=-0.04:bs=0.03:rm=-0.03:bm=0.03,
+  curves=all='0/0.03 0.5/0.55 1/1'` (YAVG ≈ 125, sariq tus kamayadi). Har doim oldin/keyin kadrini solishtiring.
+- Matn pastda bo'lsa, **pastga qora gradient** qo'ying (y 0.60→1.0, shaffoflik 0→0.82) — foydalanuvchiga yoqadi.
+- **O'tishlar silliq bo'lsin** — foydalanuvchi keskin kesishni yoqtirmaydi. Jump-cut'larda 0.3 s dissolve
+  (`xfade=fade`, kesimning ikki tomonidan 0.15 s "handle" olib, ovoz vaqti o'zgarmasin), B-roll esa
+  0.35 s alfa fade bilan kirib-chiqsin (overlay boshlanishi 0.175 s oldin).
+- **O'tishlar ko'p bo'lmasin** (30 s videoga ~7 ta). Jump-cut'larni iloji boricha B-roll ostiga yashiring
+  (B-roll kesimdan ≥0.35 s oldin boshlansin, ostida oddiy kesim); ketma-ket B-roll'larni bittaga birlashtiring.
+- **Tovush effektlari** qo'shing (`assets/sfx/README.md`): whoosh FAQAT B-roll kirishida (30 s ga ~3 ta, ko'p bo'lmasin), pop - hook/oltin yozuv, ding - kuchli so'z.
+
+## "Doktor oltin": `--style doktor-oltin` (Remotion: bubble, duo, gold, stat)
+Chat-pufak hook (`bubble`), oq KATTA + oltin qo'lyozma (`duo`), oltin kalit ibora (`gold`), tepada katta qo'lyozma (`stat`),
+mavzuga mos B-roll, oxirida telefon raqami (`duo` caps, raqam aytila boshlaganda chiqsin) + "Muolajaga yozilishingiz mumkin".
+Klinika raqami: +998 99 845 50 70 (foydalanuvchi tasdiqlagan). Reja qo'lda yoziladi (`--plan`, `--no-cut`, `--text-y 0.52`),
+baza oldindan yig'iladi: rang tuzatish, silliq o'tishlar, B-roll alfa fade bilan. Musiqa: Runaway 5%.
+
+## Podkast-referens uslubi (nomi hali berilmagan; doktor videosida tasdiqlangan)
+Remotion: `headline` (framed, `bg` yashil `rgba(31,74,56,0.9)`, ko'krak balandligida `top≈0.56`, 3D stikerlar `emojis: ["emoji3d/....png"]` — Fluent Emoji 3D PNG (MIT, raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/<Nom>/3D/<nom>_3d.png → remotion/public/emoji3d), oddiy emoji EMAS; katta qator YO'Q),
+`point` (krem plashka, tepasida "N-BOSQICH" yorlig'i, burchakda N/jami), `plain` (Oswald KATTA + kursiv izoh).
+- Matn rangi **sariq** (`color: "#FFD43B"`) — oq xalat ustida oq matn o'qilmaydi.
+- Hook — foydalanuvchining savoli (masalan "SHAXNOZAPA, ENUREZNI QANDAY USULDA DAVOLAYSIZ?"), "5 ta bosqich" kabi qo'shimcha qator kerak emas.
+- Hook kirish ovozi: `2354` (xabar). `2356` pop hook uchun YOQMADI.
+- "mm/eee" va uzun pauzalarni kesing, lekin yuzdagi kesim ko'rinadigan joyda (B-roll yo'q) qisqa pauzani qoldiring — dissolve ham sezilmasin.
+- B-roll har bosqich mazmuniga mos, birinchi kadrdanoq to'liq (oq/bo'sh boshlanmasin).
+
+## "AI explainer oltin": `--style ai-explainer-oltin` (Remotion: tri, keys, stamps, white, glow — `Explainer.tsx`)
+Reja qo'lda (`--plan`, `--no-cut`, `--grade none`); namunasi: Sohiba haqidagi mijoz fikri. Oq kiyim ustida matnga qorong'i halo shart.
+Brend teg: "Sohiba • target". Oltin nur (glow) o'tishi YOQMADI — ishlatmang. Referens tahlili:
+Referens: 25 s, 720x1280, yigit ko'chada (shisha binolar), qo'lda kamera, tez gap. Uslub — "motion-heavy explainer":
+- **Matn tizimi:** har 1–2 s da yangi blok, yuzdan pastda (ko'krak, y≈0.52–0.62). 3 qatlam:
+  kichik oq kursiv yuqori qator ("Qanaqa qilib", "o'zingizning") → KATTA qalin to'q-sariq/oltin gradient so'z
+  (Montserrat/Inter ExtraBold italic, #FFB800→#F59E0B, oq ichki yorug'lik) → kichik oq/kursiv pastki qator ("qo'yaman").
+  Ba'zan kichik sariq "Hozir" yorlig'i (pill) KATTA so'z tepasida. So'zlar alohida sakrab chiqadi (scale 0.6→1.05→1, ~0.2 s).
+- **Animatsion ob'ektlar** (gapdagi narsaga mos, ~1.5 s):
+  - klaviatura tugmalari (keycaps): oltin 3D kvadratlar, ichidagi belgi slot-mashinadek aylanadi (7·1·$ → A·I·⚡), atrofida tanlov ramkasi (Figma selection);
+  - "pochta markasi" kartalari (tishli qirrali oltin kvadrat + ikonka + yozuv: Sotadi, CRM), aylanib/qiyshayib kirib, ketma-ket ustma-ust;
+  - ikonli pill (Instagram/Telegram logotipi so'z yonida), to'lqinli oltin chiziq (ekranni kesib o'tadi), sichqoncha kursori + "isroil.ai" yorlig'i (brend teg, doim harakatda).
+- **Oq "motion" ekranlar** (2–3 s, fon #F5F5F5): markazda katta qora "24/7" qo'shtirnoqda + kichik izoh; Instagram post kartasi
+  (spikerning o'z kadri bilan) 3D aylanib chiqadi; qora rounded ilova-ikonka (14 kun → BEPUL yashil pill → havola ikonkasi) va ostida
+  1-2-3-4 progress chiziq (oltin nuqtalar to'ladi). Oq ekranga **suyuq (liquid/blob) wipe** bilan kiriladi va chiqiladi (~0.5 s).
+- **O'tishlar:** liquid wipe (oq), yorug' nur/light-leak (oltin, ~0.5 s, CTA oldidan), qolgani oddiy kesim; kesimlarda kadr 5–10% yaqinlashadi.
+- **Rang:** tabiiy, past to'yinganlik (SATAVG≈14, YAVG≈118, biroz sovuq U≈132), urg'u faqat oltin-sariq. Oq+qora+oltin palitra.
+- **Tovush:** ovoz −14 LUFS, fon musiqasi deyarli eshitilmaydi; har matn/ob'ekt chiqishiga mayda "tick/pop", wipe'larda yumshoq whoosh.
+- **Tuzilma:** hook (0–2 s: "Qanaqa qilib 5 MINUT") → muammo/yechim punktlari ob'ektlar bilan → oq ekranli tushuntirish →
+  qiymat (14 kun BEPUL) → CTA: "izohga AGENT deb yozing" (oltin, "deb yozing" sariq pill) → "Direct'ga yuboraman".
+
+## "Split" referensi (nomi hali berilmagan) — Remotion: `panel`, `karaoke` (`Explainer.tsx`)
+Referens: tepada kontent (oq karta / skrinshot), pastda gapiruvchi, chegarada 2 qatorli subtitr (aytilgan so'z oq, keyingisi kulrang).
+Pastda gapiruvchining o'z videosi (sinxron, `crop=1080:1060:0:430`, kesimlarda navbatma-navbat 6% zoom; foydalanuvchi shuni tanladi): tepada oq panel (qora ikonka + KATTA so'z + qizil ✗ / yashil ✓ pill), pastki qism y=860..1920, subtitr `top≈0.40`. "Muammo → Demak, ..." formatida har savol-javobga bitta panel; namunasi: v14.
+
+## "Psixolog 50/50" (namunasi v26) — `tools/build_split.py` + Remotion `headline`, `karaoke`
+Tepa 1080x960: mavzuga mos realistik B-roll (Mixkit: anxiety, depression, pills, insomnia, argument, sad-woman; o'pish/alkogol YO'Q),
+har 4–8 s da almashadi, doim to'la. Past 1080x960: gapiruvchi (`crop=1080:960:0:200`, boshi uchun joy qoldiring), kesimlarda 1.0/1.06 zoom.
+Tepaning pastiga qora gradient (geq, y 600→960, 0→0.7), karaoke `top≈0.385` (ikki qator tepa qismda). Hook: yashil framed headline `top≈0.16`
++ 3D stikerlar, o'rtada asosiy fikr ham headline. Musiqa: Mixkit 139 (Relax Beat) 12%.
+
+## "Juftlik psixologiyasi" referensi (nomi hali berilmagan; namunasi v27, fae79fd1…mp4) — Remotion `Pair.tsx`
+Referens: 68 s, gapiruvchi (iliq, qorong'i studiya) + romantik/oilaviy B-roll, musiqa past. Elementlar:
+- `plaque` — hook: B-roll ustida to'q jigarrang yumaloq plashka, krem Oswald KATTA qatorlar, ostida oq pill ("3 SIRI" / "PSIXOLOG JAVOBI"), `top≈0.56`.
+- `numscreen` — oq ekran, chapda ulkan jigarrang Anton raqam (xiralikdan tiniqlashadi), o'ngda KATTA sarlavha + so'zma-so'z kichik qatorlar (~3 s, ovoz davom etadi).
+- `duet` — gapiruvchi ustida sariq (#F2C230) KATTA 1–3 so'z + oq kichik qator, aytilmagan so'z xira; B-roll ustida (`broll: true`) oq kursiv.
+- `profile` — oxirida doira avatar + oq mini profil kartasi (obuna tugmasi bosiladi).
+Foydalanuvchi talabi: yashil animatsion hook yozuvi kerak emas; videoni KESMANG (yuborgan barcha kadr va gaplar qolsin).
+
+## Yuzsiz viral "N ta sabab" (namunasi v16) — Remotion: `diag`, `karaoke`, `headline` (framed, `size`)
+To'liq ekran realistik B-roll (har juftga bitta klip, `eq=brightness=-0.06`), markazda oq "diagnoz" kartasi (ikonka + KATTA so'z +
+qizil ✗ muammo / yashil ✓ "Demak"), o'ng tepada n/jami, pastda (`top≈0.70`) karaoke subtitr. Hook: "…YO'QMI? N TA SABAB 👇" + 3D stikerlar.
+Ovoz `atempo=1.12`, oraliq 0.06 s (≈30–35 s). Oxirida CTA "QAYSI BIRI SIZDA? IZOHGA RAQAMINI YOZING" + profil kartasi. Musiqa 25%.
+
+## "Kuzgi storismaker" referensi (nomi hali berilmagan; v19 tahlili, 7b8d8b77…mp4)
+Referens: 47.7 s, 720x1280, ovoz −14.3 LUFS, pauzasiz zich gap (jimlik yo'q), fon musiqasi deyarli sezilmaydi. Mavzu: progrev storismaker xizmati.
+- **Kadrlar:** ochiq havoda (kuzgi o'rmon, sariq barglar) ikki rakurs navbatma-navbat: (1) keng plan — yog'ochda o'tirgan, YUZI XIRALASHTIRILGAN;
+  (2) yelka ortidan yaqin plan (yuz ko'rinmaydi, qo'lda planshet + mikrofon). Kesimlar oddiy, har 3–8 s da rakurs almashadi.
+- **Rang:** tabiiy-iliq, past yorug'lik (YAVG≈86, SATAVG≈14–19, V≈135 — iliq/sariq), qorong'i vinyetka.
+- **Matn tizimi** (bir joyda, ekranning chap-o'rtasida, y≈0.30–0.50, yuzdan chetda): kichik oq ingichka qator → KATTA qalin so'z →
+  kichik oq qator; so'zlar aytilishi bilan chiqadi. KATTA so'z rangi almashadi: sariq (#F2E600, "STORIS YURGAZSAM", "auditoriya", "storismaker"),
+  oq ("storisda ulashib", "ishonchi"), oq so'z QIZIL plashkada ("Reelsga"), qizil plashkali kichik yorliqlar ("Produsyer / Sotuv bo'limi bilan").
+  Hook: sariq siqiq KATTA (Oswald/Bebas) + kichik kursiv savol ("qanaqa effekt beradi?").
+- **Natija kartalari:** chap tepada qiyshiq 3D shisha-karta (rounded, oq hoshiya, ichida natija videosi/rasm) + ustida "150+ / sotuv", "5TA ODAM / har kuni",
+  "50TA ODAM / kursga yozilgan" — har gapga yangi karta, gorizontal surilib almashadi (swipe), karta ichidagi rasm almashib turadi.
+- **To'liq ekranli motion kadrlar:** (a) oq/kulrang fon, qizil hoshiyali ko'p fotokartalar (kollaj) + markazda jigarrang lenta-plashka
+  "PROGREV / STORISMAKERNING / ASOSIY VAZIFASI"; (b) oq fon, siluet odamlar yuradi + jigarrang "❝Storis orqali" iqtibos, ostida 2 qator;
+  (c) stok B-roll (telefon штатив, ring-light, blog yozayotgan ayol) qorong'ilashtirilgan, ustida kursiv yozuv + so'z sariq "highlighter" ramkada
+  ("ko'rsata olasiz!" — Figma-selection uslubida) va pastda "——— Storismaker" imzo.
+- **Remotion (`Story.tsx`):** `story` (pre/big/post, `tone` yellow|white|red, `hook` — Oswald, `top≈0.74`, `left 0.07`), `labels` (qizil + qora
+  plashkali yorliqlar), `quote` (oq radial fon, jigarrang ❝ iqtibos, doira bo'lib ochiladi), `ask` (o'zbekcha Instagram savol stikeri, `rect`).
+  Namunasi v20: Adam Mosseri inglizcha videosi o'zbekchaga — ingliz subtitri `boxblur` + qorong'ilashtirilgan maska bandi bilan yashirilgan,
+  savol stikeri `ask` bilan almashtirilgan, musiqa 10%.
+- **Tuzilma:** hook-savol (0–3 s) → keyslar raqamlar bilan (3–16 s) → "albatta… produsyer bilan" (16–21) → ta'rif motion-ekranlarda (21–29)
+  → sabab + B-roll (29–38) → natija (38–42) → CTA "Agar sizga ham tajribali progrev storismaker kerak bo'lsa — Direktdan murojaat qiling".
+
+## "Estetik voice-over" referensi (nomi hali berilmagan; v21 tahlili, 8c9b64db…mp4)
+Referens: 35.4 s, **gorizontal 1276x720 (16:9)**, ruscha, yuzsiz. Ovoz — yumshoq, sokin ayol voice-over (diktor ovozi, kadrda gapirmaydi),
+gaplar orasida pauza yo'q (≤0.1 s), −14.1 LUFS. Mavzu: "Reels'ni kam joylab ham akkaunt o'sadi — auditoriya muammosiga kontent".
+- **Kadrlar (B-roll, ~3–6 s dan, oddiy kesim, o'tish effekti YO'Q):** kinematografik "cozy" stok — pled ichida bloknot ushlagan qo'llar,
+  noutbukda yozish (makro, sayoz fokus), sariq abajurli chiroq + baxmal parda, stolda yotgan telefon (Instagram ochiq). Iliq kechki yorug'lik.
+- **Rang:** iliq-oltin, past to'yinganlik (YAVG≈90–98, SATAVG≈19–28, U≈110–119, V≈140–144 — sariq/apelsin tus), yumshoq kontrast, film ko'rinishi.
+- **Matn 1 — B-roll ustida:** oq **qo'lyozma (script) shrift**, kvadrat qavs ichida "[ mne lenʹ ]", 1–3 so'zdan bo'lak, so'z aytilishi bilan almashadi
+  (karaoke emas — faqat joriy ibora). Kalit so'z kattaroq va pastki qatorda ("[snimatʹ / **Reels**]"). Joyi kadrga qarab: o'ng tepa, pastki markaz yoki markaz —
+  bo'sh joyga. Yumshoq fade, harakatsiz.
+- **Matn 2 — oq "motion" ekranlar** (fon oq, chetlari kulrang vinyetka):
+  (a) 3 ta Reels muqovasi (9:16 rounded) birin-ketin "pop" bo'lib chiqadi, har birida qizil ❤ yurak-hisoblagich 0 dan sanab o'sadi (0→629);
+  (b) "АУДИТОРИЯ" — siqiq qora KATTA (Bebas/Anton) och-sariq plashkada, harflar yozilib chiqadi, burchaklarida sariq nuqta+chiziq (Figma tanlov ramkasi);
+      ostida "PROBLEMA 1 / 2 / 3" ketma-ket, keyin har biri ostida Reels muqovasi pop bo'ladi.
+- **Raqamli ro'yxat:** fon — o'sha rasmning xira (blur) kattalashtirilgan nusxasi + kulrang parda; chapda Instagram post kartasi (oq, rounded,
+  ichida rasm + vertikal KATTA so'z "STUDENT", ostida ❤💬✈ 🔖), o'ngda ulkan "1" (Bebas/Anton, oq) + 2 qator KATTA izoh. Har punktga yangi karta.
+- **Final:** split-ekran — chapda B-roll (bloknotli qo'llar), o'ngda Instagram profil skrinshoti (bio, obunachilar, "Vy podpisany ✅", highlight'lar) — CTA o'rnida.
+- **Tuzilma:** hook (0–3 s, shaxsiy e'tirof: "Reels olishga erinaman, lekin akkaunt o'smoqda") → isbot (Reels muqovalari + layklar) →
+  usul (auditoriya → muammolar → yechim) → misol 1/2/3 (kartalar) → xulosa ("odamlar aynan shunday kontent uchun keladi") →
+  ishonch ("bu men o'z akkauntimda sinagan vosita") + profil.
+- Tayyorlash uchun kerak: script shrift (lotin+kirill, masalan Great Vibes / Marck Script, OFL), Reels muqovalari, profil skrinshoti, voice-over yozuvi.
+
+## "Ekspert montaj jigarrang": `--style ekspert-jigarrang`
+
+`expert` referensi asosida (talking-head): krem hook plashka, jigarrang matn kartalari,
+"1/3" raqamli punktlar, so'zma-so'z chiqadigan matn (yuzdan pastda), keskin kesish,
+kesimlarda navbatma-navbat 12% yaqinlashish, iliq rang.
+
+Foydalanuvchi talablari (o'zgartirmang, agar o'zi so'ramasa):
+- **Rangli o'tishlar yo'q** (light leak / to'q sariq flash olib tashlangan) — `ekspert-jigarrang` buni o'zi qiladi.
+- **Fon musiqasi asl balandligining 5%** ida, ducking'siz — `ekspert-jigarrang` buni o'zi qiladi.
+  Musiqa faylini foydalanuvchi yuboradi (oxirgisi: Kanye West — Runaway). Musiqa yuborilmasa, so'rang.
+- Username / Instagram belgisi kerak emas. "Obuna bo'ling" joyida **profil rasmi kartasi** bo'lsin:
+  `--avatar rasm.png` (oxirgisi: Instagram profil skrinshotidan qirqilgan doira rasm).
+- **Xiralashgan (blur) yuz kadrlari ishlatilmasin** — ayniqsa hook'da. Manbada yuz xira bo'lsa,
+  o'rniga realistik B-roll qo'ying (masalan Mixkit 206: kafeda noutbukda yozayotgan qo'llar).
+- **Hook kadri har videoda yangi bo'lsin** (avvalgi videodagi B-roll takrorlanmasin). Ro'yxatli videolarda
+  kuchli usul — "teaser": hook davomida ro'yxatdagi barcha ekranlar ~0.45 s dan tez almashadi.
+- Hook matni bitta kuchli gap (`--title "|KATTA GAP"`); "Marketologlar, saqlab qo'ying" kabi qo'shimcha qator kerak emas.
+- Musiqa vaqt bo'yicha tekislanadi (qo'shiq o'rtasida balandlashmasin) — `ekspert-jigarrang` buni o'zi qiladi.
+- Yuborilgan video **30 MB dan kichik** bo'lsin (ilova chegarasi). Sifat pasaymasin: SFX qo'shganda videoni qayta kodlamang
+  (`-c:v copy`, render crf 20 ≈ 18 MB / 37 s); faqat 30 MB dan oshsa `-crf 23 -preset slow`.
+- "Syomka" deb yozing (S'yomka emas). Oq kiyimli kadrlarda subtitr sariq (`plan.json` da `"palette"`).
+- Alohida rangli fon kartasi (card) shart emas bo'lsa ishlatmang — foydalanuvchiga yoqmadi.
+
+## Har bir video uchun qadamlar
+
+1. Yuklangan faylni ishchi papkaga ko'chiring, `ffprobe` bilan ko'ring, kontakt-varaq bilan kadrlarni tekshiring.
+   Bir nechta bo'lak yuborilsa — ketma-ket birlashtiring.
+2. **Transkripsiya:** `faster-whisper large-v3`, `language="uz"` (huggingface.co muhit sozlamalarida ochiq).
+   Ovoz past bo'lishi mumkin — agent jimlik chegarasini o'zi moslaydi.
+3. **Matnni tuzating:** Whisper o'zbekchani ko'pincha fonetik yozadi va ba'zan takroriy "xayoliy"
+   gaplar chiqaradi. Gaplarni adabiy o'zbek tilida qayta yozing, har biriga Whisper vaqtini qo'ying
+   (`[[boshlanish, tugash, "Gap."], ...]`) va moslang:
+   `python tools/fix_transcript.py video.mp4 gaplar.json tuzatilgan.transcript.json`
+   Shubhali joylarni foydalanuvchiga ayting.
+4. **Hook** (2 qator, `kichik|KATTA`) va **punktlar** (3–4 ta) ni mazmundan tanlang.
+5. Render:
+   ```bash
+   python agent.py video.mp4 --style ekspert-jigarrang --transcript tuzatilgan.transcript.json \
+       --title "kichik qator|katta qator" --points "A|B|C" --music musiqa.mp3 -o output
+   ```
+   Reja `output/<video>.plan.json` ga yoziladi — kerak bo'lsa tahrirlab `--plan` bilan qayta render qiling.
+6. Tekshiring: kontakt-varaq (matn yuzni yopmasin, plashka bo'sh turmasin), `ebur128` (≈ −14 LUFS).
+7. 30 MB dan kichik qilib siqing va `SendUserFile` bilan yuboring. Nima qilinganini qisqa yozing.
+
+## Yuzsiz (B-roll) montaj
+Foydalanuvchi yuzini ko'rsatmaslikni so'rasa: xiralik/emoji EMAS — ovoz + mavzuga mos B-roll + matnlar.
+1. Kadrlar: foydalanuvchining o'z kadrlari yoki Mixkit (mixkit.co, assets.mixkit.co ruxsat etilgan;
+   `https://mixkit.co/free-stock-video/<mavzu>/` sahifasidan id topiladi,
+   `https://assets.mixkit.co/videos/<id>/<id>-1080.mp4` yoki `-720.mp4`).
+2. Avval odatdagidek render qilib rejani oling (`output/<video>.plan.json`), har bir iboraga mos kadr tanlang:
+   `[[boshlanish, "klip.mp4", focus_x], ...]` va yig'ing:
+   `python tools/build_broll.py spec.json klipler/ <davomiylik> broll.mp4`
+3. B-roll + kesilgan ovozni birlashtirib, `--no-cut --plan reja.json --text-y 0.40` bilan render qiling.
+   Foydalanuvchi **realistik** kadrlarni afzal ko'radi: animatsion HUD/grafik va kod ekranlaridan qoching,
+   haqiqiy qo'llar, noutbuk, telefon, kafe, haqiqiy analitika ekranlarini tanlang. Eng yaxshisi — uning o'z kadrlari.
+
+## Foydalanuvchining o'zi (Sohiba) kadrda bo'lsa
+- Odatda **uning yuzi ko'rinmasin** (selfi bo'laklarida ham), LEKIN o'zi so'rasa (masalan split uslubida "pastga o'zimni gapirgan videoyimni qo'y") ko'rsating: ovozini qoldirib, tasvirni natija skrinshotlari / oq ekran / B-roll
+  bilan TO'LIQ yoping (fade paytida ham yuz ko'rinmasin - rasmlar orasida bo'shliq qoldirmang). Mijozlar (doktor va b.) yuzi ko'rinishi mumkin.
+
+## Kesish
+- **Mazmunni o'zingcha kesmang** — foydalanuvchi aytilgan gaplarni, gap tartibini va oxirini to'liq saqlashni so'raydi.
+  Faqat "mm/eee" va uzun pauzalarni olib tashlash mumkin; gapni olib tashlash uchun avval so'rang. Teaser hook (kuchli gapni boshga
+  NUSXA qilish) va `atempo=1.08` ga ruxsat bor (tasdiqlangan), lekin gap asl joyida ham qolsin; oxirgi so'z tugaguncha kesmang.
+
+- Pipeline kesganda oxirgi so'z kesilib qolishi mumkin (fix_transcript oxirgi so'z vaqtini erta qo'yadi). Oxirgi gap tugashini
+  `silencedetect` bilan aniqlang, pauzalarni o'zingiz kesing (`cut.py` uslubida) va `--no-cut` bilan render qiling; tayyor videoning oxirini Whisper bilan tekshiring.
+- Mixkit'ning yangi kliplari (id ≥ 100000) `.../videos/<id>/<id>-1080.mp4` da yo'q: sahifadagi `"contentUrl"` havolasidan oling. Yashil fon (green screen) kliplarini ishlatmang.
+
+- **Pauzani toza ovozda (`voice.wav`) `silencedetect=n=-55dB:d=0.45` bilan toping** — xom ovozda −42 dB so'z oxirlarini (yumshoq bo'g'inlar)
+  pauza deb oldi va so'zlar qirqildi, foydalanuvchi "gap tugallanmay qolgan" dedi. Kesimda pauza boshidan 0.22 s, oxiridan 0.12 s qoldiring;
+  kesilgan videoni Whisper bilan qayta o'qib, so'zlar butunligini tekshiring.
+
+## Shovqin
+- Pipeline ovozni −14 LUFS gacha kuchaytiradi (+20 dB atrofida), shu bilan pauzadagi qoldiq shovqin ham ko'tariladi. Shuning uchun ovozni o'zingiz tayyorlang:
+  pauzalardan olingan shovqin profili bilan `noisereduce` (prop_decrease=1.0), kompressor, gain → −14 LUFS, so'ng `agate` (pauza ≲ −45 dB).
+  Videoni pipeline'da render qiling, keyin ovozni shu toza ovoz + musiqa + SFX bilan almashtiring (`-c:v copy`).
+- Fon shovqini (konditsioner g'uvillashi) qolsa foydalanuvchi e'tiroz bildiradi. `afftdn` yetmaydi: pauzadan shovqin namunasini olib
+  `noisereduce` (stationary, prop_decrease=0.95) bilan tozalang (≈ −20 dB), so'ng bazani shu ovoz bilan yig'ing.
+
+## Foydali buyruqlar
+- Testlar: `python -m pytest -q tests`
+- Referensdan musiqa ajratish: `--music-from referens.mp4` (`pip install 'audio-separator[cpu]'`)
+- Yuzni yashirish: `--hide-face flowers|blur|emoji`

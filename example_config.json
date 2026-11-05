@@ -1,0 +1,10 @@
+{
+  "formats": ["16:9", "9:16"],
+  "reframe": "crop",
+  "cut": {"noise_db": -32, "min_silence": 0.4, "padding": 0.1},
+  "transition": {"type": "smoothleft", "duration": 0.15},
+  "captions": {"font": "Montserrat", "size": 96, "highlight": "#00E5FF", "max_words": 3},
+  "highlight": {"zoom": 1.15, "per_minute": 8},
+  "motion": {"primary": "#0F172A", "accent": "#00E5FF", "cta": "Like bosing va obuna bo'ling!"},
+  "audio": {"music_volume_db": -6, "target_lufs": -14}
+}
