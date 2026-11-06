@@ -120,11 +120,10 @@ module.exports = {
     {
       id: "M16-keys-epileptolog",
       theme: bg("y2-kapuchino.jpg"),
-      cover: { photo: "y2-kapuchino.jpg", pos: "50% 35%", line1: "88$ reklama →", line2: "9,3 mln soʻm", sub: "Real natija. Raqamlar bilan." },
+      cover: { photo: "y2-kapuchino.jpg", pos: "50% 35%", line1: "88$ reklama →", line2: "9,3 mln lik sotuv", sub: "Real natija. Raqamlar bilan." },
       slides: [
         { label: "Keys", title: "Epileptolog konsultatsiyasi <mark>uchun target.</mark>", body: "Mijozim: @nurafshonmedical.uz<br>Vazifa: odamlarni konsultatsiyaga yozdirish.", note: "Oktyabr oyi natijalari 👇" },
         { label: "Reklama hisoboti", title: "88$ ga <mark>130 ta lid.</mark>", body: "Byudjet — <b>88,46$</b><br>Lidlar — <b>130 ta</b><br>Bitta lid — <b>≈ 0,68$</b><br>Oxvat — <b>≈ 46 000</b><br>Koʻrishlar — <b>85 957</b>", note: "" },
-        { proof: "proof-hisobot.jpg", label: "Isbot 👇", caption: "Oktyabr oyi reklama hisoboti" },
         { label: "Lekin", title: "Lid — bu hali <mark>natija emas.</mark>", body: "Men har doim soʻrayman: «Odamlar keldimi?»", note: "<b>2 kunda 31 kishi</b> konsultatsiyaga kelib, qabulda boʻldi ✅" },
         { proof: "proof-chat.jpg", label: "Isbot 👇", caption: "Mijoz bilan yozishmadan" },
         { label: "Hisob-kitob", title: "31&nbsp;×&nbsp;300&nbsp;000 =<br><mark>9&nbsp;300&nbsp;000&nbsp;soʻm</mark>", body: "Reklamaga — <b>≈ 1 043 000 soʻm</b><br>Konsultatsiyadan — <b>9 300 000 soʻm</b>", note: "Va bu faqat 2 kunlik natija." },
