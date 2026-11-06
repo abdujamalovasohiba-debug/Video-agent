@@ -92,8 +92,8 @@ module.exports = {
     },
     {
       id: "M14-targetolog-sotuv",
-      theme: bg("y7-oylash-yashil.jpg"),
-      cover: { photo: "y7-oylash-yashil.jpg", pos: "50% 28%", line1: "Targetolog", line2: "sotuvga javobgarmi?", sub: "Ochiq javob beraman." },
+      theme: bg("y8-yashil-2.jpg"),
+      cover: { photo: "y8-yashil-2.jpg", pos: "50% 34%", line1: "Targetolog", line2: "sotuvga javobgarmi?", sub: "Ochiq javob beraman." },
       slides: [
         { label: "Koʻp eshitaman", title: "«Reklamaga pul toʻladim — <mark>sotuv qani?</mark>»", body: "Koʻp tadbirkorlar targetologdan sotuv kutadi. Sotuv boʻlmasa — «targetolog yomon» deydi.", note: "Keling, kim nimaga javobgarligini oddiy qilib koʻramiz." },
         { label: "Targetolog ishi", title: "Targetolog — <mark>odam olib keladi.</mark>", body: "Toʻgʻri odamlarga reklama koʻrsatadi va ular sizga yozishi yoki raqam qoldirishi uchun ishlaydi.", note: "Uning natijasi — lid, yaʼni qiziqqan odam." },
