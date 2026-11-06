@@ -122,7 +122,7 @@ module.exports = {
       theme: bg("y2-kapuchino.jpg"),
       cover: { photo: "y2-kapuchino.jpg", pos: "50% 35%", line1: "88$ reklama →", line2: "9,3 mln lik sotuv", sub: "Real natija. Raqamlar bilan." },
       slides: [
-        { label: "Keys", title: "Epileptolog konsultatsiyasi <mark>uchun target.</mark>", body: "Mijozim: @nurafshonmedical.uz<br>Vazifa: odamlarni konsultatsiyaga yozdirish.", note: "Oktyabr oyi natijalari 👇" },
+        { label: "Keys", title: "Turkiyalik epileptolog konsultatsiyasi <mark>uchun target.</mark>", body: "Mijozim: @nurafshonmedical.uz<br>Maqsad: Turkiyalik doktor konsultatsiyasi uchun sifatli lid olib kelish.", note: "Oktyabr oyi natijalari 👇" },
         { label: "Reklama hisoboti", title: "88$ ga <mark>130 ta lid.</mark>", body: "Byudjet — <b>88,46$</b><br>Lidlar — <b>130 ta</b><br>Bitta lid — <b>≈ 0,68$</b><br>Oxvat — <b>≈ 46 000</b><br>Koʻrishlar — <b>85 957</b>", note: "" },
         { label: "Lekin", title: "Lid — bu hali <mark>natija emas.</mark>", body: "Men har doim soʻrayman: «Sotuv boʻldimi?»", note: "<b>2 kunda 31 kishi</b> konsultatsiyaga kelib, qabulda boʻldi ✅" },
         { proof: "proof-chat.jpg", label: "Isbot 👇", caption: "Mijoz bilan yozishmadan" },
