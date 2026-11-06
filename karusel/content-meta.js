@@ -107,7 +107,7 @@ module.exports = {
     {
       id: "M15-sotuvni-oldiradi",
       theme: bg("y4-baland-javon.jpg"),
-      cover: { photo: "y4-baland-javon.jpg", pos: "50% 45%", line1: "Sotuvni reklama emas,", line2: "mana bular «oʻldiradi»", sub: "" },
+      cover: { photo: "y4-baland-javon.jpg", pos: "50% 45%", line1: "Lid bor,", line2: "sotuv yoʻq?", sub: "" },
       slides: [
         { label: "Koʻp eshitaman", title: "«Reklama ishlamayapti — <mark>sotuv yoʻq.</mark>»", body: "Koʻpincha lidlar keladi, lekin sotuv boʻlmaydi.", note: "Sabab reklamada emas — lidga qanday javob berilayotganida." },
         { label: "1-xato", title: "Javob <mark>kech</mark> keladi.", body: "Birinchi javob 15 daqiqadan kech kelsa, mijoz soviydi yoki raqobatchiga yozadi.", note: "<b>Ideal holat — 5 daqiqagacha.</b>" },
