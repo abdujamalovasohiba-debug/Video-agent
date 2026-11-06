@@ -113,7 +113,7 @@ module.exports = {
         { label: "1-xato", title: "Javob <mark>kech</mark> keladi.", body: "Birinchi javob 15 daqiqadan kech kelsa, mijoz soviydi yoki raqobatchiga yozadi.", note: "<b>Ideal holat — 5 daqiqagacha.</b>" },
         { label: "2-xato", title: "«Narxi qancha?» — <mark>faqat raqam.</mark>", body: "Narxni yozasiz — va mijoz jim boʻlib qoladi.", note: "<b>Toʻgʻrisi:</b> avval 1–2 savol bilan ehtiyojini biling, keyin narxni qiymati bilan birga ayting." },
         { label: "3-xato", title: "Javob bermaganga <mark>qayta yozmaslik.</mark>", body: "Koʻp mijozlar birinchi yozishda emas, eslatmadan keyin sotib oladi.", note: "<b>1 kundan keyin</b> va <b>3 kundan keyin</b> eslatma yuboring." },
-        { label: "Natija", title: "Shu 1-bosqichni <mark>toʻgʻri yoʻlga qoʻying.</mark>", body: "Javob tezligi, narxni toʻgʻri aytish va qayta yozish.", note: "Shuning oʻzi bilan lid sifati sezilarli oshadi." },
+        { label: "Natija", title: "Lid kelgandan keyingi <mark>birinchi muloqotni</mark> tartibga soling.", body: "Tez javob bering, narxni toʻgʻri ayting va javob bermaganlarga qayta yozing.", note: "Shuning oʻzi bilan lidlardan chiqadigan sotuv sezilarli oshadi." },
         { label: "Xulosa", final: true, title: "<mark>Eslab qoling!</mark>", body: "Qisqa qilib aytganda:<br>Reklama odam olib keladi. Sotuvni esa tez va toʻgʻri javob qiladi.", note: "<span style=\"display:block;font-size:50px;line-height:1.2;font-weight:800;letter-spacing:-1px\">👉 Obuna boʻling — <mark>@sohiba_abdujamolova</mark></span>" },
       ],
     },
