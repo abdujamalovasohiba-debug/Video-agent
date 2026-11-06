@@ -125,6 +125,30 @@ function cardHtml(s, i, n, t) {
   </body></html>`;
 }
 
+// Isbot slaydi: haqiqiy skrinshot, orqada xira fon
+function proofHtml(s, i, n, t) {
+  const counter = `${String(i).padStart(2, "0")} / ${String(n).padStart(2, "0")}`;
+  return `<!doctype html><html><head><meta charset="utf-8"><style>${base}
+  body { background: #222; color: #fff; }
+  .bgph { position: absolute; inset: -40px; background: center/cover; filter: blur(28px) brightness(.55); }
+  .top { position: absolute; top: 70px; left: 84px; right: 84px; display: flex; justify-content: space-between; align-items: center; }
+  .pill { background: ${t.accent}; color: #111; font-weight: 800; font-size: 34px; padding: 14px 30px; border-radius: 40px; }
+  .count { font-size: 28px; color: rgba(255,255,255,.85); }
+  .cap { position: absolute; top: 170px; left: 84px; right: 84px; font-size: 40px; font-weight: 700; line-height: 1.25; }
+  .shot { position: absolute; left: 50%; top: ${s.caption ? 290 : 190}px; bottom: 140px; transform: translateX(-50%);
+          display: flex; align-items: center; justify-content: center; width: 912px; }
+  .shot img { max-width: 100%; max-height: 100%; border-radius: 28px; box-shadow: 0 30px 70px rgba(0,0,0,.45); }
+  footer { position: absolute; left: 82px; right: 72px; bottom: 50px; display: flex; justify-content: space-between;
+           align-items: center; font-size: 28px; }
+  </style></head><body>
+  ${t.bgPhoto && has(t.bgPhoto) ? `<div class="bgph" style="background-image:url(${photo(t.bgPhoto)})"></div>` : ""}
+  <div class="top"><span class="pill">${s.label || "Isbot"}</span><span class="count">${counter}</span></div>
+  ${s.caption ? `<div class="cap">${s.caption}</div>` : ""}
+  <div class="shot"><img src="${photo(s.proof)}"></div>
+  <footer><span>${handle}</span>${longArrow}</footer>
+  </body></html>`;
+}
+
 function splitHtml(s) {
   const img = photo(s.photo);
   const half = (bw, text) => `
@@ -170,7 +194,10 @@ function splitHtml(s) {
   for (const c of cards) {
     const n = c.slides.length + 1;
     await shot(coverHtml(c), out(c.id, 1));
-    for (const [i, s] of c.slides.entries()) await shot(cardHtml(s, i + 2, n, { ...DEFAULT_THEME, ...c.theme }), out(c.id, i + 2));
+    for (const [i, s] of c.slides.entries()) {
+      const t = { ...DEFAULT_THEME, ...c.theme };
+      await shot(s.proof ? proofHtml(s, i + 2, n, t) : cardHtml(s, i + 2, n, t), out(c.id, i + 2));
+    }
   }
   for (const c of splits) {
     for (const [i, s] of c.slides.entries()) {
