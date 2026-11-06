@@ -124,7 +124,7 @@ module.exports = {
       slides: [
         { label: "Keys", title: "Epileptolog konsultatsiyasi <mark>uchun target.</mark>", body: "Mijozim: @nurafshonmedical.uz<br>Vazifa: odamlarni konsultatsiyaga yozdirish.", note: "Oktyabr oyi natijalari 👇" },
         { label: "Reklama hisoboti", title: "88$ ga <mark>130 ta lid.</mark>", body: "Byudjet — <b>88,46$</b><br>Lidlar — <b>130 ta</b><br>Bitta lid — <b>≈ 0,68$</b><br>Oxvat — <b>≈ 46 000</b><br>Koʻrishlar — <b>85 957</b>", note: "" },
-        { label: "Lekin", title: "Lid — bu hali <mark>natija emas.</mark>", body: "Men har doim soʻrayman: «Odamlar keldimi?»", note: "<b>2 kunda 31 kishi</b> konsultatsiyaga kelib, qabulda boʻldi ✅" },
+        { label: "Lekin", title: "Lid — bu hali <mark>natija emas.</mark>", body: "Men har doim soʻrayman: «Sotuv boʻldimi?»", note: "<b>2 kunda 31 kishi</b> konsultatsiyaga kelib, qabulda boʻldi ✅" },
         { proof: "proof-chat.jpg", label: "Isbot 👇", caption: "Mijoz bilan yozishmadan" },
         { label: "Hisob-kitob", title: "31&nbsp;×&nbsp;300&nbsp;000 =<br><mark>9&nbsp;300&nbsp;000&nbsp;soʻm</mark>", body: "Reklamaga — <b>≈ 1 043 000 soʻm</b><br>Konsultatsiyadan — <b>9 300 000 soʻm</b>", note: "Va bu faqat 2 kunlik natija." },
         { label: "ROAS", title: "Har 1 soʻm <mark>~9 soʻm</mark> boʻlib qaytdi.", body: "Reklamaga sarflangan pulning taxminan 9 barobari qaytdi.", note: "<b>ROAS ~9x</b> 🔥" },
