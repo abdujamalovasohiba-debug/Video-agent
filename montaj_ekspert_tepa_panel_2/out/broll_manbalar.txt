@@ -10,3 +10,5 @@ Vaqt (kesilgan video) | Pexels ID | Sahifa
 39.80-43.53  3201103  https://www.pexels.com/video/3201103/  (ona qizini quchoqlamoqda)
 43.53-47.20  4812264  https://www.pexels.com/video/4812264/  (bola ota-ona o'rtasida, dron, uzoqdan)
 47.20-52.87  7669519  https://www.pexels.com/video/7669519/  (baxtli oila bog'da)
+
+Fon musiqa: music.py bilan yaratilgan original kompozitsiya (Am-F-C-G, 66 BPM, pianino + pad). Mualliflik huquqi muammosi yo'q.
