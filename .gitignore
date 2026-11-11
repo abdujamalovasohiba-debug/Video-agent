@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Montaj: og'ir media fayllar
+montaj_*/work/
+montaj_*/broll/
+montaj_*/out/*.mp4
+montaj_*/assets/*.png
