@@ -1,0 +1,8 @@
+ 0.00-11.23  B-roll  seg00.mp4
+11.23-15.07  B-roll  seg01.mp4
+15.07-23.20  B-roll  seg02.mp4
+23.20-30.33  B-roll  seg03.mp4
+30.33-35.80  B-roll  seg04.mp4
+35.80-43.53  B-roll  seg05.mp4
+43.53-47.20  B-roll  seg06.mp4
+47.20-52.87  B-roll  seg07.mp4
