@@ -88,7 +88,7 @@ export const Labels: React.FC<P<Extract<Item, {type: 'labels'}>>> = ({item, u, w
           return (
             <div key={i} style={{overflow: 'hidden', borderRadius: 3 * u}}>
               <div style={{background: i === 0 ? RED : 'rgba(20,20,20,0.72)', color: '#FFF', fontFamily: 'Montserrat',
-                           fontWeight: i === 0 ? 700 : 500, fontSize: (i === 0 ? 40 : 34) * u, padding: `${3 * u}px ${14 * u}px`,
+                           fontWeight: i === 0 ? 700 : 500, fontSize: (i === 0 ? 52 : 44) * u, padding: `${6 * u}px ${18 * u}px`,
                            transform: `translateX(${(p - 1) * 105}%)`}}>
                 {ln.w}
               </div>
