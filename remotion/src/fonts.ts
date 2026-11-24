@@ -6,6 +6,7 @@ const FONTS = [
   {family: 'Montserrat', file: 'fonts/Montserrat.ttf'},
   {family: 'Courgette', file: 'fonts/Courgette.ttf'},
   {family: 'Anton', file: 'fonts/Anton.ttf'},
+  {family: 'Playfair', file: 'fonts/Playfair.ttf'},
 ];
 
 let loaded = false;
