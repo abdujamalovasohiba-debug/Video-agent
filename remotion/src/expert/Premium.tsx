@@ -37,6 +37,19 @@ export const PTitle: React.FC<P<Extract<Item, {type: 'ptitle'}>>> = ({item, u, w
         ) : null}
         {item.lines.map((ln, i) => {
           const p = interpolate(now, [ln.t, ln.t + 0.45], [0, 1], {...clamp, easing: ease});
+          if (item.typing) {
+            // Yozuv mashinkasi: harflar ketma-ket paydo bo'ladi, oxirida kursor miltillaydi
+            const n = Math.max(0, Math.min(ln.w.length, Math.floor((now - ln.t) / 0.045)));
+            const last = i === item.lines.length - 1 || now < (item.lines[i + 1]?.t ?? 1e9);
+            const cursor = last && now >= ln.t && Math.floor(now * 2.5) % 2 === 0;
+            return (
+              <div key={i} style={{fontFamily: 'Playfair', fontWeight: 800, fontSize: (item.size ?? 96) * u, lineHeight: 1.05,
+                                   color: i === item.accent ? LILAC : '#FFFFFF', minHeight: (item.size ?? 96) * u * 1.05,
+                                   textShadow: `0 ${4 * u}px ${22 * u}px rgba(20,5,30,0.75), 0 0 ${6 * u}px rgba(20,5,30,0.6)`}}>
+                {ln.w.slice(0, n)}<span style={{opacity: cursor ? 1 : 0}}>|</span>
+              </div>
+            );
+          }
           return (
             <div key={i} style={{fontFamily: 'Playfair', fontWeight: 800, fontSize: (item.size ?? 96) * u, lineHeight: 1.02,
                                  color: i === item.accent ? LILAC : '#FFFFFF', opacity: p, transform: `translateY(${(1 - p) * 40 * u}px)`,

@@ -34,7 +34,7 @@ export type Item =
   | {type: 'numscreen'; start: number; end: number; n: number; title: Word[]; lines: Word[][]}
   | {type: 'duet'; start: number; end: number; top?: number; size?: number; broll?: boolean; caps: Word[]; small?: Word[]}
   | {type: 'profile'; start: number; end: number; top?: number; image?: string; name: string; stats?: string[]}
-  | {type: 'ptitle'; start: number; end: number; top?: number; size?: number; kicker?: string; accent?: number; lines: Word[]}
+  | {type: 'ptitle'; start: number; end: number; top?: number; size?: number; kicker?: string; typing?: boolean; accent?: number; lines: Word[]}
   | {type: 'plower'; start: number; end: number; top?: number; name: string; role: string}
   | {type: 'pstep'; start: number; end: number; top?: number; size?: number; n: number; icon?: string; total?: number; label?: string; title: string; sub?: string; subAt?: number}
   | {type: 'pcount'; start: number; end: number; top?: number; value: number; prefix?: string; suffix?: string; caption: string}
