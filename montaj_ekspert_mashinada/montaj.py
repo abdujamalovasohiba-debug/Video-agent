@@ -71,7 +71,8 @@ def pieces():
         pts = [a] + [c for c in cuts if a + 0.5 < c < b - 0.5] + [b]
         for x, y in zip(pts, pts[1:]):
             out.append((x, y))
-    return [(a, b, MID if i % 2 == 0 else CLOSE) for i, (a, b) in enumerate(out)]
+    # Foydalanuvchi so'rovi: yaqinlashish kerak emas — butun video bir xil uzoq (o'rta) planda.
+    return [(a, b, MID) for a, b in out]
 
 
 def build_top():
@@ -203,6 +204,9 @@ def main():
     if "--faqat-yakun" in sys.argv:  # tepa/past panel tayyor bo'lsa, faqat subtitr va eksport
         total = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration",
                                                "-of", "csv=p=0", str(WORK / "top.mov")]))
+        write_ass()
+    elif "--faqat-tepa" in sys.argv:  # past panel o'zgarmagan bo'lsa
+        total = build_top()
         write_ass()
     else:
         total = build_top()
