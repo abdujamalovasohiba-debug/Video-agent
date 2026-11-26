@@ -1,0 +1,17 @@
+Barcha B-roll: Pexels (pexels.com/license — bepul, tijoriy foydalanish mumkin)
+  0.00-  6.94   7579913  https://www.pexels.com/video/7579913/  (shifokor ona va qiz bilan)
+  6.94- 16.79   7089367  https://www.pexels.com/video/7089367/  (homilador ayol UZI'da)
+ 16.79- 24.39   7572229  https://www.pexels.com/video/7572229/  (homilador ayol qorni)
+ 24.39- 29.65   6967708  https://www.pexels.com/video/6967708/  (homilador ayol vitamin ichmoqda)
+ 29.65- 33.26   7088510  https://www.pexels.com/video/7088510/  (ginekolog qabulida)
+ 33.26- 39.00   7490498  https://www.pexels.com/video/7490498/  (keksa ayol)
+ 39.00- 45.39   5960702  https://www.pexels.com/video/5960702/  (buvi va nevara)
+ 56.20- 62.00   7572244  https://www.pexels.com/video/7572244/  (homilador ayol salat tayyorlamoqda)
+ 62.00- 68.00   6967766  https://www.pexels.com/video/6967766/  (homilador ayol vitamin olmoqda)
+ 68.00- 72.50   7281355  https://www.pexels.com/video/7281355/  (chaqaloq oyoqlari)
+ 72.50- 78.41   7918430  https://www.pexels.com/video/7918430/  (chaqaloq barmoqni ushlamoqda)
+ 78.41- 85.65   6700258  https://www.pexels.com/video/6700258/  (pul sanash)
+ 85.65- 91.32   7579975  https://www.pexels.com/video/7579975/  (shifokor bola bilan)
+ 91.32- oxiri   5853208  https://www.pexels.com/video/5853208/  (baxtli homilador ayol deraza oldida)
+45.39-56.20  grafik karta: "Hurmatli qaynonajonlar!"
+Fon musiqa: ../montaj_ekspert_tepa_panel_2/music.py bilan yaratilgan original kompozitsiya.

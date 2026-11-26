@@ -1,0 +1,66 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,Inter,54,&H00FFFFFF,&H00FFFFFF,&H00201A15,&H00201A15,-1,0,0,0,100,100,0,0,3,18,0,5,40,40,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.88,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}Yoshligidan ikki yoshgacha
+Dialogue: 0,0:00:01.88,0:00:03.39,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}davom etayotgan holat
+Dialogue: 0,0:00:03.39,0:00:05.42,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}bo'lganligi uchun, men {\c&H00D7FF&}spina
+Dialogue: 0,0:00:05.42,0:00:06.93,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}{\c&H00D7FF&}bifidaga{\c&HFFFFFF&} yuborgandim.
+Dialogue: 0,0:00:06.93,0:00:08.33,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}Ulardan spina bifida
+Dialogue: 0,0:00:08.33,0:00:10.29,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}aniqlangani uchun, tug'ilish
+Dialogue: 0,0:00:10.29,0:00:12.11,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}jarayonini so'radim, ya'ni
+Dialogue: 0,0:00:12.11,0:00:13.65,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}homiladorlik payti ona
+Dialogue: 0,0:00:13.65,0:00:15.26,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}homilani qanday holatda
+Dialogue: 0,0:00:15.26,0:00:16.80,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}ko'targanini so'radim.
+Dialogue: 0,0:00:16.80,0:00:18.27,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}Ular menga aytdilarki,
+Dialogue: 0,0:00:18.27,0:00:20.67,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}homiladorlik payti birinchi navbatda
+Dialogue: 0,0:00:20.67,0:00:22.76,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}yaxshi ovqatlanmaganman, {\c&H00D7FF&}och
+Dialogue: 0,0:00:22.76,0:00:24.40,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}{\c&H00D7FF&}qolgan{\c&HFFFFFF&} kunlarim bo'ldi
+Dialogue: 0,0:00:24.40,0:00:26.13,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}va bolamga yetarlicha
+Dialogue: 0,0:00:26.13,0:00:27.86,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}{\c&H00D7FF&}vitaminlarni{\c&HFFFFFF&} yetkazib
+Dialogue: 0,0:00:27.86,0:00:29.67,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}berolmaganman. Sababi,
+Dialogue: 0,0:00:29.67,0:00:32.24,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}kalsiy ichasan, deb ginekolog
+Dialogue: 0,0:00:32.24,0:00:33.30,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}aytgan payti
+Dialogue: 0,0:00:33.30,0:00:34.77,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}qaynonalari: «Yo'q,
+Dialogue: 0,0:00:34.77,0:00:36.85,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}biz ham kalsiy, vitamin
+Dialogue: 0,0:00:36.85,0:00:38.56,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}ichmasdan bolamizni
+Dialogue: 0,0:00:38.56,0:00:40.73,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}sopa-sog'lom tug'ganmiz,
+Dialogue: 0,0:00:40.73,0:00:42.14,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}buni siz ham ichmasangiz
+Dialogue: 0,0:00:42.14,0:00:43.36,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}bo'ladi», degan gapni
+Dialogue: 0,0:00:43.36,0:00:45.47,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}gapirganlar. Hurmatli {\c&H00D7FF&}qaynonajonlar,{\c&HFFFFFF&}
+Dialogue: 0,0:00:45.47,0:00:47.21,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}hozirgi muhit bilan oldingi
+Dialogue: 0,0:00:47.21,0:00:48.50,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}muhitni {\c&H00D7FF&}taqqoslashni{\c&HFFFFFF&}
+Dialogue: 0,0:00:48.50,0:00:50.31,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}to'xtating, iltimos qilaman.
+Dialogue: 0,0:00:50.31,0:00:51.74,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}Ba'zi bir qaynonalarga
+Dialogue: 0,0:00:51.74,0:00:52.90,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}tegishli bu gapim.
+Dialogue: 0,0:00:52.90,0:00:55.11,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}Sababi, oldingi payt bilan
+Dialogue: 0,0:00:55.11,0:00:56.30,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}hozirgi paytda
+Dialogue: 0,0:00:56.30,0:00:58.79,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}{\c&H00D7FF&}90 foiz{\c&HFFFFFF&} o'zgarish bor. Shuning
+Dialogue: 0,0:00:58.79,0:01:00.71,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}uchun iltimos qilardim:
+Dialogue: 0,0:01:00.71,0:01:03.12,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}kelinlaringizga vaqtida o'sha
+Dialogue: 0,0:01:03.12,0:01:05.44,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}vitaminlarni ichishga qo'yib
+Dialogue: 0,0:01:05.44,0:01:07.94,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}bering. Sababi, spina bifida —
+Dialogue: 0,0:01:07.94,0:01:10.35,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}bu {\c&H00D7FF&}tug'ma{\c&HFFFFFF&} kasallik. Nimagaki,
+Dialogue: 0,0:01:10.35,0:01:12.76,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}o'sha paytda ona homiladorlik
+Dialogue: 0,0:01:12.76,0:01:14.75,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}paytida kalsiyni vaqtida
+Dialogue: 0,0:01:14.75,0:01:16.00,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}ichmagani sabab
+Dialogue: 0,0:01:16.00,0:01:18.50,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}bolada spina bifida vujudga keladi.
+Dialogue: 0,0:01:18.50,0:01:20.63,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}Mana endi nima bo'ldi? O'sha
+Dialogue: 0,0:01:20.63,0:01:22.92,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}paytda berilmagan kalsiy hozir
+Dialogue: 0,0:01:22.92,0:01:25.73,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}{\c&H00D7FF&}ikki barobar{\c&HFFFFFF&} qimmatga aylanib, bolani
+Dialogue: 0,0:01:25.73,0:01:27.67,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}bosqichma-bosqich, qancha pul
+Dialogue: 0,0:01:27.67,0:01:29.67,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}sarflab, aynan spina bifidadan
+Dialogue: 0,0:01:29.67,0:01:31.40,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}davolashga to'g'ri keladi.
+Dialogue: 0,0:01:31.40,0:01:33.77,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}Shuni yana takrorlardimki,
+Dialogue: 0,0:01:33.77,0:01:35.34,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}homiladorlik paytida kerakli
+Dialogue: 0,0:01:35.34,0:01:36.51,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}{\c&H00D7FF&}vitaminlarni{\c&HFFFFFF&} ichishga
+Dialogue: 0,0:01:36.51,0:01:37.97,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}to'sqinlik qilmasangizlar,
+Dialogue: 0,0:01:37.97,0:01:39.03,Cap,,0,0,0,,{\pos(540,960)\fad(60,40)}juda ham xohlardim.
